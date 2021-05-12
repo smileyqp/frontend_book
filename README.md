@@ -1189,10 +1189,9 @@ function createArr(n,len){
 ```
 
 
-
 ## 5.8
 
-- call和apply区别是什么，哪个性能更好一些？
+#### 1、call和apply区别是什么，哪个性能更好一些？
 
 call和apply都是function原型上的方法，用于改变this指向的，唯一的区别就是传入参数的形式不一样，call是一个一个传参，而apply把所有参数用数组形式传。bind与他们类似（传参数也是数组形式），都是改变this指向，只是预先处理函数，但是并不会立即执行。 经过测试，call比apply性能要好一些。
 
@@ -1200,8 +1199,767 @@ call和apply都是function原型上的方法，用于改变this指向的，唯�
 //使用apply场景
 let arr = [10,20,30],
 		obj = {};
+		
+function fn(x,y,z){
+  
+}
+
+fn.apply(obj,arr)		//x,y,z分别为10 20 30
+fn.call(obj,...arr)		//基于ES6的展开运算符，可以展开依次传递给函数
 
 ```
+
+自己实现性能测试(只供参考，任何代码测试都跟测试环境有关。CPU、内存、GPU等电脑当前性能不会有相同的时间)。`console.time`可以测出一段程序执行的时间。在火狐浏览器中可以安装`firebug`插件取监控更精确的时间
+
+```shell
+console.time('A')		//A相当于给时间测试起个名字
+for(let i = 0;i<100000;i++){
+  
+}
+console.timeEnd('A')
+```
+
+#### 2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字
+
+- 正向预查：要匹配的字符串必须满足pattern这个条件
+- 负向预查：要匹配的字符串必须不满足pattern这个条件
+- 括号中的内容只是参与条件，并不参与真正的条件
+
+```shell
+let reg = /^(?!^[a-zA-Z]+$)(?!^[A-Z0-9]+$)(?!^[0-9a-z]+$)(?![0-9]+$)[a-zA-Z0-9]{6,16}$/
+
+```
+
+
+
+#### 3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集
+
+- 相当于写一个属性选择器。
+  - 获得所有标签，循环所有标签。得到每一个标签，传入什么属性就按照这个属性去获取属性值。特殊情况，class这些只要包含这个属性值就可以
+
+```shell
+let ary = $attr('id','AAA')
+
+
+function $attr(property,value){
+  let elements = document.getElementByTagName('*'),		//获取当前页面的所有标签
+  		arr = [];
+  //方式一：可以借用数组循环
+  // [].forEach.call(elements,item=>{})
+  
+  //方式二：利用Array.from将类数组非数组转化成为数组
+  elements = Array.from(elements)
+  elements.forEach((item)=>{
+    let itemValue = item.getAttribute(property)	//在这个标签中获取property
+    
+    if(property === 'class'){	//class样式类属性名要做特殊处理，因为class中可能有多个属性值
+    	
+    	//判断当前字符串中是否包含着哦个单词
+    	new RegExp(/\b+value+\b/).test(itemValue)?arr.push(item):null		
+      return;
+    }
+     
+    if(itemValue === value){	//获取的值和传递的值相等校验成功就是我们需要的
+      arr.push(item)
+    }
+  })
+  return arr;
+}
+```
+
+#### 4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格
+
+```shell
+let str = "test一个测试，just测试一下下smileyqp",
+		reg = /\b[a-z]+\b/ig;		//后面的g是全局匹配，i是忽略大小写
+str.replace(reg,value=>{  //value正则捕获的内容
+	return ' '+value+' '
+}).trim();							//trim()去除开头和结尾的空格；trimLeft()去除开头空格；trimRight()去结尾空格
+
+//str  "test 一个测试， just 测试一下下 smileyqp"
+```
+
+#### 5、实现`(5).add(3).minus(2)`使其输出结果为6
+
+- 对象的实例可以调用对象圆形上的方法。由于数字5可以调用add那么说明，add一定是数字5原型上的方法。数字5属于Number类，那么Number类上一定要有add方法
+- 并且由于是链式调用（链式写法），那么执行完add之后，返回的一定是可以继续调用minus的，那么，每一次执行add返回一定是一个数字 ，即返回Number类的实例
+
+```shell
+(function(){
+	function check(n){
+    n = Number(n);		//进行检测
+    return isNaN(n)?0:n		//判断是否为有效数字，有效数字返回n，非有效数字返回0 
+	}
+	function add(n){
+		 n = check(n);		//进行有效性检测处理
+     return this+n;		//这里的this是操作的实例，即5，那么this+n即5+3 =》 8
+	}
+	function minus(n){
+		 n = check(n);
+     return this-n;		
+	}
+	
+	//Number.prototype.add = add;
+	//Number.prototype.minus = minus;
+	//也可以如下写，JQ源码走红经常下面这种写法
+	['add','minus'].forEach((item)=>{
+    Number.prototype[item] = eval(item);		//eval将字符串转化成表达式
+	})
+	
+	
+})()
+
+(5).add(3).minus(2)
+```
+
+#### 6、箭头函数和普通函数的区别
+
+- 箭头函数语法上比普通函数更简洁(ES6中每种函数都可以形参赋默认值和使用…剩余运算符)
+
+```shell
+function fn(x){
+  return function(y){
+    return x+y
+  }
+}
+
+let fn = x => y=>x+y
+```
+
+- 箭头函数中没有this,它里面出现的this从属于所属上下文 （使用call、apply等任何方式都无法改变this指向）
+
+```shell
+let obj = {
+  name:'smileyqp'
+}
+function fn1(){
+  console.log(this)
+}
+fn1.call(obj)		//this =>  obj
+
+let fn2 = ()=>{
+  console.log(this)
+}
+fn2.call(obj)  //this  => window
+```
+
+- 箭头函数中没有Arguments类数组，只有基于`…arg`传递的参数集合（数组）
+
+```shell
+let fn = (...arg ) =>{
+  console.log(arg)		// [10, 20, 30]
+}
+fn(10,20,30)
+```
+
+- 箭头函数不能被new执行，因为箭头函数没有this也没有prototype
+
+```shell
+function Fn (){
+  this.X = 100;
+}
+fn.prototype.getX = function(){}
+let f = new Fn;
+```
+
+思考题拓展：
+
+```shell
+题目一：数组上实现一个each方法，实现下面的三个要求
+
+let arr = [10,20,30,'AA'],
+		obj = {};
+arr = arr.each(function(item,index){
+  // this => obj  1、第二个参数不传，this指向window
+  if(!isNaN(item)){
+    return false; 	//2、如果不是数字，那么返回的是false
+  }
+  return item*10;		//3、返回结果是啥就把数组中当前项替换掉
+}，obj)
+
+//这个方法最后实现的结果是 [100,200,300,false]
+```
+
+
+
+```shell
+题目二：重写replace，replace([REG正则],callback)
+let str = 'smileyqp2019smile2020'
+str = str.replace(/smile/g,function(...arg){
+  //arg中存储了每一次大正则匹配的信息和小正则匹配的信息
+  
+  return ; //返回把正则匹配的替换后的字符串
+})
+```
+
+
+
+## 5.10
+
+#### 7、字符串中字母大写转小写，小写转大写
+
+```shell
+let str = 'smileyqpTestItSMILEYQP@沛沛$3434'
+str = str.replace(/a-zA-Z/g,(content)=>{		//每一次正则匹配到的结果
+  //验证是否为大写：1、转化成大写之后是否和原来一样，一样那原来的为大写，反之之前为小写2、ASCII表中找大写字母的取值范围（65-90）
+  //1、content.toUpperCase() === content
+  //2、content.charCodeAt() >=65 || content.charCodeAt <=90
+  return content.toUpperCase() === content?content.toLowerCase:content.toUpperCase;
+})
+```
+
+#### 8、实现字符串查找
+
+实现一个字符串匹配算法，从字符串S中查找是否存在字符串T，若存在则返回第一次所在位置，不存在返回-1（不能基于indexOf以及includes等内置方法）
+
+- 思路一：循环原始字符串中的每一项，让每一项从当前位置街区T.length个字符和T比较，一样返回索引，一共循环S.length-T.length+1次
+
+```shell
+(function(){
+  function myIndexOf(T){
+    //this 原始的字符串，即S
+    let lenT = T.length,
+    		lenS = S.length,
+    		result = -1;
+    if(lenT>lenTS){
+      return -1;
+    }
+    for(let i = 0;i<lenS-lenT+1;i++){
+    	let substr = S.substr(i,lenT)
+      if(substr === T){
+        result = i;
+        break;
+      }
+    }
+    return result;
+  }
+  String.prototype.myIndexOf = myIndexOf;
+})()
+
+let S = 'yqp27982348张三smile&&&smile',
+		T = 'smile'
+console.log(S.myIndexOf(T))
+```
+
+- 思路二：正则处理
+  - 直接正则匹配这个字符串，如果结果为null返回-1，部位null直接可以在正则匹配的 结果中找到index就是索引
+
+```shell
+(function(){
+  function myIndexOf(T){
+    //this 原始的字符串，即S
+    let reg = new RegExp(T),
+    		res = reg.exect(this);
+    return  res === null ? -1:res .index
+  }
+  String.prototype.myIndexOf = myIndexOf;
+})()
+
+let S = 'yqp27982348张三smile&&&smile',
+		T = 'smile'
+console.log(S.myIndexOf(T))
+
+```
+
+
+
+#### 9、验证输入的是否是一个正确的网址
+
+```shell
+1、协议：http https ftp
+2、域名 www.smileyqp.com  smileyp.cn  smile.yqp.smileyqp.com.cn
+3、请求路径 index.html /stu. stu/index.html
+4、问号传参   ?name=smileyqp&age=18
+5、哈希值 
+
+协议、请求路径、问号传参、哈希可以省略
+
+let str = 'http://www.smileyqp.com/index.html'
+leg reg = /^((http|https|ftp):\/\/)?(([\w-]+\.)+[a-z0-9]+)((\/[^/]*)+)?(?:\?[^# ]+)?(#.+)?$/i;
+
+```
+
+## 5.11
+
+#### 10、 原型链
+
+```
+function Foo(){
+  Foo.a = function(){
+    console.log(1)
+  }
+  this.a = function(){
+    console.log(2)
+  }
+}
+Foo.prototype.a = function(){
+  console.log(3)
+}
+Foo.a = function(){
+  cosnole.log(4)
+}
+
+Foo.a();	//4
+let obj = new Foo();		//new Foo()的时候也会吧Foo当作一个函数执行;此时Foo上的属性a  =>1，其中this指obj，obj.a =>2
+obj.a();	//2
+Foo.a(); //1
+```
+
+
+
+#### 11、图片懒加载
+
+- 前端性能优化的重要方案，通过图片或者数据的延迟加载，可以加快页面加载速度，第一次加载的速度变快，并且只有滑动到图片部分才会进行加载
+- 处理方案
+  - 将所有需要延迟加载的图片用一个盒子包起来，设置宽高和默认的占位图
+  - 开始让所有的image的src为空，将图片真实地址放到image的自定义属性上，让img隐藏
+  - 等到所有的其他资源加载完成之后我们才开始去加载图片
+  - 对于有很多图片，当页面滚动的时候，当前图片完全显示出来后，再加载图片
+
+![](https://img-blog.csdnimg.cn/20210511104945485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- 单张图片懒加载
+
+```shell
+//html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片懒加载</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .imgBox{
+            margin: 1000px auto;
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+            background: pink;
+        }
+        .imgBox img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="imgBox">
+        <img src="" alt="懒加载" data-img="https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/3ac79f3df8dcd100bbd10c8e738b4710b8122fcb.jpg"/>
+    </div>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./delayImg.js"></script>
+</body>
+</html>
+
+```
+
+```shell
+//delayImg.js
+let $imgBox  = $(".imgBox"),
+    $img = $imgBox.children('img'),
+    $window = $(window)
+/**
+ * 加载的时机:
+ * 1、当页面其他的所有资源都加载完成的时候
+ * 2、当页面滚动到其位置的时候，图片完全出现在视野之中
+ */
+ 
+// $(document).ready();//dom结构加载完成
+$(window).on('load scroll',function(){      //在load和scroll两个事件的时候都会触发;JQuery中事件绑定支持多事件绑定,两个事件触发的时候执行相同的事件;
+    if($img.attr('isLoad')==='true'){
+        return; //加载过之后不会重新加载
+    }
+    console.log('ok')
+    let $A = $imgBox.outerHeight() + $imgBox.offset().top;
+    let $B = $window.outerHeight() + $window.scrollTop()
+    if($A<=$B){
+        //加载真实图片
+        $img.attr('src',$img.attr('data-img'))
+        $img.on('load',()=>{
+            //加载成功
+            // $img.css('display','block')
+            console.log('图片加载成功！')
+            $img.stop().fadeIn()    //fadeIn是jq中的渐现
+        })
+        $img.attr('isLoad',true)        //attr存储的自定义属性值都是字符串格式'true'
+    }
+});
+```
+
+![](https://img-blog.csdnimg.cn/20210511110612942.gif)
+
+
+
+- 多图片懒加载
+
+```shell
+//html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多图片懒加载</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+           width: 800px;
+           margin: 0 auto;
+        }
+        .imgBox{
+            margin: 0px auto;
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+            background: pink;
+            margin-bottom: 20px;
+        }
+        .imgBox img{
+            width: 100%;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="imgBox">
+            <img src="" alt="懒加载" data-img="https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/3ac79f3df8dcd100bbd10c8e738b4710b8122fcb.jpg"/>
+        </div>
+    </div>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./moredelayImg.js"></script>
+</body>
+</html>
+```
+
+```shell
+//moredelayImg.js
+let $container = $('.container'),
+    str = ``,
+    $imgBoxs = null,
+    $window = $(window)
+ 
+new Array(20).fill().forEach((item)=>{      //new Array(20).fill() 创造长度为20的数组每一项用null填充
+    str+='<div class="imgBox"><img src="" alt="懒加载" data-img="https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/3ac79f3df8dcd100bbd10c8e738b4710b8122fcb.jpg"/></div>'
+})
+console.log(str)
+$container.html(str);
+$imgBoxs = $container.children('.imgBox');
+
+//多张图片延迟加载
+$window.on('load scroll',()=>{
+    //获取浏览器距离body的距离
+    let $B = $window.outerHeight() + $window.scrollTop() 
+    console.log($imgBoxs)
+    //循环获取每一张图片区域，根据自己距离body的距离计算出里面的图片是否进行加载
+    $imgBoxs.each((index,item)=>{
+        console.log(index,item)
+        let $item = $(item),
+            $itemA = $item.outerHeight() + $item.offset().top,
+            isLoad = $item.attr('isLoad')
+        if($itemA <= $B && isLoad !== 'true'){  //如果这个盒子已经懒加载过依次那么就不再次进行懒加载处理
+            $item.attr('isLoad',true);
+            $img = $item.children('img')
+            $img.attr('src',$img.attr('data-img'))
+            $img.on('load',()=>{
+                //加载成功
+                // $img.css('display','block')
+                console.log('图片加载成功！')
+                $img.stop().fadeIn()    //fadeIn是jq中的渐现
+            })
+        }
+    });         
+})
+```
+
+
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20210511120033321.gif)
+
+
+
+#### 12、数组交集
+
+```shell
+let nums1 = [1,2,3,2]
+let nums2 = [2,2,2]
+
+let arr = [];
+for(let i = 0;i<nums1.length;i++){
+  let item1 = nums1[i]
+  for(let j=0;j<nums2.length;j++){
+    let item2 = nums2[j]
+    if(item1===item2){
+    	nums1[i] = null;
+    	nums2[j] = null;
+      arr.push(item1)
+      break;
+    }
+  }
+}
+
+console.log(arr)	//[2,2]
+```
+
+```shell
+let nums1 = [1,2,3,2]
+let nums2 = [2,2,2]
+
+let arr = [];
+nums1.forEach((item,index)=>{
+	let n = nums.indexOf();
+	if(n>0){
+    nums1.splice(index,1)
+    nums2.splice(n,1)
+    arr.push(item)
+	}
+})
+```
+
+
+
+#### 13、旋转数组
+
+给定一个数组，将数组中的元素向右移k个位置，其中k是非负数，例如：
+
+输入：[1,2,3,4,5,6]和k=3
+
+输出：[5,6,1,2,3,4]
+
+- slice
+
+```shell
+输入：[1,-100,78,90]  k = 2
+输出：[90,1,-100,78]
+
+function rotate(key){
+  //参数处理，key>0
+  if(key<0||key === 0||key === this.length)return this;
+  if(key>this.length){key = key%this.length}
+  //slice支持负数索引，直接就是数组的后几位
+   return this.slice(-key).concat(this.slice(0,this.length-key))
+}
+Array.prototype.rotate = rotate;
+
+
+
+let arr = [1,2,3,4,5,6,7],
+		k = 3;
+arr.rotate(3);		// [5, 6, 7, 1, 2, 3, 4]
+```
+
+> `slice`参数：开始点，结束点，返回：切割的数组
+>
+> `splice`参数：开始点、长度，返回：删除的这部分返回
+
+- splice
+
+```shell
+输入：[1,-100,78,90]  k = 2
+输出：[90,1,-100,78]
+
+function rotate(key){
+  //参数处理，key>0
+  if(key<0||key === 0||key === this.length)return this;
+  if(key>this.length){key = key%this.length}
+  
+   return this.splice(this.length-key,key).concat(this)
+}
+Array.prototype.rotate = rotate;
+
+
+
+let arr = [1,2,3,4,5,6,7],
+		k = 3;
+arr.rotate(3);		// [5, 6, 7, 1, 2, 3, 4]
+```
+
+- 最后一项删除放到最开头，执行k次
+
+```shell
+输入：[1,-100,78,90]  k = 2
+输出：[90,1,-100,78]
+
+//写法一：
+function rotate(key){
+  //参数处理，key>0
+  if(key<0||key === 0||key === this.length)return this;
+  if(key>this.length){key = key%this.length}
+  
+   for(let i = 0;i<=key;i++){
+     this.unshift(this.pop());		//this.pop()最后一项；unshift首部插入
+   }
+   return this;
+}
+Array.prototype.rotate = rotate;
+
+//写法二：
+function rotate(key){
+  //参数处理，key>0
+  if(key<0||key === 0||key === this.length)return this;
+  if(key>this.length){key = key%this.length}
+  
+  new Array(k).fill('').forEach((item)=>{
+    this.unshift(this.pop());		//this.pop()最后一项；unshift首部插入
+  })
+   return this;
+}
+Array.prototype.rotate = rotate;
+
+let arr = [1,2,3,4,5,6,7],
+		k = 3;
+arr.rotate(3);		// [5, 6, 7, 1, 2, 3, 4]
+```
+
+
+
+## 5.12
+
+#### 14、函数科里化思想
+
+- 函数科里化：预先处理的思想（利用闭包的机制）
+
+```shell
+let obj = {
+  name:'OBJ'
+}
+
+function fn(...arg){
+  console.log(this,arg)
+}
+
+document.body.onclick = fn;		//this=>BODY
+document.body.onclick = function(ev){
+//=>ev 事件对象：给元素的某个事件绑定方法，当事件触发会绑定这个方法，并且把当前事件的相关信息传递给这个函数事件对象
+}
+```
+
+> 实现：
+>
+> - 点击时候，this指向修改成obj，并传入事件对象以及两个参数100，200
+
+```shell
+//bind就是一个最经典的柯里化
+(function(){
+//context就是传入的obj用来改变this指向的，如果没有就默认写的是window
+  function myBind(context=window,...outerArgs){	
+  	let _this = this;
+    return function(...innerArgs){
+      _this.call(context,...innerArgs.concat(outerArgs))
+    }
+  }
+  Function.prototype.myBind = myBind;
+})()
+
+let obj = {
+  name:'OBJ'
+}
+document.body.onclick = fn.myBind(obj,100,200)
+
+```
+
+> 函数的科里化：是利用闭包的保存思想，也就是函数执行形成一个闭包，存储一些变量值，当要使用的时候再使用 
+
+- 闭包的两大作用：
+  - 保护
+  - 保存
+
+- 最简单科里化函数编程思想示例。科里化=》闭包。形成闭包，里面的参数供子集使用。
+
+```shell
+function fn(x){
+	//相当于预先在闭包中把值存储起来 
+  return function(y){
+    return x+y
+  }
+}
+
+fn(100)(200)
+//第一次执行fn(100)，执行完成之后当前作用域销毁，但是形成闭包值保留，进行第二个方法执行
+```
+
+- ##### 经典案例
+
+> 请实现一个add函数实现以下功能
+> add(1)	//1
+> add(1)(2)	//3
+> add(1)(2)(3)	//6
+> add(1)(2)(3)(4)	//10
+> add(1)(2,3)	//6
+> add(1,2)(3)	//6
+> add(1,2,3)	//6
+
+```shell
+function currying(fn,length){	//函数的length是获取它有多少个形参
+  length = length || fn.length;
+  return function(...args){
+    if(args.length >= length){
+      return fn(...args)
+    }
+    return curring(fn.bind(null,...args),length-args.length)
+  }
+}
+
+let add = currying((...args)=>{
+  return eval(args.join('+'))	//求args里面值相加的和
+},5)	//这个后面的5是总共要求几个字数的和，比如这里求五个的。这里是不管几次调用函数，只是参数的数量
+```
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20210512141055564.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- `add(1)(2)(3)(4)`步骤分析
+  ![](https://img-blog.csdnimg.cn/20210512150501945.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+- `add(1,2)(3，4)`步骤分析
+  ![](https://img-blog.csdnimg.cn/20210512151524743.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+
+
+#### 15、手写new
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
