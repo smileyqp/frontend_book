@@ -1,7 +1,7 @@
 #### 持续更新ing～
 
 - `README.md`可以下载到`typora`中打开，会有整个大纲目录显示（github中markdown目录快捷生成方式不现实，之后可能会想办法生成贴过来，暂时不做相关处理）
-- `README.md`中会实时更新进度内容。`gitbook`中考虑整个学完整理完成之后，再去统一处理发布，敬请期待！`gitbook`版本可建议后期碎片化时间进行复习使用。
+- `README.md`中会实时更新进度内容。[gitbook](https://smileyqp.github.io/frontend_book/)中考虑整个学完整理完成之后，再去统一处理发布，敬请期待！`gitbook`版本可建议后期碎片化时间进行复习使用。
 - 另：`CSDN`博客专栏[前端自我修养进阶](https://blog.csdn.net/qq_34273059/category_9894803.html?spm=1001.2014.3001.5482)中，也会一篇一篇实时更新相关知识点。
 
 
