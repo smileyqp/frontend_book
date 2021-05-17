@@ -2364,6 +2364,122 @@ Object.keys(obj).forEach(item=>{
 
 
 
+#### 21、值类型&引用类型（变量类型）
+
+深拷贝
+
+- 值类型
+
+```shell
+let a = 100;
+let b = 1;
+a = 200;
+console.log(b) //100
+```
+
+- 引用类型
+
+```shell
+let a = {age:10};
+let b = a;
+b.age = 20;
+console.log(a.age)	//20
+```
+
+- 常见值类型
+  - undefined
+  - string
+  - number
+  - boolean
+  - symbol
+
+-  常见引用类型
+  - obj
+  - array
+  - null  特殊引用类型，指向的地址为空地址
+  - function  特殊引用类型，不用于存储数据，所以没有'拷贝、赋值函数'这一说法
+
+```shell
+const obj1 = {x:100,y:200}
+const obj2 =obj1;
+let x1 = obj1.x;		//干扰作用，值类型直接赋值过去，之后再没有关系
+obj2.x = 101;
+x1 = 102;
+console.log(obj1)		//{x:101,y:200}
+```
+
+
+
+#### 22、typeof运算符（变量类型）和深拷贝
+
+- 判断所有值类型
+- 判断是否函数
+- 判断是否引用类型（不可再细分）
+
+![](https://img-blog.csdnimg.cn/20210513174038244.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+![](https://img-blog.csdnimg.cn/2021051317415385.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+##### 深拷贝
+
+```shell
+function deepClone(obj = {}){
+  if(typeof obj !== 'object'||obj === null){
+    return obj;
+  }
+  //初始化返回结果
+  let result;
+  if(obj.instanceof Array){
+    result = []
+  }else{
+    result = {}
+  }
+  for(let key in obj){
+    if(obj.hasOwnProperty(key)){	//保证是这个对象自己拥有的私有属性，不是原型的属性
+    	//调用递归
+       result[key] = deepClone(obj[key])
+    }
+  }
+  return result;
+}
+```
+
+
+
+#### 23、变量计算、类型转换
+
+- ##### 字符串拼接
+
+```shell
+const a = 100+10;		//110
+const b = 100+'10';	//10010
+const c = true+'10';	//true10
+```
+
+- ##### ==
+
+```shell
+100 == '100';		//true
+0 == '';		//true
+0 == false;	//true
+false =='';	//true
+null == undefined;	//true
+```
+
+> 除了`==null`之外其他的一律用`===`。并且，例如：`a==null`相当于a`===undefined||===null`
+
+- ##### if语句和逻辑运算(if语句判断的就是truely变量和falsely变量)
+
+  - truely变量和falsely变量
+    - truely变量：两步非运算得到true。`!!a===true`
+    - falsely变量：两步非运算得到false。`!!a===false`
+
+![](https://img-blog.csdnimg.cn/20210513182550663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/2021051318272935.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- ##### 逻辑判断（也是truely变量和falsely变量）
+
+![](https://img-blog.csdnimg.cn/20210513182911197.png)
 
 
 
@@ -2371,8 +2487,695 @@ Object.keys(obj).forEach(item=>{
 
 
 
+## 5.14
+
+#### 24、class和继承
+
+```shell
+class Student{
+  constructor(name,age){
+    this.name = name;
+    this.age = age;
+  }
+  sayHi(){
+    console.log('hi'+this.name+this.age)
+  }
+}
+
+let stu = new Student('smileyqp',100)
+```
+
+##### 继承
+
+- extends
+- super
+- 扩展或者重写方法
+
+```shell
+class Person(){
+  constructor(name,age){
+    this.name = name;
+    this.age = age;
+  }
+  eat(){
+    console.log(this.name+'eat food')
+  }
+}
+
+class Student extends Person{
+  constructor(name,age,number){
+    super(name,age)
+    this.number = number;
+  }
+  sayHi(){		//扩展方法
+    console.log('hi'+this.name+this.age)
+  }
+}
+
+class Teacher extends Person{
+  constructor(name,age,major){
+    super(name,age)
+    this.major = major;
+  }
+  teach(){
+    console.log(this.name+'teach'+this.major)
+  }
+}
+
+let smileyqp = new Student('smileyqp',20)
+
+//补充
+smileyqp.eat()		//smileyqp eat food
+smileyqp.__proto__.eat()		//会爆粗，因为它相当于在smileyqp.__proto__即Student的原型上去调用的，没有定义name所以会报错
+
+```
+
+##### instanceof
+
+- instanceof可以去判断引用类型
+- Object是所有class的父类
+
+```shell
+smileyqp instanceof Student;	//true
+smileyqp instanceof Person;	//true
+smileyqp instanceof Object;	//true
+
+[] instanceof Array;	//true
+{} instanceof Object;		//true
+[] instanceof Object;		//true
+```
 
 
+
+#### 25、原型和原型链
+
+- 每个class都有显示原型`prototype`
+- 每个实例都有隐式原型`__proto__`
+- 实例的隐式原型`__proto__`都指向对应的class的原型`prototype`
+
+```shell
+//隐式原型和显式原型（案例demo接上个题目的案例）
+console.log(smileyqp.__proto__)				//隐式原型
+console.log(Student.prototype)				//显式原型
+console.log(smileyqp.__proto__ === Student.prototype)				//true
+```
+
+##### 获取实例的属性或者方法（基于原型的执行规则）
+
+- 先在自身的属性和方法上进行查找
+- 如果找不到就到`__proto__`中查找
+
+##### 原型链
+
+![](https://img-blog.csdnimg.cn/20210514111816793.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+```shell
+console.log(Student.prototype.__proto__)
+console.log(Person.prototype)	
+console.log(Student.prototype.__proto__ === Person.prototype)
+```
+
+##### instanceof
+
+- 顺着原型链进行查找，有返回true，没有返回false
+
+##### 原型原型链相关题目解答
+
+- 如何判断一个变量是否是数组（类型判断instanceof，a instanceof Array）
+- 手写一个建议的jQuery，考虑插件和扩展性（原型和原型链）
+
+```shell
+//jquery做dom查询的
+class jquery{
+  constructor(selector){
+    cons result = documnent.querySelectorAll(selector)
+    const length = result.length;
+    for(let i = 0;i < length;i++){
+      this[i] = result[i]
+    }
+    this.length = length;
+    this.selector = selector;
+  }
+  get(index){
+     return this[index]
+  }
+  each(fn){
+    for(let i =0;i<this.length;i++){
+      const elem  = this[i];
+      fn(elem)
+    }
+  }
+  on(type,fn){
+    return this.each(elem=>{
+      elem.addEventListener(type,fn,false)
+    })
+  }
+}
+
+
+const $p = new jQuery('p')
+$p.get(1)
+$p.each(elem=>console.log(elem.nodeName))
+$p.on('click',()=>{alert('click')})
+
+
+```
+
+```shell
+
+//1、插件机制
+jQuery.prototype.dialog = function(info){
+  alert(info)
+}
+
+//2、造轮子
+class myJQuery extends jQuery{
+  constructor(selector){
+    super(selector)
+  }
+  //扩展自己的方法
+  addClass(className){
+    
+  }
+  style(data){
+    
+  }
+}
+```
+
+- class的原型本质怎么理解（class和继承）
+  - 原型和原型链的图示
+  - 属性和方法的执行规则
+
+#### 26、作用域和闭包
+
+- this的不同应用场景，如何取值
+- 手写bind函数
+- 实际开发中闭包的应用场景，并举例说明
+
+```shell
+//创建10个<a/>标签，点击的时候弹出来对应的序号
+let i,a;
+for(i = 0;i<=10;i++){
+  a = document.createElement('a');
+  a.innerHTML = i+"<br/>";
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    alert(i)		//10
+  })
+  document.body.appendChild(a)
+}
+
+
+let a;
+for(let i = 0;i<=10;i++){	//let i是定义块作用域
+  a = document.createElement('a');
+  a.innerHTML = i+"<br/>";
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    alert(i)		//1,2,3,4,5...
+  })
+  document.body.appendChild(a)
+}
+
+
+
+```
+
+##### 作用域和自由变量
+
+- 作用域：变量的合法的使用范围
+
+- 作用域分类
+
+  - 全局作用域
+  - 函数作用域
+  - 块级作用域（ES6新增）
+
+  ```shell
+  //ES6新增
+  if(true){
+    let x = 100;			//这里用乐天声明的变量或者const声明的常量，他们的作用域都是这个块之内
+  }
+  console.log(x);		//会报错
+  ```
+
+![](https://img-blog.csdnimg.cn/20210514144022202.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+##### 自由变量 
+
+- 自由变量：一个变量在当前作用域没有定义但是被使用了
+- 向上级作用域一层一层寻找，直到找到为止
+- 如果到全局作用域都没有找到的话那么就会报错`xx is undefined`
+
+##### 闭包
+
+```shell
+//函数作为返回值，返回之后再执行
+function create(){
+  let a = 100;
+  return function(){
+    console.log(a)
+  }
+}
+let fn = create();
+let a = 200;
+fn();		//100   函数执行是在全局作用域；函数的定义在create函数里面，往上级作用域寻找
+
+```
+
+```shell
+//函数作为参数，通过参数传入之后再执行
+function print(fn){
+  let a = 200;
+  fn()
+}
+let a = 100;
+function fn(){
+  console.log(a)
+}
+print(fn);		//100
+```
+
+- ##### 闭包：自由变量的查找是在函数定义的地方，向上级作用域进行查找，不实在执行的地方进行查找 
+
+#### 27、this
+
+- 作为普通函数
+- 使用call、bind、apply
+- 作为对象方法被调用
+- 在class方法中调用
+- 箭头函数
+
+##### this取什么:值是在函数执行的时候决定的不是在函数定义的时候确定的
+
+```shell
+function fn1(){
+  console.log(this)
+}
+fn1();	//window
+
+fn1.call({x:100})		//{x:100}
+
+const fn2 = fn1.bind({x:200})
+fn2();	//{x:200}
+```
+
+箭头函数没有this，其中this取上级作用域this
+
+```shell
+//demo1
+const zhansan = {
+  name:'zhangsan',
+  sayHi(){
+    console.log(this)		//this当前对象
+  },
+  wait(){
+    setTimeout(function(){
+      console.log(this)		//this window
+    })
+  }
+}
+
+//demo1
+const zhangsan = {
+  name:'zhangsan',
+  sayHi(){
+    console.log(this)		//当前对象
+  },
+  waitAgain(){
+    setTimeout(()=>{
+      console.log(this)		//当前对象
+    })
+  }
+}
+```
+
+##### 手写bind函数
+
+```shell
+function.prototype.mybind = function(){
+  //将参数拆解为数组
+  const args = Array.prototype.slice.call(arguments);
+  
+  //获取this（数组第一项）
+  const t = args.shift()
+  
+  //fn1 bind中的fn1
+  const self = this;
+  
+  return function(){
+    return self.apply(self,args)
+  }
+}
+
+```
+
+##### 闭包的应用
+
+- 隐藏数据
+- 做一个简单的cache工具
+
+```shell
+function createCache(){
+  const data = {}		//闭包中的数据，隐藏不被外界访问
+  return {
+    set:function(key,val){
+      data[key] = val;
+    },
+    get:(){
+      return data[key]
+    }
+  }
+}
+
+//隐藏不被外界访问,是指c只能通过set，get设置获取。只提供api访问，其他方式改不了
+const c = createCache();
+c.set('a',100);
+c.get('a');
+
+```
+
+
+
+## 5.16
+
+#### 28、同步和异步
+
+```shell
+//异步
+console.log(1)
+setTimeout(()=>{
+  console.log(2)
+},1000)
+console.log(3)
+
+//同步
+console.log(1)
+alert(2)
+console.log(3)
+```
+
+- 同步和异步的区别是什么
+  - 基于js是单线程语言
+  - 异步不会阻塞代码执行
+  - 同步会阻塞代码执行
+- 手写Promise加载一张图片
+
+```shell
+const src = '../xxximg.png'
+
+function loadImg(){
+  return new Promise((resolve,reject)=>{
+    let img = document.createElement('img')
+		img.onload = function(){
+  		console.log('loaded')
+  		resolve(img)
+		}
+		mg.onrror = function(){
+      reject(new Error(`图片加载失败${src}`))
+		}
+		img.src = src
+  })
+}
+
+loadImg().then(img=>{
+  console.log(img)
+  return img
+}).catch(err){
+  console.log(err)
+}
+```
+
+- 前端使用的异步的场景有哪些
+
+  - 网络请求，比如：ajax图片加载 
+
+    ```shell
+    onsole.log('start')
+    let img = document.createElement('img')
+    img.onload = function(){
+      onsole.log('loaded')
+    }
+    img.src = './xxx.png'
+    console.log('end')
+    ```
+
+  - 定时任务，比如：setTimeout
+
+##### 知识点
+
+- 单线程和异步（异步是由单线程这个背景来的）
+
+  - JS是单线程语言，只能同时做一件事
+  - 浏览器和nodejs已支持Js启动进程如web worker。但是并不能改变js是单线程的本质
+  - Js和dom渲染共用同一个线程，因为js可以修改dom结构
+  - 遇到等待（网络请求、定时任务）不能卡住
+
+  
+
+  - 需要异步，解决单线程的问题
+  - 回调callback函数形式
+
+## 回顾总结
+
+##### 知识模块
+
+- 变量类型和计算
+- 原型和原型链
+- 作用域和闭包
+- 异步和单线程
+
+##### 题目
+
+- typeof能判断哪些类型
+  - 基础类型
+  - 引用类型
+
+- 何时使用===何时使用==
+- 值类型和引用类型的区别  
+- 手写深拷贝
+
+##### 知识点
+
+- 值类型vs引用类型，堆栈模型，深拷贝
+- typeof运算符能干嘛
+- 类型转换、truely和falsely变量
+
+##### 原型和原型链的题目
+
+- 如何准确判断一个变量是不是数组（instanceof原型链查找）
+- 手写一个jquery，考虑插件和扩展性
+- class的原型本质怎样理解
+
+##### 原型和原型链知识点
+
+- class和继承，结合手写jquery的示例理解
+- instanceof表象和本质
+- 原型和原型链：图示&执行规则
+
+##### 闭包和作用域的题目
+
+- this的不同引用场景，如何取值
+  - this是在函数执行的时候确定，函数定义的时候不能确定
+
+- 手写bind函数
+- 实际开发中遇到的闭包场景，并且举例说明（eg：隐藏数据，只提供api）
+
+```shell
+//创建10个a标签，点击依次弹出1，2，3，4，5，6，7，8，9，10
+let a;
+for(let i = 0;i<=10;i++){
+   a = document.createElement('a')
+   a.innerHTML = i+'</br>';
+   a.addEventListener('click',function(e){
+     e.preventDefault()
+     alert(i)
+   })
+   document.body.appendChild(a)
+}
+```
+
+##### 作用域和闭包知识点
+
+- 作用域和自由变量（自由变量是不是在当前块作用域定义，但是在这使用的）
+- 闭包：常见两种形式&自由变量查找规则
+- this
+
+##### 异步和单线程题目
+
+- 异步和同步的区别
+- 手写Promise加载一张图片 
+- 前端使用异步的场景
+  - ajax请求
+  - setTimeout
+
+##### 异步和单线程知识点
+
+- 单线程和异步、异步和同步的区别 
+- 前端异步应用场景（网络请求&定时任务）
+- Promise解决callback hell问题
+
+
+
+
+
+# JS Web API
+
+- JS基础知识，规定语法（ECMA 262标准）
+- JS WEB API，网页操作API（W3C标准）
+- 前者是后者的基础，两者结合才能真正的在实际中应用
+
+### JS WEB API范围
+
+- DOM操作
+- BOM操作（浏览器上的事情：浏览器导航、浏览器url地址、浏览器跳转、浏览器宽高）
+- 事件绑定
+- ajax
+- 存储
+
+
+
+前言
+
+- Vue和React框架应用广泛、封装了DOM操作
+- 但是DOM操作一直都是前端工程师的基础必备知识
+- 只会框架不会dom操作的程序员不会长久
+
+#### 1、DOM操作（Document Object Model文档对象模型的集合）
+
+##### 题目
+
+- DOM属于哪种数据结构
+  - 基于树形结构
+- DOM操作的常用API
+- attr（attribute）和property的区别
+  - property：修改对象的属性，不会体现在html结构中（不会对节点有什么影响）
+  - attr：直接修改html属性，会改变html的结构（改变标签结构）
+  - 两者都可能引起dom重新渲染（尽量用property去进行操作，因为设置property一定会重新渲染，attribute不一定。重新dom渲染是一件比较耗费性能的事情）
+
+- 一次性插入多个dom节点，考虑性能
+  - dom节点缓存
+  - 创建片段，一次性插入createFragment
+
+##### 知识点
+
+- DOM本质
+  - 从html解析出来的树
+
+html实际上也是一种特殊的xml
+
+- DOM节点的操作
+
+  - 获取节点
+    - getElementById
+    - getElementByClassName
+    - getElementByTagName
+    - document.querySelectorAll
+  - attribute：直接修改dom结构，直接对标签有影响
+
+  ```shell
+  const pList = ducument.querySelectorAll('p')
+  const p = pList[0]
+  
+  p.getAttribute('data-name')
+  p.setAttribute('data-name','smileyqp')
+  p.getAttribute('style')
+  p.setAttribute('style','font-size:30px')
+  ```
+
+  - property：修改js变量的属性，设置不会对标签有什么影响
+    - 用js的属性操作的一种形式
+
+  ```shell
+  const pList = ducument.querySelectorAll('p')
+  const p = pList[0]
+  console.log(p.style)
+  console.log(p.style.width)
+  console.log(p.style.className)
+  console.log(p.nodeName)	//nodeName节点的名称
+  console.log(p.nodeType)	//nodeType节点的类型
+  ```
+
+- DOM结构的操作
+
+  - 新增/插入操作
+  - 获取子元素列表，获取父元素
+  - 删除子节点
+
+```shell
+const div1 = document.getElementById('div1')
+const div2 = document.getElementById('div2')
+
+//新建节点
+const newP = document.createElement('newP')
+newP.innerHTML = 'this is newP'
+
+//插入节点
+div1.appendChild(newP)
+
+//移动节点
+div2.appendChild(p1)	//将一个已经存在于dom中的元素append到另外一个中去，那么就是将节点移动过去的
+
+//获取父元素
+console.log(p1.parentNode)
+
+//获取子元素列表;类似乎组转化成数组Array.prototype.slice.call，然后过滤类型为1，即p的元素节点
+div1.childNodes();		
+const div1childNodesP = Array.prototype.slice.call(div1.childNodes()).filter((child)=>{
+  if(child.nodeType === 1){
+    return true;
+  }
+})
+
+//删除子节点
+div1.removeChild(div1childNodesP[0])
+```
+
+- DOM性能
+
+  - dom查询做缓存（减少dom查询。将dom缓存，dom查询改成变量查询）
+
+  ```shell
+  //不缓存dom查询结果
+  for(let i = 0;i<document.getElementByTagName('p').length;i++){
+    //每次查询都会重新去计算length，频繁进行dom查询
+  }
+  
+  //缓存dom查询的结果
+  const plist = document.getElementByTagName('p')
+  const plength = plist.length;
+  for(let i = 0;i<plength;i++){
+  	//缓存dom查询，只需要进行一次dom查询
+  }
+  ```
+
+  - 将频繁操作改成一次操作
+    - 创建文件片段，然后再一次插入（createFragment）
+
+  ```shell
+  const listNode = document.getElementById('list')
+  
+  //创建一个文档片段，此时还没有插入dom
+  const frag = document.createDocumentFragent();
+  
+  //执行插入
+  for(let x = 0;<=10;x++){
+    const li = document.createElement('li');
+    i.innerHTML = 'list item'+x;
+    frag.appendChild(li)
+  }
+  
+  //都完成之后再插入dom树中
+  listNode.appendChild(frag)
+  ```
+
+  
+
+#### 2、BOM操作（Browser Object Model）
+
+- 如何识别浏览器类型
+- 分析拆解url的各个部分
 
 
 
