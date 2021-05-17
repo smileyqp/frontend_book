@@ -1,3 +1,16 @@
+#### 持续更新ing～
+
+- `README.md`可以下载到`typora`中打开，会有整个大纲目录显示（github中markdown目录快捷生成方式不现实，之后可能会想办法生成贴过来，暂时不做相关处理）
+- `README.md`中会实时更新进度内容。`gitbook`中考虑整个学完整理完成之后，再去统一处理发布，敬请期待！`gitbook`版本可建议后期碎片化时间进行复习使用。
+- 另：`CSDN`博客专栏[前端自我修养进阶](https://blog.csdn.net/qq_34273059/category_9894803.html?spm=1001.2014.3001.5482)中，也会一篇一篇实时更新相关知识点。
+
+
+
+#### ⭐️就是最好的鼓励哦wink～💗
+
+
+
+
 [TOC]
 
 [前端CSDN Blog地址](https://blog.csdn.net/qq_34273059/category_9894803.html?spm=1001.2014.3001.5482)
@@ -3042,6 +3055,8 @@ for(let i = 0;i<=10;i++){
 - 但是DOM操作一直都是前端工程师的基础必备知识
 - 只会框架不会dom操作的程序员不会长久
 
+## 5.17
+
 #### 1、DOM操作（Document Object Model文档对象模型的集合）
 
 ##### 题目
@@ -3177,9 +3192,68 @@ div1.removeChild(div1childNodesP[0])
 - 如何识别浏览器类型
 - 分析拆解url的各个部分
 
+##### 知识点
+
+- navigator：浏览器信息
+- screen：屏幕信息
+- location：地址信息
+- history：前行后退信息
+
+ ##### navigator和screen
+
+```shell
+//navigator
+const ua = navigator.userAgent;		//获取当前浏览器的信息
+const isChrome = ua.indexOf('Chrome')
+console.log(isChrome)
+
+//screen
+onsole.log(screen.width)
+cobsole.log(screen.height)
+```
+
+##### location和history
+
+```shell
+//location
+console.log(location.href)
+console.log(location.protocol)
+console.log(location.pathname)
+console.log(location.search)		//获取url传的参数
+console.log(location.hash)		//获取哈希，也就是#后面的内容
+
+//history
+history.back();
+history.forward()
+```
+
+#### 3、事件
+
+##### 题目：
+
+- 编写一个通用的事件监听函数
+- 描述事件冒泡的流程
+- 
 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
