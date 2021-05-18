@@ -3322,6 +3322,8 @@ bindEvent(div3,'click','a',function(event){		//注意：这里不能用箭头函
 })
 ```
 
+## 5.18
+
 #### 4、ajax
 
 ##### 题目
