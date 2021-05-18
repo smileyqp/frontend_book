@@ -3512,10 +3512,22 @@ xhr.send(null)
 
 ##### 题目
 
-- 从输入url到渲染出页面的整个过程
-- `window.onload`和`DOMCOntentLoad`的区别
+- 从输入url到渲染出页面的整个过程（见下：资源形式、加载过程、渲染过程）
+  - 下载资源：各个资源类型、下载过程
+  - 渲染页面：结合html、css、js图片等
+- `window.onload`和`DOMContentLoad`的区别
   - window.onload页面全部加载完成包括图片
-  - DOMCOntentLoad是dom渲染完成即可，此时图片视频可能还没有加载完
+  - DOMContentLoad是dom渲染完成即可，此时图片视频可能还没有加载完 
+
+```shell
+document.addEventListener('load',()=>{
+  console.log('window loaded')
+})
+
+document.addEventListener('DOMContentLoaded',()=>{
+  console.log('dom loaded')
+})
+```
 
 ##### 知识点
 
