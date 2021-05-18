@@ -2,7 +2,7 @@
 
 - [前端基础github地址](https://github.com/smileyqp/frontend_book)。`README.md`可以下载到`typora`中打开，会有整个大纲目录显示（github中markdown目录快捷生成方式不现实，之后可能会想办法生成贴过来，暂时不做相关处理）
 - [前端基础gitbook地址](https://smileyqp.github.io/frontend_book/doc/%E5%89%8D%E7%AB%AFhtml%E5%92%8Ccss%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html)。`README.md`中会实时更新进度内容。[gitbook](https://smileyqp.github.io/frontend_book/)中考虑整个学完整理完成之后，再去统一处理发布，敬请期待！`gitbook`版本可建议后期碎片化时间进行复习使用。
-- [前端基础csdn地址](https://blog.csdn.net/qq_34273059/category_9894803_2.html)。`CSDN`博客专栏[前端自我修养进阶](https://blog.csdn.net/qq_34273059/category_9894803.html?spm=1001.2014.3001.5482)中，也会一篇一篇实时更新相关知识点。
+- [前端基础csdn地址](https://blog.csdn.net/qq_34273059/article/details/116933292)。`CSDN`博客专栏[前端自我修养进阶](https://blog.csdn.net/qq_34273059/category_9894803.html)中，也会一篇一篇实时更新相关知识点。
 - [前端基础掘金地址](https://juejin.cn/post/6963439715911467021)
 
 
