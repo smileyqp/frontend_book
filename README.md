@@ -3,6 +3,7 @@
 - [前端基础github地址](https://github.com/smileyqp/frontend_book)。`README.md`可以下载到`typora`中打开，会有整个大纲目录显示（github中markdown目录快捷生成方式不现实，之后可能会想办法生成贴过来，暂时不做相关处理）
 - [前端基础gitbook地址](https://smileyqp.github.io/frontend_book/doc/%E5%89%8D%E7%AB%AFhtml%E5%92%8Ccss%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html)。`README.md`中会实时更新进度内容。[gitbook](https://smileyqp.github.io/frontend_book/)中考虑整个学完整理完成之后，再去统一处理发布，敬请期待！`gitbook`版本可建议后期碎片化时间进行复习使用。
 - [前端基础csdn地址](https://blog.csdn.net/qq_34273059/category_9894803_2.html)。`CSDN`博客专栏[前端自我修养进阶](https://blog.csdn.net/qq_34273059/category_9894803.html?spm=1001.2014.3001.5482)中，也会一篇一篇实时更新相关知识点。
+- [前端基础掘金地址](https://juejin.cn/post/6963439715911467021)
 
 
 
@@ -3321,21 +3322,70 @@ bindEvent(div3,'click','a',function(event){		//注意：这里不能用箭头函
 })
 ```
 
+#### 4、ajax
+
+##### 题目
+
+- 手写一个简易的ajax
+- 跨域常用的实现方式
+
+##### 知识点
+
+- XMLHttpRequest
+
+```shell
+//手写简易的ajax
+//get请求；post请求差不多
+const xhr = new XMLHttpRequest();
+xhr.open('GET','data/test.json',true);		//true的意思是异步请求
+xhr.onreadystatechange = function(){
+  if(xhr.readystate === 4){
+    if(xhr.status === 200){
+      alert(xhr.responseText)
+    }else if(xhr.status === 404){
+      console.log('404 not found ')
+    }
+  }
+}
+xhr.send(null)
+```
+
+- 状态码
+
+![](https://img-blog.csdnimg.cn/2021051717113417.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210518093144992.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- 跨域：同源策略跨域解决方案
+  - 什么是跨域（同源策略）
+  - JSONP
+  - CORS（服务端支持）
 
 
 
+##### 同源策略
 
+- ajax请求时，浏览器要求当前网页和server必须同源（安全）
+- 同源：协议、域名、端口三者必须一致
 
+- 加载图片、css、js可以无视同源策略
+  - `<img src=""/>`（注意：有的图片可能做了防盗链）
+  - `<link src=""/>`
+  - `<script src=""></script>`
+  - `<img src=""/>`可以做统计打点，可使用第三方统计服务
+  - `<link src=""/>`和`<script src=""></script>`可以使用CDN，CDN一般都是外域
+  - `<script src=""></script>`可以实现JSONP
 
+##### 跨域
 
+- 所有的跨域都必须经过serve端允许和配合
+- 未经serve端允许就实现跨域，说明浏览器有漏洞，危险信号
 
+##### JSONP
 
-
-
-
-
-
-
+- `<script></script>`可以绕过跨域限制
+- 服务器可以任意动态拼接数据返回
+- 所以，`<script></script>`可以获得跨域数据，只要服务端愿意返回
 
 
 
