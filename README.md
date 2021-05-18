@@ -3448,3 +3448,79 @@ xhr.send(null)
 ![](https://img-blog.csdnimg.cn/20210518104209364.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 ![](https://img-blog.csdnimg.cn/20210518104248535.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+
+
+#### 5、存储
+
+##### 题目
+
+- 描述cookie、localstorage、sessionStorage的区别
+  - 容量
+  - API易用性
+  -  是否跟随http 请求发出去 
+
+##### 知识点
+
+- cookie
+- localstorage和sessionstorage
+
+##### cookie
+
+- 本身用于浏览器和server通信
+- 被"借用"来本地存储
+- 可用`document.cookie=... `来修改
+- 存储大小，最大4kb
+- http请求时候需要发送到服务端，增加请求数据量
+- 只能用`document.cookie=… `来修改，太过简陋
+
+##### localstorage和sessionstorage
+
+- html5专门为存储而设计，最大可以存储5M
+- API简洁易用，用setItem和getItem
+- 不会随着http请求被发出去
+
+##### localstorage和sessionstorage区别
+
+- localstorage数据会永久存储，除非代码或者手动删除
+- sessionstorage只会存在于当前会话浏览器关闭则清空
+- 一般用localstorage多一些
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
