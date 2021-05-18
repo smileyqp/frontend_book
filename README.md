@@ -3486,6 +3486,88 @@ xhr.send(null)
 - sessionstorage只会存在于当前会话浏览器关闭则清空
 - 一般用localstorage多一些
 
+#### 6、开发环境
+
+- git
+- 调试工具
+- 抓包
+- webpack babel
+- linux常用命令
+
+##### git
+
+- 最常用的代码版本管理工具
+- 大型项目多人协作，必须使用git
+
+##### chrome调试工具
+
+- elements
+- console
+- debugger
+- network
+- application
+
+##### 抓包
+
+- 移动端h5页，查看网络请求
+- win一般用fiddler
+- mac一般用charles
+- 抓包过程：
+  - 手机电脑连同一个局域网
+  - 手机代理到电脑上
+  - 手机浏览网页即可抓包
+- 查看网址请求
+- 网址代理 
+- https
+
+#### 7、webpack和babel
+
+- ES6模块化，浏览器暂不支持
+- ES6语法，浏览器不完全支持
+- 压缩代码、整合代码，让网页加载更快
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
