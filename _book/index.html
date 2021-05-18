@@ -325,6 +325,7 @@
 <li><a href="https://github.com/smileyqp/frontend_book" target="_blank">&#x524D;&#x7AEF;&#x57FA;&#x7840;github&#x5730;&#x5740;</a>&#x3002;<code>README.md</code>&#x53EF;&#x4EE5;&#x4E0B;&#x8F7D;&#x5230;<code>typora</code>&#x4E2D;&#x6253;&#x5F00;&#xFF0C;&#x4F1A;&#x6709;&#x6574;&#x4E2A;&#x5927;&#x7EB2;&#x76EE;&#x5F55;&#x663E;&#x793A;&#xFF08;github&#x4E2D;markdown&#x76EE;&#x5F55;&#x5FEB;&#x6377;&#x751F;&#x6210;&#x65B9;&#x5F0F;&#x4E0D;&#x73B0;&#x5B9E;&#xFF0C;&#x4E4B;&#x540E;&#x53EF;&#x80FD;&#x4F1A;&#x60F3;&#x529E;&#x6CD5;&#x751F;&#x6210;&#x8D34;&#x8FC7;&#x6765;&#xFF0C;&#x6682;&#x65F6;&#x4E0D;&#x505A;&#x76F8;&#x5173;&#x5904;&#x7406;&#xFF09;</li>
 <li><a href="https://smileyqp.github.io/frontend_book/doc/%E5%89%8D%E7%AB%AFhtml%E5%92%8Ccss%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html" target="_blank">&#x524D;&#x7AEF;&#x57FA;&#x7840;gitbook&#x5730;&#x5740;</a>&#x3002;<code>README.md</code>&#x4E2D;&#x4F1A;&#x5B9E;&#x65F6;&#x66F4;&#x65B0;&#x8FDB;&#x5EA6;&#x5185;&#x5BB9;&#x3002;<a href="https://smileyqp.github.io/frontend_book/" target="_blank">gitbook</a>&#x4E2D;&#x8003;&#x8651;&#x6574;&#x4E2A;&#x5B66;&#x5B8C;&#x6574;&#x7406;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#xFF0C;&#x518D;&#x53BB;&#x7EDF;&#x4E00;&#x5904;&#x7406;&#x53D1;&#x5E03;&#xFF0C;&#x656C;&#x8BF7;&#x671F;&#x5F85;&#xFF01;<code>gitbook</code>&#x7248;&#x672C;&#x53EF;&#x5EFA;&#x8BAE;&#x540E;&#x671F;&#x788E;&#x7247;&#x5316;&#x65F6;&#x95F4;&#x8FDB;&#x884C;&#x590D;&#x4E60;&#x4F7F;&#x7528;&#x3002;</li>
 <li><a href="https://blog.csdn.net/qq_34273059/category_9894803_2.html" target="_blank">&#x524D;&#x7AEF;&#x57FA;&#x7840;csdn&#x5730;&#x5740;</a>&#x3002;<code>CSDN</code>&#x535A;&#x5BA2;&#x4E13;&#x680F;<a href="https://blog.csdn.net/qq_34273059/category_9894803.html?spm=1001.2014.3001.5482" target="_blank">&#x524D;&#x7AEF;&#x81EA;&#x6211;&#x4FEE;&#x517B;&#x8FDB;&#x9636;</a>&#x4E2D;&#xFF0C;&#x4E5F;&#x4F1A;&#x4E00;&#x7BC7;&#x4E00;&#x7BC7;&#x5B9E;&#x65F6;&#x66F4;&#x65B0;&#x76F8;&#x5173;&#x77E5;&#x8BC6;&#x70B9;&#x3002;</li>
+<li><a href="https://juejin.cn/post/6963439715911467021" target="_blank">&#x524D;&#x7AEF;&#x57FA;&#x7840;&#x6398;&#x91D1;&#x5730;&#x5740;</a></li>
 </ul>
 <h4 id="&#x2B50;&#xFE0F;&#x5C31;&#x662F;&#x6700;&#x597D;&#x7684;&#x9F13;&#x52B1;&#x54E6;wink&#xFF5E;&#x1F497;">&#x2B50;&#xFE0F;&#x5C31;&#x662F;&#x6700;&#x597D;&#x7684;&#x9F13;&#x52B1;&#x54E6;wink&#xFF5E;&#x1F497;</h4>
 <p>[TOC]</p>
@@ -3344,6 +3345,121 @@ bindEvent(div3,&apos;click&apos;,&apos;a&apos;,function(event){        //&#x6CE8
   alert(this.innerHTML)
 })
 </code></pre>
+<h4 id="4&#x3001;ajax">4&#x3001;ajax</h4>
+<h5 id="&#x9898;&#x76EE;">&#x9898;&#x76EE;</h5>
+<ul>
+<li>&#x624B;&#x5199;&#x4E00;&#x4E2A;&#x7B80;&#x6613;&#x7684;ajax</li>
+</ul>
+<pre><code class="lang-shell">function ajax(url){
+  const p = new Promise((resolve,reject)=&gt;{
+    const xhr = new XMLHttpRequest();
+    xhr.open(&apos;GET&apos;,&apos;data/test.json&apos;,true);        //true&#x7684;&#x610F;&#x601D;&#x662F;&#x5F02;&#x6B65;&#x8BF7;&#x6C42;
+    xhr.onreadystatechange = function(){
+      if(xhr.readystate === 4){
+        if(xhr.status === 200){
+          resolve(JSON.parse(xhr.responseText))
+        }else if(xhr.status === 404){
+          reject(new Error(&apos;404 not found!&apos;))
+        }
+      }
+    }
+  });
+  xhr.send(null)
+  return p;
+}
+
+const url = &apos;/data/test.json&apos;
+ajax(url).then(res=&gt;{
+  console.log(res)
+}).catch(err=&gt;{
+  console.log(err)
+})
+</code></pre>
+<ul>
+<li>&#x8DE8;&#x57DF;&#x5E38;&#x7528;&#x7684;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;</li>
+</ul>
+<h5 id="&#x77E5;&#x8BC6;&#x70B9;">&#x77E5;&#x8BC6;&#x70B9;</h5>
+<ul>
+<li>XMLHttpRequest</li>
+</ul>
+<pre><code class="lang-shell">//&#x624B;&#x5199;&#x7B80;&#x6613;&#x7684;ajax
+//get&#x8BF7;&#x6C42;&#xFF1B;post&#x8BF7;&#x6C42;&#x5DEE;&#x4E0D;&#x591A;
+const xhr = new XMLHttpRequest();
+xhr.open(&apos;GET&apos;,&apos;data/test.json&apos;,true);        //true&#x7684;&#x610F;&#x601D;&#x662F;&#x5F02;&#x6B65;&#x8BF7;&#x6C42;
+xhr.onreadystatechange = function(){
+  if(xhr.readystate === 4){
+    if(xhr.status === 200){
+      alert(xhr.responseText)
+    }else if(xhr.status === 404){
+      console.log(&apos;404 not found &apos;)
+    }
+  }
+}
+xhr.send(null)
+</code></pre>
+<ul>
+<li>&#x72B6;&#x6001;&#x7801;</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/2021051717113417.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20210518093144992.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70" alt=""></p>
+<ul>
+<li>&#x8DE8;&#x57DF;&#xFF1A;&#x540C;&#x6E90;&#x7B56;&#x7565;&#x8DE8;&#x57DF;&#x89E3;&#x51B3;&#x65B9;&#x6848;<ul>
+<li>&#x4EC0;&#x4E48;&#x662F;&#x8DE8;&#x57DF;&#xFF08;&#x540C;&#x6E90;&#x7B56;&#x7565;&#xFF09;</li>
+<li>JSONP</li>
+<li>CORS&#xFF08;&#x670D;&#x52A1;&#x7AEF;&#x652F;&#x6301;&#xFF09;</li>
+</ul>
+</li>
+</ul>
+<h5 id="&#x540C;&#x6E90;&#x7B56;&#x7565;">&#x540C;&#x6E90;&#x7B56;&#x7565;</h5>
+<ul>
+<li>ajax&#x8BF7;&#x6C42;&#x65F6;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x8981;&#x6C42;&#x5F53;&#x524D;&#x7F51;&#x9875;&#x548C;server&#x5FC5;&#x987B;&#x540C;&#x6E90;&#xFF08;&#x5B89;&#x5168;&#xFF09;</li>
+<li><p>&#x540C;&#x6E90;&#xFF1A;&#x534F;&#x8BAE;&#x3001;&#x57DF;&#x540D;&#x3001;&#x7AEF;&#x53E3;&#x4E09;&#x8005;&#x5FC5;&#x987B;&#x4E00;&#x81F4;</p>
+</li>
+<li><p>&#x52A0;&#x8F7D;&#x56FE;&#x7247;&#x3001;css&#x3001;js&#x53EF;&#x4EE5;&#x65E0;&#x89C6;&#x540C;&#x6E90;&#x7B56;&#x7565;</p>
+<ul>
+<li><code>&lt;img src=&quot;&quot;/&gt;</code>&#xFF08;&#x6CE8;&#x610F;&#xFF1A;&#x6709;&#x7684;&#x56FE;&#x7247;&#x53EF;&#x80FD;&#x505A;&#x4E86;&#x9632;&#x76D7;&#x94FE;&#xFF09;</li>
+<li><code>&lt;link src=&quot;&quot;/&gt;</code></li>
+<li><code>&lt;script src=&quot;&quot;&gt;&lt;/script&gt;</code></li>
+<li><code>&lt;img src=&quot;&quot;/&gt;</code>&#x53EF;&#x4EE5;&#x505A;&#x7EDF;&#x8BA1;&#x6253;&#x70B9;&#xFF0C;&#x53EF;&#x4F7F;&#x7528;&#x7B2C;&#x4E09;&#x65B9;&#x7EDF;&#x8BA1;&#x670D;&#x52A1;</li>
+<li><code>&lt;link src=&quot;&quot;/&gt;</code>&#x548C;<code>&lt;script src=&quot;&quot;&gt;&lt;/script&gt;</code>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;CDN&#xFF0C;CDN&#x4E00;&#x822C;&#x90FD;&#x662F;&#x5916;&#x57DF;</li>
+<li><code>&lt;script src=&quot;&quot;&gt;&lt;/script&gt;</code>&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;JSONP</li>
+</ul>
+</li>
+</ul>
+<h5 id="&#x8DE8;&#x57DF;">&#x8DE8;&#x57DF;</h5>
+<ul>
+<li>&#x6240;&#x6709;&#x7684;&#x8DE8;&#x57DF;&#x90FD;&#x5FC5;&#x987B;&#x7ECF;&#x8FC7;serve&#x7AEF;&#x5141;&#x8BB8;&#x548C;&#x914D;&#x5408;</li>
+<li>&#x672A;&#x7ECF;serve&#x7AEF;&#x5141;&#x8BB8;&#x5C31;&#x5B9E;&#x73B0;&#x8DE8;&#x57DF;&#xFF0C;&#x8BF4;&#x660E;&#x6D4F;&#x89C8;&#x5668;&#x6709;&#x6F0F;&#x6D1E;&#xFF0C;&#x5371;&#x9669;&#x4FE1;&#x53F7;</li>
+</ul>
+<h5 id="jsonp">JSONP</h5>
+<ul>
+<li><code>&lt;script&gt;&lt;/script&gt;</code>&#x53EF;&#x4EE5;&#x7ED5;&#x8FC7;&#x8DE8;&#x57DF;&#x9650;&#x5236;</li>
+<li>&#x670D;&#x52A1;&#x5668;&#x53EF;&#x4EE5;&#x4EFB;&#x610F;&#x52A8;&#x6001;&#x62FC;&#x63A5;&#x6570;&#x636E;&#x8FD4;&#x56DE;</li>
+<li>&#x6240;&#x4EE5;&#xFF0C;<code>&lt;script&gt;&lt;/script&gt;</code>&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x8DE8;&#x57DF;&#x6570;&#x636E;&#xFF0C;&#x53EA;&#x8981;&#x670D;&#x52A1;&#x7AEF;&#x613F;&#x610F;&#x8FD4;&#x56DE;</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210518100723124.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/2021051810101435.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70" alt=""></p>
+<h5 id="cors-&#x670D;&#x52A1;&#x5668;&#x8BBE;&#x7F6E;http-header">CORS &#x670D;&#x52A1;&#x5668;&#x8BBE;&#x7F6E;http header</h5>
+<ul>
+<li>&#x670D;&#x52A1;&#x5668;&#x5141;&#x8BB8;&#x8DE8;&#x57DF;</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210518101438223.png" alt=""></p>
+<h5 id="ajax&#x7684;&#x5E38;&#x7528;&#x63D2;&#x4EF6;">ajax&#x7684;&#x5E38;&#x7528;&#x63D2;&#x4EF6;</h5>
+<ul>
+<li>jquery</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210518103852238.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70" alt=""></p>
+<ul>
+<li>fetch</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210518103945753.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20210518104023491.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20210518104058242.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70" alt=""></p>
+<ul>
+<li>axios</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210518104209364.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20210518104248535.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70" alt=""></p>
 
                                 
                                 </section>
@@ -3383,7 +3499,7 @@ bindEvent(div3,&apos;click&apos;,&apos;a&apos;,function(event){        //&#x6CE8
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"前端html和css基础知识","level":"1.1.1","depth":2,"path":"doc/前端html和css基础知识.md","ref":"doc/前端html和css基础知识.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2021-05-17T08:45:39.859Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-17T08:52:24.517Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"前端html和css基础知识","level":"1.1.1","depth":2,"path":"doc/前端html和css基础知识.md","ref":"doc/前端html和css基础知识.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2021-05-18T02:43:05.590Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-18T02:09:39.980Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -3391,6 +3507,10 @@ bindEvent(div3,&apos;click&apos;,&apos;a&apos;,function(event){        //&#x6CE8
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
     
         
         <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>

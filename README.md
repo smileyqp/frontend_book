@@ -3327,6 +3327,36 @@ bindEvent(div3,'click','a',function(event){		//注意：这里不能用箭头函
 ##### 题目
 
 - 手写一个简易的ajax
+
+```shell
+function ajax(url){
+  const p = new Promise((resolve,reject)=>{
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET','data/test.json',true);		//true的意思是异步请求
+    xhr.onreadystatechange = function(){
+      if(xhr.readystate === 4){
+        if(xhr.status === 200){
+          resolve(JSON.parse(xhr.responseText))
+        }else if(xhr.status === 404){
+          reject(new Error('404 not found!'))
+        }
+      }
+    }
+  });
+  xhr.send(null)
+  return p;
+}
+
+const url = '/data/test.json'
+ajax(url).then(res=>{
+  console.log(res)
+}).catch(err=>{
+  console.log(err)
+})
+```
+
+
+
 - 跨域常用的实现方式
 
 ##### 知识点
@@ -3387,15 +3417,32 @@ xhr.send(null)
 - 服务器可以任意动态拼接数据返回
 - 所以，`<script></script>`可以获得跨域数据，只要服务端愿意返回
 
+![](https://img-blog.csdnimg.cn/20210518100723124.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
+![](https://img-blog.csdnimg.cn/2021051810101435.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
+##### CORS 服务器设置http header
 
+- 服务器允许跨域
 
+![](https://img-blog.csdnimg.cn/20210518101438223.png)
 
+##### ajax的常用插件
 
+- jquery
 
+![](https://img-blog.csdnimg.cn/20210518103852238.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
+- fetch
 
+![](https://img-blog.csdnimg.cn/20210518103945753.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
+![](https://img-blog.csdnimg.cn/20210518104023491.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
+![](https://img-blog.csdnimg.cn/20210518104058242.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
+- axios
+
+![](https://img-blog.csdnimg.cn/20210518104209364.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210518104248535.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
