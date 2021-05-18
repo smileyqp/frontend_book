@@ -3580,7 +3580,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 - 加载更快
   - 减少资源体积：压缩代码
   - 减少访问次数：合并代码（js、css、雪碧图）、ssr服务端渲染（数据一起给前端）、缓存
-  - 使用更快的网络：CDN
+  - 使用更快的网络：CDN（根据地域做静态文件访问服务）
 - 渲染更快
   - css放进head中，js放到body最下面
   - 尽早执行js，用DOMContentLoad去触发
@@ -3589,27 +3589,42 @@ document.addEventListener('DOMContentLoaded',()=>{
   - 频繁dom操作合并到一起插入都没结构
   - 节流throttle和防抖debounce （渲染更加流畅）
 
+##### 示例
+
+- 资源合并
+
+![](https://img-blog.csdnimg.cn/20210518173127797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 
 
+- 缓存
+  - 静态资源加hash后缀，根据文件内容计算哈希
+  - 文件内容不变、则哈希不变，那么url不变
+  - url和文件不变，则会自动触发http缓存机制返回304（减少了资源请求）
 
+![image-20210518173205903](/Users/yqp/Library/Application Support/typora-user-images/image-20210518173205903.png)
 
+- SSR（server side render）
+  - 服务端渲染：将网页和数据一起加载一起渲染
+  - 非SSR（前后端分离）：先加载网页、再加载数据、再渲染数据
+  - 早先的JSP、PHP、APS都属于ssr，现在的react  vue ssr
 
+- 懒加载
 
+![](https://img-blog.csdnimg.cn/20210518174016768.png)
 
+- 缓存dom查询
 
+![](https://img-blog.csdnimg.cn/20210518174058216.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
+- 多个dom操作合并一起插入dom结构
 
+![](https://img-blog.csdnimg.cn/20210518174153235.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
+- 尽早开始js执行
+  - 在dom渲染结束之后就可以开始js执行没必要等到图片、视频等多媒体资源都加载完成之后再去执行
 
-
-
-
-
-
-
-
-
+![](https://img-blog.csdnimg.cn/20210518174320303.png)
 
 
 
