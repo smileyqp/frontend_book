@@ -3517,7 +3517,7 @@ xhr.send(null)
   - 渲染页面：结合html、css、js图片等
 - `window.onload`和`DOMContentLoad`的区别
   - window.onload页面全部加载完成包括图片
-  - DOMContentLoad是dom渲染完成即可，此时图片视频可能还没有加载完 
+  - DOMContentLoaded是dom渲染完成即可，此时图片视频可能还没有加载完 
 
 ```shell
 document.addEventListener('load',()=>{
@@ -3567,9 +3567,27 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 - 图片渲染并不会阻塞dom渲染，只不过可能先空着等图片加载完成之后显示
 
+#### 8、性能优化
 
+##### 性能优化原则
 
+- 多使用内存、缓存或者其他方法
+- 减少CPU计算量、减少网络加载耗时
+- （适用于所有编程性能优化、空间换时间）
 
+##### 从哪些方面入手
+
+- 加载更快
+  - 减少资源体积：压缩代码
+  - 减少访问次数：合并代码（js、css、雪碧图）、ssr服务端渲染（数据一起给前端）、缓存
+  - 使用更快的网络：CDN
+- 渲染更快
+  - css放进head中，js放到body最下面
+  - 尽早执行js，用DOMContentLoad去触发
+  - 懒加载(图片懒加载、上滑加载更多)
+  - 对dom查询进行缓存
+  - 频繁dom操作合并到一起插入都没结构
+  - 节流throttle和防抖debounce （渲染更加流畅）
 
 
 
