@@ -3741,10 +3741,39 @@ div1.addEventListener(throttle(function(e){
 ##### XSRF预防
 
 - 使用POST接口，因为使用POST接口跨域是需要serve端进行支持的
-
 - 增加验证，比如：密码验证码、指纹等
 
-  
+
+
+
+
+
+
+# 面试题
+
+#### 1、作用域和值类型引用类型的传递
+
+```shell
+var num1 = 11;
+var num2 = 22;
+function fn(num,num1){
+	//num,num1会计作用域中变量，分别传入时候只为11，22
+  num = 100;
+  num1 = 100;
+  num2 = 100;		//没有用var声明，不是块作用域中变量，那么修改的就是全局的num2
+  console.log(num)		//100
+  console.log(num1)		//100
+  console.log(num2)		//100
+}
+	fn(num1,num2)
+  console.log(num1)		//11
+  console.log(num2)		//100
+  console.log(num)		//undefined报错
+```
+
+
+
+
 
 
 
