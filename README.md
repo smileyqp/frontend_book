@@ -3794,6 +3794,117 @@ f1(p)
 console.log(p.name) //ls
 ```
 
+#### 2、封装函数进行字符串驼峰命名
+
+- 已知有字符串类似`get-element-by-id`格式，写一个function将其转化成驼峰命名表示法`getElementById`
+
+```shell
+function fn(str){
+  var arr = str.split('-');
+  for(let i = 1;i<arr.length;i++){
+    arr[i] = arr[i].charAt(0).toUpperCase()+arr[i].substr(1,arr[i].length-1)
+  }
+  return arr.join('');		//数组拼接成字符串
+}
+```
+
+#### 3、冒泡排序
+
+```shell
+function bubble(arr){
+  for(let i = 0;i < arr.length;i++){
+    for(let j = 0;j < arr.length - 1 -i;j++){
+      if(arr[j]>arr[j+1]){
+        [arr[j],arr[j+1]] = [arr[j+1],arr[j]];
+      }
+    }
+  }
+  return arr;
+}
+
+```
+
+#### 4、反转数组
+
+- 示例：比如数组`[1,2,3,4,5,6,7,8]`反转数组之后的结果是`[8,7,6,5,4,3,2,1]`
+- 类似于首位交换
+
+```shell
+0 len-1
+1 len-1 -1
+2 lem-1 -2
+
+function fn(arr){
+  for(let i = 0;i < arr.length/2;i++){
+    [arr[i],arr[arr.length -1 -i]] = [arr[arr.length -1 -i],arr[i]]
+  }
+  return arr
+}
+```
+
+#### 5、数组去重
+
+- Set
+
+```shell
+function fn(arr){
+  return Array.from(new Set(arr))
+}
+```
+
+- 一项一项去拿，然后和其后面形成的数组进行对比
+
+```shell
+function fn(arr){
+  for(let i = 0;i < arr.length;i++){
+    let val = arr[i],
+    		compareArr = arr.slice(i);		//取出i之后的所有项组成的数组
+    if(compareArr.indexOf(val)>-1){		//如果后面存在这个值
+      arr.split(i,1)
+      arr.length--;
+      i--;
+    }
+  }
+  return arr
+}
+
+
+function fn(arr){
+  for(let i = 0;i < arr.length;i++){
+    let val = arr[i],
+    		compareArr = arr.slice(i);		//取出i之后的所有项组成的数组
+    if(compareArr.indexOf(val)>-1){		//如果后面存在这个值
+      arr[i] = null;
+    }
+  }
+  arr = arr.filter((item)=>{return item != null})
+}
+```
+
+- 先排序再去重
+
+```shell
+function fn(arr){
+  arr = arr.sort((a,b)=>{return a-b});		//升序
+  for(let i = 0;i < arr.length-1;i++){		//倒数第一项不用去跟后面一项进行对比
+    if(arr[i] === arr[i+1]){
+      arr.split(i,1)
+      arr.length--;
+      i--;
+    }
+  }
+  return arr;
+}
+```
+
+#### 6、1px物理像素的实现
+
+```shell
+
+
+
+```
+
 
 
 
