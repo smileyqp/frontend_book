@@ -3753,6 +3753,8 @@ div1.addEventListener(throttle(function(e){
 
 #### 1、作用域和值类型引用类型的传递
 
+##### 作用域
+
 ```shell
 var num1 = 11;
 var num2 = 22;
@@ -3771,9 +3773,26 @@ function fn(num,num1){
   console.log(num)		//undefined报错
 ```
 
+##### 值类型、引用类型的传递
 
+```shell
+function Person(name,age,salary){
+  this.name = name;
+  this.age = age;
+  this.salary = salary;
+}
 
+function f1(person){
+//执行f1(p)的时候person的地址和p的地址指向同一个内存地址，因此修改person.name会修改p.name
+  person.name = "ls"		
+  person = new Person('aa',18,10)		//此时重新将person指向另外一个引用地址，所以跟p无关，不修改p值
+}
 
+var p = new Person('zs',18,10000)
+console.log(p.name)		//zs
+f1(p)
+console.log(p.name) //ls
+```
 
 
 
