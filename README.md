@@ -3687,7 +3687,7 @@ input1.addEventListener('keyup',debounce(function(){
 }),1000)
 ```
 
-##### 截流throttle
+##### 节流throttle
 
 - 场景：拖拽一个元素时候要随时拿到这个元素的位置
 - 如果直接用drag事件那么会频繁触发，十分容易导致卡顿
