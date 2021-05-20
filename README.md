@@ -3897,27 +3897,128 @@ function fn(arr){
 }
 ```
 
-#### 6、1px物理像素的实现
+#### 6、js综合面试题
+
+- 变量提升，函数提升。变量提升：变量名提升；函数提升：函数整体提升
+- this指向问题
+- 变量常用规则，变量沿着作用域链进行查找
+- 运算符优先级关系：点运算优先级最高，但是遇到`()`没有办法进行运算，所以会记那个前面整体先进性运算
+- 实例对象属性规则，原型原型链
 
 ```shell
+//涉及变量提升、函数提升；
+function Foo(){
+  getName = function(){alert(1)}		//修改了全局的
+  return this;
+}
+Foo.getName = function(){alert(2)}
+Foo.prototype.getName = function(){alert(3)}
+var getName = function(){alert(4)}
+function getName(){alert(5)}
 
 
-
+//输出如下结果
+Foo.getName()		//2
+getName()			//4
+Foo().getName()		//1   this指向window，window.getName()
+getName()			//1
+new Foo.getName();		//2
+new Foo().getName();		//3
+new new Foo().getName();		//3
 ```
 
+#### 7、nodejs事件轮询
+
+- `libuv`
+- 事件轮询机制
+  - 定时器阶段：计时到点的计时器
+  - pending callback：做系统操作，tcp错误等
+  - idle、prepare准备工作
+  - 轮询阶段：轮询队列
+    - 轮询队列不为空：一次去除回调函数中的第一个函数，先进先出。知道轮询队列为空或者达到最大限制（轮询队列为空：设置过SetImmidiate函数直接进入下一个check阶段；没有设置过，那么就在当前poll等待，直到轮询队列添加进来新的函数，就会去第一个情况执行。如果定时器到点，那么也会去执行下一个阶段）
+  - check查阶段：执行setImmediate设置的回调函数
+  - close callback：关闭阶段。close事件的回调函数在这个阶段进行。
+
+- `process.nextTick`能在任意阶段优先执行
+
+```
+setTimeout(function(){
+  console.log(1)
+},0)
+
+setImmediate(function(){ 
+  console.log(2)
+})
+
+process.nextTick(function(){
+  console.log(3)
+})
+
+//nextTick timeout immediate
+```
+
+#### 8、从url输入
+
+- DNS解析。域名解析成IP。先读取浏览器DNS缓存，读取系统DNS缓存，读取路由器DNS缓存，网络运营商缓存，递归搜索
+- TCP三次握手：
+  - 浏览器告诉服务器要发送请求
+  - 服务器告诉浏览器准备接收
+  - 浏览器告诉服务器马上就发送请求
+- 发送请求：请求报文
+- 接受响应：响应报文
+- 渲染页面
+  - 遇见HTML标记，浏览器调用HTML解析器解析解析并且构建成dom树
+  -  遇见style/link，浏览器调用css解析起解析并且构建成cssom树
+  - 遇到script会调用js解析器，处理script代码（绑定事件，修改dom树/cssom树）
+  - 合并dom树和cssom树成渲染树
+  - 根据渲染树进行计算布局，计算每个节点的几何信息（布局）
+  - 将各个节点颜色绘制到屏幕上（渲染 ）
+  - 注意：这五个不一定按照顺序执行，如果dom树或者cssom树被修改了，可能会执行多次布局和渲染。
+
+- 断开链接：四次挥手。
+  - 浏览器发送给服务器：我请求报文完了，关闭
+  - 服务器告诉浏览器：我准备关闭
+  - 服务器告诉浏览器：响应报文发送完了，准备关闭
+  - 浏览器告诉服务器：客户端准备关闭
 
 
 
+#### 9、闭包
+
+- 函数嵌套
+- 内部函数使用外部函数的局部变量
+
+- 优点：延长外部函数局部变量的生命周期；缺点：内存泄漏
+- 合理使用闭包，及时销毁
+
+```shell
+function fun(n,o){
+  console.log(o)		//执行var a = fun(0)时候o没有定义，undefined
+  return {
+    fun:function(m){
+      return fun(m, n);			//这个fun是window的fun也就是全局的fun
+    }
+  }
+}
+
+//a中存的是同一个返回方法，是同一个fun(m,n)，此时存的n都是第一次的0，后面也只是改m所以n都是0，o打印都为0
+var a = fun(0)			//结果给a赋值返回一个对象{fun:function(){...}}
+a.fun(1)				//0
+a.fun(2)				//0
+a.fun(3)				//0
+
+//注意这里区别于上面，这里每次执行完之后保存的n都是上一次返回的n
+var b = fun(0).fun(1).fun(2).fun(3)		//undefined 0 1 2
+
+//同理：
+var d = fun(0).fun(1).fun(2).fun(3).fun(67).fun(45)  //undefined 0 1 2 3 67
 
 
+var c = fun(0).fun(1) //undefined 0 此后c上的n保存变成了1
 
-
-
-
-
-
-
-
+c.fun(2)		//1
+c.fun(3)		//1 
+```
 
 
 
