@@ -3981,8 +3981,6 @@ process.nextTick(function(){
   - 服务器告诉浏览器：响应报文发送完了，准备关闭
   - 浏览器告诉服务器：客户端准备关闭
 
-
-
 #### 9、闭包
 
 - 函数嵌套
@@ -4020,9 +4018,82 @@ c.fun(2)		//1
 c.fun(3)		//1 
 ```
 
+#### 10、变量提升&上下文
 
+##### 变量提升
 
+- js引擎在代码执行之前会做预处理工作
+  - 收集变量：var声明的变量定义，但是不赋值
+  - 收集函数：function声明的函数就提前定义函数
 
+```shell
+console.log(username)		//undefined
+var username = 'smileyqp'
+
+fun();			//正常执行函数
+function fun(){
+	console.log('inner func')
+}
+```
+
+##### 执行上下文（excute context）
+
+- 理解：代码执行的环境
+- 时机：代码正式执行之前会进入到执行环境
+  - 创建变量对象（变量提升）
+    - 变量
+    - 函数及函数的参数
+    - 全局：window
+    - 局部变量对象
+  - 确认this指向
+    - 全局window
+    - 局部：调用其的对象
+  - 创建作用域链
+    - 父级作用域链+当前的变量对象
+  - 扩展：执行上下文可以认为是一个大的对象，这个对象中主要包含 
+    - 变量对象：变量、函数、函数的形参
+    - 作用域链Scopechain：父级作用链+当前作用域对象
+    - this：window||调用其的对象
+
+#### 11、宏任务和微任务
+
+> js是单线程的，所以我们可以称之为主线程，也就是我们的js代码都是在主线程上完成的。祝不过我们区分任务是同步还是异步，如果是异步的话，那么它会有一个回调函数。 回调函数：定时器的回调、ajax请求的回调、对应事件的回调（比如点击事件）。不同的任务又会交给不同的模块去处理，比如：定时器模块、网络请求模块、事件处理模块。
+
+js事件轮询机制，js是单线程的
+
+- 宏任务：setTimeout 、setInterval、requestAnimationFrame
+  - 宏任务所处的队列就是宏任务队列 
+  - 第一个宏任务队列中只有一个任务、执主线程的js代码
+  - 宏任务队列可以哟欧多个
+- 微任务：New Promise().then(两个回调函数 )、process.nextTick
+  - 微任务所处的队列就是微任务队列
+  - 只有一个微任务队列
+  - 上一个宏任务执行完成之后如果有微任务就会执行微任务队列中所有任务
+  - 当宏任务重的任务执行完成之后会此案去查看微任务队列中是否有任务，如果有就先执行微任务队列中的任务，如果没有的话就继续执行下一个宏任务
+
+```shell
+//主线程宏任务执行打印1-5  微任务队列执行打印then中console   setTimeout宏任务执行
+
+console.log('start')
+
+setTimeout(()=>{
+  console.log('setTimeout')
+},0)
+
+new Promise((resolve,reject)=>{
+  for(var i = 0;i<=5;i++){
+    console.log(i)
+    resolve()
+  }
+}).then(()=>{
+  console.log('promise实例成功回调')
+})
+
+console.log('end')
+
+//输出：
+// start 1 2 3 4 5 end promise实例成功回调  setTimeout
+```
 
 
 
