@@ -3751,6 +3751,8 @@ div1.addEventListener(throttle(function(e){
 
 # 面试题
 
+## 5.20
+
 #### 1、作用域和值类型引用类型的传递
 
 ##### 作用域
@@ -4129,7 +4131,111 @@ console.log('end')
 -  redux-thunk实现redux的一步编程。以及redux-saga
 - redux-devtools实现chrome中redux的调试
 
+## 5.21
+
 #### 14、vue组件间通信的方式
+
+- 父向子通信
+- 子向父通信
+- 兄弟组件通信
+- 隔代组件通信
+
+##### 实现通信方式
+
+- props
+  - 标一般属性（父向子）、函数属性（子向父）
+  - 隔代通信比比较麻烦：需要逐级传递；兄弟组件通信需要通过父组件传递 
+- Vue自定义事件：
+  - 绑定监听（子胥见在父组件中调用的时候绑定监听）`<My-component @eveName="callback"/>`
+  - 触发(分发)事件`this.$emit('eveName',data )`
+  - 只适合子组件向父组件通信 
+- 消息订阅与发布（例如：pubsub-js ）
+  - 订阅消息
+  - 发布消息
+  - 适用于任意关系的组件通信
+- Vuex（vue的状态管理的插件库）
+- slot：专门用来父向子传递带数据的标签
+
+#### 15、vuex状态管理机制
+
+![](https://img-blog.csdnimg.cn/20210521143448327.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+#### 16、Vue的MVVM的实现
+
+- 模板解析
+  - 解析大括号表达式
+  - 解析指令
+- 数据绑定
+  - 更新显示实现：数据劫持
+
+![](https://img-blog.csdnimg.cn/2021052114463857.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+
+
+#### 17、重绘、重排（回流）
+
+- 先把dom节点生成dom树（解析dom）
+- 生成cssom（解析css）
+- 布局：构成渲染树render tree（从根节点递归，布局）
+- 绘制：绘制div等到页面上
+
+重绘（repaint）：一个元素外观的改变所触发的浏览器的行为，浏览器会根据元素的新属性重新绘制，使元素呈现新外观
+
+回流（重排、重构reflow）：当渲染树的一部分因为元素的尺寸、布局、隐藏等改变而需要重新构建称之为重排
+
+重绘和重排的关系：在重排的过程中，浏览器会使渲染树中收到影响的部分失效，并且重新去构造这部分渲染树，完成重排之后，浏览器会重新绘制受影响的部分到屏幕中，该部分称为重绘。
+
+重排（回流）一定会重绘，但是重绘不一定会重排。（重排=>布局 重绘=>样式）
+
+##### 触发重排的条件
+
+- 页面渲染初始化
+- 添加删除可见dom元素
+- 元素位置改变或者使用动画
+- 元素尺寸的改变——大小、外边距、边框
+- 浏览器窗口尺寸的变化（resize事件发生时）
+- 填充内容的改变，比如文本的改变导致的计算值的宽高改变
+- 读取某些元素属性（读取宽高offsetTop/Top/Height/width等）
+
+##### 重绘或者重排的代价：耗时、导致浏览器卡顿
+
+##### 重绘重排优化
+
+- 浏览器自己的优化：浏览器会维护一个队列，把所有会引起重绘或者重排的操作放入这个队列，等队列中的操作到了一定的哦时间间隔或者一定数量的时候，浏览器就会flush队列进行一个个处理，这样就会让多次回流和重绘便车个一次
+- 我们也可以合并多次对dom的操作以及对样式的修改为一次，并且减少对style的样式请求
+  - 直接改变元素的className
+  - 先设置元素的`display:none`然后进行页面布局等操作，设置完成之后再将`display:block`这样的话就之后出现两次重绘和重排
+  - 使用cloneNode（ture or false）和replace技术只引发一次重绘和重排
+  - 将需要毒刺重排的元素的`position`设置成absolte或者fixed,使其脱离文档流，那么它的变化不会影响到其他元素
+  - 如果要插入多个dom节点可以创建一个documentFragment创建完成之后一次性加入document
+
+```shell
+var fragment = document.createDocumentFragment()
+for(let i = 0;i<=1000;i++){
+  var li = document.createElement('i')
+  li.innerHTML = i + '</br>'
+  fragment.append(li)
+}
+document.getElementById('container').appendChild(fragment)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
