@@ -4287,7 +4287,7 @@ console.log(hw.next().next().next())		//ending
 console.log(hw.next().next().next().next())		//undefined
 ```
 
--
+
 
 
 
