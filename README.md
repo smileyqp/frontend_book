@@ -4287,7 +4287,76 @@ console.log(hw.next().next().next())		//ending
 console.log(hw.next().next().next().next())		//undefined
 ```
 
+- 拓展`Promise.all`和`Promise.race`
+  - `Promise.all`必须数组里面的所有promise执行完毕，才成功。用在要很多结果都执行成功的情况。
+  - `Promise.race`只要数组里面的一个成功，整个race就成功执行
 
+```shell
+Promise.all([p1,p2,p3...],function)
+
+Promise.race([p1,p2,p3...],function)
+```
+
+#### 20、ts在项目中的使用
+
+- ts是js的一个超集，支持ES6标准
+- ts比js有更严格的类型要求。有类型的约束，减少大型项目中的bug
+- 示例：`msg!:string`msg是非空字符串；`msg?:string`msg有可能有欲呕可能没有
+
+#### 21、ES6装饰器的使用
+
+- 装饰器：是一种与类相关的语法，用来注释和修改类和类相关的方法和属性。许多面向对象的语言都有这个功能。一般和类class 相关，普通的方法不要去使用
+- 装饰器是一种函数，写法是`@函数名`，它可以放在类和类的方法定义前。装饰器就是执行函数，给类或者类下面的属性方法加一些控制条件
+- 装饰器
+  - 给类或者类属性驾驶一些其他代码
+  - 可以代码复用
+
+```shell
+@decorator
+class A(){
+  
+}
+
+//等同于
+class A(){
+	//decorator是一个函数，相当于调用它给A类可以加上一些其他代码,加上属性等
+  A = decorator(A)
+}
+
+
+
+
+//实例.在类或者类属性方法上写上@函数名，就相当于调用这个函数
+function testfunc(target){
+  target.isok = true;   			//相当于Myclass.isok = true 
+  console.log('i am test func',target)
+}
+
+@testfunc
+class Myclass{
+  
+}
+
+
+
+function readonly(target,name,descriptor){
+  console.log(target)		//当前的class，即Person
+  console.log(name)			//装饰的属性或方法名
+  //configuerable修改、enumerable枚举是否可for in循环、writeable、value对象属性默认值
+  console.log(descriptor)			
+  return descriptor;
+}
+
+class Person{
+  
+  @readonly
+  abc(){
+    console.log('add func ')
+  }
+}
+```
+
+![](https://img-blog.csdnimg.cn/20210523041948698.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 
 
