@@ -4358,11 +4358,85 @@ class Person{
 
 ![](https://img-blog.csdnimg.cn/20210523041948698.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
+## 5.23
+
+#### 22、事件循环
+
+异步：定时器、ajax、onclick、promise（new Promise立刻执行，then异步）
+
+- 宏任务：定时器（setTimeout、setInterval）、requestAnimationFrame、I/O
+- 微任务：process.nextTick、Promise、Object.observe、MutationObserver
+- 宏任务队列和微任务队列，执行主线程任务，宏任务放到宏任务队列，微任务放到微任务队列。只有在微任务队列中的微任务全部执行完成之后才会去执行下一个宏任务。注意：执行宏任务的时候，也会产生微任务，继续执行上面过程
+
+```shell
+console.log('1')
+
+setTimeout(function(){
+  console.log('2')
+  new Promise(function(resolve){
+    console.log('3')
+    resolve()
+  }).then(function(){
+    console.log('4')
+  })
+})
+
+new Promise(function(resolve){
+  console.log('5')
+  resolve()
+}).then(function(){
+  console.log('6')
+})
+
+setTimeout(function(){
+  console.log('7')
+  new Promise(function(resolve){
+    console.log('8')
+    resolve()
+  }).then(function(){
+    console.log('9')
+  })
+  console.log('10')
+},0)
+
+console.log('11')
 
 
+//1 5 11 6 2 3 4 7 8 10 9
+```
 
+#### 23、浏览器缓存原理
 
+- 浏览器本身有缓存，浏览器可能会把上次代码缓存起来，再去访问不是去拿新代码，而是直接使用缓存
 
+- 浏览器的缓存分成两种，强制缓存和协商缓存
+  - 强缓存：不会向服务器发送请求，直接从缓存中读取资源，每次访问本地资源直接验证看是否过期。强缓存可以通过设置两种http header实现：expire过期时间和cache-control缓存控制。
+  - 协商缓存（Last-Modified/If-Modefied-Since和E-tag/If-None-Match）：发请求到服务器，服务器会告诉浏览器去拿缓存还是新的代码
+
+拓展：
+
+- 网站优化
+  - 雪碧图
+  - 懒加载
+  - 减少http请求（缓存:浏览器有缓存，现在h5的manifest也可以进行自定义缓存，优化网站）
+
+#### 24、h5离线存储manifest
+
+Html5提出的一个新特性：离线存储。通过离线存储，我们可以吧需要离线存储在本地的文件夹列举在manifest配置文件中，这样即使在离线的情况下，用户也可以正常的看见网页
+
+- 在需要离线缓存的页面的html标签上加上`manifest='cache.manifest'`
+
+```shell
+<html lang='en' manifest='cache.manifest'>
+...
+</html>
+```
+
+- 在根目录创建新文件名称为`cache.manifest`的文件，并写上代码
+
+![](https://img-blog.csdnimg.cn/20210524024015163.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210524024122985.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 
 
