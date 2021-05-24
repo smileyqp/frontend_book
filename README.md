@@ -4459,9 +4459,50 @@ Html5提出的一个新特性：离线存储。通过离线存储，我们可以
 
 ![](https://img-blog.csdnimg.cn/20210524102918108.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
+![](https://img-blog.csdnimg.cn/20210524103318890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
+##### 混合开发框架
 
+- weex：采用vue框架，可打包成app
+- react-native：采用react框架
+  - react语法加上自己特定的标签`<Text></Text>` `<View></View>`等
+- uniapp：采用vue框架
 
+> 补充：如何将vue项目打包成app？1、vue项目build 2、将build文件夹下面文件复制到新的hbuild创建的心项目中，覆盖原文件 3、直接打包
+
+#### 27、一次完整的http请求过程
+
+##### 题目
+
+当web浏览器输入`www.baidu.com`具体发生了什么？
+
+- DNS域名解析，得到对应的IP
+- 根据这个IP，找到对应的服务器，发起TCP三次握手
+- 建立TCP链接之后发起HTTP请求
+- 服务器响应HTTP请求，浏览器获取html代码
+- 浏览器解析html代码，并且请求html代码中的资源（css、js、图片、视频等。得到html后才能去湖区这些资源）
+- 浏览器对页面进行渲染并且呈现给用户
+- 服务器关闭TCP链接（四次挥手）
+
+##### 详细解析
+
+- 怎样进行域名解析，DNS怎样找到域名的？
+  - DNS域名解析是采用递归查询的方式，过程是：先去找DNS缓存=〉缓存找不到就去找根域名服务器=〉根域名又会去找下一级，这样递归查找之后，找到了就给我们的浏览器
+    - 浏览器自身DNS缓存
+    - 操作系统DNS缓存
+    - 路由器DNS缓存（host文件中查找）
+    - 递归去各个域名服务器查找
+- 为什么HTTP要基于TCP来实现？
+  - TCP是一个端到端的可靠的面相连接的协议，HTTP基于传输层TCP协议不用担心数据传输的各种问题（当发生错误的时候会重传）
+
+- 浏览器对页面是如何进行渲染的？
+  - 解析html获得dom树
+  - 解析css生成cssom树
+  - dom树和cssom合成渲染树
+  - 边解析边渲染（布局：计算位置和尺寸；渲染：渲染样式）
+  - JS单线程运行的，js困难修改dom的结构
+
+> 拓展：重排（回流）：修改布局；重绘：修改样式。重排一定会重绘，重绘不一定重排。
 
 
 
