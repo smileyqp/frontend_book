@@ -4680,37 +4680,70 @@ export default MyPromise;
 
 ```
 
+## 5.26
+
 #### 30、React
 
 ##### redux
 
+- ##### Redux帮我们用一个变量存储所有的state，并且提供发布的功能来修改我们的数据，以及提供订阅的功能来触发回调
+
 -  redux是一个独立的数据状态管理库，在angular、vue也都可以使用redux，只不过常与react一起使用
+
 - redux解决数据状态管理，跨层级问题。
+
 - redux就是一个经典的发布订阅器。事件绑定的过程其实也是一个发布订阅的过程。
+
+- redux使用方法
+
+  - 调用ctreateStore创建store对象
+  - 用Provide包裹根组件
+  - 使用connect获取链接
+
+##### react-redux
+
+- 提供两个api
+
+  - `Provider`传递store到每个组件中去。Provider实际上是一个组件。getChildContext创建store。Provider就是通过React的context API把数据往下传。
+
+  ![](https://img-blog.csdnimg.cn/20210526153235760.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+  - `connect`通过store传递进来的provider，将state绑定到当前组件。connect有两个参数mapstatetoProps订阅更新，mapdispatchtoprops 调用dispatch改变当前数据
+
+    - ##### connnect方法本质上是一个高阶组件，接收Provider传递过来的store并订阅store中的数据，如果store中的数据改变，就调用setState方法触发组件更新
+
+  ![](https://img-blog.csdnimg.cn/20210526153812547.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210526154758549.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+![](https://img-blog.csdnimg.cn/20210526154818274.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+>  拓展：`函数柯里化`：函数返回函数；`高阶组件`：组件返回组件
+
+![](https://img-blog.csdnimg.cn/20210526152902453.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 ##### react题目
 
 - redux是如何将State注入到React组件中去
-  - redux使用方法
-    - 调用ctreateStore创建store对象
-    - 用Provide包裹根组件
-    - 使用connect获取链接
-
-```shell
-
-
-
-```
-
-
-
-
-
-
-
-
+  - 明确react与redux的联系是react-redux这个库（Provider、connect）
+  - redux的原理其实就是一个发布订阅器，帮我们用一个变量存储所有state，并且提供了发布来修改数据，提供了订阅功能来触发回调
+  - react-redux的功能是订阅store中的数据更新，它包含两个重要的元素Provider和connect
+  - Provider的作用是通过context api把store对象注入到react组件中去
+  - connect方法就是一个高阶组件，在高阶组件中通过订阅store的更新，调用setState方法来触发组件更新
 
 - redux在实际项目中的使用问题
+  - 为什么要使用redux
+    - 
+  - 如果一定要使用有哪些最佳实践
+  - redux的异步问题怎样处理
+
+
+
+
+
+
+
+
+
 - React中的hooks
 
  
@@ -4719,9 +4752,11 @@ export default MyPromise;
 
 
 
+- redux痛点是什么？
+  - 增加代码的复杂性。需要经过dispatch、调用reducer、触发回调、更新数据。redux在使用中最大的弊端就是样板代码（action、reducer）太多，修改数据链路较长
 
-
-
+- 为什么还是要使用redux？
+  - redux可以解决跨组件间数据传递问题并且
 
 
 
