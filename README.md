@@ -4928,9 +4928,36 @@ export default MyPromise;
 
 - 实现webpack打包优化
 
+  - 解答：多&大
+
+    - 可以设置mode=production来默认实现webpack对代码的混淆和压缩，从而最大程度减少代码体积
+    - 使用webpack+dynamic import（动态加载）并结合路由的入口文件动态加载做拆包处理
+    - 并且可以设置一定的打包策略（分包压缩，node_modules、常改动、不常改动公共组件），配合网络缓存（cache-control等）进行加载性能优化
+
   - 问题分析
+
     - 少：使用webpack进行物理打包
     - 小：使用webpack进行混淆和压缩，所有与webpack相关的配置都在optimization这个配置项进行管理
+
+  - Q&A
+
+    - Q：打包怎样小怎样少？
+
+      - A：使用webpack对代码进行混淆和压缩，并且可以使用react lazy进行拆包，结合路由进行按需加载
+
+    - Q：对文件进行拆包处理，那么文件肯定会增多，会不会跟减少资源请求数量矛盾呢？
+
+      - A：并不矛盾，因为我们按需加载之后，拆包的文件不可能同时加载，所以不会造成同一时间请求过多的问题
+
+      ![image-20210528022556530](/Users/yqp/Library/Application Support/typora-user-images/image-20210528022556530.png)
+
+
+
+打包策略
+
+![](https://img-blog.csdnimg.cn/20210528022405544.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210528022006976.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 - 实现CDN加速
 
