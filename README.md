@@ -4808,7 +4808,7 @@ export default MyPromise;
 
 ##### 初始阶段（加载优化）
 
-- 首页加载优化
+- ##### 首页加载优化
 
   - 解答
 
@@ -4901,7 +4901,25 @@ export default MyPromise;
 
     
 
-- 优化图片的做法
+- ##### 优化图片的做法
+
+  - 问题分析：
+
+    - 减少图片加载请求
+    - 减少图片大小
+
+  - Q&A
+
+    - Q：用什么自动化工具对图片进行压缩？
+
+      - 熊猫站（https://tinypng.com/）：无损压缩。熊猫站是通过相似颜色的量化技术来减少颜色的数量，并且可以将24位的png文件转化成8位的彩色图片，同时可以将不必要的元素进行剥离。并且它提供了npm包tinify，可以进行批量压缩
+
+    - Q：还有什么其他方式吗
+
+      - 将图片转码为base64，会增大图片体积，因此不建议把大图片转成base64格式，但是建议把小图片转成base64格式，因为它直接写在代码中，可以减少一个图片的请求
+      - 使用webp格式
+
+      ![](https://img-blog.csdnimg.cn/20210527171756779.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 - 实现webpack打包优化
 
