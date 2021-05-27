@@ -4821,6 +4821,12 @@ export default MyPromise;
 
     - ##### 1、首页加载图片过多
 
+      - ##### 1、总结：
+
+        - 通过懒加载的方式处理非首屏图片
+        - 对于小图标可以使用Iconfont的方式来解决
+        - 对于小图片可以使用雪碧图的方式来解决
+
       - Q&A
 
         - Q：首页加载图片过多怎样处理
@@ -4832,13 +4838,13 @@ export default MyPromise;
             - 把所有小图标拼接到一张大图片上（减少资源请求）
             - 并使用background-position的css属性来修改图片坐标
 
-      - ##### 1、总结：
-
-        - 通过懒加载的方式处理非首屏图片
-        - 对于小图标可以使用Iconfont的方式来解决
-        - 对于小图片可以使用雪碧图的方式来解决
-
     - #####  2、首页请求过多
+
+      - ##### 2、总结（首页请求量过多，可以通过一些手段来减少资源的请求量）
+
+        - 通过nginx服务器来做静态资源的合并或者通过webpack等打包工具进行物理的打包
+        - 在代码层面，对于u 一些需要引入大型的第三方库进行按需加载，比如可以按照babel来进行
+        - 还可以通过react lazy等动态导入方案进行前端路由层面的动态加载，从而减少首页的js和css加载的大小
 
       - 可以通过减少资源请求量
 
@@ -4879,13 +4885,7 @@ export default MyPromise;
           - import('xxx')返回的是一个promise
           - webpack只要遇到了import('xxx')就会把括号里引入的内容单独打一个包
 
-      - ##### 2、总结（首页请求量过多，可以通过一些手段来减少资源的请求量）
-
-        - 通过nginx服务器来做静态资源的合并或者通过webpack等打包工具进行物理的打包
-        - 在代码层面，对于u 一些需要引入大型的第三方库进行按需加载，比如可以按照babel来进行
-        - 还可以通过react lazy等动态导入方案进行前端路由层面的动态加载，从而减少首页的js和css加载的大小
-
-    - 首页请求的静态资源（html、css、js）过大
+    - ##### 3、首页请求的静态资源（html、css、js）过大
 
       - 分析
         - 要分资源文件、js、css等分开处理
@@ -4902,6 +4902,11 @@ export default MyPromise;
     
 
 - ##### 优化图片的做法
+
+  - 解答：图片优化业主要是从两个方面来进行，太多和太大
+
+    - 通过懒加载减少加载图片请求，或者通过雪碧图来合并图片，以及将小图转化成base64格式减少图片请求
+    - 图片过大问题可以通过图片自动化压缩工具或者使用webp格式的图片
 
   - 问题分析：
 
@@ -4922,6 +4927,10 @@ export default MyPromise;
       ![](https://img-blog.csdnimg.cn/20210527171756779.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 - 实现webpack打包优化
+
+  - 问题分析
+    - 少：使用webpack进行物理打包
+    - 小：使用webpack进行混淆和压缩，所有与webpack相关的配置都在optimization这个配置项进行管理
 
 - 实现CDN加速
 
