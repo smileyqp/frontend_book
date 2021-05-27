@@ -4769,20 +4769,83 @@ export default MyPromise;
 
 - ##### React中的hooks
 
-React组件类型
+  - React Hooks是一个新的API，可以用函数来写所有组件
+  - 可以让函数也拥有自己的状态管理（包括state和生命周期）
+  - 可以通过创建自定义的hooks来抽离可服用量的业务组件
 
-- 函数组件
-  - 一个函数就是一个组件
-  - 一个函数必须有return
-  - return的是一个react元素
-- 类组件
-  - 一个Class声明就是一个类组件
-  - 所有的类组件都是继承于React.Component
-  - React.Component类有自带属性和方法，比如render、componentDidMount等等
+- React组件类型
+  - 函数组件
+    - 一个函数就是一个组件
+    - 一个函数必须有return
+    - return的是一个react元素
+  - 类组件
+    - 一个Class声明就是一个类组件
+    - 所有的类组件都是继承于React.Component
+    - React.Component类有自带属性和方法，比如render、componentDidMount等等
 
 ![](https://img-blog.csdnimg.cn/20210527093422780.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
-   
+- React Hooks的作用以及有哪些特性
+  - react hooks是v16.8版本才引入的全新API，它算是一个颠覆性的变革
+  - 所有的React组件都可以是一个函数组件，再也不需要写类组件了
+  - 再也不需要记住react有哪些生命周期了
+
+![](https://img-blog.csdnimg.cn/20210527094522853.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210527094636771.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+创建使用自定义hooks
+
+![](https://img-blog.csdnimg.cn/20210527095744394.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210527095956508.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+
+
+## 5.27
+
+#### 31、性能优化
+
+##### 初始阶段（加载优化）
+
+- 首页加载优化
+
+  - 问题分析（资源多、大）
+
+    - 首页加载图片过多
+      - Q&A
+        - Q：首页加载图片过多怎样处理
+          - 懒加载：监听滚动条事件，如果滚动条的高度距离浏览器顶部的高度等于或者接近于图片到浏览器顶部的高度，那么就将data-src的属性赋值到src上
+        - Q：首页设置的小图标很多，比如有很多的小icon怎么办
+          - 对于纯色小图标可以用Iconfont来解决（减少资源请求）
+            - 设置font-famliy的css属性
+          - 对于一些彩色的小图标可以使用雪碧图
+            - 把所有小图标拼接到一张大图片上（减少资源请求）
+            - 并使用background-position的css属性来修改图片坐标
+      - 总结：
+        - 通过懒加载的方式处理非首屏图片
+        - 对于小图标可以使用Iconfont的方式来解决
+        - 对于小图片可以使用雪碧图的方式来解决
+    - 首页请求过多
+      - 可以通过减少资源请求量
+        - 通过nginx服务器（可用来做CDN，处理静态资源）用来做文件合并combo—将多个js、css合并成一个。逻辑上打包，通过拼接请求链接，将多个资源链接合并到一起
+        - 通过打包工具（webpack）来做资源文件的物理打包。没有第一种灵活。
+      - Q&A
+        - Q：只有合并资源的方式才能减少资源请求吗？
+          - 对于引用一些大的第三方库，比如antd、elementui等，可以使用按需加载的方式进行解决
+    - 首页请求的静态资源（html、css、js）过大
+
+    
+
+- 优化图片的做法
+
+- 实现webpack打包优化
+
+- 实现CDN加速
+
+##### 运行阶段（渲染优化）
+
+- 
 
 
 
@@ -4790,25 +4853,12 @@ React组件类型
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+> 拓展：服务器类别
+>
+> - 应用服务器：弹性计算，存放运行后端代码等
+> - 存储服务器：存储文件
+> - CDN服务器：处理静态资源，做资源文件的合并。做静态资源分发
+> - 数据库服务器
 
 
 
