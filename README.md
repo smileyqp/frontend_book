@@ -4813,6 +4813,7 @@ export default MyPromise;
   - 问题分析（资源多、大）
 
     - 首页加载图片过多
+
       - Q&A
         - Q：首页加载图片过多怎样处理
           - 懒加载：监听滚动条事件，如果滚动条的高度距离浏览器顶部的高度等于或者接近于图片到浏览器顶部的高度，那么就将data-src的属性赋值到src上
@@ -4826,13 +4827,48 @@ export default MyPromise;
         - 通过懒加载的方式处理非首屏图片
         - 对于小图标可以使用Iconfont的方式来解决
         - 对于小图片可以使用雪碧图的方式来解决
+
     - 首页请求过多
+
       - 可以通过减少资源请求量
+
         - 通过nginx服务器（可用来做CDN，处理静态资源）用来做文件合并combo—将多个js、css合并成一个。逻辑上打包，通过拼接请求链接，将多个资源链接合并到一起
         - 通过打包工具（webpack）来做资源文件的物理打包。没有第一种灵活。
+
       - Q&A
+
         - Q：只有合并资源的方式才能减少资源请求吗？
-          - 对于引用一些大的第三方库，比如antd、elementui等，可以使用按需加载的方式进行解决
+
+          - 对于引用一些大型的第三方库，比如antd、elementui等，可以使用按需加载的方式进行解决。一般都是使用babel插件来实现
+
+          - 针对SPA单页应用，在路由层面，可以使用前端路由懒加载的方式，从而减小首页js和css的大小
+
+            - 使用React.lazy进行路由的加载(react16.6以上才可以使用，16.6以下版本可以使用react-loadable)
+
+            ![](https://img-blog.csdnimg.cn/20210527114825660.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+            ![](https://img-blog.csdnimg.cn/20210527115051890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+        - Q：为什么React lazy可以进行路由懒加载？
+
+          - 首先react lazy是使用了动态加载（dynamic import）的一个标准，webpack只要遇到了动态加载就会把import的内容单独打一个包
+          - 由于动态加载返回的是一个promise，所以可以利用promise的流程来做渲染流程的控制
+          - 如果当前promise是pending状态，那么就渲染loading组件，如果是resolve状态那么就渲染动态导入的组件
+
+        ![](https://img-blog.csdnimg.cn/20210527154924142.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+        动态导入：代码执行到import这一行的时候才开始去下载组件。并且webpack会将其单独打包成一个文件 
+
+        ![](https://img-blog.csdnimg.cn/20210527155047496.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+        lazy懒加载
+
+        ![](https://img-blog.csdnimg.cn/20210527160626742.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+        - 结论：
+          - import('xxx')返回的是一个promise
+          - webpack只要遇到了import('xxx')就会把括号里引入的内容单独打一个包
+
     - 首页请求的静态资源（html、css、js）过大
 
     
