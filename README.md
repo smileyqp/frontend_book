@@ -4987,10 +4987,18 @@ export default MyPromise;
 
 ##### 运行阶段（渲染优化）
 
-- 结论：
-  - 可以使用`document.createDocumentFragment`
+- 思路：
+  - 导致卡顿的远影一般都是dom操作太多太频繁
+  - 如果想要渲染哦很多数据又不造成浏览器卡顿，那么肯定是要减少dom的操作。比如react创建虚拟dom，本质上是用js来模拟真实的dom，从而减少dom的操作
+  - 还有在插入多个dom节点时候，可以使用`document.createDocumentFragment`先创建虚拟节点，再一次性插入
+  - 也可以采取分段式渲染的方式`requestAnimation`来进行逐帧渲染
 
 - 渲染十万条数据不造成卡顿？
+  - 结论：
+    - 可以使用`document.createDocumentFragment`创建虚拟节点来避免不必要的渲染
+    - 当所有的li都创建完成之后，再一次吧虚拟节点中的li全部渲染出来
+    - 可以采用分段渲染的方式，比如一次只渲染一屏的数据
+    - 最后使用 
 
 ![](https://img-blog.csdnimg.cn/20210528160433283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
