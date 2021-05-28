@@ -4985,21 +4985,30 @@ export default MyPromise;
 
       - http2：引入了多路复用的机制，可最大化发送请求数量。（没有了http1的六个TCP请求限制）
 
-      
-
-      
-
-      
-
-      
-
 ##### 运行阶段（渲染优化）
 
-- 
+- 结论：
+  - 可以使用`document.createDocumentFragment`
+
+- 渲染十万条数据不造成卡顿？
+
+![](https://img-blog.csdnimg.cn/20210528160433283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 
 
+普通方式：
 
+![](https://img-blog.csdnimg.cn/20210528160747567.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+优化渲染（分段渲染 ）
+
+![](https://img-blog.csdnimg.cn/20210528161129401.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+![](https://img-blog.csdnimg.cn/20210528161156127.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+
+![](https://img-blog.csdnimg.cn/2021052816124314.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+> 补充：`requestAnimation`逐帧渲染。1000/60=16,也就是16ms渲染一次。requestAnimation要保证浏览器是60帧，所以默认是16ms一次渲染。
 
 
 
