@@ -326,15 +326,49 @@ arr.splice(2,0,11)
   - indexOf，找到元素下标
   - lastIndexOf
 
+## 6.2
 
+##### 自定义栈
 
+![](https://img-blog.csdnimg.cn/20210602012622363.png)
 
+![](https://img-blog.csdnimg.cn/20210602012740566.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
+- 栈的几个功能方法
+  - 进栈（压栈）push
+  - 出栈pop
+  - 产看栈顶peek
+  - 栈中元素个数size
+  - 是否空栈isEmpty
 
+```shell
+function Stack(){
+  //用于保存元素数据的数组
+  const arr = [];
+  
+  this.push = function(element){
+    arr.push(element)
+  }
+  
+  this.pop = function(){
+    arr.pop()
+  }
+  
+  this.peek = function(){
+    return arr[arr.length-1]
+  }
+  
+  this.size = function(){
+    return arr.length
+  }
+  
+  this.isEmpty = function(){
+    return arr.length === 0 ?true:false
+  }
+  
+}
 
-
-
-
+```
 
 
 
