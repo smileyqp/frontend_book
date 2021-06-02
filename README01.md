@@ -491,7 +491,9 @@ passGame(names,3)
 
 ##### 图
 
+#### 36、webpack
 
+webpack是静态模块打包工具（webpack中一切资源都是文件）
 
 
 
