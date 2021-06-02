@@ -364,13 +364,25 @@ function Stack(){
   
   this.isEmpty = function(){
     return arr.length === 0 ?true:false
+  }  
+}
+
+export default Stack;
+```
+
+- 栈应用（栈十进制转二进制：除2取余，倒序排列，高位补0）
+
+```shell
+function edc2bin(decNum){
+  //创建一个用于保存二进制的stack
+  const stack = new Stack();	//这里的stack是从我们上面写的stack去初始化的栈
+  while(decNum>0){
+    const remainder = decNum % 2;		//取余
+    stack.push(remainder)
   }
-  
 }
 
 ```
-
-
 
 
 
