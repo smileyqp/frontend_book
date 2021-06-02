@@ -230,7 +230,7 @@ Array.prototype.some = function(){
 }
 ```
 
-#### 35、算法
+#### 35、算法基础
 
 ![](https://img-blog.csdnimg.cn/20210601145630299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
@@ -473,17 +473,23 @@ passGame(names,3)
 
 ![](https://img-blog.csdnimg.cn/20210602153652920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
+##### 树（dom树）
 
+![](https://img-blog.csdnimg.cn/2021060215430024.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
-##### 树
+二叉树BT：一个节点有最多两个子节点
 
-
+二叉搜索树BST：满足二叉树的基础上，值左边小，右边大
 
 ##### 集合
 
+元素唯一不能重复。ES6中集合的实现是用数组实现的。当然集合也可以用Object实现
 
+#####  字典
 
+##### 哈希列表/散列表
 
+##### 图
 
 
 
