@@ -328,7 +328,7 @@ arr.splice(2,0,11)
 
 ## 6.2
 
-##### 自定义栈
+##### 自定义栈Stack
 
 ![](https://img-blog.csdnimg.cn/20210602012622363.png)
 
@@ -370,39 +370,116 @@ function Stack(){
 export default Stack;
 ```
 
-- 栈应用（栈十进制转二进制：除2取余，倒序排列，高位补0）
+- 栈应用（栈十进制转二进制：除2取余，倒序排列，高位补0）。数组实现十进制转二进制。
+
+![](https://img-blog.csdnimg.cn/20210602144334190.png)
 
 ```shell
 function edc2bin(decNum){
-  //创建一个用于保存二进制的stack
-  const stack = new Stack();	//这里的stack是从我们上面写的stack去初始化的栈
+  //创建一个用于保存二进制的array。Array改为Stack就是栈应用
+  const arr = new Array();	
   while(decNum>0){
     const remainder = decNum % 2;		//取余
-    stack.push(remainder)
+    arr.push(remainder);		
+    decNum = Math.floor(decNum / 2); 	//向下取整数
   }
+  //依次
+  let result = ''
+  while(arr.length !== 0){
+    result = result + arr.pop() 
+  }
+  return result;
 }
-
 ```
 
+![](https://img-blog.csdnimg.cn/20210602145041669.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+##### 队列Queue
+
+![](https://img-blog.csdnimg.cn/20210602145210372.png)
+
+![](https://img-blog.csdnimg.cn/20210602145314760.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210602145346949.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 
 
+```shell
+function Queue(){
+  const arr = [];
+  
+  this.enqueue = function(element){
+    arr.push(element)
+  }
+  
+  this.dequeue = function(){
+    arr.shift()		//删除数组的第一个元素并且返回
+  }
+  
+  this.front = function(){		//查看队列第一个
+    return arr[0]
+  }
+   this.size = function(){
+    return arr.length
+  }
+  
+  this.isEmpty = function(){
+    return arr.length === 0 ?true:false
+  }  
+}
+
+export default Queue;
+```
+
+- 队列击鼓传花（队列头依次放到后面去；并且删除指定的第几个 ）
+  - 创建一个空queue
+  - 将数组中的所有元素依次放入queue
+  - 将队列中num-1元素依次转移到队列最后，将队头部元素删除（只要队列的size>1就不断做，直到剩下最后一个，就是目标元素 ）
+
+```shell
+function passGame(names,num){
+  //创建一个空queue
+  const queue = new Queue();
+  
+  //将数组中的所有元素(name和index)依次放入queue
+  names.forEach((name,index)=>{
+  console.log(name,index)
+    queue.enqueue({name,index})
+  })
+  
+  while(queue.size() > 1){
+    for(let i = 0;i < num;i++){
+      queue.enqueue(queue.dequeue())
+    }
+    //删除头部元素
+    queue.dequeue(queue.front())
+  }
+  const {name,index} = queue.front()
+  return `${name}是最后一个，它的index是第${index}个`
+}
+
+var names = ['a','b','c','d','e']
+passGame(names,3)
+```
+
+- 优先级队列
+  - 传入值优先级。标记优先级，优先级高的先出
+
+##### 链表(单项链表->只有next、双向链表->有front和next)
+
+![](https://img-blog.csdnimg.cn/20210602153344160.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210602153753876.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210602153652920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 
 
+##### 树
 
 
 
-
-
-
-
-
-
-
-
-
-
+##### 集合
 
 
 
