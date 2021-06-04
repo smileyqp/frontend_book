@@ -491,14 +491,90 @@ passGame(names,3)
 
 ##### 图
 
+## 6.3
+
 #### 36、webpack
 
 webpack是静态模块打包工具（webpack中一切资源都是文件）
 
 Webpack怎样找到相关的依赖文件呢？从公入口开始递归找到所有直接或者间接依赖的模块。它会内部构件依赖图，依赖图会映射到项目文件，最后生成打包文件
 
+webpack-cli处理打包命令，解析webpack命令。webpack做文件打包工作
+
 webpack不用全局下载，只需要局部下载即可。因为不同项目可能用的webpack版本。
 
+![](https://img-blog.csdnimg.cn/20210603102643782.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- webpack核心概念，常用10个配置
+  - mode：none、development、production。声明一些模式就是内部为我们预先加上一些配置
+  - 入口entry：一个或者多个（单页打包多页打包）
+  - 出口output：指定打包的文件夹
+  - modules模块加载器，用来指定loader：webpack本身只能打包js，不能处理css、图片等资源。因此就需要模块加载器。将css打包到js，引用地址
+  - 插件plugins：需要打包js之外做的事情，比如说压缩、拷贝、清除、引入页面等操作。插件名称一般是`xx-webpack-plugin`形式
+    - clear-webpack-plugin清除插件
+    - html-webpack-plugin
+  - devtools开发工具，用来制定sourcemap
+  - devServer开发服务器。比如说配置代理、以及不带#路由（Broswer路由）404问题
+  - resolve解析别名和路径
+  - optimization指定优化处理的。由模式确定。生产环境和开发环境指定的优化方式不一样。
+  - externals外部某个包。配置了某个包，比如说用了lodash，不用npm下载也可以，在这里配置也是可以的
+
+![](https://img-blog.csdnimg.cn/20210603105703101.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- webpack常用包
+  - webpack-dev-server开发服务器的包
+  - webpack-merge合并包
+  - cross-env
+  - css-loader
+  - style-loader
+  - postcss-loader
+    - autoprefixer自动浏览器适配。适配浏览器
+    - postcss-px2em写的px实际上自动转为rem，适配移动端
+  - less-loader
+  - styles-loader
+  - sass-loader
+  - file-loader
+  - url-loader
+  - image-webpack-loader压缩图片，不影响显示效果
+  - babel-loader
+    - @babel/core
+    - @babel/preset-env
+    - @babel/preset-react
+    - @babel/polyfill
+    - @babel/plugin-transform-runtime
+    - @babel/runtime
+  - vue-loader
+  - eslint-loader语法检查
+  - MiniCssExtractPlugin.loader单独提取打包css。
+  - thread-loader多线程打包
+  - html-webpack-plugin把打包的css或者js自动引入到界面中去
+  - clean-webpack-plugin删除文件
+  - mini-css-extract-plugin单独提取打包css
+  - optimize-css-assets-webpack-plugin压缩css
+  - copy-webpack-plugin拷贝文件
+  - terser-webpack-plugin压缩js
+  - add-asset-html-webpack-plugin
+  - webpack-bundle-analyzer分析打包文件的
+  - webpack.ProgressPlugin显示打包进度的
+  - webpack.HotModuleReplacementPlugin热模块低缓
+  - webpack.HashedModulesPlugin模块id哈希值
+  - webpack.DllPlugin多进程打包
+  - webpack.DllReferencePlugin多进程打包
+  - new webpack.ProvidePlugin
+
+![](https://img-blog.csdnimg.cn/202106031419350.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210603142029332.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- 处理
+  - loader处理：js资源以外的资源、包括jsES6转ES5
+  - plugin插件处理
+  - devTool开发工具：
+  - devServer开发服务器：
+
+##### 版本号
+
+![](https://img-blog.csdnimg.cn/20210603142825568.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 
 
@@ -506,6 +582,36 @@ webpack不用全局下载，只需要局部下载即可。因为不同项目可�
 
 
 
+![](https://img-blog.csdnimg.cn/20210603164101841.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70) 
+
+
+
+![](https://img-blog.csdnimg.cn/20210603165350721.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+babel本身是不能进行ES6编译到ES5的，它是提供了一个平台`babel-core`,靠`babel-core`去组织，每一个语法都有对应的插件去解析。
+
+`@babel/preset-env`预设包，是很多插件包的集合包，这里指的是很多js的ES6到ES5语法转换的插件包的集合包。并且不是插件能解决所有的语法转化问题，因为有些新语法是提供函数方法API，有些新语法是提供操作符。
+
+`@babel/polyfill`补丁包，处理一些浏览器不兼容的语法。
+
+`@babel/plugin-transform-runtime`处理
+
+![](https://img-blog.csdnimg.cn/2021060317122180.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210603172306712.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+
+
+##### 打包图片
+
+- `file-loader`
+- `url-loader`：处理图片主要是用这个，但是它是需要`file-loader`做基础。并且不仅图片、音视频、字体文件、打包样式、格式处理都可以使用这个文件
+
+![](https://img-blog.csdnimg.cn/20210604110508964.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70) 
+
+
+
+![](https://img-blog.csdnimg.cn/20210604144819517.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 
 
@@ -513,19 +619,7 @@ webpack不用全局下载，只需要局部下载即可。因为不同项目可�
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+![](https://img-blog.csdnimg.cn/20210604144934475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 
 
