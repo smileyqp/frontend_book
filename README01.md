@@ -1009,7 +1009,7 @@ module.exports = {
 
 - 观察者模式（麦当劳点餐）
 - 代理模式（花店送花）
-- 
+- z
 
 
 
@@ -1072,12 +1072,43 @@ window.onload = function(){
       }
     }
   })()
-  //把真实图片给到对象
-  myImage.setSrc("https://himg.bdimg.com/sys/portrait/item/pp.1.d64a7775.reheWDHF3vrjPLK3n-YgKw.jpg?tt=1623053822499");			//真实图片
+  //调用：把真实图片给到对象
+ 	myImage.setSrc("https://himg.bdimg.com/sys/portrait/item/pp.1.d64a7775.reheWDHF3vrjPLK3n-YgKw.jpg?tt=1623053822499");			//真实图片
+
 }
 ```
 
 使用代理模式重构图片懒加载
+
+```shell
+window.onload = function(){
+  var myImage = (function(){
+    var imgNode = document.createElement('img')
+    document.body.appendChild(imgNode)
+    return {
+      setSrc:function(src){
+         imgNode.src = src;
+      }
+    }
+  })()
+  
+  //代理对象：先展示等待图片，再拉取真实图片
+  var ProxyImage = (function(){
+    var img = new Image()				//内存中的代理
+    img.onload = function(){			//加载完之后将触发这个方法
+      myImage.setSrc(this.src)		//this指向img；将真实图片给真实对象展示 
+    }
+    return {
+      setSrc:function(src){
+        myImage.setSrc('https://th.bing.com/th/id/R20d0cd9f696181bbead3b250782239fc?rik=SozVXnglW3zBxg&riu=http%3a%2f%2fbpic.588ku.com%2felement_pic%2f01%2f35%2f08%2f79573bd17084b13.jpg&ehk=UPH3Ji9JG4ZMqBzH9qKIJwuFG2R31XoHzvp4NkK5vXc%3d&risl=&pid=ImgRaw')	//代理图片
+        img.src = src;
+      }
+    }
+  })()
+  
+//调用；直接给代理对象设置真实图片  ProxyImage.setSrc('https://himg.bdimg.com/sys/portrait/item/pp.1.d64a7775.reheWDHF3vrjPLK3n-YgKw.jpg?tt=1623053822499')	//真实图片
+}
+```
 
 
 
