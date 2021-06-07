@@ -613,27 +613,34 @@ babel本身是不能进行ES6编译到ES5的，它是提供了一个平台`babel
 
 ![](https://img-blog.csdnimg.cn/20210604144819517.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
-
-
-
-
-
-
 ![](https://img-blog.csdnimg.cn/20210604144934475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 
 
+##### 样式打包
+
+- 基本css
+- css预编译器
+  - less
+  - sass
+  - stylus
+- postcss
+- 抽取/单独打包css
+- 压缩css
+
+![](https://img-blog.csdnimg.cn/20210604145914713.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 
 
+![](https://img-blog.csdnimg.cn/20210604170938817.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 
 
+![](https://img-blog.csdnimg.cn/20210604174330707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 
 
-
-
+p
 
 
 
