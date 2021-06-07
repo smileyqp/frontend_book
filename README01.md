@@ -1134,8 +1134,9 @@ shopObj.listen = function(goodskey,fn){		//商品订阅方法；fn订阅的行�
   shopObj.list[goodskey].push(fn)	//往特定商品列表中添加订阅
 }
 
-shopObj.publish = function(goodskey){
-	var fns = this.list[goodskey ]
+shopObj.publish = function(){
+	var goodskey  = arguments[0]
+	var fns = this.list[goodskey]
   for(var i = 0,fn;fn = fns[i++];){
     //执行订阅的fn
     
