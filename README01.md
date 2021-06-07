@@ -1112,6 +1112,52 @@ window.onload = function(){
 
 
 
+##### 观察者模式
+
+场景：双十一购买商品。购买者：观察者；商品：被观察者；商家（商品价格修改）：发布者。发布者发布，关注着会收到改变。
+
+观察者、被观察者、发布者
+
+```shell
+//观察者
+var shopObj = {}
+
+//商品列表 ['huawei':[],'apple':[],'oppo':[]]
+shopObj.list = []
+
+
+//订阅;根据特定的商品推给特定人
+shopObj.listen = function(goodskey,fn){		//商品订阅方法；fn订阅的行为； 建立商品和观察者的联系
+  if(!this.list[goodskey]){
+    this.list[goodskey] = []
+  }
+  shopObj.list[goodskey].push(fn)	//往特定商品列表中添加订阅
+}
+
+shopObj.publish = function(goodskey){
+	var fns = this.list[goodskey ]
+  for(var i = 0,fn;fn = fns[i++];){
+    //执行订阅的fn
+    
+    fn.apply(this,arguments)
+  }
+}
+
+//用户1:添加订阅
+shopObj.listen('huawei',function(brand,model){
+  console.log('user 1'+brand,model)
+})
+
+//用户2:添加订阅
+shopObj.listen('apple',function(brand,model){
+  console.log('user 2'+brand,model)
+})
+
+
+//商家发布订阅
+shopObj.publish('huawei','P40')
+```
+
 
 
 
