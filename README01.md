@@ -1015,27 +1015,69 @@ module.exports = {
 
 ##### 代理模式
 
-真实对象->代理对象->用户
+- 特点：代理对象与真实对象有相同的行为
 
-花店送花
+- 真实对象->代理对象->用户
+
+- 花店送花：男孩让花店送花给女孩
 
 ```shell
 //定义女孩对象
-var girl = function(name){
+var Girl = function(name){
   this.name = name;		
 }
 
-var boy = function(girl){
+var Boy = function(girl){
 	//女同学
   this.girl = girl;
   
   //送花
   this.sendGift = function(gift){
-    console.log(this.girl.name+gift)
+    console.log(this.girl.name+gift)	//花店下订单，花店人去送花
   }
 }
 
+//代理对象 花店员工
+var ProxyObj = function(girl){
+  this.girl = girl;					//需要知道女孩信息
+  this.sendGift = function(gift){
+    (new Boy(this.girl)).sendGift(gift)		//替人送花；直接调用
+  }
+}
+
+
+//调用 不能看出是谁送花 
+var girl = new Girl('Vicky')
+var proxy = new ProxyObj(girl)
+proxy.sendGift("flowers")
 ```
+
+- 代理模式的应用：图片懒加载
+  - 真实图片：大、加载慢；代理图片：小，加载快
+
+```shell
+//常用图片懒加载
+window.onload = function(){
+  var myImage = (function(){			//自执行函数
+    var imgNode = document.createElement('img')		//创建真实图片节点
+    document.body.appendChild(imgNode)		//图片节点加到body
+    var img = new Image()									//代理对象 先展示代理图片 接着拉取实际图片
+    img.onload = function(){					//真实图片加载完毕后触发
+      imgNode.src = this.src;					//把真实图片url给真实图片节点；替换等待图片；this指向代理对象
+    }
+    return {					 //返回一个对象
+      setSrc:function(src){
+        imgNode.src = 'https://th.bing.com/th/id/R20d0cd9f696181bbead3b250782239fc?rik=SozVXnglW3zBxg&riu=http%3a%2f%2fbpic.588ku.com%2felement_pic%2f01%2f35%2f08%2f79573bd17084b13.jpg&ehk=UPH3Ji9JG4ZMqBzH9qKIJwuFG2R31XoHzvp4NkK5vXc%3d&risl=&pid=ImgRaw';		//代理图片url给到真实对象；先展示等待图片
+        img.src = src; 		//把src给到代理对象
+      }
+    }
+  })()
+  //把真实图片给到对象
+  myImage.setSrc("https://himg.bdimg.com/sys/portrait/item/pp.1.d64a7775.reheWDHF3vrjPLK3n-YgKw.jpg?tt=1623053822499");			//真实图片
+}
+```
+
+使用代理模式重构图片懒加载
 
 
 
