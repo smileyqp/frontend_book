@@ -794,6 +794,61 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
   }
 ```
 
+##### eslint
+
+![](https://img-blog.csdnimg.cn/20210607115534472.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+
+
+
+
+
+
+```shell
+//webpack中配置
+module:{
+    rules:[
+        {
+            enforce:'pre',          //前置loader最先执行;pre:最先执行；post:最后执行
+            test: /\.m?js$/,        
+            include:resolve('src'), 
+            loader:'eslint-loader',  
+            options:{
+                formatter:'eslint-friendly-formatter'       //友好格式化
+            }
+        },
+    ]
+}
+
+//配置好之后，初始化配置文件，执行下面方法生成配置文件.eslintrc.js
+npx eslint --init 
+
+
+//.eslintrc.js中进行相关配置
+module.exports = {
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node":true
+    },
+    // "extends": "eslint:rall",        开启所有的规则检查
+    "extends": "eslint:recommended",        //只开启推荐的规则检查
+    "globals":{         //定义全局变量；也就是这个变量及时不进行定义，全局也可以使用
+        "SharedArrayBuffer":"readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-unused-vars":"off"          //不去检查未定义变量使用的情况
+    }
+};
+
+```
+
+
+
 ##### webpack基础配置
 
 ```shell
@@ -830,9 +885,18 @@ module.exports = {
         filename:'bundle.js',
         publicPath:'/'          //解决图片路径问题；所有生成的URL链接左侧用/开头；即相对路径
     },
-    //模块加载器
+    //模块加载器；按照顺序从下往上执行。enfore可以改变这个顺序
     module:{
         rules:[
+            {
+                enforce:'pre',          //前置loader最先执行;pre:最先执行；post:最后执行
+                test: /\.m?js$/,        
+                include:resolve('src'), 
+                loader:'eslint-loader',  
+                options:{
+                    formatter:'eslint-friendly-formatter'       //友好格式化
+                }
+            },
             //处理ES6到ES5
             {
                 test: /\.m?js$/,                                    //指定对哪些文件进行处理，正则
@@ -941,15 +1005,7 @@ module.exports = {
 }
 ```
 
-##### eslint
-
-![](https://img-blog.csdnimg.cn/20210607115534472.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
-
-
-
-
-
-
+##### 
 
 
 
