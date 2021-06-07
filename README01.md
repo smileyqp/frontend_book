@@ -1017,10 +1017,23 @@ module.exports = {
 
 真实对象->代理对象->用户
 
+花店送花
+
 ```shell
+//定义女孩对象
+var girl = function(name){
+  this.name = name;		
+}
 
-
-
+var boy = function(girl){
+	//女同学
+  this.girl = girl;
+  
+  //送花
+  this.sendGift = function(gift){
+    console.log(this.girl.name+gift)
+  }
+}
 
 ```
 
