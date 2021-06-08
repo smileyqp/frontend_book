@@ -1407,7 +1407,7 @@ function orderdefault(orderType,isPay,count){
 }
 ```
 
-- 使用职责链再次重构
+- 使用职责链再次重构(不关自己的事情就交给下一个)
 
 ```shell
 function order500(orderType,isPay,count){
@@ -1469,7 +1469,7 @@ chain200.setnextSuccessor = chaindefault;
 chain500.passRequest(1,true,100)		//类型1 支付成功 金额500
 ```
 
-面向对象：抽象、多态、继承、封装
+> 面向对象：抽象、多态、继承、封装
 
 
 
