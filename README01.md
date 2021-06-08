@@ -1005,13 +1005,13 @@ module.exports = {
 
 #### 37、设计模式
 
-设计模式：针对特定的场景，在软件设计过程中常见的代码范式（与语言无关）
+设计模式：针对特定的场景，在软件设计过程中常见的代码范式（通用解决方案，与语言无关）。
 
 - 观察者模式（麦当劳点餐）
 - 代理模式（花店送花）
-- z
-
-
+- 装饰器：可以允许向一个对象添加新的功能，却不改变原有对象。比如：
+  - 给文件上传功能添加日志输出功能
+  - react中redux的`@connect`
 
 ##### 代理模式
 
@@ -1120,7 +1120,7 @@ window.onload = function(){
 //观察者
 var shopObj = {}
 
-//商品列表 ['huawei':[],'apple':[],'oppo':[]]
+//商品列表 ['huawei':['订阅人1'，'订阅人2'],'apple':['订阅人3'，'订阅人2'],'oppo':['订阅人1']]
 shopObj.list = []
 
 
@@ -1208,9 +1208,39 @@ shopObj.listen('apple',function(brand,model){
 shopObj.publish('huawei','P40')
 ```
 
+## 6.8
 
+##### 装饰器 
 
+- 给对象添加额外行为但是没有改变原有对象
 
+简单装饰器的实现
+
+```shell
+class Circle{
+  draw(){
+    console.log('draw a circle')
+  }
+}
+
+//使用装饰器添加一个边框
+class Decorator{
+  constructor(circle){
+    this.circle = circle;
+  }
+  draw(){
+    this.circle.draw()		//圆自己绘制
+    this.setBorder()			//增加绘制方法
+  }
+  setBorder(circle){				//装饰器方法
+    console.log('draw border')
+  }
+}
+
+var circle = new Circle()
+var dec = new Decorator(circle)
+dec.draw()
+```
 
 
 
