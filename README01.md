@@ -1338,7 +1338,7 @@ math.value(1,3)
 
 ##### 职责链模式
 
-场景：充值抽奖
+- 场景：充值抽奖
 
 开闭原则：原有代码对现有需求时关闭的，对扩展时开放的
 
@@ -1375,11 +1375,11 @@ function(orderType,isPay,count){		//订单类型；是否支付成功；金额
 
 ```
 
-使用职责链模式重构
+- 使用职责链模式重构
 
 ```shell
 function order500(orderType,isPay,count){
-  if(orderType === 1){					//500rmb
+  if(orderType === 1 && isPay){					//500rmb
     if(isPay){
       console.log('中奖100rmb')
     }else{
@@ -1389,7 +1389,7 @@ function order500(orderType,isPay,count){
 }
 
 function order200(orderType,isPay,count){
-  if(orderType === 2){					//500rmb
+  if(orderType === 2 && isPay){					//500rmb
     if(isPay){
       console.log('中奖100rmb')
     }else{
@@ -1399,7 +1399,7 @@ function order200(orderType,isPay,count){
 }
 
 function orderdefault(orderType,isPay,count){
-	if(count>0){
+	if(count>0 && isPay){
      	console.log('抽到纪念奖')
 	}else{
       console.log('谢谢参与')
@@ -1407,9 +1407,69 @@ function orderdefault(orderType,isPay,count){
 }
 ```
 
+- 使用职责链再次重构
+
+```shell
+function order500(orderType,isPay,count){
+  if(orderType === 1 && isPay){					//500rmb
+    if(isPay){
+      console.log('中奖100rmb')
+    }else{
+    	//console.log('不关我的事，给下一个处理')
+      return "nextSuccessor"
+    }
+}
+
+function order200(orderType,isPay,count){
+  if(orderType === 2 && isPay){					//500rmb
+    if(isPay){
+      console.log('中奖100rmb')
+    }else{
+    	//console.log('不关我的事，给下一个处理')
+       return "nextSuccessor"
+    }
+}
 
 
+function orderdefault(orderType,isPay,count){
+	if(count>0 && isPay){
+     	console.log('抽到纪念奖')
+	}else{
+      console.log('谢谢参与')
+	}
+}
 
+//创建职责链关系对象
+function Chain(fn){
+  this.fn = fn;
+  this.successor = null;
+}
+
+//设置下一个关系对象
+Chain.prototype.setnextSuccessor =function(successor){
+  this.successor = successor;
+}
+
+//传递给下一个
+Chain.prototype.passRequest = function(){
+  var ret = this.fn.apply(this,arguments)
+  if(ret === 'nextSuccessor'){		//传给下一个
+    this.successor && this.successor.passRequest.apply(this.successor,arguments)
+  }
+}
+
+//实例化
+var chain500 = new Chain(order500)
+var chain200 = new Chain(order200)
+var chaindefault = new Chain(orderdefault)
+chain500.setnextSuccessor = chain200;
+chain200.setnextSuccessor = chaindefault;
+
+//调用
+chain500.passRequest(1,true,100)		//类型1 支付成功 金额500
+```
+
+面向对象：抽象、多态、继承、封装
 
 
 
