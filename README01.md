@@ -1110,9 +1110,7 @@ window.onload = function(){
 }
 ```
 
-
-
-##### 观察者模式
+##### 观察者模式（发布订阅模式）
 
 场景：双十一购买商品。购买者：观察者；商品：被观察者；商家（商品价格修改）：发布者。发布者发布，关注着会收到改变。
 
@@ -1159,7 +1157,7 @@ shopObj.listen('apple',function(brand,model){
 shopObj.publish('huawei','P40')
 ```
 
-优化
+观察者模式优化
 
 ```shell
 //订阅发布放一起；之后再初始化
