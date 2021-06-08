@@ -1214,7 +1214,7 @@ shopObj.publish('huawei','P40')
 
 - 给对象添加额外行为但是没有改变原有对象
 
-简单装饰器的实现
+- 简单装饰器的实现
 
 ```shell
 class Circle{
@@ -1242,11 +1242,100 @@ var dec = new Decorator(circle)
 dec.draw()
 ```
 
+- 装饰器--注解形式
+
+```shell
+class Boy {
+	@run
+  speak(){
+    console.log('speak')
+  }
+}
+
+function run(target,key,descriptor){			//装饰器参数。
+	//target是Boy对象；key是被装饰的方法speak；descriptor是描述方法（writeable可写；enumerable可枚举，即是否可以for循环出来；configuerable可配置）
+  console.log('run')
+}
+
+var boy = new Boy()
+boy.speak()
+```
+
+需要配置`babel`，使用`transform-decoarors-legacy`将`@`转化成ES5代码；安装之后使用`babel xxx.js -o /build/xxx.js`进行转化。
+
+```shell
+cnpm i -S babel-cli babel-preset-env babel-plugin-transform-decoarors-legacy
+
+//babel-preset-env用于ES6转ES5
+//babel-plugin-transform-decoarors-legacy用于注解翻译的
+```
 
 
 
+![](https://img-blog.csdnimg.cn/20210608092205495.png)
 
 
+
+- 装饰器参数
+  - target 对象
+  - key被装饰的方法
+  - descriptor 描述对象
+
+```shell
+//给方法添加日志输出功能；不改变原有功能，添加新功能
+class Math{
+	@log
+  add(a,b){
+    return a+b;
+  }
+}
+
+//日志装饰器
+function log(target,name,descriptor){
+  var oldValue = descriptor.value;			//descriptor.value是被修饰的方法，add
+  descriptor.value = function(){
+    console.log(`调用${name}`参数是`${arguments}`)	//arguments是js的内置对象，包含所有实参的类数组
+    return oldValue.apply(target,arguments)
+  }
+  return descriptor;
+}
+
+var math = new Math();
+math.value(1,3)
+
+```
+
+装饰器添加参数
+
+```shell
+//给方法添加日志输出功能,并且带上参数，加到a、b上；
+class Math{
+	@log(100)
+  add(a,b){
+    return a+b;
+  }
+}
+
+//日志装饰器
+function log(num){
+  return function log(target,name,descriptor){
+  	var _num = num || 0;
+    var oldValue = descriptor.value;			
+    descriptor.value = function(...args){
+    	arg[0] += _num;		//改变原有参数值
+    	arg[1] += _num;
+      console.log(`调用${name}`参数是`${args}`)	
+      return oldValue.apply(target,args)
+    }
+    return descriptor;
+  }
+}
+
+var math = new Math();
+math.value(1,3)
+
+
+```
 
 
 
