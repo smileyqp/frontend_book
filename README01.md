@@ -1159,6 +1159,57 @@ shopObj.listen('apple',function(brand,model){
 shopObj.publish('huawei','P40')
 ```
 
+优化
+
+```shell
+//订阅发布放一起；之后再初始化
+var event = {
+  list:[],
+  listen:function(key,fn){
+  	if(!this.list[key]){
+    	this.list[skey] = []
+    }
+    shopObj.list[key].push(fn)	//往特定商品列表中添加订阅
+  },
+  publish:function(){
+    var goodskey  = arguments[0]
+    var fns = this.list[goodskey]
+    for(var i = 0,fn;fn = fns[i++];){
+      //执行订阅的fn
+
+      fn.apply(this,arguments)
+    }
+  }
+}
+
+//观察者对象初始化
+var initEvent = function(obj){
+  for(var i in event){
+    obj[i] = event[i];
+  }
+}
+
+//定义空发布者
+var shopObj = {}			//空对象
+initEvent(shopObj)		//将我们定义的方法属性都给它
+
+
+
+//用户1:添加订阅
+shopObj.listen('huawei',function(brand,model){
+  console.log('user 1'+brand,model)
+})
+
+//用户2:添加订阅
+shopObj.listen('apple',function(brand,model){
+  console.log('user 2'+brand,model)
+})
+
+
+//商家发布订阅
+shopObj.publish('huawei','P40')
+```
+
 
 
 
