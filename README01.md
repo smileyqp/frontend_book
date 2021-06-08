@@ -1338,9 +1338,74 @@ math.value(1,3)
 
 ##### 职责链模式
 
+场景：充值抽奖
+
+开闭原则：原有代码对现有需求时关闭的，对扩展时开放的
+
+充值500抽100rmb；充值200抽20rmb；否则无奖
+
+```shell
+function(orderType,isPay,count){		//订单类型；是否支付成功；金额
+	if(orderType === 1){					//500rmb
+    if(isPay){
+      console.log('中奖100rmb')
+    }else{
+      if(count>0){
+        console.log('抽到纪念奖')
+      }else{
+        console.log('谢谢参与')
+      }
+    }
+	}else if(orderType === 2){		//200rmb
+    if(isPay){
+      console.log('中奖20rmb')
+    }else{
+      if(count>0){
+        console.log('抽到纪念奖')
+      }else{
+        console.log('谢谢参与')
+      }
+    }
+	}else if(orderType === 3){
+    console.log('谢谢参与')
+	}
+  
+}
 
 
+```
 
+使用职责链模式重构
+
+```shell
+function order500(orderType,isPay,count){
+  if(orderType === 1){					//500rmb
+    if(isPay){
+      console.log('中奖100rmb')
+    }else{
+    	//console.log('不关我的事，给下一个处理')
+      order200(orderType,isPay,count)
+    }
+}
+
+function order200(orderType,isPay,count){
+  if(orderType === 2){					//500rmb
+    if(isPay){
+      console.log('中奖100rmb')
+    }else{
+    	//console.log('不关我的事，给下一个处理')
+      orderdefault(orderType,isPay,count)
+    }
+}
+
+function orderdefault(orderType,isPay,count){
+	if(count>0){
+     	console.log('抽到纪念奖')
+	}else{
+      console.log('谢谢参与')
+	}
+}
+```
 
 
 
