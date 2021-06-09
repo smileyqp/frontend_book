@@ -61,9 +61,8 @@ console.timeEnd('A')
 ```shell
 (function(){
   function check(n){				//参数容错性
-    //n = Number(n)
-    //return isNaN(n)?0:n;
-    return n = Number(n) && (isNaN(n)?0:n)		//简写
+    n = Number(n)
+    return isNaN(n)?0:n;
   }
   
   function add(n){
