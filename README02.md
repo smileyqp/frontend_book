@@ -207,8 +207,24 @@ function trans(str){
 let S = 'adhskdahskyuasjkdas',
 		T = 'yu';
 console.log(S.myIndexOf(T))
+```
 
+- 正则处理
 
+```shell
+(function(){
+  function myIndexOf(T){
+  	let reg = new RegExp(T)
+    res = reg.exec(this)
+    return res === null ? -1 :res.index;
+  }
+  
+  String.prototype.myIndexOf = myIndexOf;
+})()
+
+let S = 'adhskdahskyuasjkdas',
+		T = 'yu';
+console.log(S.myIndexOf(T))
 
 ```
 
