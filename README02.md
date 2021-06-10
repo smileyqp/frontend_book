@@ -215,7 +215,7 @@ console.log(S.myIndexOf(T))
 (function(){
   function myIndexOf(T){
   	let reg = new RegExp(T)
-    res = reg.exec(this)
+    		res = reg.exec(this)
     return res === null ? -1 :res.index;
   }
   
