@@ -228,6 +228,53 @@ console.log(S.myIndexOf(T))
 
 ```
 
+#### 6、输出下面代码运行结果
+
+![](https://img-blog.csdnimg.cn/20210610102244519.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+> 三题答案依次是：c		b		c
+>
+> 属性都会转成字符串。Symbol生成的值都唯一。对象的属性值为对象的时候，都会将对象转化成字符串，调用toString，对象的实例是Object，调用的是Object的原型上的toString。把对象作为属性名，最后存储的都是`"[object Object]"`为属性值的
+
+#### 7、判断输入的是正确的网址
+
+- 协议：`http://` `https://` `ftp://`（可省）
+- 域名：www.xxx.xx  xxx.xx  xx.xx.xx.xx
+- 请求路径 `index.html` `stu/index.html` ` /stu`（可省）
+- 问号传参`?xx=xx`（可省）
+- 哈希值 `#xxx`（可省）
+
+```shell
+let str = 'http://smileyqp.com/smile'
+let reg = /^((http|https|ftp):\/\/)?(([\w-].)+[a-z0-9]+)((\/[^/]*)+)?(\?[^#]+)?(#.+)?$/i;
+console.og(reg.exec(str))
+```
+
+#### 8、阿里面试函数题
+
+![](https://img-blog.csdnimg.cn/20210610111312842.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+```shell
+function Foo(){
+  Foo.a = function(){
+    console.log(1)
+  }
+  this.a = function(){
+    console.log(2)
+  }
+}
+Foo.prototype.a = function(){
+  console.log(3)
+}
+Foo.a = function(){
+  console.log(4)
+}
+Foo.a()											//4
+let obj = new Foo();		
+obj.a()											//2 私有属性中有a
+Foo.a()											//1
+```
+
 
 
 
