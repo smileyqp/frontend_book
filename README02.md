@@ -406,11 +406,65 @@ JSON.stringify(arr).replace(/(\[|\])/g,'').split(',').map(item=>{
 //JSON.stringify(arr).replace(/(\[|\])/g,'')  	"2,4,1,5,8,5,2,23,45,12,1,45,35,10"
 ```
 
+- `[].concat(...arr)`基于数组的`some`进行判断检测;some验证数组中有没有一项发一个规则的（some返回的额结果true或者false）；`find`查找，返回的结果如果有就返回第一个的值，如果没有就返回undefined；同理`findIndex`有就返回index，没有就返回-1
+
+```shell
+let arr=[[2,4,1,5],[8,5,2],[23,45,12,[1,45,35]],10]	
+
+while(arr.some(item=>Array.isArray(item))){		//只要arr数组中有数组
+  arr = [].concat(...arr)		//[].concat(...arr)每次只能展开一级
+}
+```
+
+- 递归
+
+```shell
+let arr=[[2,4,1,5],[8,5,2],[23,45,12,[1,45,35]],10]	
+
+(function(){
+  function myFlat(){
+  	let res = [],
+  			_this = this;
+  	let fn = (arr) => {
+      for(let i = 0;i < arr.length;i++){
+      	let item = arr[i];
+        if(Array.isArray(item)){
+          fn(item)
+          continue;
+        }
+        res.push(item)
+      }
+  	}
+  	fn(_this)
+  	return result;
+  }
+  Array.ptototype.myFlat = myFlat;
+})()
+```
+
+#### 12、面向对象new
+
+![](https://img-blog.csdnimg.cn/20210615102220444.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210615102632956.png)
+
+```shell
+(function(){
+  function _new(){
+  	//let obj = Object.create(this.prototype)下面两句的简写
+    let obj = new Object();
+    obj.__proto__ = this.prototype;
+    obj.apply(this,arguments)
+    return obj;
+  }
+  Function.prototype._new = _new;
+})()
+
+```
 
 
 
-
-
+#### 13、数组合并
 
 
 
