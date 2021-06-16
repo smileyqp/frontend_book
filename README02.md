@@ -280,7 +280,7 @@ Foo.a()											//1
 #### 9、实现图片懒加载
 
 ```shell
-
+review之后补充
 
 
 
@@ -521,6 +521,174 @@ let ary2 = ['B','A','D','C']
  }
 console.log(ary1)// ["D1", "D2", "D", "A1", "A2", "A", "C1", "C2", "C", "B1", "B2", "B"]
 ```
+
+#### 14、前端经典输出1-10问题
+
+- let
+
+let存在块作用域，每次循环都会在当前块作用域中形成一个私有变量i，每次定时器使用的都是私有变量
+
+```shell
+for(let i = 0;i < 10;i++){		
+  setTimeout(()=>{
+    console.log(i)
+  },1000)
+}
+```
+
+- 利用闭包
+
+```shell
+for(var i = 0;i < 10;i++){		
+  setTimeout(((i)=>{
+    console.log(i)
+  })(i),1000)
+}
+```
+
+```shell
+for(var i = 0;i < 10;i++){		
+   (function(i){
+     setTimeout(()=>{
+     	console.log(i)
+   		},1000)
+   })(i)
+}
+```
+
+- bind预先处理
+
+```shell
+var fn = function(i){
+  console.log(i)
+}
+for(var i = 0;i < 10;i++){		
+  setTimeout(fn.bind(null,i),1000);		//用bind预先处理
+}
+```
+
+#### 15、函数经典题
+
+##### 1、匿名函数如果设置了函数名 ，在外面是无法调用的，但是在函数里面是可以调用的
+
+##### 2、而且类似于创建常量一样，这个名字存储的值不能再被修改（非严格模式下不会报错，但是不会有任何效果，严格模式下直接报错，可以把AAA理解成为const声明的常量）
+
+```shell
+let fn = function AAA(){
+  console.log(AAA)			//方法本身；但是这里如果使用严格模式的话也会报错
+}
+AAA()		//Uncaught ReferenceError: AAA is not defined
+```
+
+> 写出下面输出：
+
+```shell
+var b = 10;
+(function b(){
+  b = 20;
+  console.log(b)	//非严格模式下不报错，但是存储的值不被修改。因此还是方法b
+})()
+console.log(b)		//10
+```
+
+> 修改方法，使匿名函数中的b输出20，但是外面的还是输出10；
+
+##### 方法的私有变量一般有两个写法：带var的，或者形参赋值
+
+```shell
+//分析：里面的b一定是私有的不能是全局的。方法的私有变量一般有两个写法：带var的，或者形参赋值
+var b = 10;
+(function b(){
+  var b = 20;
+  console.log(b) //20带名称的匿名函数中如果一旦私有声明，名称变量就跟原函数无关了；这里使用let、const也行
+})()
+console.log(b)		//10
+```
+
+```shell
+//上面这种也可以直接给它传入一个形参
+var b = 10;
+(function b(b){
+  b = 20;
+  console.log(b)
+})()
+console.log(b)		//10
+```
+
+> 如果把带名称的匿名函数的名称去掉，函数里面的b变成全局的了
+
+```shell
+var b = 10;
+(function (){
+  b = 20;
+  console.log(b)		//20
+})()
+console.log(b)		//20
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
