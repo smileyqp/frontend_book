@@ -280,7 +280,7 @@ Foo.a()											//1
 #### 9、实现图片懒加载
 
 ```shell
-review之后补充
+前面已经有详细解答，具体代码之后补充
 
 
 
@@ -624,6 +624,42 @@ var b = 10;
   console.log(b)		//20
 })()
 console.log(b)		//20
+```
+
+#### 16、a=?使得a==1&&a==2&&a==3成立
+
+```shell
+前面已经有详细解答，具体代码之后补充
+
+```
+
+#### 17、经典题
+
+```shell
+let obj = {
+  2:3,
+  3:4,
+  length:2,
+  push:Array.prototype.push
+}
+obj.push(1)			//obj[2] = 1
+obj.push(2)			//obj[3] = 2
+console.log(obj)
+
+
+
+//模拟数组的push方法
+Array.prototype.push = function(val){
+  this[this.length] = val;			//往数组中push一个val，也就是把val放进index位数组第数组的长度位数处
+	//  this.length 在原来的基础上加一，浏览器自动加一
+}
+//那么就得出如下结果{2: 1, 3: 2, length: 4, push: ƒ}
+obj = {
+  2:1,
+  3:2,
+  length:4,
+  push:Array.prototype.push
+}
 ```
 
 
