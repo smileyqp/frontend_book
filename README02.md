@@ -662,6 +662,116 @@ obj = {
 }
 ```
 
+## 6.17
+
+#### 18、经典函数题
+
+- ##### 请实现一个函数满足以下功能
+
+```shell
+add(1)					//1
+add(1)(2)				//3
+add(1)(2)(3)		//6
+add(1)(2,3)		//6
+add(1,2)(3)		//6
+add(1,2,3)		//6
+```
+
+
+
+- ##### 函数柯里化：函数预先处理，利用闭包。例如：bind
+
+```shell
+let obj = {
+  name:'OBJ'
+}
+function fn(...arg){
+  console.log(this,arg)
+}
+document.body.onclick = fn;		//this 为 BODY
+document.body.onclick = function(ev){	
+//ev事件对象：给元素的某个事件绑定方法，当事件触发会执行这个方法，并且会把当前事件的信息传递给这个函数的"事件对象"
+
+}
+
+//要求：给fn中的this指向obj并且传入100，200，以及事件对象（预先处理思想）
+//1、使用bind
+document.body.onclick = fn.bind(obj,100,200);
+
+//2、自己写：执行匿名函数
+document.body.onclick = function(ev){
+  fn.call(obj,ev,100,200)
+}
+```
+
+自定义mybind实现
+
+```shell
+let obj = {
+  name:'OBJ'
+}
+(function(){
+  mybind(context=window,...outerArg){
+  	let _this = this;
+  	//this 指向fn
+    return function(...innerArg){
+    	//此时这个匿名函数中的this指向BODY
+      _this.call(context,...outer,...innnerArg)
+    }
+  }
+  Function.prototype.mybind = mybind;
+})()
+fn.mybind(obj,100,200)
+```
+
+函数柯里化：返回一个匿名函数，形成闭包，保存第一次执行传入的参数，并返回一个函数。第二次执行的时候直接使用上一次保存的数据，供调用。利用闭包的保存作用。
+
+闭包两大作用：保护、保存
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
