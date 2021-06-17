@@ -10,7 +10,7 @@
 
 ## 6.16
 
-#### 两数之和
+#### 1、两数之和
 
 ![](https://img-blog.csdnimg.cn/20210617091136279.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 ![](https://img-blog.csdnimg.cn/20210617091156151.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
@@ -37,7 +37,7 @@ var twoSum = function(nums, target) {
 
 ## 6.17
 
-#### 实现strStr()
+#### 28、实现strStr()
 
 ![](https://img-blog.csdnimg.cn/2021061709094677.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 ![](https://img-blog.csdnimg.cn/20210617091006468.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
