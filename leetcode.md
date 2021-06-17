@@ -1,6 +1,8 @@
-其实有些思路算法挺有意思的，决定开始刷刷leetcode，先从简单的题开始吧！非最优解，仅记录分享
+其实有些算法思路挺有意思的，决定开始刷刷leetcode，先从简单的题开始吧！非最优解，仅记录分享
 
 ##### [CSDN链接](https://blog.csdn.net/qq_34273059/article/details/117980748)
+
+##### [github leetcode链接](https://github.com/smileyqp/frontend_book/blob/master/leetcode.md)
 
 
 
