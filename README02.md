@@ -658,7 +658,7 @@ console.log(b)		//20
 true == 2					//false 1 2
 ```
 
-##### 2、具体题目实现（改变私有toString方法，实例私有属性上重构一个方法调私有方法）
+##### 2、a=?使得a==1&&a==2&&a==3成立，具体题目实现（改变私有toString方法，实例私有属性上重构一个方法调私有方法）
 
 - 方法一：加私有的toString方法
 
@@ -692,14 +692,10 @@ Object.definedProperty(window,'a',{
   }
 })
 
-//
+//优化
 Object.definedProperty(window,'a',{			
   get:function(){
-  	if(this.value){
-      return ++this.value;
-  	}
-  	this.value = 1;
-  	return this.value;
+  	return this.value ? ++this.value:1;
   }
 })
 ```
