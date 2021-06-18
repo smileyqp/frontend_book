@@ -677,7 +677,7 @@ add(1,2)(3)		//6
 add(1,2,3)		//6
 ```
 
-函数柯里化，利用闭包的保存的特性，实现预先处理的方法
+
 
 ```shell
 function currying(fn,len){		//可执行多少次
@@ -686,21 +686,18 @@ function currying(fn,len){		//可执行多少次
     if(arg.length>=len){
       return fn(...args)			//如果执行次数小于等于这个参数个数；直接执行这个方法
     }
-    //不直接执行，二十返回一个可以继续执行的函数；args将这次的参数当作参数传入下面执行的方法中
-    return currying(fn.bind(null,...args,len-arg.len))
+    return currying(fn.bind(...args),)
   }
 }
 
-let add = currying((...args)=>{
-  eval(arg.join('+'))
-},4)			//也就是可执行多少次，所有的传入参数的个数
+function add(){
+  
+}
 
-add = currying(add,4)
-add(1)(2)(3)(4)		//10
-add(1)(2,3)(4)		//10
-add(1,2)(3)(4)		//10
-add(1,2,3,4)			//10
+
 ```
+
+
 
 - ##### 函数柯里化：函数预先处理，利用闭包。例如：bind
 
