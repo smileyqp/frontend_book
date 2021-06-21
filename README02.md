@@ -820,15 +820,115 @@ fn.mybind(obj,100,200)
 
 
 
-## 6.18
+## 6.21
 
-#### 19、
+#### 19、求两个数组的交集
+
+```shell
+let num1 = [1,4,2,6,9]
+let num2 = [3,4,7,2]
+
+//方法一
+let arr = []
+for(let i = 0;i < num1.length;i++){
+  let item1 = num1[i]
+  for(let j = 0;j<num2.length;j++){
+    let item2 = num2[j]
+    if(item1 === item2){
+      arr.push(item1)
+      num1[i] = null;
+      num2[j] = null;
+      break;
+    }
+  }
+}
+
+//方法二
+let arr = []
+num1.forEach((item,index)=>{
+	let n = arr2.indexOf(item)
+	if(n>=0){
+    arr.push(item)
+    num1.splice(index,1)
+    num2.splice(n,1)
+	}
+})
+```
 
 
 
+#### 20、旋转数组
+
+![](https://img-blog.csdnimg.cn/20210621144744814.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- 截取拼接
+
+```shell
+function rotate(k){
+	//参数处理
+	if(k<0 || k === 0 || k === this.length){return this;}
+	if(k > this.length){k = k%this.length}
+	//旋转数组
+  //return arr.slice(-k).concat(arr.slice(0,arr.length-k))		//方法一：slice(-k)从后面取k个
+  //return [...this.splice(arr.length-k),...this]		//方法二：splice会改变原数组，并返回截取的数组
+  //new Array(3).fill('').forEach(()=>{this.unshift(this.pop())})		//方法三变式
+
+  for(let i = 0;i < k;i++){				//方法三：从后面一个一个拿，放到最前面
+    this.unshift(this.pop())
+  }
+  return this;
+  
+}
+Array.prototype.rotate = rotate;
+```
 
 
 
+#### 21、把公司1-12个月的销售额存在对象中
+
+![](https://img-blog.csdnimg.cn/2021062115085825.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- 方法一
+
+```shell
+let obj = {
+  1:222,
+  3:444,
+  5:345
+}
+let arr = new Array(12).fill(null).map((item,index)=>{
+  return obj[index+1]||null
+})
+```
+
+- 方法二obj.length
+
+```shell
+let obj = {
+  1:222,
+  3:444,
+  5:345
+}
+obj.length = 13			//将其长度强行赋值到13，那么它有13位并且不对应的会用undefined填充
+let arr = Array.from(obj).slice(1).map(item=>{
+  return typeof item === "undefined"?null:item;
+})
+```
+
+- 方法三Object.keys
+
+```shell
+let obj = {
+  1:222,
+  3:444,
+  5:345
+}
+//Object.keys(obj)是将obj中的属性名以数组的方式返回
+let arr = new Array(12).fill(null)
+Object.keys(obj).forEach(item=>{
+  arr[item-1] = obj[item]
+})
+```
 
 
 
