@@ -448,6 +448,11 @@ let arr=[[2,4,1,5],[8,5,2],[23,45,12,[1,45,35]],10]
 
 ![](https://img-blog.csdnimg.cn/20210615102632956.png)
 
+- 函数内部创建新对象
+- 新对象原型指向传入的类的原型
+- 改变新对象的this指向并传入它相关参数
+- 返回该创建的心对象
+
 ```shell
 (function(){
   function _new(){
@@ -628,9 +633,71 @@ console.log(b)		//20
 
 #### 16、a=?使得a==1&&a==2&&a==3成立
 
-```shell
-前面已经有详细解答，具体代码之后补充
+##### 1、`==`规则
 
+两个等号进行比较的时候，先转化成同一种数据类型再进行比较
+
+- 对象进行比较，比较的是对应 的内存地址
+- `null==undefined`是true
+- NaN和谁都不想等， `NaN==NaN`为false
+- `[12]=='12'`对象和字符串进行比较是将对象toString转化成字符串后再进行比较
+- 剩余所有情况在进行比较的时候都是先转化成数字再进行比较（前提是数据类型不一样）
+  - 对象转化成数字：线转化成字符串，再转数字
+  - 字符串转数字：只要出现一个非数字，结果都是NaN
+  - 布尔转数字：true是1，false是0
+  - null转化成数字：0
+  - undefined转化成数字：NaN
+
+##### 当左右两边数据类型不一致的情况下，对象和字符串比较是对象转换成字符串，其余的情况`null==undefined`是相等的，NaN和任何都是不想等，包括自身。其余都是转化成数字再进行比较
+
+```shell
+12 == true;				//false 12  1
+[] == false;			//true 0 0
+[] == 1						//false 0 1
+"1" == 1					//true 1 1
+true == 2					//false 1 2
+```
+
+##### 2、a=?使得a==1&&a==2&&a==3成立，具体题目实现（改变私有toString方法，实例私有属性上重构一个方法调私有方法）
+
+- 方法一：加私有的toString方法
+
+```shell
+//a==1&&a==2&&a==3
+var a = {
+  n:0,
+  toString:function(){
+    return ++this.n;
+  }
+};
+```
+
+- 利用数组的shift方法
+
+shift删除数组第一项，将删除的内容返回，原有数组内容改变
+
+```shell
+let a = [1,2,3]
+a.toString = a.shift;
+```
+
+- 利用definedProperty
+
+```shell
+let n = 0;
+//window作用域上创建a;获取a的时候走get方法；返回++n
+Object.definedProperty(window,'a',{			
+  get:function(){
+    return ++n;
+  }
+})
+
+//优化
+Object.definedProperty(window,'a',{			
+  get:function(){
+  	return this.value ? ++this.value:1;
+  }
+})
 ```
 
 #### 17、经典题
@@ -677,7 +744,7 @@ add(1,2)(3)		//6
 add(1,2,3)		//6
 ```
 
-
+函数柯里化，利用闭包的保存的特性，实现预先处理的方法
 
 ```shell
 function currying(fn,len){		//可执行多少次
@@ -686,18 +753,21 @@ function currying(fn,len){		//可执行多少次
     if(arg.length>=len){
       return fn(...args)			//如果执行次数小于等于这个参数个数；直接执行这个方法
     }
-    return currying(fn.bind(...args),)
+    //不直接执行，二十返回一个可以继续执行的函数；args将这次的参数当作参数传入下面执行的方法中
+    return currying(fn.bind(null,...args,len-arg.len))
   }
 }
 
-function add(){
-  
-}
+let add = currying((...args)=>{
+  eval(arg.join('+'))
+},4)			//也就是可执行多少次，所有的传入参数的个数
 
-
+add = currying(add,4)
+add(1)(2)(3)(4)		//10
+add(1)(2,3)(4)		//10
+add(1,2)(3)(4)		//10
+add(1,2,3,4)			//10
 ```
-
-
 
 - ##### 函数柯里化：函数预先处理，利用闭包。例如：bind
 
@@ -750,13 +820,115 @@ fn.mybind(obj,100,200)
 
 
 
+## 6.21
+
+#### 19、求两个数组的交集
+
+```shell
+let num1 = [1,4,2,6,9]
+let num2 = [3,4,7,2]
+
+//方法一
+let arr = []
+for(let i = 0;i < num1.length;i++){
+  let item1 = num1[i]
+  for(let j = 0;j<num2.length;j++){
+    let item2 = num2[j]
+    if(item1 === item2){
+      arr.push(item1)
+      num1[i] = null;
+      num2[j] = null;
+      break;
+    }
+  }
+}
+
+//方法二
+let arr = []
+num1.forEach((item,index)=>{
+	let n = arr2.indexOf(item)
+	if(n>=0){
+    arr.push(item)
+    num1.splice(index,1)
+    num2.splice(n,1)
+	}
+})
+```
 
 
 
+#### 20、旋转数组
+
+![](https://img-blog.csdnimg.cn/20210621144744814.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- 截取拼接
+
+```shell
+function rotate(k){
+	//参数处理
+	if(k<0 || k === 0 || k === this.length){return this;}
+	if(k > this.length){k = k%this.length}
+	//旋转数组
+  //return arr.slice(-k).concat(arr.slice(0,arr.length-k))		//方法一：slice(-k)从后面取k个
+  //return [...this.splice(arr.length-k),...this]		//方法二：splice会改变原数组，并返回截取的数组
+  //new Array(3).fill('').forEach(()=>{this.unshift(this.pop())})		//方法三变式
+
+  for(let i = 0;i < k;i++){				//方法三：从后面一个一个拿，放到最前面
+    this.unshift(this.pop())
+  }
+  return this;
+  
+}
+Array.prototype.rotate = rotate;
+```
 
 
 
+#### 21、把公司1-12个月的销售额存在对象中
 
+![](https://img-blog.csdnimg.cn/2021062115085825.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- 方法一
+
+```shell
+let obj = {
+  1:222,
+  3:444,
+  5:345
+}
+let arr = new Array(12).fill(null).map((item,index)=>{
+  return obj[index+1]||null
+})
+```
+
+- 方法二obj.length
+
+```shell
+let obj = {
+  1:222,
+  3:444,
+  5:345
+}
+obj.length = 13			//将其长度强行赋值到13，那么它有13位并且不对应的会用undefined填充
+let arr = Array.from(obj).slice(1).map(item=>{
+  return typeof item === "undefined"?null:item;
+})
+```
+
+- 方法三Object.keys
+
+```shell
+let obj = {
+  1:222,
+  3:444,
+  5:345
+}
+//Object.keys(obj)是将obj中的属性名以数组的方式返回
+let arr = new Array(12).fill(null)
+Object.keys(obj).forEach(item=>{
+  arr[item-1] = obj[item]
+})
+```
 
 
 

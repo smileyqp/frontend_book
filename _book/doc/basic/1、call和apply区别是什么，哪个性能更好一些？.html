@@ -1,0 +1,610 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>1、call和apply区别是什么，哪个性能更好一些？ · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.1" >
+            
+                <span>
+            
+                    
+                    前端基础知识
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.1.1" data-path="../前端html和css基础知识.html">
+            
+                <a href="../前端html和css基础知识.html">
+            
+                    
+                    前端html和css基础知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.2" data-path="../从几道有意思的题理解堆栈内存、闭包作用域.html">
+            
+                <a href="../从几道有意思的题理解堆栈内存、闭包作用域.html">
+            
+                    
+                    从几道有意思的题理解堆栈内存、闭包作用域
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.3" data-path="../面试必会之对象和数组的深浅拷贝.html">
+            
+                <a href="../面试必会之对象和数组的深浅拷贝.html">
+            
+                    
+                    面试必会之对象和数组的深浅拷贝
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.4" data-path="../一道题解读面向对象.html">
+            
+                <a href="../一道题解读面向对象.html">
+            
+                    
+                    一道题解读面向对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.5" data-path="../EventLoop，宏任务、微任务.html">
+            
+                <a href="../EventLoop，宏任务、微任务.html">
+            
+                    
+                    EventLoop，宏任务、微任务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.6" data-path="../有意思的双等号题目.html">
+            
+                <a href="../有意思的双等号题目.html">
+            
+                    
+                    有意思的双等号题目
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.7" data-path="../Vue_React区别.html">
+            
+                <a href="../Vue_React区别.html">
+            
+                    
+                    Vue_React区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.8" data-path="../跨域问题的解决方案和实现原理.html">
+            
+                <a href="../跨域问题的解决方案和实现原理.html">
+            
+                    
+                    跨域问题的解决方案和实现原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.9" data-path="../前端必会的排序算法.html">
+            
+                <a href="../前端必会的排序算法.html">
+            
+                    
+                    前端必会的排序算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.10" data-path="../前端必会的数组去重的四大实现方案.html">
+            
+                <a href="../前端必会的数组去重的四大实现方案.html">
+            
+                    
+                    前端必会的数组去重的四大实现方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.11" data-path="../前端基础之数组扁平化.html">
+            
+                <a href="../前端基础之数组扁平化.html">
+            
+                    
+                    前端基础之数组扁平化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.12" data-path="../斐波那契数列.html">
+            
+                <a href="../斐波那契数列.html">
+            
+                    
+                    斐波那契数列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.13" data-path="../字节跳动前端经典算法题.html">
+            
+                <a href="../字节跳动前端经典算法题.html">
+            
+                    
+                    字节跳动前端经典算法题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2" >
+            
+                <span>
+            
+                    
+                    前端基础题目
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.1.2.1" data-path="1、call和apply区别是什么，哪个性能更好一些？.html">
+            
+                <a href="1、call和apply区别是什么，哪个性能更好一些？.html">
+            
+                    
+                    1、call和apply区别是什么，哪个性能更好一些？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.2" data-path="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
+            
+                <a href="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
+            
+                    
+                    2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.3" data-path="3、实现一个$attr.html">
+            
+                <a href="3、实现一个$attr.html">
+            
+                    
+                    3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.4" data-path="4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格.html">
+            
+                <a href="4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格.html">
+            
+                    
+                    4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.5" data-path="5、实现`(5.html">
+            
+                <a href="5、实现`(5.html">
+            
+                    
+                    5、实现(5).add(3).minus(2)使其输出结果为6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.6" data-path="../bacic/6、箭头函数和普通函数的区别.html">
+            
+                <a href="../bacic/6、箭头函数和普通函数的区别.html">
+            
+                    
+                    6、箭头函数和普通函数的区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.7" data-path="7、字符串中字母大写转小写，小写转大写.html">
+            
+                <a href="7、字符串中字母大写转小写，小写转大写.html">
+            
+                    
+                    7、字符串中字母大写转小写，小写转大写
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.8" data-path="8、实现字符串查找.html">
+            
+                <a href="8、实现字符串查找.html">
+            
+                    
+                    8、实现字符串查找
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.9" data-path="9、验证输入的是否是一个正确的网址.html">
+            
+                <a href="9、验证输入的是否是一个正确的网址.html">
+            
+                    
+                    9、验证输入的是否是一个正确的网址
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.10" data-path="10、原型链.html">
+            
+                <a href="10、原型链.html">
+            
+                    
+                    10、原型链
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.11" data-path="11、图片懒加载.html">
+            
+                <a href="11、图片懒加载.html">
+            
+                    
+                    11、图片懒加载
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.12" data-path="12、数组交集.html">
+            
+                <a href="12、数组交集.html">
+            
+                    
+                    12、数组交集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.13" data-path="13、旋转数组.html">
+            
+                <a href="13、旋转数组.html">
+            
+                    
+                    13、旋转数组
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >1、call和apply区别是什么，哪个性能更好一些？</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="1&#x3001;call&#x548C;apply&#x533A;&#x522B;&#x662F;&#x4EC0;&#x4E48;&#xFF0C;&#x54EA;&#x4E2A;&#x6027;&#x80FD;&#x66F4;&#x597D;&#x4E00;&#x4E9B;&#xFF1F;">1&#x3001;call&#x548C;apply&#x533A;&#x522B;&#x662F;&#x4EC0;&#x4E48;&#xFF0C;&#x54EA;&#x4E2A;&#x6027;&#x80FD;&#x66F4;&#x597D;&#x4E00;&#x4E9B;&#xFF1F;</h1>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+                <a href="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"1、call和apply区别是什么，哪个性能更好一些？","level":"1.1.2.1","depth":3,"next":{"title":"2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字","level":"1.1.2.2","depth":3,"path":"doc/basic/2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.md","ref":"doc/basic/2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.md","articles":[]},"previous":{"title":"前端基础题目","level":"1.1.2","depth":2,"ref":"","articles":[{"title":"1、call和apply区别是什么，哪个性能更好一些？","level":"1.1.2.1","depth":3,"path":"doc/basic/1、call和apply区别是什么，哪个性能更好一些？.md","ref":"doc/basic/1、call和apply区别是什么，哪个性能更好一些？.md","articles":[]},{"title":"2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字","level":"1.1.2.2","depth":3,"path":"doc/basic/2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.md","ref":"doc/basic/2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.md","articles":[]},{"title":"3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集","level":"1.1.2.3","depth":3,"path":"doc/basic/3、实现一个$attr.md","ref":"doc/basic/3、实现一个$attr.md","articles":[]},{"title":"4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格","level":"1.1.2.4","depth":3,"path":"doc/basic/4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格.md","ref":"doc/basic/4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格.md","articles":[]},{"title":"5、实现(5).add(3).minus(2)使其输出结果为6","level":"1.1.2.5","depth":3,"path":"doc/basic/5、实现`(5","ref":"doc/basic/5、实现`(5","articles":[]},{"title":"6、箭头函数和普通函数的区别","level":"1.1.2.6","depth":3,"path":"doc/bacic/6、箭头函数和普通函数的区别.md","ref":"doc/bacic/6、箭头函数和普通函数的区别.md","articles":[]},{"title":"7、字符串中字母大写转小写，小写转大写","level":"1.1.2.7","depth":3,"path":"doc/basic/7、字符串中字母大写转小写，小写转大写.md","ref":"doc/basic/7、字符串中字母大写转小写，小写转大写.md","articles":[]},{"title":"8、实现字符串查找","level":"1.1.2.8","depth":3,"path":"doc/basic/8、实现字符串查找.md","ref":"doc/basic/8、实现字符串查找.md","articles":[]},{"title":"9、验证输入的是否是一个正确的网址","level":"1.1.2.9","depth":3,"path":"doc/basic/9、验证输入的是否是一个正确的网址.md","ref":"doc/basic/9、验证输入的是否是一个正确的网址.md","articles":[]},{"title":"10、原型链","level":"1.1.2.10","depth":3,"path":"doc/basic/10、原型链.md","ref":"doc/basic/10、原型链.md","articles":[]},{"title":"11、图片懒加载","level":"1.1.2.11","depth":3,"path":"doc/basic/11、图片懒加载.md","ref":"doc/basic/11、图片懒加载.md","articles":[]},{"title":"12、数组交集","level":"1.1.2.12","depth":3,"path":"doc/basic/12、数组交集.md","ref":"doc/basic/12、数组交集.md","articles":[]},{"title":"13、旋转数组","level":"1.1.2.13","depth":3,"path":"doc/basic/13、旋转数组.md","ref":"doc/basic/13、旋转数组.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/1、call和apply区别是什么，哪个性能更好一些？.md","mtime":"2021-06-22T03:36:18.496Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-22T03:06:45.405Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

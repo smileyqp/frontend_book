@@ -63,3 +63,51 @@ var strStr = function(haystack, needle) {
     return res;
 };
 ```
+
+## 6.21
+
+#### 26、删除有序数组中的重复项(数组去重)
+
+![](https://img-blog.csdnimg.cn/20210621173616109.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+![](https://img-blog.csdnimg.cn/20210621173633412.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+```shell
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+    for(let i = 0;i<=nums.length-1;i++){
+        for(let j = i+1;j<=nums.length-1;j++){
+            if(nums[i]===nums[j]){
+                nums.splice(i,1)
+                i--;
+                break;
+            }
+        }
+    }
+};
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
