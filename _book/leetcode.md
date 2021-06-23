@@ -89,19 +89,48 @@ var removeDuplicates = function(nums) {
 };
 ```
 
+## 6.23
+
+#### [27. 移除元素](https://leetcode-cn.com/problems/remove-element/)
+
+![](https://img-blog.csdnimg.cn/20210623134755362.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+![](https://img-blog.csdnimg.cn/20210623134817751.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+```shell
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+var removeElement = function(nums, val) {
+    for(let i =0;i<nums.length;i++){
+        if(nums[i]===val){
+            nums.splice(i,1);
+            i--;
+        }
+    }
+    return nums.length;
+};
+```
 
 
 
+#### [7. 整数反转](https://leetcode-cn.com/problems/reverse-integer/)
 
+![](https://img-blog.csdnimg.cn/20210623140106806.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
-
-
-
-
-
-
-
-
+```shell
+/**
+ * @param {number} x
+ * @return {number}
+ */
+var reverse = function(x) {
+    var zhengfu = x>0?true:false;
+    x = x > 0?x:-x;
+    var res = parseInt(x.toString().split('').reverse().join(''));
+    return res > 2147483647 || res < -2147483648 ? 0 :(zhengfu?res:-res)
+};
+```
 
 
 
