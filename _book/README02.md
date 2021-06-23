@@ -942,7 +942,7 @@ Object.keys(obj).forEach(item=>{
 let ary = [23,31,4,7,3,9]
 
 function bubble(ary){
-  for(let i = 0;i<ary.length;i++){	//控制比较轮数
+  for(let i = 0;i<ary.length-1;i++){	//控制比较轮数
     for(let j = 0;j<ary.length-1-i;j++){		//每一轮比较的次数
       ary[j]>ary[j+1]?[ary[j],ary[j+1]]=[ary[j+1],ary[j]]:null
     }
@@ -953,11 +953,49 @@ function bubble(ary){
 
 #### 23、插入排序
 
-L
+类似于抓牌
 
 ```shell
+let ary = [23,31,4,7,3,9]
 
+function insert(ary){
+  let handle = [];
+  handle.push(ary[0])
+  for(let i = 1;i<ary.length;i++){
+    for(let j = handle.length-1;j>=0;j--){
+      if(ary[i]>handle[j]){
+        handle.splice(j+1,0,ary[i]);			//把ary[i]放到handle[j]的后面；及放到handle[j+1]前面
+        break;
+      }
+      if(j===0){
+        handle.unshift(ary[i]);		//已经比较到最前面就插入数组首部
+      }
+    }
+  }
+  return handle;
+}
 
+```
+
+#### 24、快速排序
+
+找到数组中的中间项，然后将其从原来数组中移除，并且获取这个中间项值。依次拿数组中的每项跟中间项进行对比，小的放左边大的放右边
+
+```shell
+ let ary = [23,31,4,7,3,9]
+
+function quick(ary){
+  if(ary.length<=1){return ary}
+  let middleIndex = Math.floor(ary.length/2)
+  let middleVal = ary.splice(middleIndex,1)[0]
+  let leftary = [],
+  		rightary = []
+  for(let i = 0;i<ary.length;i++){
+  	ary[i]<middleVal?leftary.push(ary[i]):rightary.push(ary[i])
+    
+  }
+  return (quick(leftary)).concat(middleVal,quick(rightary))
+}
 ```
 
 

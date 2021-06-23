@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>8、实现字符串查找 · GitBook</title>
+        <title>27、作用域和闭包 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="9、验证输入的是否是一个正确的网址.html" />
+    <link rel="next" href="28、this.html" />
     
     
-    <link rel="prev" href="7、字符串中字母大写转小写，小写转大写.html" />
+    <link rel="prev" href="26、原型和原型链.html" />
     
 
     </head>
@@ -396,7 +396,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.1.2.8" data-path="8、实现字符串查找.html">
+        <li class="chapter " data-level="1.1.2.8" data-path="8、实现字符串查找.html">
             
                 <a href="8、实现字符串查找.html">
             
@@ -643,7 +643,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.2.27" data-path="27、作用域和闭包.html">
+        <li class="chapter active" data-level="1.1.2.27" data-path="27、作用域和闭包.html">
             
                 <a href="27、作用域和闭包.html">
             
@@ -722,7 +722,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >8、实现字符串查找</a>
+        <a href="../.." >27、作用域和闭包</a>
     </h1>
 </div>
 
@@ -737,56 +737,88 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="8&#x3001;&#x5B9E;&#x73B0;&#x5B57;&#x7B26;&#x4E32;&#x67E5;&#x627E;">8&#x3001;&#x5B9E;&#x73B0;&#x5B57;&#x7B26;&#x4E32;&#x67E5;&#x627E;</h1>
-<p>&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x5339;&#x914D;&#x7B97;&#x6CD5;&#xFF0C;&#x4ECE;&#x5B57;&#x7B26;&#x4E32;S&#x4E2D;&#x67E5;&#x627E;&#x662F;&#x5426;&#x5B58;&#x5728;&#x5B57;&#x7B26;&#x4E32;T&#xFF0C;&#x82E5;&#x5B58;&#x5728;&#x5219;&#x8FD4;&#x56DE;&#x7B2C;&#x4E00;&#x6B21;&#x6240;&#x5728;&#x4F4D;&#x7F6E;&#xFF0C;&#x4E0D;&#x5B58;&#x5728;&#x8FD4;&#x56DE;-1&#xFF08;&#x4E0D;&#x80FD;&#x57FA;&#x4E8E;indexOf&#x4EE5;&#x53CA;includes&#x7B49;&#x5185;&#x7F6E;&#x65B9;&#x6CD5;&#xFF09;</p>
+                                <h1 id="27&#x3001;&#x4F5C;&#x7528;&#x57DF;&#x548C;&#x95ED;&#x5305;">27&#x3001;&#x4F5C;&#x7528;&#x57DF;&#x548C;&#x95ED;&#x5305;</h1>
 <ul>
-<li>&#x601D;&#x8DEF;&#x4E00;&#xFF1A;&#x5FAA;&#x73AF;&#x539F;&#x59CB;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x9879;&#xFF0C;&#x8BA9;&#x6BCF;&#x4E00;&#x9879;&#x4ECE;&#x5F53;&#x524D;&#x4F4D;&#x7F6E;&#x8857;&#x533A;T.length&#x4E2A;&#x5B57;&#x7B26;&#x548C;T&#x6BD4;&#x8F83;&#xFF0C;&#x4E00;&#x6837;&#x8FD4;&#x56DE;&#x7D22;&#x5F15;&#xFF0C;&#x4E00;&#x5171;&#x5FAA;&#x73AF;S.length-T.length+1&#x6B21;</li>
+<li>this&#x7684;&#x4E0D;&#x540C;&#x5E94;&#x7528;&#x573A;&#x666F;&#xFF0C;&#x5982;&#x4F55;&#x53D6;&#x503C;</li>
+<li>&#x624B;&#x5199;bind&#x51FD;&#x6570;</li>
+<li>&#x5B9E;&#x9645;&#x5F00;&#x53D1;&#x4E2D;&#x95ED;&#x5305;&#x7684;&#x5E94;&#x7528;&#x573A;&#x666F;&#xFF0C;&#x5E76;&#x4E3E;&#x4F8B;&#x8BF4;&#x660E;</li>
 </ul>
-<pre><code class="lang-shell">(function(){
-  function myIndexOf(T){
-    //this &#x539F;&#x59CB;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5373;S
-    let lenT = T.length,
-            lenS = S.length,
-            result = -1;
-    if(lenT&gt;lenTS){
-      return -1;
-    }
-    for(let i = 0;i&lt;lenS-lenT+1;i++){
-        let substr = S.substr(i,lenT)
-      if(substr === T){
-        result = i;
-        break;
-      }
-    }
-    return result;
-  }
-  String.prototype.myIndexOf = myIndexOf;
-})()
+<pre><code class="lang-shell">//&#x521B;&#x5EFA;10&#x4E2A;&lt;a/&gt;&#x6807;&#x7B7E;&#xFF0C;&#x70B9;&#x51FB;&#x7684;&#x65F6;&#x5019;&#x5F39;&#x51FA;&#x6765;&#x5BF9;&#x5E94;&#x7684;&#x5E8F;&#x53F7;
+let i,a;
+for(i = 0;i&lt;=10;i++){
+  a = document.createElement(&apos;a&apos;);
+  a.innerHTML = i+&quot;&lt;br/&gt;&quot;;
+  a.addEventListener(&apos;click&apos;,function(e){
+    e.preventDefault();
+    alert(i)        //10
+  })
+  document.body.appendChild(a)
+}
 
-let S = &apos;yqp27982348&#x5F20;&#x4E09;smile&amp;&amp;&amp;smile&apos;,
-        T = &apos;smile&apos;
-console.log(S.myIndexOf(T))
+
+let a;
+for(let i = 0;i&lt;=10;i++){    //let i&#x662F;&#x5B9A;&#x4E49;&#x5757;&#x4F5C;&#x7528;&#x57DF;
+  a = document.createElement(&apos;a&apos;);
+  a.innerHTML = i+&quot;&lt;br/&gt;&quot;;
+  a.addEventListener(&apos;click&apos;,function(e){
+    e.preventDefault();
+    alert(i)        //1,2,3,4,5...
+  })
+  document.body.appendChild(a)
+}
 </code></pre>
+<h5 id="&#x4F5C;&#x7528;&#x57DF;&#x548C;&#x81EA;&#x7531;&#x53D8;&#x91CF;">&#x4F5C;&#x7528;&#x57DF;&#x548C;&#x81EA;&#x7531;&#x53D8;&#x91CF;</h5>
 <ul>
-<li>&#x601D;&#x8DEF;&#x4E8C;&#xFF1A;&#x6B63;&#x5219;&#x5904;&#x7406;<ul>
-<li>&#x76F4;&#x63A5;&#x6B63;&#x5219;&#x5339;&#x914D;&#x8FD9;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5982;&#x679C;&#x7ED3;&#x679C;&#x4E3A;null&#x8FD4;&#x56DE;-1&#xFF0C;&#x90E8;&#x4F4D;null&#x76F4;&#x63A5;&#x53EF;&#x4EE5;&#x5728;&#x6B63;&#x5219;&#x5339;&#x914D;&#x7684; &#x7ED3;&#x679C;&#x4E2D;&#x627E;&#x5230;index&#x5C31;&#x662F;&#x7D22;&#x5F15;</li>
+<li><p>&#x4F5C;&#x7528;&#x57DF;&#xFF1A;&#x53D8;&#x91CF;&#x7684;&#x5408;&#x6CD5;&#x7684;&#x4F7F;&#x7528;&#x8303;&#x56F4;</p>
+</li>
+<li><p>&#x4F5C;&#x7528;&#x57DF;&#x5206;&#x7C7B;</p>
+<ul>
+<li>&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;</li>
+<li>&#x51FD;&#x6570;&#x4F5C;&#x7528;&#x57DF;</li>
+<li>&#x5757;&#x7EA7;&#x4F5C;&#x7528;&#x57DF;&#xFF08;ES6&#x65B0;&#x589E;&#xFF09;</li>
 </ul>
+<pre><code class="lang-shell">//ES6&#x65B0;&#x589E;
+if(true){
+  let x = 100;            //&#x8FD9;&#x91CC;&#x7528;&#x4E50;&#x5929;&#x58F0;&#x660E;&#x7684;&#x53D8;&#x91CF;&#x6216;&#x8005;const&#x58F0;&#x660E;&#x7684;&#x5E38;&#x91CF;&#xFF0C;&#x4ED6;&#x4EEC;&#x7684;&#x4F5C;&#x7528;&#x57DF;&#x90FD;&#x662F;&#x8FD9;&#x4E2A;&#x5757;&#x4E4B;&#x5185;
+}
+console.log(x);        //&#x4F1A;&#x62A5;&#x9519;
+</code></pre>
 </li>
 </ul>
-<pre><code class="lang-shell">(function(){
-  function myIndexOf(T){
-    //this &#x539F;&#x59CB;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5373;S
-    let reg = new RegExp(T),
-            res = reg.exect(this);
-    return  res === null ? -1:res .index
+<p><img src="https://img-blog.csdnimg.cn/20210514144022202.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70" alt=""></p>
+<h5 id="&#x81EA;&#x7531;&#x53D8;&#x91CF;">&#x81EA;&#x7531;&#x53D8;&#x91CF;</h5>
+<ul>
+<li>&#x81EA;&#x7531;&#x53D8;&#x91CF;&#xFF1A;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x5728;&#x5F53;&#x524D;&#x4F5C;&#x7528;&#x57DF;&#x6CA1;&#x6709;&#x5B9A;&#x4E49;&#x4F46;&#x662F;&#x88AB;&#x4F7F;&#x7528;&#x4E86;</li>
+<li>&#x5411;&#x4E0A;&#x7EA7;&#x4F5C;&#x7528;&#x57DF;&#x4E00;&#x5C42;&#x4E00;&#x5C42;&#x5BFB;&#x627E;&#xFF0C;&#x76F4;&#x5230;&#x627E;&#x5230;&#x4E3A;&#x6B62;</li>
+<li>&#x5982;&#x679C;&#x5230;&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#x90FD;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x7684;&#x8BDD;&#x90A3;&#x4E48;&#x5C31;&#x4F1A;&#x62A5;&#x9519;<code>xx is undefined</code></li>
+</ul>
+<h5 id="&#x95ED;&#x5305;">&#x95ED;&#x5305;</h5>
+<pre><code class="lang-shell">//&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x8FD4;&#x56DE;&#x4E4B;&#x540E;&#x518D;&#x6267;&#x884C;
+function create(){
+  let a = 100;
+  return function(){
+    console.log(a)
   }
-  String.prototype.myIndexOf = myIndexOf;
-})()
-
-let S = &apos;yqp27982348&#x5F20;&#x4E09;smile&amp;&amp;&amp;smile&apos;,
-        T = &apos;smile&apos;
-console.log(S.myIndexOf(T))
+}
+let fn = create();
+let a = 200;
+fn();        //100   &#x51FD;&#x6570;&#x6267;&#x884C;&#x662F;&#x5728;&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#xFF1B;&#x51FD;&#x6570;&#x7684;&#x5B9A;&#x4E49;&#x5728;create&#x51FD;&#x6570;&#x91CC;&#x9762;&#xFF0C;&#x5F80;&#x4E0A;&#x7EA7;&#x4F5C;&#x7528;&#x57DF;&#x5BFB;&#x627E;
 </code></pre>
+<pre><code class="lang-shell">//&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#xFF0C;&#x901A;&#x8FC7;&#x53C2;&#x6570;&#x4F20;&#x5165;&#x4E4B;&#x540E;&#x518D;&#x6267;&#x884C;
+function print(fn){
+  let a = 200;
+  fn()
+}
+let a = 100;
+function fn(){
+  console.log(a)
+}
+print(fn);        //100
+</code></pre>
+<ul>
+<li><h5 id="&#x95ED;&#x5305;&#xFF1A;&#x81EA;&#x7531;&#x53D8;&#x91CF;&#x7684;&#x67E5;&#x627E;&#x662F;&#x5728;&#x51FD;&#x6570;&#x5B9A;&#x4E49;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x5411;&#x4E0A;&#x7EA7;&#x4F5C;&#x7528;&#x57DF;&#x8FDB;&#x884C;&#x67E5;&#x627E;&#xFF0C;&#x4E0D;&#x5B9E;&#x5728;&#x6267;&#x884C;&#x7684;&#x5730;&#x65B9;&#x8FDB;&#x884C;&#x67E5;&#x627E;">&#x95ED;&#x5305;&#xFF1A;&#x81EA;&#x7531;&#x53D8;&#x91CF;&#x7684;&#x67E5;&#x627E;&#x662F;&#x5728;&#x51FD;&#x6570;&#x5B9A;&#x4E49;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x5411;&#x4E0A;&#x7EA7;&#x4F5C;&#x7528;&#x57DF;&#x8FDB;&#x884C;&#x67E5;&#x627E;&#xFF0C;&#x4E0D;&#x5B9E;&#x5728;&#x6267;&#x884C;&#x7684;&#x5730;&#x65B9;&#x8FDB;&#x884C;&#x67E5;&#x627E;</h5>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -814,12 +846,12 @@ console.log(S.myIndexOf(T))
 
             
                 
-                <a href="7、字符串中字母大写转小写，小写转大写.html" class="navigation navigation-prev " aria-label="Previous page: 7、字符串中字母大写转小写，小写转大写">
+                <a href="26、原型和原型链.html" class="navigation navigation-prev " aria-label="Previous page: 26、原型和原型链">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="9、验证输入的是否是一个正确的网址.html" class="navigation navigation-next " aria-label="Next page: 9、验证输入的是否是一个正确的网址">
+                <a href="28、this.html" class="navigation navigation-next " aria-label="Next page: 28、this">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -830,7 +862,7 @@ console.log(S.myIndexOf(T))
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"8、实现字符串查找","level":"1.1.2.8","depth":3,"next":{"title":"9、验证输入的是否是一个正确的网址","level":"1.1.2.9","depth":3,"path":"doc/basic/9、验证输入的是否是一个正确的网址.md","ref":"doc/basic/9、验证输入的是否是一个正确的网址.md","articles":[]},"previous":{"title":"7、字符串中字母大写转小写，小写转大写","level":"1.1.2.7","depth":3,"path":"doc/basic/7、字符串中字母大写转小写，小写转大写.md","ref":"doc/basic/7、字符串中字母大写转小写，小写转大写.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/8、实现字符串查找.md","mtime":"2021-06-22T03:44:31.204Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-23T02:04:36.451Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"27、作用域和闭包","level":"1.1.2.27","depth":3,"next":{"title":"28、this","level":"1.1.2.28","depth":3,"path":"doc/basic/28、this.md","ref":"doc/basic/28、this.md","articles":[]},"previous":{"title":"26、原型和原型链","level":"1.1.2.26","depth":3,"path":"doc/basic/26、原型和原型链.md","ref":"doc/basic/26、原型和原型链.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/27、作用域和闭包.md","mtime":"2021-06-23T02:02:41.122Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-23T02:04:36.451Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>8、实现字符串查找 · GitBook</title>
+        <title>15、手写new · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="9、验证输入的是否是一个正确的网址.html" />
+    <link rel="next" href="16、数组合并.html" />
     
     
-    <link rel="prev" href="7、字符串中字母大写转小写，小写转大写.html" />
+    <link rel="prev" href="14、函数科里化思想.html" />
     
 
     </head>
@@ -396,7 +396,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.1.2.8" data-path="8、实现字符串查找.html">
+        <li class="chapter " data-level="1.1.2.8" data-path="8、实现字符串查找.html">
             
                 <a href="8、实现字符串查找.html">
             
@@ -487,7 +487,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.2.15" data-path="15、手写new.html">
+        <li class="chapter active" data-level="1.1.2.15" data-path="15、手写new.html">
             
                 <a href="15、手写new.html">
             
@@ -722,7 +722,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >8、实现字符串查找</a>
+        <a href="../.." >15、手写new</a>
     </h1>
 </div>
 
@@ -737,56 +737,44 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="8&#x3001;&#x5B9E;&#x73B0;&#x5B57;&#x7B26;&#x4E32;&#x67E5;&#x627E;">8&#x3001;&#x5B9E;&#x73B0;&#x5B57;&#x7B26;&#x4E32;&#x67E5;&#x627E;</h1>
-<p>&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x5339;&#x914D;&#x7B97;&#x6CD5;&#xFF0C;&#x4ECE;&#x5B57;&#x7B26;&#x4E32;S&#x4E2D;&#x67E5;&#x627E;&#x662F;&#x5426;&#x5B58;&#x5728;&#x5B57;&#x7B26;&#x4E32;T&#xFF0C;&#x82E5;&#x5B58;&#x5728;&#x5219;&#x8FD4;&#x56DE;&#x7B2C;&#x4E00;&#x6B21;&#x6240;&#x5728;&#x4F4D;&#x7F6E;&#xFF0C;&#x4E0D;&#x5B58;&#x5728;&#x8FD4;&#x56DE;-1&#xFF08;&#x4E0D;&#x80FD;&#x57FA;&#x4E8E;indexOf&#x4EE5;&#x53CA;includes&#x7B49;&#x5185;&#x7F6E;&#x65B9;&#x6CD5;&#xFF09;</p>
-<ul>
-<li>&#x601D;&#x8DEF;&#x4E00;&#xFF1A;&#x5FAA;&#x73AF;&#x539F;&#x59CB;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x9879;&#xFF0C;&#x8BA9;&#x6BCF;&#x4E00;&#x9879;&#x4ECE;&#x5F53;&#x524D;&#x4F4D;&#x7F6E;&#x8857;&#x533A;T.length&#x4E2A;&#x5B57;&#x7B26;&#x548C;T&#x6BD4;&#x8F83;&#xFF0C;&#x4E00;&#x6837;&#x8FD4;&#x56DE;&#x7D22;&#x5F15;&#xFF0C;&#x4E00;&#x5171;&#x5FAA;&#x73AF;S.length-T.length+1&#x6B21;</li>
-</ul>
-<pre><code class="lang-shell">(function(){
-  function myIndexOf(T){
-    //this &#x539F;&#x59CB;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5373;S
-    let lenT = T.length,
-            lenS = S.length,
-            result = -1;
-    if(lenT&gt;lenTS){
-      return -1;
-    }
-    for(let i = 0;i&lt;lenS-lenT+1;i++){
-        let substr = S.substr(i,lenT)
-      if(substr === T){
-        result = i;
-        break;
-      }
-    }
-    return result;
-  }
-  String.prototype.myIndexOf = myIndexOf;
-})()
+                                <h1 id="15&#x3001;&#x624B;&#x5199;new">15&#x3001;&#x624B;&#x5199;new</h1>
+<pre><code class="lang-shell">function Dog(name){
+  this.name = name;
+}
+Dog.prototype.bark = function(){
+  console.log(&apos;bark&apos;)
+}
+Dog.prototype.sayName = function(){
+  console.log(&apos;my name is&apos;+this.name)
+}
 
-let S = &apos;yqp27982348&#x5F20;&#x4E09;smile&amp;&amp;&amp;smile&apos;,
-        T = &apos;smile&apos;
-console.log(S.myIndexOf(T))
-</code></pre>
-<ul>
-<li>&#x601D;&#x8DEF;&#x4E8C;&#xFF1A;&#x6B63;&#x5219;&#x5904;&#x7406;<ul>
-<li>&#x76F4;&#x63A5;&#x6B63;&#x5219;&#x5339;&#x914D;&#x8FD9;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5982;&#x679C;&#x7ED3;&#x679C;&#x4E3A;null&#x8FD4;&#x56DE;-1&#xFF0C;&#x90E8;&#x4F4D;null&#x76F4;&#x63A5;&#x53EF;&#x4EE5;&#x5728;&#x6B63;&#x5219;&#x5339;&#x914D;&#x7684; &#x7ED3;&#x679C;&#x4E2D;&#x627E;&#x5230;index&#x5C31;&#x662F;&#x7D22;&#x5F15;</li>
-</ul>
-</li>
-</ul>
-<pre><code class="lang-shell">(function(){
-  function myIndexOf(T){
-    //this &#x539F;&#x59CB;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5373;S
-    let reg = new RegExp(T),
-            res = reg.exect(this);
-    return  res === null ? -1:res .index
-  }
-  String.prototype.myIndexOf = myIndexOf;
-})()
 
-let S = &apos;yqp27982348&#x5F20;&#x4E09;smile&amp;&amp;&amp;smile&apos;,
-        T = &apos;smile&apos;
-console.log(S.myIndexOf(T))
+&#x8981;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;_new&#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#x4EE5;&#x4E0B;&#xFF1A;
+let dog = _new(Dog,&apos;dooooog&apos;)
+dog.sayName()
+dog.bark()
 </code></pre>
+<p>1&#x3001;&#x50CF;&#x666E;&#x901A;&#x51FD;&#x6570;&#x6267;&#x884C;&#x4E00;&#x6837;&#x3001;&#x5F62;&#x6210;&#x4E00;&#x4E2A;&#x79C1;&#x6709;&#x7684;&#x4F5C;&#x7528;&#x57DF;</p>
+<ul>
+<li>&#x5F62;&#x53C2;&#x8D4B;&#x503C;</li>
+<li>&#x53D8;&#x91CF;&#x63D0;&#x5347;</li>
+</ul>
+<p>2&#x3001;&#x9ED8;&#x8BA4;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x7136;&#x51FD;&#x6570;&#x4E2D;&#x7684;this&#x6307;&#x5411;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x5C31;&#x662F;&#x5F53;&#x524D;&#x5B9E;&#x4F8B;
+3&#x3001;&#x4EE3;&#x7801;&#x6267;&#x884C;
+4&#x3001;&#x9ED8;&#x8BA4;&#x628A;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#x8FD4;&#x56DE;</p>
+<pre><code class="lang-shell">function _new(Fn,...arg){
+  //Fn&#x5F53;&#x524D;&#x8981;new&#x7684;&#x7C7B;;arg&#x662F;&#x7ED9;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4F20;&#x7684;&#x53C2;&#x6570;
+
+  //let obj = {};
+  //Fn.call(obj,...arg)
+  let obj = Object.create(Fn.prototype);        //&#x521B;&#x5EFA;&#x539F;&#x578B;&#x94FE;&#x4E3A;Fn.prototype&#x7684;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;
+  obj.__proto__ = Fn.prototype;
+  return obj;
+}
+</code></pre>
+<blockquote>
+<p>&#x6CE8;&#x610F;&#xFF1A;<code>Object.create</code>&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7A7A;&#x5BF9;&#x8C61;&#xFF0C;&#x5E76;&#x4E14;&#x5BF9;&#x8C61;&#x7684;&#x539F;&#x578B;&#x94FE;&#x6307;&#x5411;&#x6211;&#x4EEC;&#x4F20;&#x5165;&#x7684;&#x90A3;&#x4E2A;&#x53C2;&#x6570;&#xFF08;&#x5373;&#xFF1A;&#x8BA9;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x7684;&#x8FD9;&#x4E2A;&#x7A7A;&#x5BF9;&#x8C61;&#x4F5C;&#x4E3A;&#x6211;&#x4EEC;&#x4F20;&#x5165;&#x7684;&#x90A3;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x5B9E;&#x4F8B;&#xFF09;</p>
+</blockquote>
 
                                 
                                 </section>
@@ -814,12 +802,12 @@ console.log(S.myIndexOf(T))
 
             
                 
-                <a href="7、字符串中字母大写转小写，小写转大写.html" class="navigation navigation-prev " aria-label="Previous page: 7、字符串中字母大写转小写，小写转大写">
+                <a href="14、函数科里化思想.html" class="navigation navigation-prev " aria-label="Previous page: 14、函数科里化思想">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="9、验证输入的是否是一个正确的网址.html" class="navigation navigation-next " aria-label="Next page: 9、验证输入的是否是一个正确的网址">
+                <a href="16、数组合并.html" class="navigation navigation-next " aria-label="Next page: 16、数组合并">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -830,7 +818,7 @@ console.log(S.myIndexOf(T))
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"8、实现字符串查找","level":"1.1.2.8","depth":3,"next":{"title":"9、验证输入的是否是一个正确的网址","level":"1.1.2.9","depth":3,"path":"doc/basic/9、验证输入的是否是一个正确的网址.md","ref":"doc/basic/9、验证输入的是否是一个正确的网址.md","articles":[]},"previous":{"title":"7、字符串中字母大写转小写，小写转大写","level":"1.1.2.7","depth":3,"path":"doc/basic/7、字符串中字母大写转小写，小写转大写.md","ref":"doc/basic/7、字符串中字母大写转小写，小写转大写.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/8、实现字符串查找.md","mtime":"2021-06-22T03:44:31.204Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-23T02:04:36.451Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"15、手写new","level":"1.1.2.15","depth":3,"next":{"title":"16、数组合并","level":"1.1.2.16","depth":3,"path":"doc/basic/16、数组合并.md","ref":"doc/basic/16、数组合并.md","articles":[]},"previous":{"title":"14、函数科里化思想","level":"1.1.2.14","depth":3,"path":"doc/basic/14、函数科里化思想.md","ref":"doc/basic/14、函数科里化思想.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/15、手写new.md","mtime":"2021-06-23T01:59:55.998Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-23T02:04:36.451Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

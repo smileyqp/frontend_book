@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>8、实现字符串查找 · GitBook</title>
+        <title>23、typeof运算符（变量类型）和深拷贝 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="9、验证输入的是否是一个正确的网址.html" />
+    <link rel="next" href="24、变量计算、类型转换.html" />
     
     
-    <link rel="prev" href="7、字符串中字母大写转小写，小写转大写.html" />
+    <link rel="prev" href="22、值类型&引用类型（变量类型）.html" />
     
 
     </head>
@@ -396,7 +396,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.1.2.8" data-path="8、实现字符串查找.html">
+        <li class="chapter " data-level="1.1.2.8" data-path="8、实现字符串查找.html">
             
                 <a href="8、实现字符串查找.html">
             
@@ -591,7 +591,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.2.23" data-path="23、typeof运算符（变量类型）和深拷贝.html">
+        <li class="chapter active" data-level="1.1.2.23" data-path="23、typeof运算符（变量类型）和深拷贝.html">
             
                 <a href="23、typeof运算符（变量类型）和深拷贝.html">
             
@@ -722,7 +722,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >8、实现字符串查找</a>
+        <a href="../.." >23、typeof运算符（变量类型）和深拷贝</a>
     </h1>
 </div>
 
@@ -737,55 +737,34 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="8&#x3001;&#x5B9E;&#x73B0;&#x5B57;&#x7B26;&#x4E32;&#x67E5;&#x627E;">8&#x3001;&#x5B9E;&#x73B0;&#x5B57;&#x7B26;&#x4E32;&#x67E5;&#x627E;</h1>
-<p>&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x5339;&#x914D;&#x7B97;&#x6CD5;&#xFF0C;&#x4ECE;&#x5B57;&#x7B26;&#x4E32;S&#x4E2D;&#x67E5;&#x627E;&#x662F;&#x5426;&#x5B58;&#x5728;&#x5B57;&#x7B26;&#x4E32;T&#xFF0C;&#x82E5;&#x5B58;&#x5728;&#x5219;&#x8FD4;&#x56DE;&#x7B2C;&#x4E00;&#x6B21;&#x6240;&#x5728;&#x4F4D;&#x7F6E;&#xFF0C;&#x4E0D;&#x5B58;&#x5728;&#x8FD4;&#x56DE;-1&#xFF08;&#x4E0D;&#x80FD;&#x57FA;&#x4E8E;indexOf&#x4EE5;&#x53CA;includes&#x7B49;&#x5185;&#x7F6E;&#x65B9;&#x6CD5;&#xFF09;</p>
+                                <h1 id="23&#x3001;typeof&#x8FD0;&#x7B97;&#x7B26;&#xFF08;&#x53D8;&#x91CF;&#x7C7B;&#x578B;&#xFF09;&#x548C;&#x6DF1;&#x62F7;&#x8D1D;">23&#x3001;typeof&#x8FD0;&#x7B97;&#x7B26;&#xFF08;&#x53D8;&#x91CF;&#x7C7B;&#x578B;&#xFF09;&#x548C;&#x6DF1;&#x62F7;&#x8D1D;</h1>
 <ul>
-<li>&#x601D;&#x8DEF;&#x4E00;&#xFF1A;&#x5FAA;&#x73AF;&#x539F;&#x59CB;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x9879;&#xFF0C;&#x8BA9;&#x6BCF;&#x4E00;&#x9879;&#x4ECE;&#x5F53;&#x524D;&#x4F4D;&#x7F6E;&#x8857;&#x533A;T.length&#x4E2A;&#x5B57;&#x7B26;&#x548C;T&#x6BD4;&#x8F83;&#xFF0C;&#x4E00;&#x6837;&#x8FD4;&#x56DE;&#x7D22;&#x5F15;&#xFF0C;&#x4E00;&#x5171;&#x5FAA;&#x73AF;S.length-T.length+1&#x6B21;</li>
+<li>&#x5224;&#x65AD;&#x6240;&#x6709;&#x503C;&#x7C7B;&#x578B;</li>
+<li>&#x5224;&#x65AD;&#x662F;&#x5426;&#x51FD;&#x6570;</li>
+<li>&#x5224;&#x65AD;&#x662F;&#x5426;&#x5F15;&#x7528;&#x7C7B;&#x578B;&#xFF08;&#x4E0D;&#x53EF;&#x518D;&#x7EC6;&#x5206;&#xFF09;</li>
 </ul>
-<pre><code class="lang-shell">(function(){
-  function myIndexOf(T){
-    //this &#x539F;&#x59CB;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5373;S
-    let lenT = T.length,
-            lenS = S.length,
-            result = -1;
-    if(lenT&gt;lenTS){
-      return -1;
-    }
-    for(let i = 0;i&lt;lenS-lenT+1;i++){
-        let substr = S.substr(i,lenT)
-      if(substr === T){
-        result = i;
-        break;
-      }
-    }
-    return result;
+<p><img src="https://img-blog.csdnimg.cn/20210513174038244.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70" alt="">
+<img src="https://img-blog.csdnimg.cn/2021051317415385.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70" alt=""></p>
+<h5 id="&#x6DF1;&#x62F7;&#x8D1D;">&#x6DF1;&#x62F7;&#x8D1D;</h5>
+<pre><code class="lang-shell">function deepClone(obj = {}){
+  if(typeof obj !== &apos;object&apos;||obj === null){
+    return obj;
   }
-  String.prototype.myIndexOf = myIndexOf;
-})()
-
-let S = &apos;yqp27982348&#x5F20;&#x4E09;smile&amp;&amp;&amp;smile&apos;,
-        T = &apos;smile&apos;
-console.log(S.myIndexOf(T))
-</code></pre>
-<ul>
-<li>&#x601D;&#x8DEF;&#x4E8C;&#xFF1A;&#x6B63;&#x5219;&#x5904;&#x7406;<ul>
-<li>&#x76F4;&#x63A5;&#x6B63;&#x5219;&#x5339;&#x914D;&#x8FD9;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5982;&#x679C;&#x7ED3;&#x679C;&#x4E3A;null&#x8FD4;&#x56DE;-1&#xFF0C;&#x90E8;&#x4F4D;null&#x76F4;&#x63A5;&#x53EF;&#x4EE5;&#x5728;&#x6B63;&#x5219;&#x5339;&#x914D;&#x7684; &#x7ED3;&#x679C;&#x4E2D;&#x627E;&#x5230;index&#x5C31;&#x662F;&#x7D22;&#x5F15;</li>
-</ul>
-</li>
-</ul>
-<pre><code class="lang-shell">(function(){
-  function myIndexOf(T){
-    //this &#x539F;&#x59CB;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5373;S
-    let reg = new RegExp(T),
-            res = reg.exect(this);
-    return  res === null ? -1:res .index
+  //&#x521D;&#x59CB;&#x5316;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;
+  let result;
+  if(obj.instanceof Array){
+    result = []
+  }else{
+    result = {}
   }
-  String.prototype.myIndexOf = myIndexOf;
-})()
-
-let S = &apos;yqp27982348&#x5F20;&#x4E09;smile&amp;&amp;&amp;smile&apos;,
-        T = &apos;smile&apos;
-console.log(S.myIndexOf(T))
+  for(let key in obj){
+    if(obj.hasOwnProperty(key)){    //&#x4FDD;&#x8BC1;&#x662F;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x81EA;&#x5DF1;&#x62E5;&#x6709;&#x7684;&#x79C1;&#x6709;&#x5C5E;&#x6027;&#xFF0C;&#x4E0D;&#x662F;&#x539F;&#x578B;&#x7684;&#x5C5E;&#x6027;
+        //&#x8C03;&#x7528;&#x9012;&#x5F52;
+       result[key] = deepClone(obj[key])
+    }
+  }
+  return result;
+}
 </code></pre>
 
                                 
@@ -814,12 +793,12 @@ console.log(S.myIndexOf(T))
 
             
                 
-                <a href="7、字符串中字母大写转小写，小写转大写.html" class="navigation navigation-prev " aria-label="Previous page: 7、字符串中字母大写转小写，小写转大写">
+                <a href="22、值类型&引用类型（变量类型）.html" class="navigation navigation-prev " aria-label="Previous page: 22、值类型&引用类型（变量类型）">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="9、验证输入的是否是一个正确的网址.html" class="navigation navigation-next " aria-label="Next page: 9、验证输入的是否是一个正确的网址">
+                <a href="24、变量计算、类型转换.html" class="navigation navigation-next " aria-label="Next page: 24、变量计算、类型转换">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -830,7 +809,7 @@ console.log(S.myIndexOf(T))
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"8、实现字符串查找","level":"1.1.2.8","depth":3,"next":{"title":"9、验证输入的是否是一个正确的网址","level":"1.1.2.9","depth":3,"path":"doc/basic/9、验证输入的是否是一个正确的网址.md","ref":"doc/basic/9、验证输入的是否是一个正确的网址.md","articles":[]},"previous":{"title":"7、字符串中字母大写转小写，小写转大写","level":"1.1.2.7","depth":3,"path":"doc/basic/7、字符串中字母大写转小写，小写转大写.md","ref":"doc/basic/7、字符串中字母大写转小写，小写转大写.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/8、实现字符串查找.md","mtime":"2021-06-22T03:44:31.204Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-23T02:04:36.451Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"23、typeof运算符（变量类型）和深拷贝","level":"1.1.2.23","depth":3,"next":{"title":"24、变量计算、类型转换","level":"1.1.2.24","depth":3,"path":"doc/basic/24、变量计算、类型转换.md","ref":"doc/basic/24、变量计算、类型转换.md","articles":[]},"previous":{"title":"22、值类型&引用类型（变量类型）","level":"1.1.2.22","depth":3,"path":"doc/basic/22、值类型&引用类型（变量类型）.md","ref":"doc/basic/22、值类型&引用类型（变量类型）.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/23、typeof运算符（变量类型）和深拷贝.md","mtime":"2021-06-23T02:00:47.647Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-23T02:04:36.451Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
