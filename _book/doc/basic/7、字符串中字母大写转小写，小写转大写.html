@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字 · GitBook</title>
+        <title>7、字符串中字母大写转小写，小写转大写 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="3、实现一个$attr.html" />
+    <link rel="next" href="8、实现字符串查找.html" />
     
     
-    <link rel="prev" href="1、call和apply区别是什么，哪个性能更好一些？.html" />
+    <link rel="prev" href="6、箭头函数和普通函数的区别.html" />
     
 
     </head>
@@ -318,7 +318,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.1.2.2" data-path="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
+        <li class="chapter " data-level="1.1.2.2" data-path="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
             
                 <a href="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
             
@@ -383,7 +383,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.2.7" data-path="7、字符串中字母大写转小写，小写转大写.html">
+        <li class="chapter active" data-level="1.1.2.7" data-path="7、字符串中字母大写转小写，小写转大写.html">
             
                 <a href="7、字符串中字母大写转小写，小写转大写.html">
             
@@ -514,7 +514,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字</a>
+        <a href="../.." >7、字符串中字母大写转小写，小写转大写</a>
     </h1>
 </div>
 
@@ -529,13 +529,14 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="2&#x3001;&#x7F16;&#x5199;&#x4E00;&#x6761;&#x6B63;&#x5219;&#xFF0C;&#x7528;&#x6765;&#x9A8C;&#x8BC1;&#x6B64;&#x89C4;&#x5219;&#xFF1A;&#x4E00;&#x4E2A;6&#xFF5E;16&#x4F4D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5FC5;&#x987B;&#x540C;&#x65F6;&#x5305;&#x542B;&#x6709;&#x5927;&#x5C0F;&#x5199;&#x5B57;&#x6BCD;&#x548C;&#x6570;&#x5B57;">2&#x3001;&#x7F16;&#x5199;&#x4E00;&#x6761;&#x6B63;&#x5219;&#xFF0C;&#x7528;&#x6765;&#x9A8C;&#x8BC1;&#x6B64;&#x89C4;&#x5219;&#xFF1A;&#x4E00;&#x4E2A;6&#xFF5E;16&#x4F4D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5FC5;&#x987B;&#x540C;&#x65F6;&#x5305;&#x542B;&#x6709;&#x5927;&#x5C0F;&#x5199;&#x5B57;&#x6BCD;&#x548C;&#x6570;&#x5B57;</h1>
-<ul>
-<li>&#x6B63;&#x5411;&#x9884;&#x67E5;&#xFF1A;&#x8981;&#x5339;&#x914D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5FC5;&#x987B;&#x6EE1;&#x8DB3;pattern&#x8FD9;&#x4E2A;&#x6761;&#x4EF6;</li>
-<li>&#x8D1F;&#x5411;&#x9884;&#x67E5;&#xFF1A;&#x8981;&#x5339;&#x914D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5FC5;&#x987B;&#x4E0D;&#x6EE1;&#x8DB3;pattern&#x8FD9;&#x4E2A;&#x6761;&#x4EF6;</li>
-<li>&#x62EC;&#x53F7;&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#x53EA;&#x662F;&#x53C2;&#x4E0E;&#x6761;&#x4EF6;&#xFF0C;&#x5E76;&#x4E0D;&#x53C2;&#x4E0E;&#x771F;&#x6B63;&#x7684;&#x6761;&#x4EF6;</li>
-</ul>
-<pre><code class="lang-shell">let reg = /^(?!^[a-zA-Z]+$)(?!^[A-Z0-9]+$)(?!^[0-9a-z]+$)(?![0-9]+$)[a-zA-Z0-9]{6,16}$/
+                                <h1 id="7&#x3001;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x5B57;&#x6BCD;&#x5927;&#x5199;&#x8F6C;&#x5C0F;&#x5199;&#xFF0C;&#x5C0F;&#x5199;&#x8F6C;&#x5927;&#x5199;">7&#x3001;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x5B57;&#x6BCD;&#x5927;&#x5199;&#x8F6C;&#x5C0F;&#x5199;&#xFF0C;&#x5C0F;&#x5199;&#x8F6C;&#x5927;&#x5199;</h1>
+<pre><code class="lang-shell">let str = &apos;smileyqpTestItSMILEYQP@&#x6C9B;&#x6C9B;$3434&apos;
+str = str.replace(/a-zA-Z/g,(content)=&gt;{        //&#x6BCF;&#x4E00;&#x6B21;&#x6B63;&#x5219;&#x5339;&#x914D;&#x5230;&#x7684;&#x7ED3;&#x679C;
+  //&#x9A8C;&#x8BC1;&#x662F;&#x5426;&#x4E3A;&#x5927;&#x5199;&#xFF1A;1&#x3001;&#x8F6C;&#x5316;&#x6210;&#x5927;&#x5199;&#x4E4B;&#x540E;&#x662F;&#x5426;&#x548C;&#x539F;&#x6765;&#x4E00;&#x6837;&#xFF0C;&#x4E00;&#x6837;&#x90A3;&#x539F;&#x6765;&#x7684;&#x4E3A;&#x5927;&#x5199;&#xFF0C;&#x53CD;&#x4E4B;&#x4E4B;&#x524D;&#x4E3A;&#x5C0F;&#x5199;2&#x3001;ASCII&#x8868;&#x4E2D;&#x627E;&#x5927;&#x5199;&#x5B57;&#x6BCD;&#x7684;&#x53D6;&#x503C;&#x8303;&#x56F4;&#xFF08;65-90&#xFF09;
+  //1&#x3001;content.toUpperCase() === content
+  //2&#x3001;content.charCodeAt() &gt;=65 || content.charCodeAt &lt;=90
+  return content.toUpperCase() === content?content.toLowerCase:content.toUpperCase;
+})
 </code></pre>
 
                                 
@@ -564,12 +565,12 @@
 
             
                 
-                <a href="1、call和apply区别是什么，哪个性能更好一些？.html" class="navigation navigation-prev " aria-label="Previous page: 1、call和apply区别是什么，哪个性能更好一些？">
+                <a href="6、箭头函数和普通函数的区别.html" class="navigation navigation-prev " aria-label="Previous page: 6、箭头函数和普通函数的区别">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="3、实现一个$attr.html" class="navigation navigation-next " aria-label="Next page: 3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集">
+                <a href="8、实现字符串查找.html" class="navigation navigation-next " aria-label="Next page: 8、实现字符串查找">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -580,7 +581,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字","level":"1.1.2.2","depth":3,"next":{"title":"3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集","level":"1.1.2.3","depth":3,"path":"doc/basic/3、实现一个$attr.md","ref":"doc/basic/3、实现一个$attr.md","articles":[]},"previous":{"title":"1、call和apply区别是什么，哪个性能更好一些？","level":"1.1.2.1","depth":3,"path":"doc/basic/1、call和apply区别是什么，哪个性能更好一些？.md","ref":"doc/basic/1、call和apply区别是什么，哪个性能更好一些？.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.md","mtime":"2021-06-22T03:42:30.094Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-22T03:47:15.841Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"7、字符串中字母大写转小写，小写转大写","level":"1.1.2.7","depth":3,"next":{"title":"8、实现字符串查找","level":"1.1.2.8","depth":3,"path":"doc/basic/8、实现字符串查找.md","ref":"doc/basic/8、实现字符串查找.md","articles":[]},"previous":{"title":"6、箭头函数和普通函数的区别","level":"1.1.2.6","depth":3,"path":"doc/basic/6、箭头函数和普通函数的区别.md","ref":"doc/basic/6、箭头函数和普通函数的区别.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/7、字符串中字母大写转小写，小写转大写.md","mtime":"2021-06-22T03:44:15.912Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-22T03:47:15.841Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字 · GitBook</title>
+        <title>13、旋转数组 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="3、实现一个$attr.html" />
     
-    
-    <link rel="prev" href="1、call和apply区别是什么，哪个性能更好一些？.html" />
+    <link rel="prev" href="12、数组交集.html" />
     
 
     </head>
@@ -318,7 +316,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.1.2.2" data-path="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
+        <li class="chapter " data-level="1.1.2.2" data-path="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
             
                 <a href="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
             
@@ -461,7 +459,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.2.13" data-path="13、旋转数组.html">
+        <li class="chapter active" data-level="1.1.2.13" data-path="13、旋转数组.html">
             
                 <a href="13、旋转数组.html">
             
@@ -514,7 +512,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字</a>
+        <a href="../.." >13、旋转数组</a>
     </h1>
 </div>
 
@@ -529,13 +527,91 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="2&#x3001;&#x7F16;&#x5199;&#x4E00;&#x6761;&#x6B63;&#x5219;&#xFF0C;&#x7528;&#x6765;&#x9A8C;&#x8BC1;&#x6B64;&#x89C4;&#x5219;&#xFF1A;&#x4E00;&#x4E2A;6&#xFF5E;16&#x4F4D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5FC5;&#x987B;&#x540C;&#x65F6;&#x5305;&#x542B;&#x6709;&#x5927;&#x5C0F;&#x5199;&#x5B57;&#x6BCD;&#x548C;&#x6570;&#x5B57;">2&#x3001;&#x7F16;&#x5199;&#x4E00;&#x6761;&#x6B63;&#x5219;&#xFF0C;&#x7528;&#x6765;&#x9A8C;&#x8BC1;&#x6B64;&#x89C4;&#x5219;&#xFF1A;&#x4E00;&#x4E2A;6&#xFF5E;16&#x4F4D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5FC5;&#x987B;&#x540C;&#x65F6;&#x5305;&#x542B;&#x6709;&#x5927;&#x5C0F;&#x5199;&#x5B57;&#x6BCD;&#x548C;&#x6570;&#x5B57;</h1>
+                                <h1 id="13&#x3001;&#x65CB;&#x8F6C;&#x6570;&#x7EC4;">13&#x3001;&#x65CB;&#x8F6C;&#x6570;&#x7EC4;</h1>
+<p>&#x7ED9;&#x5B9A;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#xFF0C;&#x5C06;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x5411;&#x53F3;&#x79FB;k&#x4E2A;&#x4F4D;&#x7F6E;&#xFF0C;&#x5176;&#x4E2D;k&#x662F;&#x975E;&#x8D1F;&#x6570;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<p>&#x8F93;&#x5165;&#xFF1A;[1,2,3,4,5,6]&#x548C;k=3</p>
+<p>&#x8F93;&#x51FA;&#xFF1A;[5,6,1,2,3,4]</p>
 <ul>
-<li>&#x6B63;&#x5411;&#x9884;&#x67E5;&#xFF1A;&#x8981;&#x5339;&#x914D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5FC5;&#x987B;&#x6EE1;&#x8DB3;pattern&#x8FD9;&#x4E2A;&#x6761;&#x4EF6;</li>
-<li>&#x8D1F;&#x5411;&#x9884;&#x67E5;&#xFF1A;&#x8981;&#x5339;&#x914D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5FC5;&#x987B;&#x4E0D;&#x6EE1;&#x8DB3;pattern&#x8FD9;&#x4E2A;&#x6761;&#x4EF6;</li>
-<li>&#x62EC;&#x53F7;&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#x53EA;&#x662F;&#x53C2;&#x4E0E;&#x6761;&#x4EF6;&#xFF0C;&#x5E76;&#x4E0D;&#x53C2;&#x4E0E;&#x771F;&#x6B63;&#x7684;&#x6761;&#x4EF6;</li>
+<li>slice</li>
 </ul>
-<pre><code class="lang-shell">let reg = /^(?!^[a-zA-Z]+$)(?!^[A-Z0-9]+$)(?!^[0-9a-z]+$)(?![0-9]+$)[a-zA-Z0-9]{6,16}$/
+<pre><code class="lang-shell">&#x8F93;&#x5165;&#xFF1A;[1,-100,78,90]  k = 2
+&#x8F93;&#x51FA;&#xFF1A;[90,1,-100,78]
+
+function rotate(key){
+  //&#x53C2;&#x6570;&#x5904;&#x7406;&#xFF0C;key&gt;0
+  if(key&lt;0||key === 0||key === this.length)return this;
+  if(key&gt;this.length){key = key%this.length}
+  //slice&#x652F;&#x6301;&#x8D1F;&#x6570;&#x7D22;&#x5F15;&#xFF0C;&#x76F4;&#x63A5;&#x5C31;&#x662F;&#x6570;&#x7EC4;&#x7684;&#x540E;&#x51E0;&#x4F4D;
+   return this.slice(-key).concat(this.slice(0,this.length-key))
+}
+Array.prototype.rotate = rotate;
+
+
+
+let arr = [1,2,3,4,5,6,7],
+        k = 3;
+arr.rotate(3);        // [5, 6, 7, 1, 2, 3, 4]
+</code></pre>
+<blockquote>
+<p><code>slice</code>&#x53C2;&#x6570;&#xFF1A;&#x5F00;&#x59CB;&#x70B9;&#xFF0C;&#x7ED3;&#x675F;&#x70B9;&#xFF0C;&#x8FD4;&#x56DE;&#xFF1A;&#x5207;&#x5272;&#x7684;&#x6570;&#x7EC4;</p>
+<p><code>splice</code>&#x53C2;&#x6570;&#xFF1A;&#x5F00;&#x59CB;&#x70B9;&#x3001;&#x957F;&#x5EA6;&#xFF0C;&#x8FD4;&#x56DE;&#xFF1A;&#x5220;&#x9664;&#x7684;&#x8FD9;&#x90E8;&#x5206;&#x8FD4;&#x56DE;</p>
+</blockquote>
+<ul>
+<li>splice</li>
+</ul>
+<pre><code class="lang-shell">&#x8F93;&#x5165;&#xFF1A;[1,-100,78,90]  k = 2
+&#x8F93;&#x51FA;&#xFF1A;[90,1,-100,78]
+
+function rotate(key){
+  //&#x53C2;&#x6570;&#x5904;&#x7406;&#xFF0C;key&gt;0
+  if(key&lt;0||key === 0||key === this.length)return this;
+  if(key&gt;this.length){key = key%this.length}
+
+   return this.splice(this.length-key,key).concat(this)
+}
+Array.prototype.rotate = rotate;
+
+
+
+let arr = [1,2,3,4,5,6,7],
+        k = 3;
+arr.rotate(3);        // [5, 6, 7, 1, 2, 3, 4]
+</code></pre>
+<ul>
+<li>&#x6700;&#x540E;&#x4E00;&#x9879;&#x5220;&#x9664;&#x653E;&#x5230;&#x6700;&#x5F00;&#x5934;&#xFF0C;&#x6267;&#x884C;k&#x6B21;</li>
+</ul>
+<pre><code class="lang-shell">&#x8F93;&#x5165;&#xFF1A;[1,-100,78,90]  k = 2
+&#x8F93;&#x51FA;&#xFF1A;[90,1,-100,78]
+
+//&#x5199;&#x6CD5;&#x4E00;&#xFF1A;
+function rotate(key){
+  //&#x53C2;&#x6570;&#x5904;&#x7406;&#xFF0C;key&gt;0
+  if(key&lt;0||key === 0||key === this.length)return this;
+  if(key&gt;this.length){key = key%this.length}
+
+   for(let i = 0;i&lt;=key;i++){
+     this.unshift(this.pop());        //this.pop()&#x6700;&#x540E;&#x4E00;&#x9879;&#xFF1B;unshift&#x9996;&#x90E8;&#x63D2;&#x5165;
+   }
+   return this;
+}
+Array.prototype.rotate = rotate;
+
+//&#x5199;&#x6CD5;&#x4E8C;&#xFF1A;
+function rotate(key){
+  //&#x53C2;&#x6570;&#x5904;&#x7406;&#xFF0C;key&gt;0
+  if(key&lt;0||key === 0||key === this.length)return this;
+  if(key&gt;this.length){key = key%this.length}
+
+  new Array(k).fill(&apos;&apos;).forEach((item)=&gt;{
+    this.unshift(this.pop());        //this.pop()&#x6700;&#x540E;&#x4E00;&#x9879;&#xFF1B;unshift&#x9996;&#x90E8;&#x63D2;&#x5165;
+  })
+   return this;
+}
+Array.prototype.rotate = rotate;
+
+let arr = [1,2,3,4,5,6,7],
+        k = 3;
+arr.rotate(3);        // [5, 6, 7, 1, 2, 3, 4]
 </code></pre>
 
                                 
@@ -564,14 +640,10 @@
 
             
                 
-                <a href="1、call和apply区别是什么，哪个性能更好一些？.html" class="navigation navigation-prev " aria-label="Previous page: 1、call和apply区别是什么，哪个性能更好一些？">
+                <a href="12、数组交集.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 12、数组交集">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="3、实现一个$attr.html" class="navigation navigation-next " aria-label="Next page: 3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -580,7 +652,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字","level":"1.1.2.2","depth":3,"next":{"title":"3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集","level":"1.1.2.3","depth":3,"path":"doc/basic/3、实现一个$attr.md","ref":"doc/basic/3、实现一个$attr.md","articles":[]},"previous":{"title":"1、call和apply区别是什么，哪个性能更好一些？","level":"1.1.2.1","depth":3,"path":"doc/basic/1、call和apply区别是什么，哪个性能更好一些？.md","ref":"doc/basic/1、call和apply区别是什么，哪个性能更好一些？.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.md","mtime":"2021-06-22T03:42:30.094Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-22T03:47:15.841Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"13、旋转数组","level":"1.1.2.13","depth":3,"previous":{"title":"12、数组交集","level":"1.1.2.12","depth":3,"path":"doc/basic/12、数组交集.md","ref":"doc/basic/12、数组交集.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/13、旋转数组.md","mtime":"2021-06-22T03:45:57.121Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-22T03:47:15.841Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

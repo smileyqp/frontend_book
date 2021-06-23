@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="5、实现`(5.html" />
+    <link rel="next" href="5、实现add和minus.html" />
     
     
     <link rel="prev" href="3、实现一个$attr.html" />
@@ -357,9 +357,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.2.5" data-path="5、实现`(5.html">
+        <li class="chapter " data-level="1.1.2.5" data-path="5、实现add和minus.html">
             
-                <a href="5、实现`(5.html">
+                <a href="5、实现add和minus.html">
             
                     
                     5、实现(5).add(3).minus(2)使其输出结果为6
@@ -370,9 +370,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.2.6" data-path="../bacic/6、箭头函数和普通函数的区别.html">
+        <li class="chapter " data-level="1.1.2.6" data-path="6、箭头函数和普通函数的区别.html">
             
-                <a href="../bacic/6、箭头函数和普通函数的区别.html">
+                <a href="6、箭头函数和普通函数的区别.html">
             
                     
                     6、箭头函数和普通函数的区别
@@ -530,6 +530,14 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="4&#x3001;&#x82F1;&#x6587;&#x5B57;&#x6BCD;&#x6C49;&#x5B57;&#x7EC4;&#x6210;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x7528;&#x6B63;&#x5219;&#x7ED9;&#x82F1;&#x6587;&#x5355;&#x8BCD;&#x524D;&#x540E;&#x52A0;&#x4E0A;&#x7A7A;&#x683C;">4&#x3001;&#x82F1;&#x6587;&#x5B57;&#x6BCD;&#x6C49;&#x5B57;&#x7EC4;&#x6210;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x7528;&#x6B63;&#x5219;&#x7ED9;&#x82F1;&#x6587;&#x5355;&#x8BCD;&#x524D;&#x540E;&#x52A0;&#x4E0A;&#x7A7A;&#x683C;</h1>
+<pre><code class="lang-shell">let str = &quot;test&#x4E00;&#x4E2A;&#x6D4B;&#x8BD5;&#xFF0C;just&#x6D4B;&#x8BD5;&#x4E00;&#x4E0B;&#x4E0B;smileyqp&quot;,
+        reg = /\b[a-z]+\b/ig;        //&#x540E;&#x9762;&#x7684;g&#x662F;&#x5168;&#x5C40;&#x5339;&#x914D;&#xFF0C;i&#x662F;&#x5FFD;&#x7565;&#x5927;&#x5C0F;&#x5199;
+str.replace(reg,value=&gt;{  //value&#x6B63;&#x5219;&#x6355;&#x83B7;&#x7684;&#x5185;&#x5BB9;
+    return &apos; &apos;+value+&apos; &apos;
+}).trim();                            //trim()&#x53BB;&#x9664;&#x5F00;&#x5934;&#x548C;&#x7ED3;&#x5C3E;&#x7684;&#x7A7A;&#x683C;&#xFF1B;trimLeft()&#x53BB;&#x9664;&#x5F00;&#x5934;&#x7A7A;&#x683C;&#xFF1B;trimRight()&#x53BB;&#x7ED3;&#x5C3E;&#x7A7A;&#x683C;
+
+//str  &quot;test &#x4E00;&#x4E2A;&#x6D4B;&#x8BD5;&#xFF0C; just &#x6D4B;&#x8BD5;&#x4E00;&#x4E0B;&#x4E0B; smileyqp&quot;
+</code></pre>
 
                                 
                                 </section>
@@ -562,7 +570,7 @@
                 </a>
                 
                 
-                <a href="5、实现`(5.html" class="navigation navigation-next " aria-label="Next page: 5、实现(5).add(3).minus(2)使其输出结果为6">
+                <a href="5、实现add和minus.html" class="navigation navigation-next " aria-label="Next page: 5、实现(5).add(3).minus(2)使其输出结果为6">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -573,7 +581,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格","level":"1.1.2.4","depth":3,"next":{"title":"5、实现(5).add(3).minus(2)使其输出结果为6","level":"1.1.2.5","depth":3,"path":"doc/basic/5、实现`(5","ref":"doc/basic/5、实现`(5","articles":[]},"previous":{"title":"3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集","level":"1.1.2.3","depth":3,"path":"doc/basic/3、实现一个$attr.md","ref":"doc/basic/3、实现一个$attr.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格.md","mtime":"2021-06-22T03:36:18.507Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-22T03:06:45.405Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格","level":"1.1.2.4","depth":3,"next":{"title":"5、实现(5).add(3).minus(2)使其输出结果为6","level":"1.1.2.5","depth":3,"path":"doc/basic/5、实现add和minus.md","ref":"doc/basic/5、实现add和minus.md","articles":[]},"previous":{"title":"3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集","level":"1.1.2.3","depth":3,"path":"doc/basic/3、实现一个$attr.md","ref":"doc/basic/3、实现一个$attr.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格.md","mtime":"2021-06-22T03:43:04.253Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-22T03:47:15.841Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -581,10 +589,6 @@
         
     <script src="../../gitbook/gitbook.js"></script>
     <script src="../../gitbook/theme.js"></script>
-    
-        
-        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
-        
     
         
         <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>

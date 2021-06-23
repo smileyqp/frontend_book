@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字 · GitBook</title>
+        <title>11、图片懒加载 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="3、实现一个$attr.html" />
+    <link rel="next" href="12、数组交集.html" />
     
     
-    <link rel="prev" href="1、call和apply区别是什么，哪个性能更好一些？.html" />
+    <link rel="prev" href="10、原型链.html" />
     
 
     </head>
@@ -318,7 +318,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.1.2.2" data-path="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
+        <li class="chapter " data-level="1.1.2.2" data-path="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
             
                 <a href="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
             
@@ -435,7 +435,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.2.11" data-path="11、图片懒加载.html">
+        <li class="chapter active" data-level="1.1.2.11" data-path="11、图片懒加载.html">
             
                 <a href="11、图片懒加载.html">
             
@@ -514,7 +514,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字</a>
+        <a href="../.." >11、图片懒加载</a>
     </h1>
 </div>
 
@@ -529,14 +529,171 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="2&#x3001;&#x7F16;&#x5199;&#x4E00;&#x6761;&#x6B63;&#x5219;&#xFF0C;&#x7528;&#x6765;&#x9A8C;&#x8BC1;&#x6B64;&#x89C4;&#x5219;&#xFF1A;&#x4E00;&#x4E2A;6&#xFF5E;16&#x4F4D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5FC5;&#x987B;&#x540C;&#x65F6;&#x5305;&#x542B;&#x6709;&#x5927;&#x5C0F;&#x5199;&#x5B57;&#x6BCD;&#x548C;&#x6570;&#x5B57;">2&#x3001;&#x7F16;&#x5199;&#x4E00;&#x6761;&#x6B63;&#x5219;&#xFF0C;&#x7528;&#x6765;&#x9A8C;&#x8BC1;&#x6B64;&#x89C4;&#x5219;&#xFF1A;&#x4E00;&#x4E2A;6&#xFF5E;16&#x4F4D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5FC5;&#x987B;&#x540C;&#x65F6;&#x5305;&#x542B;&#x6709;&#x5927;&#x5C0F;&#x5199;&#x5B57;&#x6BCD;&#x548C;&#x6570;&#x5B57;</h1>
+                                <h1 id="11&#x3001;&#x56FE;&#x7247;&#x61D2;&#x52A0;&#x8F7D;">11&#x3001;&#x56FE;&#x7247;&#x61D2;&#x52A0;&#x8F7D;</h1>
 <ul>
-<li>&#x6B63;&#x5411;&#x9884;&#x67E5;&#xFF1A;&#x8981;&#x5339;&#x914D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5FC5;&#x987B;&#x6EE1;&#x8DB3;pattern&#x8FD9;&#x4E2A;&#x6761;&#x4EF6;</li>
-<li>&#x8D1F;&#x5411;&#x9884;&#x67E5;&#xFF1A;&#x8981;&#x5339;&#x914D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5FC5;&#x987B;&#x4E0D;&#x6EE1;&#x8DB3;pattern&#x8FD9;&#x4E2A;&#x6761;&#x4EF6;</li>
-<li>&#x62EC;&#x53F7;&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#x53EA;&#x662F;&#x53C2;&#x4E0E;&#x6761;&#x4EF6;&#xFF0C;&#x5E76;&#x4E0D;&#x53C2;&#x4E0E;&#x771F;&#x6B63;&#x7684;&#x6761;&#x4EF6;</li>
+<li>&#x524D;&#x7AEF;&#x6027;&#x80FD;&#x4F18;&#x5316;&#x7684;&#x91CD;&#x8981;&#x65B9;&#x6848;&#xFF0C;&#x901A;&#x8FC7;&#x56FE;&#x7247;&#x6216;&#x8005;&#x6570;&#x636E;&#x7684;&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;&#xFF0C;&#x53EF;&#x4EE5;&#x52A0;&#x5FEB;&#x9875;&#x9762;&#x52A0;&#x8F7D;&#x901F;&#x5EA6;&#xFF0C;&#x7B2C;&#x4E00;&#x6B21;&#x52A0;&#x8F7D;&#x7684;&#x901F;&#x5EA6;&#x53D8;&#x5FEB;&#xFF0C;&#x5E76;&#x4E14;&#x53EA;&#x6709;&#x6ED1;&#x52A8;&#x5230;&#x56FE;&#x7247;&#x90E8;&#x5206;&#x624D;&#x4F1A;&#x8FDB;&#x884C;&#x52A0;&#x8F7D;</li>
+<li>&#x5904;&#x7406;&#x65B9;&#x6848;<ul>
+<li>&#x5C06;&#x6240;&#x6709;&#x9700;&#x8981;&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;&#x7684;&#x56FE;&#x7247;&#x7528;&#x4E00;&#x4E2A;&#x76D2;&#x5B50;&#x5305;&#x8D77;&#x6765;&#xFF0C;&#x8BBE;&#x7F6E;&#x5BBD;&#x9AD8;&#x548C;&#x9ED8;&#x8BA4;&#x7684;&#x5360;&#x4F4D;&#x56FE;</li>
+<li>&#x5F00;&#x59CB;&#x8BA9;&#x6240;&#x6709;&#x7684;image&#x7684;src&#x4E3A;&#x7A7A;&#xFF0C;&#x5C06;&#x56FE;&#x7247;&#x771F;&#x5B9E;&#x5730;&#x5740;&#x653E;&#x5230;image&#x7684;&#x81EA;&#x5B9A;&#x4E49;&#x5C5E;&#x6027;&#x4E0A;&#xFF0C;&#x8BA9;img&#x9690;&#x85CF;</li>
+<li>&#x7B49;&#x5230;&#x6240;&#x6709;&#x7684;&#x5176;&#x4ED6;&#x8D44;&#x6E90;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#x6211;&#x4EEC;&#x624D;&#x5F00;&#x59CB;&#x53BB;&#x52A0;&#x8F7D;&#x56FE;&#x7247;</li>
+<li>&#x5BF9;&#x4E8E;&#x6709;&#x5F88;&#x591A;&#x56FE;&#x7247;&#xFF0C;&#x5F53;&#x9875;&#x9762;&#x6EDA;&#x52A8;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5F53;&#x524D;&#x56FE;&#x7247;&#x5B8C;&#x5168;&#x663E;&#x793A;&#x51FA;&#x6765;&#x540E;&#xFF0C;&#x518D;&#x52A0;&#x8F7D;&#x56FE;&#x7247;</li>
 </ul>
-<pre><code class="lang-shell">let reg = /^(?!^[a-zA-Z]+$)(?!^[A-Z0-9]+$)(?!^[0-9a-z]+$)(?![0-9]+$)[a-zA-Z0-9]{6,16}$/
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210511104945485.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70" alt=""></p>
+<ul>
+<li>&#x5355;&#x5F20;&#x56FE;&#x7247;&#x61D2;&#x52A0;&#x8F7D;</li>
+</ul>
+<pre><code class="lang-shell">//html
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;&#x56FE;&#x7247;&#x61D2;&#x52A0;&#x8F7D;&lt;/title&gt;
+    &lt;style&gt;
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .imgBox{
+            margin: 1000px auto;
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+            background: pink;
+        }
+        .imgBox img{
+            width: 100%;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;imgBox&quot;&gt;
+        &lt;img src=&quot;&quot; alt=&quot;&#x61D2;&#x52A0;&#x8F7D;&quot; data-img=&quot;https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/3ac79f3df8dcd100bbd10c8e738b4710b8122fcb.jpg&quot;/&gt;
+    &lt;/div&gt;
+    &lt;script src=&quot;node_modules/jquery/dist/jquery.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;./delayImg.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </code></pre>
+<pre><code class="lang-shell">//delayImg.js
+let $imgBox  = $(&quot;.imgBox&quot;),
+    $img = $imgBox.children(&apos;img&apos;),
+    $window = $(window)
+/**
+ * &#x52A0;&#x8F7D;&#x7684;&#x65F6;&#x673A;:
+ * 1&#x3001;&#x5F53;&#x9875;&#x9762;&#x5176;&#x4ED6;&#x7684;&#x6240;&#x6709;&#x8D44;&#x6E90;&#x90FD;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#x7684;&#x65F6;&#x5019;
+ * 2&#x3001;&#x5F53;&#x9875;&#x9762;&#x6EDA;&#x52A8;&#x5230;&#x5176;&#x4F4D;&#x7F6E;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x56FE;&#x7247;&#x5B8C;&#x5168;&#x51FA;&#x73B0;&#x5728;&#x89C6;&#x91CE;&#x4E4B;&#x4E2D;
+ */
+
+// $(document).ready();//dom&#x7ED3;&#x6784;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;
+$(window).on(&apos;load scroll&apos;,function(){      //&#x5728;load&#x548C;scroll&#x4E24;&#x4E2A;&#x4E8B;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#x90FD;&#x4F1A;&#x89E6;&#x53D1;;JQuery&#x4E2D;&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;&#x652F;&#x6301;&#x591A;&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;,&#x4E24;&#x4E2A;&#x4E8B;&#x4EF6;&#x89E6;&#x53D1;&#x7684;&#x65F6;&#x5019;&#x6267;&#x884C;&#x76F8;&#x540C;&#x7684;&#x4E8B;&#x4EF6;;
+    if($img.attr(&apos;isLoad&apos;)===&apos;true&apos;){
+        return; //&#x52A0;&#x8F7D;&#x8FC7;&#x4E4B;&#x540E;&#x4E0D;&#x4F1A;&#x91CD;&#x65B0;&#x52A0;&#x8F7D;
+    }
+    console.log(&apos;ok&apos;)
+    let $A = $imgBox.outerHeight() + $imgBox.offset().top;
+    let $B = $window.outerHeight() + $window.scrollTop()
+    if($A&lt;=$B){
+        //&#x52A0;&#x8F7D;&#x771F;&#x5B9E;&#x56FE;&#x7247;
+        $img.attr(&apos;src&apos;,$img.attr(&apos;data-img&apos;))
+        $img.on(&apos;load&apos;,()=&gt;{
+            //&#x52A0;&#x8F7D;&#x6210;&#x529F;
+            // $img.css(&apos;display&apos;,&apos;block&apos;)
+            console.log(&apos;&#x56FE;&#x7247;&#x52A0;&#x8F7D;&#x6210;&#x529F;&#xFF01;&apos;)
+            $img.stop().fadeIn()    //fadeIn&#x662F;jq&#x4E2D;&#x7684;&#x6E10;&#x73B0;
+        })
+        $img.attr(&apos;isLoad&apos;,true)        //attr&#x5B58;&#x50A8;&#x7684;&#x81EA;&#x5B9A;&#x4E49;&#x5C5E;&#x6027;&#x503C;&#x90FD;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#x683C;&#x5F0F;&apos;true&apos;
+    }
+});
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20210511110612942.gif" alt=""></p>
+<ul>
+<li>&#x591A;&#x56FE;&#x7247;&#x61D2;&#x52A0;&#x8F7D;</li>
+</ul>
+<pre><code class="lang-shell">//html
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;&#x591A;&#x56FE;&#x7247;&#x61D2;&#x52A0;&#x8F7D;&lt;/title&gt;
+    &lt;style&gt;
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+           width: 800px;
+           margin: 0 auto;
+        }
+        .imgBox{
+            margin: 0px auto;
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+            background: pink;
+            margin-bottom: 20px;
+        }
+        .imgBox img{
+            width: 100%;
+
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;container&quot;&gt;
+        &lt;div class=&quot;imgBox&quot;&gt;
+            &lt;img src=&quot;&quot; alt=&quot;&#x61D2;&#x52A0;&#x8F7D;&quot; data-img=&quot;https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/3ac79f3df8dcd100bbd10c8e738b4710b8122fcb.jpg&quot;/&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script src=&quot;node_modules/jquery/dist/jquery.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;./moredelayImg.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<pre><code class="lang-shell">//moredelayImg.js
+let $container = $(&apos;.container&apos;),
+    str = ``,
+    $imgBoxs = null,
+    $window = $(window)
+
+new Array(20).fill().forEach((item)=&gt;{      //new Array(20).fill() &#x521B;&#x9020;&#x957F;&#x5EA6;&#x4E3A;20&#x7684;&#x6570;&#x7EC4;&#x6BCF;&#x4E00;&#x9879;&#x7528;null&#x586B;&#x5145;
+    str+=&apos;&lt;div class=&quot;imgBox&quot;&gt;&lt;img src=&quot;&quot; alt=&quot;&#x61D2;&#x52A0;&#x8F7D;&quot; data-img=&quot;https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/3ac79f3df8dcd100bbd10c8e738b4710b8122fcb.jpg&quot;/&gt;&lt;/div&gt;&apos;
+})
+console.log(str)
+$container.html(str);
+$imgBoxs = $container.children(&apos;.imgBox&apos;);
+
+//&#x591A;&#x5F20;&#x56FE;&#x7247;&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;
+$window.on(&apos;load scroll&apos;,()=&gt;{
+    //&#x83B7;&#x53D6;&#x6D4F;&#x89C8;&#x5668;&#x8DDD;&#x79BB;body&#x7684;&#x8DDD;&#x79BB;
+    let $B = $window.outerHeight() + $window.scrollTop() 
+    console.log($imgBoxs)
+    //&#x5FAA;&#x73AF;&#x83B7;&#x53D6;&#x6BCF;&#x4E00;&#x5F20;&#x56FE;&#x7247;&#x533A;&#x57DF;&#xFF0C;&#x6839;&#x636E;&#x81EA;&#x5DF1;&#x8DDD;&#x79BB;body&#x7684;&#x8DDD;&#x79BB;&#x8BA1;&#x7B97;&#x51FA;&#x91CC;&#x9762;&#x7684;&#x56FE;&#x7247;&#x662F;&#x5426;&#x8FDB;&#x884C;&#x52A0;&#x8F7D;
+    $imgBoxs.each((index,item)=&gt;{
+        console.log(index,item)
+        let $item = $(item),
+            $itemA = $item.outerHeight() + $item.offset().top,
+            isLoad = $item.attr(&apos;isLoad&apos;)
+        if($itemA &lt;= $B &amp;&amp; isLoad !== &apos;true&apos;){  //&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x76D2;&#x5B50;&#x5DF2;&#x7ECF;&#x61D2;&#x52A0;&#x8F7D;&#x8FC7;&#x4F9D;&#x6B21;&#x90A3;&#x4E48;&#x5C31;&#x4E0D;&#x518D;&#x6B21;&#x8FDB;&#x884C;&#x61D2;&#x52A0;&#x8F7D;&#x5904;&#x7406;
+            $item.attr(&apos;isLoad&apos;,true);
+            $img = $item.children(&apos;img&apos;)
+            $img.attr(&apos;src&apos;,$img.attr(&apos;data-img&apos;))
+            $img.on(&apos;load&apos;,()=&gt;{
+                //&#x52A0;&#x8F7D;&#x6210;&#x529F;
+                // $img.css(&apos;display&apos;,&apos;block&apos;)
+                console.log(&apos;&#x56FE;&#x7247;&#x52A0;&#x8F7D;&#x6210;&#x529F;&#xFF01;&apos;)
+                $img.stop().fadeIn()    //fadeIn&#x662F;jq&#x4E2D;&#x7684;&#x6E10;&#x73B0;
+            })
+        }
+    });         
+})
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20210511120033321.gif" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;"></p>
 
                                 
                                 </section>
@@ -564,12 +721,12 @@
 
             
                 
-                <a href="1、call和apply区别是什么，哪个性能更好一些？.html" class="navigation navigation-prev " aria-label="Previous page: 1、call和apply区别是什么，哪个性能更好一些？">
+                <a href="10、原型链.html" class="navigation navigation-prev " aria-label="Previous page: 10、原型链">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="3、实现一个$attr.html" class="navigation navigation-next " aria-label="Next page: 3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集">
+                <a href="12、数组交集.html" class="navigation navigation-next " aria-label="Next page: 12、数组交集">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -580,7 +737,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字","level":"1.1.2.2","depth":3,"next":{"title":"3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集","level":"1.1.2.3","depth":3,"path":"doc/basic/3、实现一个$attr.md","ref":"doc/basic/3、实现一个$attr.md","articles":[]},"previous":{"title":"1、call和apply区别是什么，哪个性能更好一些？","level":"1.1.2.1","depth":3,"path":"doc/basic/1、call和apply区别是什么，哪个性能更好一些？.md","ref":"doc/basic/1、call和apply区别是什么，哪个性能更好一些？.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.md","mtime":"2021-06-22T03:42:30.094Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-22T03:47:15.841Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"11、图片懒加载","level":"1.1.2.11","depth":3,"next":{"title":"12、数组交集","level":"1.1.2.12","depth":3,"path":"doc/basic/12、数组交集.md","ref":"doc/basic/12、数组交集.md","articles":[]},"previous":{"title":"10、原型链","level":"1.1.2.10","depth":3,"path":"doc/basic/10、原型链.md","ref":"doc/basic/10、原型链.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/11、图片懒加载.md","mtime":"2021-06-22T03:45:22.398Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-22T03:47:15.841Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

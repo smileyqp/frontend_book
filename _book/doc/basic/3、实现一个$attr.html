@@ -357,9 +357,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.2.5" data-path="5、实现`(5.html">
+        <li class="chapter " data-level="1.1.2.5" data-path="5、实现add和minus.html">
             
-                <a href="5、实现`(5.html">
+                <a href="5、实现add和minus.html">
             
                     
                     5、实现(5).add(3).minus(2)使其输出结果为6
@@ -370,9 +370,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.2.6" data-path="../bacic/6、箭头函数和普通函数的区别.html">
+        <li class="chapter " data-level="1.1.2.6" data-path="6、箭头函数和普通函数的区别.html">
             
-                <a href="../bacic/6、箭头函数和普通函数的区别.html">
+                <a href="6、箭头函数和普通函数的区别.html">
             
                     
                     6、箭头函数和普通函数的区别
@@ -530,6 +530,40 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="3&#x3001;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;attrname-value&#x904D;&#x5386;&#xFF0C;&#x5C5E;&#x6027;&#x540D;&#x4E3A;name&#xFF0C;&#x503C;&#x4E3A;value&#x7684;&#x7684;&#x5143;&#x7D20;&#x5408;&#x96C6;">3&#x3001;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;$attr(name, value)&#x904D;&#x5386;&#xFF0C;&#x5C5E;&#x6027;&#x540D;&#x4E3A;name&#xFF0C;&#x503C;&#x4E3A;value&#x7684;&#x7684;&#x5143;&#x7D20;&#x5408;&#x96C6;</h1>
+<ul>
+<li>&#x76F8;&#x5F53;&#x4E8E;&#x5199;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;&#x9009;&#x62E9;&#x5668;&#x3002;<ul>
+<li>&#x83B7;&#x5F97;&#x6240;&#x6709;&#x6807;&#x7B7E;&#xFF0C;&#x5FAA;&#x73AF;&#x6240;&#x6709;&#x6807;&#x7B7E;&#x3002;&#x5F97;&#x5230;&#x6BCF;&#x4E00;&#x4E2A;&#x6807;&#x7B7E;&#xFF0C;&#x4F20;&#x5165;&#x4EC0;&#x4E48;&#x5C5E;&#x6027;&#x5C31;&#x6309;&#x7167;&#x8FD9;&#x4E2A;&#x5C5E;&#x6027;&#x53BB;&#x83B7;&#x53D6;&#x5C5E;&#x6027;&#x503C;&#x3002;&#x7279;&#x6B8A;&#x60C5;&#x51B5;&#xFF0C;class&#x8FD9;&#x4E9B;&#x53EA;&#x8981;&#x5305;&#x542B;&#x8FD9;&#x4E2A;&#x5C5E;&#x6027;&#x503C;&#x5C31;&#x53EF;&#x4EE5;</li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-shell">let ary = $attr(&apos;id&apos;,&apos;AAA&apos;)
+
+
+function $attr(property,value){
+  let elements = document.getElementByTagName(&apos;*&apos;),        //&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x9875;&#x9762;&#x7684;&#x6240;&#x6709;&#x6807;&#x7B7E;
+          arr = [];
+  //&#x65B9;&#x5F0F;&#x4E00;&#xFF1A;&#x53EF;&#x4EE5;&#x501F;&#x7528;&#x6570;&#x7EC4;&#x5FAA;&#x73AF;
+  // [].forEach.call(elements,item=&gt;{})
+
+  //&#x65B9;&#x5F0F;&#x4E8C;&#xFF1A;&#x5229;&#x7528;Array.from&#x5C06;&#x7C7B;&#x6570;&#x7EC4;&#x975E;&#x6570;&#x7EC4;&#x8F6C;&#x5316;&#x6210;&#x4E3A;&#x6570;&#x7EC4;
+  elements = Array.from(elements)
+  elements.forEach((item)=&gt;{
+    let itemValue = item.getAttribute(property)    //&#x5728;&#x8FD9;&#x4E2A;&#x6807;&#x7B7E;&#x4E2D;&#x83B7;&#x53D6;property
+
+    if(property === &apos;class&apos;){    //class&#x6837;&#x5F0F;&#x7C7B;&#x5C5E;&#x6027;&#x540D;&#x8981;&#x505A;&#x7279;&#x6B8A;&#x5904;&#x7406;&#xFF0C;&#x56E0;&#x4E3A;class&#x4E2D;&#x53EF;&#x80FD;&#x6709;&#x591A;&#x4E2A;&#x5C5E;&#x6027;&#x503C;
+
+        //&#x5224;&#x65AD;&#x5F53;&#x524D;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x662F;&#x5426;&#x5305;&#x542B;&#x7740;&#x54E6;&#x4E2A;&#x5355;&#x8BCD;
+        new RegExp(/\b+value+\b/).test(itemValue)?arr.push(item):null        
+      return;
+    }
+
+    if(itemValue === value){    //&#x83B7;&#x53D6;&#x7684;&#x503C;&#x548C;&#x4F20;&#x9012;&#x7684;&#x503C;&#x76F8;&#x7B49;&#x6821;&#x9A8C;&#x6210;&#x529F;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7684;
+      arr.push(item)
+    }
+  })
+  return arr;
+}
+</code></pre>
 
                                 
                                 </section>
@@ -573,7 +607,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集","level":"1.1.2.3","depth":3,"next":{"title":"4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格","level":"1.1.2.4","depth":3,"path":"doc/basic/4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格.md","ref":"doc/basic/4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格.md","articles":[]},"previous":{"title":"2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字","level":"1.1.2.2","depth":3,"path":"doc/basic/2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.md","ref":"doc/basic/2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/3、实现一个$attr.md","mtime":"2021-06-22T03:36:18.501Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-22T03:06:45.405Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集","level":"1.1.2.3","depth":3,"next":{"title":"4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格","level":"1.1.2.4","depth":3,"path":"doc/basic/4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格.md","ref":"doc/basic/4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格.md","articles":[]},"previous":{"title":"2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字","level":"1.1.2.2","depth":3,"path":"doc/basic/2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.md","ref":"doc/basic/2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/3、实现一个$attr.md","mtime":"2021-06-22T03:42:52.135Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-22T03:47:15.841Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -581,10 +615,6 @@
         
     <script src="../../gitbook/gitbook.js"></script>
     <script src="../../gitbook/theme.js"></script>
-    
-        
-        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
-        
     
         
         <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>

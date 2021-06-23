@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字 · GitBook</title>
+        <title>6、箭头函数和普通函数的区别 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="3、实现一个$attr.html" />
+    <link rel="next" href="7、字符串中字母大写转小写，小写转大写.html" />
     
     
-    <link rel="prev" href="1、call和apply区别是什么，哪个性能更好一些？.html" />
+    <link rel="prev" href="5、实现add和minus.html" />
     
 
     </head>
@@ -318,7 +318,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.1.2.2" data-path="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
+        <li class="chapter " data-level="1.1.2.2" data-path="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
             
                 <a href="2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
             
@@ -370,7 +370,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.1.2.6" data-path="6、箭头函数和普通函数的区别.html">
+        <li class="chapter active" data-level="1.1.2.6" data-path="6、箭头函数和普通函数的区别.html">
             
                 <a href="6、箭头函数和普通函数的区别.html">
             
@@ -514,7 +514,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字</a>
+        <a href="../.." >6、箭头函数和普通函数的区别</a>
     </h1>
 </div>
 
@@ -529,13 +529,73 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="2&#x3001;&#x7F16;&#x5199;&#x4E00;&#x6761;&#x6B63;&#x5219;&#xFF0C;&#x7528;&#x6765;&#x9A8C;&#x8BC1;&#x6B64;&#x89C4;&#x5219;&#xFF1A;&#x4E00;&#x4E2A;6&#xFF5E;16&#x4F4D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5FC5;&#x987B;&#x540C;&#x65F6;&#x5305;&#x542B;&#x6709;&#x5927;&#x5C0F;&#x5199;&#x5B57;&#x6BCD;&#x548C;&#x6570;&#x5B57;">2&#x3001;&#x7F16;&#x5199;&#x4E00;&#x6761;&#x6B63;&#x5219;&#xFF0C;&#x7528;&#x6765;&#x9A8C;&#x8BC1;&#x6B64;&#x89C4;&#x5219;&#xFF1A;&#x4E00;&#x4E2A;6&#xFF5E;16&#x4F4D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5FC5;&#x987B;&#x540C;&#x65F6;&#x5305;&#x542B;&#x6709;&#x5927;&#x5C0F;&#x5199;&#x5B57;&#x6BCD;&#x548C;&#x6570;&#x5B57;</h1>
+                                <h1 id="6&#x3001;&#x7BAD;&#x5934;&#x51FD;&#x6570;&#x548C;&#x666E;&#x901A;&#x51FD;&#x6570;&#x7684;&#x533A;&#x522B;">6&#x3001;&#x7BAD;&#x5934;&#x51FD;&#x6570;&#x548C;&#x666E;&#x901A;&#x51FD;&#x6570;&#x7684;&#x533A;&#x522B;</h1>
 <ul>
-<li>&#x6B63;&#x5411;&#x9884;&#x67E5;&#xFF1A;&#x8981;&#x5339;&#x914D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5FC5;&#x987B;&#x6EE1;&#x8DB3;pattern&#x8FD9;&#x4E2A;&#x6761;&#x4EF6;</li>
-<li>&#x8D1F;&#x5411;&#x9884;&#x67E5;&#xFF1A;&#x8981;&#x5339;&#x914D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5FC5;&#x987B;&#x4E0D;&#x6EE1;&#x8DB3;pattern&#x8FD9;&#x4E2A;&#x6761;&#x4EF6;</li>
-<li>&#x62EC;&#x53F7;&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#x53EA;&#x662F;&#x53C2;&#x4E0E;&#x6761;&#x4EF6;&#xFF0C;&#x5E76;&#x4E0D;&#x53C2;&#x4E0E;&#x771F;&#x6B63;&#x7684;&#x6761;&#x4EF6;</li>
+<li>&#x7BAD;&#x5934;&#x51FD;&#x6570;&#x8BED;&#x6CD5;&#x4E0A;&#x6BD4;&#x666E;&#x901A;&#x51FD;&#x6570;&#x66F4;&#x7B80;&#x6D01;(ES6&#x4E2D;&#x6BCF;&#x79CD;&#x51FD;&#x6570;&#x90FD;&#x53EF;&#x4EE5;&#x5F62;&#x53C2;&#x8D4B;&#x9ED8;&#x8BA4;&#x503C;&#x548C;&#x4F7F;&#x7528;&#x2026;&#x5269;&#x4F59;&#x8FD0;&#x7B97;&#x7B26;)</li>
 </ul>
-<pre><code class="lang-shell">let reg = /^(?!^[a-zA-Z]+$)(?!^[A-Z0-9]+$)(?!^[0-9a-z]+$)(?![0-9]+$)[a-zA-Z0-9]{6,16}$/
+<pre><code class="lang-shell">function fn(x){
+  return function(y){
+    return x+y
+  }
+}
+
+let fn = x =&gt; y=&gt;x+y
+</code></pre>
+<ul>
+<li>&#x7BAD;&#x5934;&#x51FD;&#x6570;&#x4E2D;&#x6CA1;&#x6709;this,&#x5B83;&#x91CC;&#x9762;&#x51FA;&#x73B0;&#x7684;this&#x4ECE;&#x5C5E;&#x4E8E;&#x6240;&#x5C5E;&#x4E0A;&#x4E0B;&#x6587; &#xFF08;&#x4F7F;&#x7528;call&#x3001;apply&#x7B49;&#x4EFB;&#x4F55;&#x65B9;&#x5F0F;&#x90FD;&#x65E0;&#x6CD5;&#x6539;&#x53D8;this&#x6307;&#x5411;&#xFF09;</li>
+</ul>
+<pre><code class="lang-shell">let obj = {
+  name:&apos;smileyqp&apos;
+}
+function fn1(){
+  console.log(this)
+}
+fn1.call(obj)        //this =&gt;  obj
+
+let fn2 = ()=&gt;{
+  console.log(this)
+}
+fn2.call(obj)  //this  =&gt; window
+</code></pre>
+<ul>
+<li>&#x7BAD;&#x5934;&#x51FD;&#x6570;&#x4E2D;&#x6CA1;&#x6709;Arguments&#x7C7B;&#x6570;&#x7EC4;&#xFF0C;&#x53EA;&#x6709;&#x57FA;&#x4E8E;<code>&#x2026;arg</code>&#x4F20;&#x9012;&#x7684;&#x53C2;&#x6570;&#x96C6;&#x5408;&#xFF08;&#x6570;&#x7EC4;&#xFF09;</li>
+</ul>
+<pre><code class="lang-shell">let fn = (...arg ) =&gt;{
+  console.log(arg)        // [10, 20, 30]
+}
+fn(10,20,30)
+</code></pre>
+<ul>
+<li>&#x7BAD;&#x5934;&#x51FD;&#x6570;&#x4E0D;&#x80FD;&#x88AB;new&#x6267;&#x884C;&#xFF0C;&#x56E0;&#x4E3A;&#x7BAD;&#x5934;&#x51FD;&#x6570;&#x6CA1;&#x6709;this&#x4E5F;&#x6CA1;&#x6709;prototype</li>
+</ul>
+<pre><code class="lang-shell">function Fn (){
+  this.X = 100;
+}
+fn.prototype.getX = function(){}
+let f = new Fn;
+</code></pre>
+<p>&#x601D;&#x8003;&#x9898;&#x62D3;&#x5C55;&#xFF1A;</p>
+<pre><code class="lang-shell">&#x9898;&#x76EE;&#x4E00;&#xFF1A;&#x6570;&#x7EC4;&#x4E0A;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;each&#x65B9;&#x6CD5;&#xFF0C;&#x5B9E;&#x73B0;&#x4E0B;&#x9762;&#x7684;&#x4E09;&#x4E2A;&#x8981;&#x6C42;
+
+let arr = [10,20,30,&apos;AA&apos;],
+        obj = {};
+arr = arr.each(function(item,index){
+  // this =&gt; obj  1&#x3001;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x4E0D;&#x4F20;&#xFF0C;this&#x6307;&#x5411;window
+  if(!isNaN(item)){
+    return false;     //2&#x3001;&#x5982;&#x679C;&#x4E0D;&#x662F;&#x6570;&#x5B57;&#xFF0C;&#x90A3;&#x4E48;&#x8FD4;&#x56DE;&#x7684;&#x662F;false
+  }
+  return item*10;        //3&#x3001;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x662F;&#x5565;&#x5C31;&#x628A;&#x6570;&#x7EC4;&#x4E2D;&#x5F53;&#x524D;&#x9879;&#x66FF;&#x6362;&#x6389;
+}&#xFF0C;obj)
+
+//&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x6700;&#x540E;&#x5B9E;&#x73B0;&#x7684;&#x7ED3;&#x679C;&#x662F; [100,200,300,false]
+</code></pre>
+<pre><code class="lang-shell">&#x9898;&#x76EE;&#x4E8C;&#xFF1A;&#x91CD;&#x5199;replace&#xFF0C;replace([REG&#x6B63;&#x5219;],callback)
+let str = &apos;smileyqp2019smile2020&apos;
+str = str.replace(/smile/g,function(...arg){
+  //arg&#x4E2D;&#x5B58;&#x50A8;&#x4E86;&#x6BCF;&#x4E00;&#x6B21;&#x5927;&#x6B63;&#x5219;&#x5339;&#x914D;&#x7684;&#x4FE1;&#x606F;&#x548C;&#x5C0F;&#x6B63;&#x5219;&#x5339;&#x914D;&#x7684;&#x4FE1;&#x606F;
+
+  return ; //&#x8FD4;&#x56DE;&#x628A;&#x6B63;&#x5219;&#x5339;&#x914D;&#x7684;&#x66FF;&#x6362;&#x540E;&#x7684;&#x5B57;&#x7B26;&#x4E32;
+})
 </code></pre>
 
                                 
@@ -564,12 +624,12 @@
 
             
                 
-                <a href="1、call和apply区别是什么，哪个性能更好一些？.html" class="navigation navigation-prev " aria-label="Previous page: 1、call和apply区别是什么，哪个性能更好一些？">
+                <a href="5、实现add和minus.html" class="navigation navigation-prev " aria-label="Previous page: 5、实现(5).add(3).minus(2)使其输出结果为6">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="3、实现一个$attr.html" class="navigation navigation-next " aria-label="Next page: 3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集">
+                <a href="7、字符串中字母大写转小写，小写转大写.html" class="navigation navigation-next " aria-label="Next page: 7、字符串中字母大写转小写，小写转大写">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -580,7 +640,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字","level":"1.1.2.2","depth":3,"next":{"title":"3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集","level":"1.1.2.3","depth":3,"path":"doc/basic/3、实现一个$attr.md","ref":"doc/basic/3、实现一个$attr.md","articles":[]},"previous":{"title":"1、call和apply区别是什么，哪个性能更好一些？","level":"1.1.2.1","depth":3,"path":"doc/basic/1、call和apply区别是什么，哪个性能更好一些？.md","ref":"doc/basic/1、call和apply区别是什么，哪个性能更好一些？.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.md","mtime":"2021-06-22T03:42:30.094Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-22T03:47:15.841Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"6、箭头函数和普通函数的区别","level":"1.1.2.6","depth":3,"next":{"title":"7、字符串中字母大写转小写，小写转大写","level":"1.1.2.7","depth":3,"path":"doc/basic/7、字符串中字母大写转小写，小写转大写.md","ref":"doc/basic/7、字符串中字母大写转小写，小写转大写.md","articles":[]},"previous":{"title":"5、实现(5).add(3).minus(2)使其输出结果为6","level":"1.1.2.5","depth":3,"path":"doc/basic/5、实现add和minus.md","ref":"doc/basic/5、实现add和minus.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/basic/6、箭头函数和普通函数的区别.md","mtime":"2021-06-22T03:44:01.810Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-22T03:47:15.841Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
