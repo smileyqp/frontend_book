@@ -1,0 +1,1837 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>2、BOM操作 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="3、事件.html" />
+    
+    
+    <link rel="prev" href="1、DOM操作（Document Object Model文档对象模型的集合）.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.1" >
+            
+                <span>
+            
+                    
+                    前端基础知识
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.1.1" data-path="../前端html和css基础知识.html">
+            
+                <a href="../前端html和css基础知识.html">
+            
+                    
+                    前端html和css基础知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.2" data-path="../从几道有意思的题理解堆栈内存、闭包作用域.html">
+            
+                <a href="../从几道有意思的题理解堆栈内存、闭包作用域.html">
+            
+                    
+                    从几道有意思的题理解堆栈内存、闭包作用域
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.3" data-path="../面试必会之对象和数组的深浅拷贝.html">
+            
+                <a href="../面试必会之对象和数组的深浅拷贝.html">
+            
+                    
+                    面试必会之对象和数组的深浅拷贝
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.4" data-path="../一道题解读面向对象.html">
+            
+                <a href="../一道题解读面向对象.html">
+            
+                    
+                    一道题解读面向对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.5" data-path="../EventLoop，宏任务、微任务.html">
+            
+                <a href="../EventLoop，宏任务、微任务.html">
+            
+                    
+                    EventLoop，宏任务、微任务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.6" data-path="../有意思的双等号题目.html">
+            
+                <a href="../有意思的双等号题目.html">
+            
+                    
+                    有意思的双等号题目
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.7" data-path="../Vue_React区别.html">
+            
+                <a href="../Vue_React区别.html">
+            
+                    
+                    Vue_React区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.8" data-path="../跨域问题的解决方案和实现原理.html">
+            
+                <a href="../跨域问题的解决方案和实现原理.html">
+            
+                    
+                    跨域问题的解决方案和实现原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.9" data-path="../前端必会的排序算法.html">
+            
+                <a href="../前端必会的排序算法.html">
+            
+                    
+                    前端必会的排序算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.10" data-path="../前端必会的数组去重的四大实现方案.html">
+            
+                <a href="../前端必会的数组去重的四大实现方案.html">
+            
+                    
+                    前端必会的数组去重的四大实现方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.11" data-path="../前端基础之数组扁平化.html">
+            
+                <a href="../前端基础之数组扁平化.html">
+            
+                    
+                    前端基础之数组扁平化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.12" data-path="../斐波那契数列.html">
+            
+                <a href="../斐波那契数列.html">
+            
+                    
+                    斐波那契数列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.1.13" data-path="../字节跳动前端经典算法题.html">
+            
+                <a href="../字节跳动前端经典算法题.html">
+            
+                    
+                    字节跳动前端经典算法题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2" >
+            
+                <span>
+            
+                    
+                    前端基础题目
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.2.1" data-path="../basic/1、call和apply区别是什么，哪个性能更好一些？.html">
+            
+                <a href="../basic/1、call和apply区别是什么，哪个性能更好一些？.html">
+            
+                    
+                    1、call和apply区别是什么，哪个性能更好一些？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.2" data-path="../basic/2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
+            
+                <a href="../basic/2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字.html">
+            
+                    
+                    2、编写一条正则，用来验证此规则：一个6～16位的字符串，必须同时包含有大小写字母和数字
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.3" data-path="../basic/3、实现一个$attr.html">
+            
+                <a href="../basic/3、实现一个$attr.html">
+            
+                    
+                    3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.4" data-path="../basic/4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格.html">
+            
+                <a href="../basic/4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格.html">
+            
+                    
+                    4、英文字母汉字组成的字符串，用正则给英文单词前后加上空格
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.5" data-path="../basic/5、实现add和minus.html">
+            
+                <a href="../basic/5、实现add和minus.html">
+            
+                    
+                    5、实现(5).add(3).minus(2)使其输出结果为6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.6" data-path="../basic/6、箭头函数和普通函数的区别.html">
+            
+                <a href="../basic/6、箭头函数和普通函数的区别.html">
+            
+                    
+                    6、箭头函数和普通函数的区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.7" data-path="../basic/7、字符串中字母大写转小写，小写转大写.html">
+            
+                <a href="../basic/7、字符串中字母大写转小写，小写转大写.html">
+            
+                    
+                    7、字符串中字母大写转小写，小写转大写
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.8" data-path="../basic/8、实现字符串查找.html">
+            
+                <a href="../basic/8、实现字符串查找.html">
+            
+                    
+                    8、实现字符串查找
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.9" data-path="../basic/9、验证输入的是否是一个正确的网址.html">
+            
+                <a href="../basic/9、验证输入的是否是一个正确的网址.html">
+            
+                    
+                    9、验证输入的是否是一个正确的网址
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.10" data-path="../basic/10、原型链.html">
+            
+                <a href="../basic/10、原型链.html">
+            
+                    
+                    10、原型链
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.11" data-path="../basic/11、图片懒加载.html">
+            
+                <a href="../basic/11、图片懒加载.html">
+            
+                    
+                    11、图片懒加载
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.12" data-path="../basic/12、数组交集.html">
+            
+                <a href="../basic/12、数组交集.html">
+            
+                    
+                    12、数组交集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.13" data-path="../basic/13、旋转数组.html">
+            
+                <a href="../basic/13、旋转数组.html">
+            
+                    
+                    13、旋转数组
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.14" data-path="../basic/14、函数科里化思想.html">
+            
+                <a href="../basic/14、函数科里化思想.html">
+            
+                    
+                    14、函数科里化思想
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.15" data-path="../basic/15、手写new.html">
+            
+                <a href="../basic/15、手写new.html">
+            
+                    
+                    15、手写new
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.16" data-path="../basic/16、数组合并.html">
+            
+                <a href="../basic/16、数组合并.html">
+            
+                    
+                    16、数组合并
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.17" data-path="../basic/17、闭包.html">
+            
+                <a href="../basic/17、闭包.html">
+            
+                    
+                    17、闭包
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.18" data-path="../basic/18、匿名函数.html">
+            
+                <a href="../basic/18、匿名函数.html">
+            
+                    
+                    18、匿名函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.19" data-path="../basic/19、a==1&&a==2&&a==3.html">
+            
+                <a href="../basic/19、a==1&&a==2&&a==3.html">
+            
+                    
+                    19、a==1&&a==2&&a==3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.20" data-path="../basic/20、对象调用push方法.html">
+            
+                <a href="../basic/20、对象调用push方法.html">
+            
+                    
+                    20、对象调用push方法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.21" data-path="../basic/21、对象转数组.html">
+            
+                <a href="../basic/21、对象转数组.html">
+            
+                    
+                    21、对象转数组
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.22" data-path="../basic/22、值类型&引用类型（变量类型）.html">
+            
+                <a href="../basic/22、值类型&引用类型（变量类型）.html">
+            
+                    
+                    22、值类型&引用类型（变量类型）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.23" data-path="../basic/23、typeof运算符（变量类型）和深拷贝.html">
+            
+                <a href="../basic/23、typeof运算符（变量类型）和深拷贝.html">
+            
+                    
+                    23、typeof运算符（变量类型）和深拷贝
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.24" data-path="../basic/24、变量计算、类型转换.html">
+            
+                <a href="../basic/24、变量计算、类型转换.html">
+            
+                    
+                    24、变量计算、类型转换
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.25" data-path="../basic/25、class和继承.html">
+            
+                <a href="../basic/25、class和继承.html">
+            
+                    
+                    25、class和继承
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.26" data-path="../basic/26、原型和原型链.html">
+            
+                <a href="../basic/26、原型和原型链.html">
+            
+                    
+                    26、原型和原型链
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.27" data-path="../basic/27、作用域和闭包.html">
+            
+                <a href="../basic/27、作用域和闭包.html">
+            
+                    
+                    27、作用域和闭包
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.28" data-path="../basic/28、this.html">
+            
+                <a href="../basic/28、this.html">
+            
+                    
+                    28、this
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2.29" data-path="../basic/29、同步和异步.html">
+            
+                <a href="../basic/29、同步和异步.html">
+            
+                    
+                    29、同步和异步
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3" >
+            
+                <span>
+            
+                    
+                    JS Web API
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.3.1" data-path="1、DOM操作（Document Object Model文档对象模型的集合）.html">
+            
+                <a href="1、DOM操作（Document Object Model文档对象模型的集合）.html">
+            
+                    
+                    1、DOM操作（文档对象模型的集合）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.1.3.2" data-path="2、BOM操作.html">
+            
+                <a href="2、BOM操作.html">
+            
+                    
+                    2、BOM操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3.3" data-path="3、事件.html">
+            
+                <a href="3、事件.html">
+            
+                    
+                    3、事件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3.4" data-path="4、ajax.html">
+            
+                <a href="4、ajax.html">
+            
+                    
+                    4、ajax
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3.5" data-path="5、存储.html">
+            
+                <a href="5、存储.html">
+            
+                    
+                    5、存储
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3.6" data-path="6、开发环境.html">
+            
+                <a href="6、开发环境.html">
+            
+                    
+                    6、开发环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3.7" data-path="7、页面加载和渲染过程.html">
+            
+                <a href="7、页面加载和渲染过程.html">
+            
+                    
+                    7、页面加载和渲染过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3.8" data-path="8、性能优化.html">
+            
+                <a href="8、性能优化.html">
+            
+                    
+                    8、性能优化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3.9" data-path="9、函数节流&防抖.html">
+            
+                <a href="9、函数节流&防抖.html">
+            
+                    
+                    9、函数节流&防抖
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3.10" data-path="10、安全.html">
+            
+                <a href="10、安全.html">
+            
+                    
+                    10、安全
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4" >
+            
+                <span>
+            
+                    
+                    面试题
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.4.1" data-path="../interview/1、作用域和值类型引用类型的传递.html">
+            
+                <a href="../interview/1、作用域和值类型引用类型的传递.html">
+            
+                    
+                    1、作用域和值类型引用类型的传递
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.2" data-path="../interview/2、封装函数进行字符串驼峰命名.html">
+            
+                <a href="../interview/2、封装函数进行字符串驼峰命名.html">
+            
+                    
+                    2、封装函数进行字符串驼峰命名
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.3" data-path="../interview/3、冒泡排序.html">
+            
+                <a href="../interview/3、冒泡排序.html">
+            
+                    
+                    3、冒泡排序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.4" data-path="../interview/4、反转数组.html">
+            
+                <a href="../interview/4、反转数组.html">
+            
+                    
+                    4、反转数组
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.5" data-path="../interview/5、数组去重.html">
+            
+                <a href="../interview/5、数组去重.html">
+            
+                    
+                    5、数组去重
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.6" data-path="../interview/6、js综合面试题.html">
+            
+                <a href="../interview/6、js综合面试题.html">
+            
+                    
+                    6、js综合面试题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.7" data-path="../interview/7、nodejs事件轮询.html">
+            
+                <a href="../interview/7、nodejs事件轮询.html">
+            
+                    
+                    7、nodejs事件轮询
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.8" data-path="../interview/8、从url输入.html">
+            
+                <a href="../interview/8、从url输入.html">
+            
+                    
+                    8、从url输入
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.9" data-path="../interview/9、闭包.html">
+            
+                <a href="../interview/9、闭包.html">
+            
+                    
+                    9、闭包
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.10" data-path="../interview/10、变量提升&上下文.html">
+            
+                <a href="../interview/10、变量提升&上下文.html">
+            
+                    
+                    10、变量提升&上下文
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.11" data-path="../interview/11、宏任务和微任务.html">
+            
+                <a href="../interview/11、宏任务和微任务.html">
+            
+                    
+                    11、宏任务和微任务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.12" data-path="../interview/12、React和Vue.html">
+            
+                <a href="../interview/12、React和Vue.html">
+            
+                    
+                    12、React和Vue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.13" data-path="../interview/13、Redux状态管理机制.html">
+            
+                <a href="../interview/13、Redux状态管理机制.html">
+            
+                    
+                    13、Redux状态管理机制
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.14" data-path="../interview/14、vue组件间通信的方式.html">
+            
+                <a href="../interview/14、vue组件间通信的方式.html">
+            
+                    
+                    14、vue组件间通信的方式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.15" data-path="../interview/15、vuex状态管理机制.html">
+            
+                <a href="../interview/15、vuex状态管理机制.html">
+            
+                    
+                    15、vuex状态管理机制
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.16" data-path="../interview/16、Vue的MVVM的实现.html">
+            
+                <a href="../interview/16、Vue的MVVM的实现.html">
+            
+                    
+                    16、Vue的MVVM的实现
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.17" data-path="../interview/17、重绘、重排（回流）.html">
+            
+                <a href="../interview/17、重绘、重排（回流）.html">
+            
+                    
+                    17、重绘、重排（回流）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.18" data-path="../interview/18、ES6的class.html">
+            
+                <a href="../interview/18、ES6的class.html">
+            
+                    
+                    18、ES6的class
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.19" data-path="../interview/19、async、await使用与原理.html">
+            
+                <a href="../interview/19、async、await使用与原理.html">
+            
+                    
+                    19、async、await使用与原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.20" data-path="../interview/20、ts在项目中的使用.html">
+            
+                <a href="../interview/20、ts在项目中的使用.html">
+            
+                    
+                    20、ts在项目中的使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.21" data-path="../interview/21、ES6装饰器的使用.html">
+            
+                <a href="../interview/21、ES6装饰器的使用.html">
+            
+                    
+                    21、ES6装饰器的使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.22" data-path="../interview/22、事件循环.html">
+            
+                <a href="../interview/22、事件循环.html">
+            
+                    
+                    22、事件循环
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.23" data-path="../interview/23、浏览器缓存原理.html">
+            
+                <a href="../interview/23、浏览器缓存原理.html">
+            
+                    
+                    23、浏览器缓存原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.24" data-path="../interview/24、h5离线存储manifest.html">
+            
+                <a href="../interview/24、h5离线存储manifest.html">
+            
+                    
+                    24、h5离线存储manifest
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.25" data-path="../interview/25、移动端兼容问题.html">
+            
+                <a href="../interview/25、移动端兼容问题.html">
+            
+                    
+                    25、移动端兼容问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.26" data-path="../interview/26、混合开发.html">
+            
+                <a href="../interview/26、混合开发.html">
+            
+                    
+                    26、混合开发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.27" data-path="../interview/27、一次完整的http请求过程.html">
+            
+                <a href="../interview/27、一次完整的http请求过程.html">
+            
+                    
+                    27、一次完整的http请求过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.28" data-path="../interview/28、http缓存控制.html">
+            
+                <a href="../interview/28、http缓存控制.html">
+            
+                    
+                    28、http缓存控制
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.29" data-path="../interview/29、Promise.html">
+            
+                <a href="../interview/29、Promise.html">
+            
+                    
+                    29、Promise
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.30" data-path="../interview/30、React.html">
+            
+                <a href="../interview/30、React.html">
+            
+                    
+                    30、React
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.31" data-path="../interview/31、性能优化.html">
+            
+                <a href="../interview/31、性能优化.html">
+            
+                    
+                    31、性能优化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.32" data-path="../interview/32、MVC、MVVM、MVP.html">
+            
+                <a href="../interview/32、MVC、MVVM、MVP.html">
+            
+                    
+                    32、MVC、MVVM、MVP
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.33" data-path="../interview/33、函数防抖与节流.html">
+            
+                <a href="../interview/33、函数防抖与节流.html">
+            
+                    
+                    33、函数防抖与节流
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.34" data-path="../interview/34、数组声明式系列方法的使用.html">
+            
+                <a href="../interview/34、数组声明式系列方法的使用.html">
+            
+                    
+                    34、数组声明式系列方法的使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.35" data-path="../interview/35、算法基础.html">
+            
+                <a href="../interview/35、算法基础.html">
+            
+                    
+                    35、算法基础
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.36" data-path="../interview/36、webpack.html">
+            
+                <a href="../interview/36、webpack.html">
+            
+                    
+                    36、webpack
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4.37" data-path="../interview/37、设计模式.html">
+            
+                <a href="../interview/37、设计模式.html">
+            
+                    
+                    37、设计模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5" >
+            
+                <span>
+            
+                    
+                    Review
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.5.1" data-path="../review/1、call和apply的区别是什么？哪一个性能更好一些？.html">
+            
+                <a href="../review/1、call和apply的区别是什么？哪一个性能更好一些？.html">
+            
+                    
+                    1、call和apply的区别是什么？哪一个性能更好一些？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.2" data-path="../review/2、实现add方法使其输出结果为6.html">
+            
+                <a href="../review/2、实现add方法使其输出结果为6.html">
+            
+                    
+                    2、实现(5).add(3).minus(2)使其输出结果为6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.3" data-path="../review/3、箭头函数与普通函数的区别是什么？构造函数可以使用new生成实例，那么箭头函数可以吗？为什么？.html">
+            
+                <a href="../review/3、箭头函数与普通函数的区别是什么？构造函数可以使用new生成实例，那么箭头函数可以吗？为什么？.html">
+            
+                    
+                    3、箭头函数与普通函数的区别是什么？构造函数可以使用new生成实例，那么箭头函数可以吗？为什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.4" data-path="../review/4、字母大小写取反，例如'AbC'变成'aBc'.html">
+            
+                <a href="../review/4、字母大小写取反，例如'AbC'变成'aBc'.html">
+            
+                    
+                    4、字母大小写取反，例如'AbC'变成'aBc'
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.5" data-path="../review/5、字符串匹配算法.html">
+            
+                <a href="../review/5、字符串匹配算法.html">
+            
+                    
+                    5、字符串匹配算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.6" data-path="../review/6、输出下面代码运行结果.html">
+            
+                <a href="../review/6、输出下面代码运行结果.html">
+            
+                    
+                    6、输出下面代码运行结果
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.7" data-path="../review/7、判断输入的是正确的网址.html">
+            
+                <a href="../review/7、判断输入的是正确的网址.html">
+            
+                    
+                    7、判断输入的是正确的网址
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.8" data-path="../review/8、阿里面试函数题.html">
+            
+                <a href="../review/8、阿里面试函数题.html">
+            
+                    
+                    8、阿里面试函数题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.9" data-path="../review/9、实现图片懒加载.html">
+            
+                <a href="../review/9、实现图片懒加载.html">
+            
+                    
+                    9、实现图片懒加载
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.10" data-path="../review/10、正则.html">
+            
+                <a href="../review/10、正则.html">
+            
+                    
+                    10、正则
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.11" data-path="../review/11、数组扁平化.html">
+            
+                <a href="../review/11、数组扁平化.html">
+            
+                    
+                    11、数组扁平化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.12" data-path="../review/12、面向对象new.html">
+            
+                <a href="../review/12、面向对象new.html">
+            
+                    
+                    12、面向对象new
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.13" data-path="../review/13、数组合并.html">
+            
+                <a href="../review/13、数组合并.html">
+            
+                    
+                    13、数组合并
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.14" data-path="../review/14、前端经典输出1-10问题.html">
+            
+                <a href="../review/14、前端经典输出1-10问题.html">
+            
+                    
+                    14、前端经典输出1-10问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.15" data-path="../review/15、函数经典题.html">
+            
+                <a href="../review/15、函数经典题.html">
+            
+                    
+                    15、函数经典题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.16" data-path="../review/16、a=?使得a==1&&a==2&&a==3成立.html">
+            
+                <a href="../review/16、a=?使得a==1&&a==2&&a==3成立.html">
+            
+                    
+                    16、a=?使得a==1&&a==2&&a==3成立
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.17" data-path="../review/17、经典题.html">
+            
+                <a href="../review/17、经典题.html">
+            
+                    
+                    17、经典题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.18" data-path="../review/18、经典函数题.html">
+            
+                <a href="../review/18、经典函数题.html">
+            
+                    
+                    18、经典函数题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.19" data-path="../review/19、求两个数组的交集.html">
+            
+                <a href="../review/19、求两个数组的交集.html">
+            
+                    
+                    19、求两个数组的交集
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.20" data-path="../review/20、旋转数组.html">
+            
+                <a href="../review/20、旋转数组.html">
+            
+                    
+                    20、旋转数组
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.21" data-path="../review/21、把公司1-12个月的销售额存在对象中.html">
+            
+                <a href="../review/21、把公司1-12个月的销售额存在对象中.html">
+            
+                    
+                    21、把公司1-12个月的销售额存在对象中
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.22" data-path="../review/22、冒泡排序.html">
+            
+                <a href="../review/22、冒泡排序.html">
+            
+                    
+                    22、冒泡排序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.23" data-path="../review/23、插入排序.html">
+            
+                <a href="../review/23、插入排序.html">
+            
+                    
+                    23、插入排序
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5.24" data-path="../review/24、快速排序.html">
+            
+                <a href="../review/24、快速排序.html">
+            
+                    
+                    24、快速排序
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >2、BOM操作</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="2&#x3001;bom&#x64CD;&#x4F5C;&#xFF08;browser-object-model&#xFF09;">2&#x3001;BOM&#x64CD;&#x4F5C;&#xFF08;Browser Object Model&#xFF09;</h1>
+<ul>
+<li>&#x5982;&#x4F55;&#x8BC6;&#x522B;&#x6D4F;&#x89C8;&#x5668;&#x7C7B;&#x578B;</li>
+<li>&#x5206;&#x6790;&#x62C6;&#x89E3;url&#x7684;&#x5404;&#x4E2A;&#x90E8;&#x5206;</li>
+</ul>
+<h5 id="&#x77E5;&#x8BC6;&#x70B9;">&#x77E5;&#x8BC6;&#x70B9;</h5>
+<ul>
+<li>navigator&#xFF1A;&#x6D4F;&#x89C8;&#x5668;&#x4FE1;&#x606F;</li>
+<li>screen&#xFF1A;&#x5C4F;&#x5E55;&#x4FE1;&#x606F;</li>
+<li>location&#xFF1A;&#x5730;&#x5740;&#x4FE1;&#x606F;</li>
+<li>history&#xFF1A;&#x524D;&#x884C;&#x540E;&#x9000;&#x4FE1;&#x606F;</li>
+</ul>
+<h5 id="navigator&#x548C;screen">navigator&#x548C;screen</h5>
+<pre><code class="lang-shell">//navigator
+const ua = navigator.userAgent;        //&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x4FE1;&#x606F;
+const isChrome = ua.indexOf(&apos;Chrome&apos;)
+console.log(isChrome)
+
+//screen
+onsole.log(screen.width)
+cobsole.log(screen.height)
+</code></pre>
+<h5 id="location&#x548C;history">location&#x548C;history</h5>
+<pre><code class="lang-shell">//location
+console.log(location.href)
+console.log(location.protocol)
+console.log(location.pathname)
+console.log(location.search)        //&#x83B7;&#x53D6;url&#x4F20;&#x7684;&#x53C2;&#x6570;
+console.log(location.hash)        //&#x83B7;&#x53D6;&#x54C8;&#x5E0C;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;#&#x540E;&#x9762;&#x7684;&#x5185;&#x5BB9;
+
+//history
+history.back();
+history.forward()
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="1、DOM操作（Document Object Model文档对象模型的集合）.html" class="navigation navigation-prev " aria-label="Previous page: 1、DOM操作（文档对象模型的集合）">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="3、事件.html" class="navigation navigation-next " aria-label="Next page: 3、事件">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"2、BOM操作","level":"1.1.3.2","depth":3,"next":{"title":"3、事件","level":"1.1.3.3","depth":3,"path":"doc/js/3、事件.md","ref":"doc/js/3、事件.md","articles":[]},"previous":{"title":"1、DOM操作（文档对象模型的集合）","level":"1.1.3.1","depth":3,"path":"doc/js/1、DOM操作（Document Object Model文档对象模型的集合）.md","ref":"doc/js/1、DOM操作（Document Object Model文档对象模型的集合）.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/js/2、BOM操作.md","mtime":"2021-06-24T03:02:37.886Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-24T08:39:33.399Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
