@@ -56,4 +56,15 @@
         * [8、性能优化](doc/js/8、性能优化.md)
         * [9、函数节流&防抖](doc/js/9、函数节流&防抖.md)
         * [10、安全](doc/js/10、安全.md)
+    * 面试题
+        * [1、作用域和值类型引用类型的传递](doc/interview/1、作用域和值类型引用类型的传递.md)
+        * [2、封装函数进行字符串驼峰命名](doc/interview/2、封装函数进行字符串驼峰命名.md)
+        * [3、冒泡排序](doc/interview/3、冒泡排序.md)
+        * [4、反转数组](doc/interview/4、反转数组.md)
+        * [5、数组去重](doc/interview/5、数组去重.md)
+        * [6、js综合面试题](doc/interview/6、js综合面试题.md)
+        * [7、nodejs事件轮询](doc/interview/7、nodejs事件轮询.md)
+        * [8、从url输入](doc/interview/8、从url输入.md)
+        * [9、闭包](doc/interview/9、闭包.md)
+        * [10、变量提升&上下文](doc/interview/10、变量提升&上下文.md)
 
