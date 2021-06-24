@@ -88,4 +88,10 @@
         * [29、Promise](doc/interview/29、Promise.md)
         * [30、React](doc/interview/30、React.md)
         * [31、性能优化](doc/interview/31、性能优化.md)
+        * [32、MVC、MVVM、MVP](doc/interview/32、MVC、MVVM、MVP.md)
+        * [33、函数防抖与节流](doc/interview/33、函数防抖与节流.md)
+        * [34、数组声明式系列方法的使用](doc/interview/34、数组声明式系列方法的使用.md)
+        * [35、算法基础](doc/interview/35、算法基础.md)
+        * [36、webpack](doc/interview/36、webpack.md)
+        * [37、设计模式](doc/interview/37、设计模式.md)
 
