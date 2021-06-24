@@ -1,3 +1,4 @@
+### [gitbook](https://smileyqp.github.io/frontend_book)
 #### 持续更新ing～
 
 - [前端基础github地址](https://github.com/smileyqp/frontend_book)。`README.md`可以下载到`typora`中打开，会有整个大纲目录显示（github中markdown目录快捷生成方式不现实，之后可能会想办法生成贴过来，暂时不做相关处理）
