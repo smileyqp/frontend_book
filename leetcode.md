@@ -134,7 +134,57 @@ var reverse = function(x) {
 
 
 
+#### [9. 回文数](https://leetcode-cn.com/problems/palindrome-number/)
 
+![](https://img-blog.csdnimg.cn/20210623214046892.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+```shell
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function(x) {
+    let res = false;
+    x===0?res = true:null;
+    if(x>0){
+        res =  Number(x.toString().split('').reverse().join('')) === x ? true:false
+    }
+    return res;
+};
+```
+
+
+
+#### [14. 最长公共前缀](https://leetcode-cn.com/problems/longest-common-prefix/)
+
+![](https://img-blog.csdnimg.cn/20210623222404367.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+```shell
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+    let shortestIndex = 0,
+        res = '';
+    for(let i = 0;i<strs.length-1;i++){
+        strs[i].length > strs[i+1].length ? shortestIndex = i+1:null
+    }
+    let shortestItem = strs[shortestIndex]
+
+    for(let k = shortestItem.length;k>=0;k--){
+        let hasIt = strs.every((item)=>{
+            return item.slice(0,k)===shortestItem.slice(0,k)
+        })
+        if(hasIt){
+            res = shortestItem.slice(0,k);
+            break;
+        }
+        
+    }
+    return res
+};
+```
 
 
 
