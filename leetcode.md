@@ -189,8 +189,8 @@ var longestCommonPrefix = function(strs) {
 ## 6.24
 
 #### [58. 最后一个单词的长度](https://leetcode-cn.com/problems/length-of-last-word/)
+![](https://img-blog.csdnimg.cn/20210625141236256.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
-![image-20210625101829772](/Users/yqp/Library/Application Support/typora-user-images/image-20210625101829772.png)
 
 ```shell
 /**
@@ -205,7 +205,9 @@ var lengthOfLastWord = function(s) {
 
 #### [66. 加一](https://leetcode-cn.com/problems/plus-one/)
 
-![image-20210625124801700](/Users/yqp/Library/Application Support/typora-user-images/image-20210625124801700.png)
+![](https://img-blog.csdnimg.cn/20210625141212469.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+
 
 ```shell
 /**
@@ -226,4 +228,3 @@ var plusOne = function(digits) {
     return digits
 };
 ```
-
