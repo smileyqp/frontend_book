@@ -186,7 +186,44 @@ var longestCommonPrefix = function(strs) {
 };
 ```
 
+## 6.24
 
+#### [58. 最后一个单词的长度](https://leetcode-cn.com/problems/length-of-last-word/)
 
+![image-20210625101829772](/Users/yqp/Library/Application Support/typora-user-images/image-20210625101829772.png)
 
+```shell
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLastWord = function(s) {
+    var arr = s.trim().split(' ')
+    return arr[arr.length-1]?arr[arr.length-1].length:0
+};
+```
+
+#### [66. 加一](https://leetcode-cn.com/problems/plus-one/)
+
+![image-20210625124801700](/Users/yqp/Library/Application Support/typora-user-images/image-20210625124801700.png)
+
+```shell
+/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+    let i = digits.length-1;
+    while(digits[i]===9){
+        digits[i] =0;
+        i--;
+    }
+    if(i<0){
+        digits.unshift(1)
+    }else{
+        digits[i]+=1
+    }
+    return digits
+};
+```
 
