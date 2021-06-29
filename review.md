@@ -346,7 +346,6 @@ body{
 结构是整体的
 
 ```shell
-
 <div class="container clearfix">
 	<div class="center"></div>
 	<div class="left"></div>
@@ -441,8 +440,6 @@ body{
 </style>
 ```
 
-
-
 ##### 使用calc
 
 也就是要中间固定宽度，中间center的宽度要是一屏幕宽度减去左右的宽度200px。那么让左、中、右一行赴东，中间宽度设置成`calc(100%,-400px)`即可
@@ -462,7 +459,6 @@ body{
 	<div class="center"></div>
 	<div class="right"></div>
 </div>
-
 
 <style>
 html,
@@ -487,6 +483,52 @@ body{
 }
 .center{
   flex:1;
+  height:400px;
+  background:blue;
+}
+</style>
+
+```
+
+##### 定位
+
+```shell
+<div class="container clearfix">
+	<div class="left"></div>
+	<div class="center"></div>
+	<div class="right"></div>
+</div>
+
+
+<style>
+html,
+body{
+  height:100%;
+  overflow:hidden;
+}
+
+.container{
+  height:100%;
+  position:relative;
+}
+
+.left,
+.right{
+	position:absolute;
+	top:0;
+	width:200px;
+	height:200px;
+	min-height:200px;
+	background:pink;
+}
+.left{
+  left:0;
+}
+.right{
+  right:0;
+}
+.center{
+  margin:0 200px;
   height:400px;
   background:blue;
 }
