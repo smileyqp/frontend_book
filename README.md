@@ -42,7 +42,7 @@
   - 标准盒模型	
     - width和height只是指内容content部分，不包括padding、border、margin部分
   - IE盒模型（怪异盒模型）
-    - width和height包括margin、border、padding的盒子
+    - width和height包括border、padding的盒子
   - 通常我们使用的都是标准盒模型，但是我们有些情况下需要使用IE盒模型的话可以设置`box-sizing:border-box`
 
 - 水平居中的实现方式
