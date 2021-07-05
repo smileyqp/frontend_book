@@ -495,14 +495,14 @@ setTimeout
 function A(){
     alert(1);
 }
-function Func() {
+function Fn() {
     A=function(){
        alert(2);
     };
     return this;
 }
-Func.A=A;
-Func.prototype={
+Fn.A=A;
+Fn.prototype={
     A:()=>{
        alert(3);
     }

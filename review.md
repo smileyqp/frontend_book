@@ -536,6 +536,708 @@ body{
 
 ```
 
+#### 6、响应式布局
+
+##### media媒体查询
+
+##### rem
+
+##### flex
+
+##### vh/vm
+
+
+
+#### 7、拓展
+
+##### 1、使用css让一个div消失在视野中
+
+##### 2、请说明z-index工作原理，使用范围
+
+- 文档流
+  - 浮动
+  - 定位
+  - transform变形
+  - animation动画
+- 定位
+
+##### 3、谈谈对html5的理解
+
+##### 4、如何使一个div中的文字垂直居中，且该文字大小根据屏幕大小自适应
+
+##### 5、不考虑其他因素，下面哪种的渲染性能较高
+
+css浏览器的渲染机制选择器从右向左进行，先找a，再找.box a
+
+```shell
+.box a{
+  
+}
+a{
+  
+}
+```
+
+
+
+## 6.30
+
+### JS
+
+堆栈内存闭包以及作用域
+
+- JS数据类型以及区别
+  - 基本类型：Number、String、Boolean、null、undefined
+  - 引用类型：Object、function
+  - 特殊类型：Symbol
+
+- JS堆栈内存的运行机制
+- 变量提升机制
+- 作用域和作用域链
+- 闭包的两大作用：保存、保护
+- JS编译机制：VO/AO/GO 
+- JS高阶编程技巧：惰性函数、柯里化函数、高阶函数
+
+面向对象（OOP）和this的处理
+
+- 单例模式
+- 类和实例
+- 原型和原型链
+- new运算符的实现机制
+- call、apply、bind
+- constructor构造函数模式
+- JS中this的五种情况综合处理
+- JS中四大类型检测方案
+  - typeof
+  - instanceof
+  - constructor
+  - Object.prototype.toString().call()
+- JS中四大继承方案（含深浅拷贝）
+  - 原生继承
+  - …….
+  - 继承组合继承
+  - 混合继承
+  - class类中继承
+
+BOM/DOM及事件处理机制
+
+- BOM/DOM的核心操作
+- 事件对象
+  - 鼠标事件对象
+  - 键盘事件对象
+  - 其他类型的事件对象
+- 拖拽及拖拽插件的封装
+- 发布订阅设计模式
+- 深度剖析Jquery源码
+- 事件传播机制和事件代理
+- DOM2级事件的核心运行机制
+- 移动touch/guesture的事件及封装处理
+- 浏览器底层渲染机制和DOM的回流重绘
+- DIALOG模态框组件的封装
+
+### ES6/ES7
+
+ES6/ES7核心知识
+
+- let const var的区别
+- 箭头函数 
+- 解构赋值和拓展运算符
+- Set、Map数据结构
+- Promise设计模式
+- asynce/await及实现原理
+- Generator生成器函数
+- Promise A+规范（手写Promise源码）
+- JS运行机制（单线程和同步异步编程）
+- JS底层运行机制：宏任务、微任务和事件循环机制
+- Interator迭代器和for of循环
+
+ajax、http前后端交互
+
+- ajax的核心四步操作
+- get、post的核心机制与区别
+- TCP三次握手与四次挥手
+- axios库和源码剖析
+- fetch基础和实战
+- 前端开发中的九种跨域解决方案
+- http状态码和实际开发中的处理方案
+- 前端性能优化汇总（包括强缓存、弱缓存）
+
+#### 1、堆栈内存、闭包作用域
+
+```shell
+let a = {},b = '0',c = 0;
+a[b] = '张三'
+a[c] = '李四'
+
+console.log(a[b])		//李四
+```
+
+> 对象和数组的区别
+
+```shell
+let a={}, b=Symbol('1'), c=Symbol('1');  
+a[b]='张三';	
+a[c]='李四';  
+console.log(a[b]);			//张三
+```
+
+> 自己实现Symbol 
+
+```shell
+let a={}, b={n:'1'}, c={m:'2'};  
+a[b]='张三';
+a[c]='李四';  
+console.log(a[b]);		//李四
+```
+
+> Object.prototype.toString的应用，怎样检查数据类型的，valueOf
+
+基本类型直接存储，引用类型都存入堆中，最终使吧堆的地址给这个变量
+
+作为函数，在堆中存储代码（字符串），所以函数既是函数也是对象
+
+```shell
+var test = (function(i){
+    return function(){
+        alert(i*=2);	//"4" 
+    }
+})(2);
+test(5);	
+```
+
+浏览器一加载页面就形成一个栈内存， 每次函数执行的时候都会形成一个全新的执行上下文（ECSTACK）。
+
+```shell
+var a=0,
+    b=0;
+function A(a){
+    A=function(b){					//重写全局下的A
+        alert(a+b++);				//形成闭包
+    };
+    alert(a++);
+}
+A(1);			//"1"	
+A(2);			//"4"
+```
+
+#### 2、深克隆、浅克隆
+
+```shell
+let obj = {
+    a: 100,
+    b: [10, 20, 30],
+    c: {
+        x: 10
+    },
+    d: /^\d+$/
+};
+
+let arr = [10, [100, 200], {
+    x: 10,
+    y: 20
+}];
+
+```
+
+浅拷贝：只克隆第一级
+
+```shell
+//方法一
+let obj2 = {...obj}
+
+//方法二
+let obj3 = {}
+for(let key in obj){
+  if(obj.hasOwnProperty(key)){
+    obj2[key] = obj[key]
+  }
+}
+```
+
+深拷贝
+
+```shell
+//方法一：函数、日期格式的数据以及正则在JSON.stringify的时候都会出现问题
+let obj4 = JSON.parse(JSON.stringify(obj))			
+
+//方法二
+function deepClone(obj){
+  //过滤特殊情况
+  if(typeof obj !== "object"){return obj;}
+  if(obj === null){return null}			//null的typeof的值也是object
+  if(obj instanceof RegExp){return new RegExp(obj)}		//typeof检测不出来是正则；
+  if(obj instanceof Date){return new Date(obj )}
+  let newobj = {};//new Object()或者new obj.constructor(new obj.constructor这样可以克隆类的实例)  
+	for(let key in obj){
+     if(obj.hasOwnProperty(key)){
+       obj2[key] = deepclone(obj[key])
+     }
+	}
+	return obj
+}
+```
+
+> 注意：函数、日期格式的数据以及正则在JSON.stringify的时候都会出现问题。函数会直接去掉，正则会变成`{}`，日期格式会变成标准日期格式字符串
+
+
+
+ #### 3、面向对象、同步异步
+
+##### 面向对象
+
+```shell
+function Foo() {
+    getName = function () {	//改了全局的getName
+        console.log(1);
+    };
+    return this;
+}
+Foo.getName = function () {
+    console.log(2);
+};
+Foo.prototype.getName = function () {
+    console.log(3);
+};
+var getName = function () {
+    console.log(4);			//变量提升时候仅定义
+};
+function  getName() {
+    console.log(5);		//变量提升时候赋值，但是被后面执行时候吧被输出4的赋值覆盖掉
+}
+
+Foo.getName()				//2
+getName()						//4
+Foo().getName()			//1  先Foo()当作普通函数执行，普通函数执行返回this，this指的是window
+getName()						//1
+
+//JS运算符的优先级问题；一个是有参数new一个是无参数new；点叫做成员访问；成员访问比无参数的new的优先级更高，所以new Foo.getName()是先Foo.getName()再new
+new Foo.getName()		//2		JS运算符的优先级问题；一个是有参数new一个是无参数new；点叫做成员访问
+new Foo().getName()	//3		先new创建实例，找实例原型上的
+new new Foo().getName();		//3	先new Foo(),生成新实例foo，所以原型上去找getName方法
+```
+
+变量提升：在js代码执行分之前会在所有代码执行之前，带var的提前声明，带function的提前声明并定义。
+
+##### 同步异步、事件循环（EventLoop）、事件队列（EventQueue）
+
+```shell
+async function async1() {
+    console.log('async1 start');
+		//⚠️注意：await async2()这里是去执行async2，也就是会立即打印async2，但是要等待它返回结果，只是会影响其后面代码执行，对其console顺序并不影响
+    await async2();		
+    console.log('async1 end');
+}
+async function async2() {
+    console.log('async2');
+}
+console.log('script start');
+setTimeout(function() {
+    console.log('setTimeout');
+}, 0)
+async1();
+new Promise(function(resolve) {
+    console.log('promise1');
+    resolve();
+}).then(function() {
+    console.log('promise2');
+});
+console.log('script end');
+
+script start
+async1 start
+async2
+promise1
+script end
+async1 end
+promise2
+setTimeout
+```
+
+先执行主栈，查找看是否有微任务先执行微任务，然后去宏任务中依次执行宏任务。宏任务中如果继续有微任务产生，那么继续放进微任务队列，执行下一个宏任务之前先要执行完所有的微任务。
+
+宏任务：定时器、事件绑定、ajax
+
+微任务：promise、async/await
+
+## 7.2
+
+- 题一
+
+```shell
+function A(){
+    alert(1);
+}
+function Fn() {
+    A=function(){
+       alert(2);
+    };
+    return this;
+}
+Fn.A=A;
+Fn.prototype={
+    A:()=>{
+       alert(3);
+    }
+};
+A();											 
+Fn.A();										 
+Fn().A();									 
+new Fn.A();								 
+new Fn().A();							 
+new new Fn().A();					//报错；因为箭头函数不能被new，因为箭头函数没有原型链，没有constructor
+```
+
+- 题二
+
+```shell
+var x = 2;
+var y = {
+  x:3,
+  z:(function(x){
+    this.x*=x;		//y.x = 9
+    x+=2;					//y.x = 11
+    return function(n){
+      this.x*=n;		//y.x = 44
+      x+=3;					//y.x = 47
+      console.log(x)		//47
+    }
+  })(x)
+}
+var m = y.z
+m(4)
+y.z(5)		//47*5+3
+console.log(x,y,z)
+```
+
+- ##### 题三 a=?使得a==1&&a==2&&a==3成立？
+
+见下4
+
+- 题四
+
+```shell
+var x = 0,
+		y = 1;
+function fn(){
+  x += 2;
+  fn=function(y){
+    console.log(y+(--x))
+  }
+  console.log(x,y)
+}
+fn(3)    
+fn(4)			 
+console.log(x,y)			
+```
+
+- 题五
+
+```shell
+setTimeout(()=>{
+  console.log(1)
+},20)
+console.log(2)
+setTimeout(()=>{
+  console.log(3)
+},10)
+console.log(4)
+console.time('AA')
+for(let i = 0;i<90000000;i++){
+  //do sth
+}
+console.timeEnd('AA')
+console.log(5)
+setTimeout(()=>{
+  console.log(6)
+},8)
+console.log(7)
+setTimeout(()=>{
+  console.log(8)
+},15)
+console.log(9)
+
+```
+
+
+
+## 7.5
+
+#### 4、a=?使得a==1&&a==2&&a==3成立？
+
+- 对象和字符串比较，对象toString转化成字符串之后进行比较的
+- null==undefined想等，但是和其他值比较不想等
+- NaN和任何东西包括自己都不想等
+- 剩下都是转化成数字
+  - 对象转化数字都是先toString
+
+
+
+##### 方法一：对象toString
+
+对象和数字进行比较，对象要先toString转化成数字之后再和数字进行比较。那么可以将a堪称对象，给a一个自己的toString方法
+
+```shell
+var a = {
+	i:0,
+  toString(){						//使用valueOf也可以；所有的先都是调用valueOf
+    return ++this.i;
+  }
+}
+
+if(a==1&&a==2&&a==3){
+  console.log('success!')
+}
+```
+
+##### 方法二：defineProperty数据劫持
+
+对象有一个definedProperty方法，里面有两个方法set和get，可以进行监听对象的属性，有set和get方法对这个属性进行设置和获取。
+
+```shell
+var a = 0;
+Object.defineProperty(window,'a',{
+  get(){
+  	//get拦截器中不能再次获取当前的属性，即不可a=a+1;因为获取值再次会触发get，造成死循环，栈内存溢出
+    return ++a;
+  },
+  set(){}
+})
+if(a==1&&a==2&&a==3){
+  console.log('success!')
+}
+```
+
+##### 方法三：使用shift+数组
+
+shift删除第一项，返回删除的项
+
+```shell
+var a = [1,2,3]
+
+a.toString = a.shift()
+
+if(a==1&&a==2&&a==3){
+  console.log('success!')
+}
+```
+
+#### 5、react和vue
+
+##### Vue2.0和Vue3.0双向数据绑定实现原理
+
+- vue2.0中使用的是defineProperty
+  - 需要对原始数据进行克隆的（因为defineProperty中get或者set是不能对原数据进行获取或者设置操作的，不然会造成死循环栈溢出）
+  - 分别需要给对象中的每一个属性设置监听
+  - 并且，一开始vue中data中没有设置，是监听不到的
+
+```shell
+var obj = {
+  name:''
+}
+var newObj = JSON.parse(JSON.stringify(obj))
+Object.defined=Property(obj,'name',{
+  get(){
+    return newObj.name;
+  },
+  set(val){
+   	if(val = newObj.name)return;
+   	newObj.name = val;
+   	observer();					//观察者
+  }
+})
+function observer(){
+  
+}
+```
+
+- vue3.0中使用的是proxy
+
+```shell
+let obj = {}
+obj = new Proxy(obj,{
+  get(target,prop){
+    console.log('a')
+    return target[prop]
+  },
+  set(target,prop,val){
+    consol.log('b')
+    target[prop] = val;
+    observer()
+  }
+})
+function observer(){
+  
+} 
+```
+
+##### MVC和MVVM区别
+
+MVC单项数据绑定
+
+MVVM双向数据绑定，数据更改视图变化，视图更改数据变化。
+
+![](https://img-blog.csdnimg.cn/20210705095731550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+#### 6、跨域问题的产生和解决方案
+
+浏览器的同源策略
+
+##### JSONP
+
+动态创建script标签，把我们要想服务器发送请求的地址赋值给src，通过callback获取服务器返回的数据。只能是get请求。缺陷：
+
+- 不安全
+- 有缓存
+- 传递的信息大小有限制
+- 服务器单独支持
+
+##### iframe跨域解决方案
+
+- window.name
+- document.domin
+- location.hash
+- post message
+
+##### cors跨域资源共享
+
+服务器端配置，客户端正常请求
+
+客户端
+
+```shell
+import axios from 'axios';
+import qs from 'qs';
+axios.defaults.baseURL = "http://127.0.0.1:3000";
+axios.defaults.timeout = 10000;
+axios.defaults.withCredentials = true;
+
+/*
+ * 设置请求传递数据的格式（看服务器要求什么格式）
+ * x-www-form-urlencoded
+ */
+axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.transformRequest = data => qs.stringify(data);
+
+/*
+ * 设置请求拦截器 
+ * TOKEN校验（JWT）：接收服务器返回的token，存储到vuex/本地存储中，每一次向服务器发请求，我们应该把token带上
+ */
+axios.interceptors.request.use(config => {
+    let token = localStorage.getItem('token');
+    token && (config.headers.Authorization = token);
+    return config;
+}, error => {
+    return Promise.reject(error);
+});
+
+/*
+ * 响应拦截器 
+ */
+axios.interceptors.response.use(response => {
+    return response.data;
+}, error => {});
+
+export default axios;
+```
+
+服务器
+
+```shell
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "";
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header("Access-Control-Allow-Headers", "PUT,POST,GET,DELETE,OPTIONS,HEAD");
+    res.header("Access-Control-Allow-Methods", "Content-Type,Content-Length,Authorization, Accept,X-Requested-With");
+    req.method === 'OPTIONS' ? res.send('CURRENT SERVICES SUPPORT CROSS DOMAIN REQUESTS!') : next();
+});
+```
+
+##### Proxy跨域
+
+开发使用Proxy，部署用nginx反响代理
+
+#### 7、Vue/React框架中关于组件信息通信
+
+##### Vue
+
+父子通信：属性+发布订阅
+
+- 属性传递
+- 发布订阅`$on`、`$emit`
+- Provider/Inject上下文，实现祖先跟后代通信
+- slot
+- `$parent`、`$children`
+- Vex（本地存储方案，一刷新没有）
+- localStorage（持久化存储）
+
+##### React
+
+父子通信：属性+回调函数
+
+- 属性
+- 发布订阅
+- React.createContext上下文，实现祖先跟后代通信
+- redux、react-redux、mobix、dva（本地存储方案）
+- localStorage（持久化存储）
+
+##### session和cookie的区别
+
+服务器设置session，服务器返回给客户端的信息会在响应头中带上set-cookie=sid，客户端拿到之后会将值保存到本地的cookie中，客户端向服务端发送请求的时候，会默认在请求头中带上cookie
+
+#### 8、入门算法（去重&排序）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
