@@ -886,7 +886,7 @@ for(let i = 0;i<ary.length;i++){
   	ary.length--;
   	i--;
   	
-    continue;c
+    continue;cshu
   }
   obj[item] = item;
 }
@@ -1059,7 +1059,6 @@ let arr = [
     [3, 4, 5, 5],
     [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10
 ];
-
 arr.join('|').split(/(?:,|\|)/g).map((item)=>{
   return parseFloat(item)
 })
@@ -1155,7 +1154,6 @@ arr = arr.myFlat();
 //构造前两项，判断n是否从第三项即值为2开始。是的话，等于前两项之和，采用递归方式
 function fabonacci(n){
   	if(n<=1) return 1;		//斐波那契数列前两项，1
-    let arr = [1,1];
     return fabonacci(n-2)+fabonacci(n-1)
 }
 
@@ -1186,7 +1184,7 @@ function fabonacci(count){
         return 1;
       }else{
         return fn(count-1,next,curr+next)		//把当前项作为下一项
-      }
+      } 
   	}
   	return fn(count);
 }

@@ -1355,9 +1355,136 @@ function quick(ary){
 
 ```
 
+#####数组扁平化
 
+- ES6的flat
 
+```shell
+let arr = [
+    [1, 2, 2],
+    [3, 4, 5, 5],
+    [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10
+];
 
+arr = arr.flat(Infinity)
+```
+
+- 转化成字符串
+
+  - toString
+
+  ```shell
+  let arr = [
+      [1, 2, 2],
+      [3, 4, 5, 5],
+      [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10
+  ];
+  
+  arr.toString().split(',').map(item=>{
+    return parseFloat(item)
+  })
+  ```
+
+  - JSON.stringify
+
+  ```shell
+  let arr = [
+      [1, 2, 2],
+      [3, 4, 5, 5],
+      [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10
+  ];
+  arr = JSON.stringify(arr).replace(/\[|\]/g,'').split(',').map(item=>{
+    return parseFloat(item)
+  })
+  ```
+
+  - join
+
+  ```shell
+  let arr = [
+      [1, 2, 2],
+      [3, 4, 5, 5],
+      [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10
+  ];
+  
+  arr = arr.join('|').replace(/\|/g,',').split(',').map(item=>{
+    return parseFloat(item)
+  })
+  
+  //或者
+  arr = arr.join('').splite(/?:,|\|/g).map(item=>{
+    return parseFloat(item)
+  })
+  ```
+
+- 递归循环验证
+
+`[].concat(...arr)`可以展开一层，但是我们不知道总共有多少层，因此做while判断，如果数组arr中存在数组就去执行这个展开操作，并且递归里面继续有的话一层层进行递归
+
+```shell
+let arr = [
+    [1, 2, 2],
+    [3, 4, 5, 5],
+    [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10
+];
+
+function flatten(arr){
+  while(arr.some(item=>Array.isArray())){
+    arr = flatten([].concat(...arr))
+  }
+  return arr;
+}
+```
+
+##### 斐波那契数列
+
+![](https://img-blog.csdnimg.cn/20210507233617893.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- 递归
+
+```shell
+function fabonacci(n){
+  if(n === 0 || n === 1)return 1;
+  if(n>1){
+    return fabonacci(n-1)+fabonacci(n-2)
+  }
+}
+```
+
+- 构造斐波那契数列
+
+构造n+1-2个数值，一次push到数组中，直到n。最后返回数组最后一项值
+
+```shell
+function fabonacci(n){
+	if(n<=1){return 1;}
+  let arr = [1,1];
+  let i = n+1 - 2;
+  while(i>0){
+    arr.push(arr[arr.length-2]+arr[arr.length-1]);
+    i--;
+  }
+  return arr[arr.length-1]
+}
+
+```
+
+- 递归
+
+```shell
+function fabonacci(count){
+  fn(count,cur=1,next=1){
+    if(count === 0){
+    	return 1;
+    }else{
+      return fn(count-1,next,cur+next)
+    }
+  }
+  return fn(count)
+}
+```
+
+##### 字节算法
 
 
 
