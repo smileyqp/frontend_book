@@ -1490,6 +1490,34 @@ function fabonacci(count){
 - 例如：输入15
 - 结果：[[1,2,3,4,5],[4,5,6],[7,8]]输入一个正数N，输出所有和为N的连续正数序列例如：输入15结果：[[1,2,3,4,5],[4,5,6],[7,8]]
 
+```shell
+function fn(n){
+  let middleIndex = Math.ceil(n/2)
+  let res = [];
+  for(let i = 1;i<=middleIndex;i++){
+    for(let j = 2;;j++){				//连续累加次数
+      let total = (i+i+j-1)*j/2			//首项加微镶成意向书除以二
+      if(total>n){
+        break;
+      }else if(total === n){
+        res.push(createArr(i,j))
+        break;
+      }
+    }
+  }
+  return res
+}
+
+function createArr(i,j){					//以i 为第一位，长度为j一次递增1的数组
+	let arr = new Array(j).fill(null)
+	arr[0] = i;
+	arr = arr.map((item,index)=>{
+    return i+index
+	})
+	return arr
+}
+```
+
 
 
 
