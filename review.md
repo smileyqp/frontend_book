@@ -1186,6 +1186,179 @@ app.use((req, res, next) => {
 
 #### 8、入门算法（去重&排序）
 
+##### 数组去重
+
+- Set
+
+```shell
+let ary = [12, 23, 12, 15, 25, 23, 25, 14, 16];
+
+let arr = [...new Set(ary)]
+
+let arr1 = Array.from(new Set(ary))
+```
+
+- 遍历
+
+双层遍历
+
+```shell
+let ary = [12, 23, 12, 15, 25, 23, 25, 14, 16];
+
+for(let i = 0;i<ary.length-1;i++){
+  for(let j = i;j<ary.length;j++){
+    if(ary[i]===ary[j]){
+      ary.splice(i,1)
+      i--;
+      break;
+    }
+  }
+}
+
+```
+
+indexOf
+
+```shell
+let ary = [12, 23, 12, 15, 25, 23, 25, 14, 16];
+
+for(let i = 0;i<ary.length-1;i++){
+  let item = ary[i],
+  		args = ary.slice(i);		
+  if(args.indexOf(item)>-1){
+  	//方法一：
+    args.slice(i,i);
+    i--;
+    break;
+    //方法二：args[i] = null;最后args.filter(item=>{return item !== null})
+    //方法三：用最后一项替换，数组长度减一，对比i减一 arg[i]=args[arg.length-1];i--;arg.length--;
+    //方法四：另外创建数组操作
+  }
+}
+```
+
+- 键值对方式
+
+遍历，将其一一放入对象，判断对象中是否存在，不存在放入，存在删除数组中值
+
+```shell
+let ary = [12, 23, 12, 15, 25, 23, 25, 14, 16];
+ 
+let obj = [];
+for(let i = 0;i<ary.length;i++){
+  obj[i] = i;
+  if(typeof obj[item]!=='undefined'){
+    ary[i] = ary[ary.length-1]
+    i--;
+    ary.length--;
+  }
+  obj[item] = item;
+}
+obj = null;
+```
+
+- 先排序，再去重
+
+sort排序然后和后一项对比去重
+
+```shell
+let ary = [12, 23, 12, 15, 25, 23, 25, 14, 16];
+
+ary.sort((a,b)=>a-b)
+for(let i = 0;i<ary.length-1;i++){
+  if(ary[i]===ary[i+1]){
+    ary.splice(i,1)
+    i--;
+    ary.length--;
+  }
+}
+
+```
+
+sort排序使用正则
+
+```shell
+let ary = [12, 23, 12, 15, 25, 23, 25, 14, 16];
+
+ary.sort((a,b)=>a-b)
+ary = ary.join('@')
+let reg = /\d+@\1*/g
+let arr = []
+ary.replace(reg,(val,group)=>{
+  arr.push(Number(group.slice(0,group.length-1)))
+})
+console.log(arr)
+```
+
+> 去重
+>
+> - ES6的Set
+> - 前一项跟后一项比较
+> - 新容器
+> - 先排序后去重
+
+##### 数组排序
+
+- 冒泡排序
+
+前一项后一项比较，大的放后边
+
+```shell
+let ary = [12, 23, 12, 15, 25, 23, 25, 14, 16];
+
+for(let i = 0;i<ary.length-1;i++){		//直到倒数第二项
+  for(let j = 0;j <ary.length-1-i){
+    ary[i]>ary[i+1]?[ary[i],ary[i+1]]=[ary[i+1],ary[i]]:null
+  }
+}
+```
+
+- 插入排序
+
+创建新数组，从后到前遍历，大的插入到这个后面
+
+```shell
+let ary = [12, 23, 12, 15, 25, 23, 25, 14, 16];
+let arr = [];
+arr.push(ary[0])
+
+for(let i = 1;i<ary.length;i++){
+  for(let j = arr.length-1;j>=0;j--){
+    if(ary[i]>arr[j]){
+      arr.slice(j,0,ary[i])
+      break;
+    }
+    if(j===0){
+      arr.unshift(ary[i])
+    }
+  }
+}
+
+```
+
+- 快速排序
+
+```shell
+let ary = [12, 23, 12, 15, 25, 23, 25, 14, 16];
+
+function quick(ary){
+	if(ary.length<=1){return ary}
+  let middleIndex = Math.floor(ary.length/2),
+  		middleItem = ary.splice(middleIndex,1)[0];
+ let leftArr = [];
+ let rightArr = [];
+ for(let i = 1;i<ary.length;i++){
+   ary[i]<middleItem?leftArr.push(ary[i]):rightArr.push(ary[i])
+ }
+ return quick(leftArr).concat(middleItem,quick(rightArr))
+}
+
+```
+
+
+
+
+
 
 
 

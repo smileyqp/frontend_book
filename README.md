@@ -837,8 +837,7 @@ ary.sort();	//升序
 - ES6 : Set
 
 ```shell
-let ary = [12, 23, 12, 15, 25, 23, 25, 14, 16];
-
+，
 let arr = [...new Set(ary)]		//使用展开运算符
 
 let arr = Array.from(new Set(ary))		//使用Array.from
@@ -887,7 +886,7 @@ for(let i = 0;i<ary.length;i++){
   	ary.length--;
   	i--;
   	
-    continue;
+    continue;c
   }
   obj[item] = item;
 }
