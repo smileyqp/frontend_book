@@ -1222,7 +1222,7 @@ function createArr(n,len){
     return n+index
   })
   return arr;
-}
+
 ```
 
 
@@ -1231,7 +1231,7 @@ function createArr(n,len){
 
 #### 1、call和apply区别是什么，哪个性能更好一些？
 
-call和apply都是function原型上的方法，用于改变this指向的，唯一的区别就是传入参数的形式不一样，call是一个一个传参，而apply把所有参数用数组形式传。bind与他们类似（传参数也是数组形式），都是改变this指向，只是预先处理函数，但是并不会立即执行。 经过测试，call比apply性能要好一些。
+call和apply都是function原型上的方法，用于改变this指向的，唯一的区别就是传入参数的形式不一样，call是一个一个传参，而apply把所有参数用数组形式传。bind与他们类似（传参数也是一个个的类似call），都是改变this指向，只是预先处理函数，但是并不会立即执行。 经过测试，call比apply性能要好一些。
 
 ```shell
 //使用apply场景
@@ -1265,10 +1265,7 @@ console.timeEnd('A')
 
 ```shell
 let reg = /^(?!^[a-zA-Z]+$)(?!^[A-Z0-9]+$)(?!^[0-9a-z]+$)(?![0-9]+$)[a-zA-Z0-9]{6,16}$/
-
 ```
-
-
 
 #### 3、实现一个$attr(name, value)遍历，属性名为name，值为value的的元素合集
 
@@ -1319,7 +1316,7 @@ str.replace(reg,value=>{  //value正则捕获的内容
 
 #### 5、实现`(5).add(3).minus(2)`使其输出结果为6
 
-- 对象的实例可以调用对象圆形上的方法。由于数字5可以调用add那么说明，add一定是数字5原型上的方法。数字5属于Number类，那么Number类上一定要有add方法
+- 对象的实例可以调用对象原型。上的方法。由于数字5可以调用add那么说明，add一定是数字5原型上的方法。数字5属于Number类，那么Number类上一定要有add方法
 - 并且由于是链式调用（链式写法），那么执行完add之后，返回的一定是可以继续调用minus的，那么，每一次执行add返回一定是一个数字 ，即返回Number类的实例
 
 ```shell
@@ -1388,7 +1385,7 @@ fn2.call(obj)  //this  => window
 let fn = (...arg ) =>{
   console.log(arg)		// [10, 20, 30]
 }
-fn(10,20,30)
+
 ```
 
 - 箭头函数不能被new执行，因为箭头函数没有this也没有prototype
@@ -1417,6 +1414,19 @@ arr = arr.each(function(item,index){
 }，obj)
 
 //这个方法最后实现的结果是 [100,200,300,false]
+
+//解答
+(function(){
+	function each(fn,obj){
+    this.bind(obj);
+    for(let i = 0;i<this.length;i++){
+      this[i] = fn(i)
+    }
+    return this;
+	}
+  
+  Array.prototype.each = each;
+})()
 ```
 
 
@@ -1429,6 +1439,17 @@ str = str.replace(/smile/g,function(...arg){
   
   return ; //返回把正则匹配的替换后的字符串
 })
+
+
+//解答
+(function(){
+  function replace(reg,fn){
+    for(let i = 0;i<this.length;i++){
+    ...
+    }
+  }
+  String.prototype.replace = replace;
+})()
 ```
 
 
@@ -1488,8 +1509,8 @@ console.log(S.myIndexOf(T))
   function myIndexOf(T){
     //this 原始的字符串，即S
     let reg = new RegExp(T),
-    		res = reg.exect(this);
-    return  res === null ? -1:res .index
+    		res = reg.exec(this);
+    return  res === null ? -1:res.index
   }
   String.prototype.myIndexOf = myIndexOf;
 })()

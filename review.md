@@ -1496,7 +1496,7 @@ function fn(n){
   let res = [];
   for(let i = 1;i<=middleIndex;i++){
     for(let j = 2;;j++){				//连续累加次数
-      let total = (i+i+j-1)*j/2			//首项加微镶成意向书除以二
+      let total = (i+i+j-1)*j/2			//首项加尾项乘以项数除以2
       if(total>n){
         break;
       }else if(total === n){
@@ -1518,41 +1518,261 @@ function createArr(i,j){					//以i 为第一位，长度为j一次递增1的数
 }
 ```
 
+## 7.6
+
+#### 9、call和apply
+
+call和apply都是Function原型上的方法，Function的实例都可以调用这两个方法，这两个方法都是用来改变this指向的。区别是，call一个个传参，apply是用数组形式传参。跟他们类似的还有一个方法bind，用于改变this指向，但是bind并没有将函数立即执行，只是预先处理了。只有apply传入的参数用数组形式传递。经过测试，call比apply性能好一些，尤其是参数数据量大的时候
+
+#### 10、编写正则6-16位，包含大小写字母加上数字
+
+- 正向预查：必须满足什么条件。
+- 负向预查：必须不满足什么条件。
+
+1、正负向预查都是在正则表达式中设置条件使用的。
+
+```shell
+//包含cainiao
+var reg1 = /cainiao/
+var str1 = 'cainiao8'
+
+//cainiao并且后面必须是8;
+var reg1 = /cainiao?=8/
+var str2 = 'cainiao8'
+var str3 = 'cainiao9'
+
+console.log(reg1.exec(str2))
+console.log(reg1.exec(str3))
+```
+
+`?=`设置的条件并不参与捕获，只是检查一下后面的字符是否符合要求而已,比如上面`cainiao?=8`返回的是菜鸟而不是`cainiao8`
+
+2、`var reg1 = /(?=^)\d{2}(?=$)/`：两位数字的左边必须是开头，两位数字的右边必须是结尾
+
+`var reg2 = /^\d{2}$/`：以两位数字开头结尾。`?=`表示必须是,`?!`表示不能是。
+
+3、编写正则6-16位，包含大小写字母加上数字
+
+```shell
+let reg = /(?!^[a-zA-Z]+$)(?!^[0-9]+$)(?!^[a-z0-9]+$)(?!^[0-9A-Z]+$)^[a-zA-Z0-9]{6-16}$/
+
+//^[a-zA-Z0-9]{6-16}$  6-16位数字 大小写字母
+//(?!^[0-9]+$)   	不能全是数字
+//(?!^[a-zA-Z]+$)		不能全是大小写字母
+```
+
+4、1-10位数字字母下划线组成的字符串，必须有下划线
+
+方式一：正向预查
+
+```shell
+let reg = /^\w{1,10}$(?=_+)/
+
+//^\w{1,10}$ 1-10位数字 字母			\w数字字母下划线			\d数字
+//(?=_+)  必须有下划线
+```
+
+方式二：负向预查
+
+```shell
+let reg = /(!?^[a-zA-Z0-9]+$)^\w{1,10}$(?=_+)/
+
+//(!?^[a-zA-Z0-9]+$) 	从开头到结尾不能纯是数字字母
+```
+
+5、字符串中包含数字字母，但是必须有下划线
+
+```shell
+let reg = /(?=_)\w+/
+```
+
+#### 11、实现一个属性选择器$attr
+
+实现一个`$attr(name,value)`遍历
+
+属性位name
+
+值为value的元素集合
+
+```shell
+let ary = $attr('class','box')		//找出属性名为class位box的元素的集合
+let ary1 = $attr('id','content')		//找出id位content的元素集合
+
+function $attr(property,value){
+	let elements = document.getElementByTagName('*'),				//获取页面中所有的标签元素
+			arr = [];
+	
+	elements = Array.from(elements);			//类数组转换成数组
+	elements.forEach((item)=>{
+    let itemValue = item.getAttribute(property)		//标签中获取属性位property的值
+    
+    if(property === 'class'){			//class需要特殊处理，因为class中包含多个属性值
+    	//验证class值是否前后都是两个空格的包含有值为value的属性，是的话push进去
+      new RegExp(/\b+value+\b/).test(itemValue)?arr.push(item):null;
+      return;
+    }
+    
+    if(itemValue === value){
+      arr.push(item);				//将属性名称为property并且属性值为value的放进结果数组中
+    }
+	})
+	
+	return arr;
+}
+```
+
+#### 12、给英文单词前后加上空格
+
+英文字母汉字组成的字符串，用正则给英文单词前后加上空格
+
+```shell
+let str = "test一个测试，just测试一下下smileyqp",
+		reg = /\b[a-z]+\b/ig;													// 	\b指单词
+str = str.replace(reg,value=>{
+  return ' '+value+' ';
+}).trim();			//trim()删除首位空格；trimLeft去首；trimRight去尾
+console.log(str)
+```
+
+#### 13、实现`(5).add(3).minus(2)`使其输出结果为6
+
+- 对象的实例可以调用原型上的方法，可以看出一定是Number实例上的方法。
+
+- 链式调用，说明返回的也一定是Number的实例
+
+实例直接调取的方法，就将方法直接挂在当前实例所处的原型上
+
+```shell
+(function(){
+	function check(n){
+    n = Number(n)
+    return isNaN(n)?0:n;			//判断是否是有效数字;isNaN判断是否是非有效数字
+	}
+  function add(n){
+  	n = check(n);		//进行有效性检测处理
+    return this+n;
+  }
+  function minus(n){
+    n = check(n);		//进行有效性检测处理
+    return this-n;
+  }
 
 
+  ['add','minus'].forEach(item=>{
+    Number.prototye[item] = eval(item)
+  })
+})()
+```
 
+#### 14、箭头函数&普通函数
 
+- 语法上箭头函数更加简洁
+- 箭头函数内没有this，它里面的this从属于其上下文。使用call和apply都无法改变其this指向
+- 箭头函数中没有`arguments`类数组，只有基于`...args`传入的参数集合
 
+```shell
+let fn = (...args)=>{
+  console.log(args)			//[10,20,30]
+}
+fn(10,20,30)
+```
 
+- 箭头函数不能被new执行因为它没有构造函数也没有原型链（没有this也没有prototype）
 
+```shell
+function fn(){
+  this.X = 100;
+}
+fn.prototype.getX = function (){}
+let f = new fn;
+```
 
+拓展
 
+```shell
+题目一：数组上实现一个each方法，实现下面的三个要求
 
+let arr = [10,20,30,'AA'],
+		obj = {};
+arr = arr.each(function(item,index){
+  // this => obj  1、第二个参数不传，this指向window
+  if(!isNaN(item)){
+    return false; 	//2、如果不是数字，那么返回的是false
+  }
+  return item*10;		//3、返回结果是啥就把数组中当前项替换掉
+}，obj)
 
+//这个方法最后实现的结果是 [100,200,300,false]
 
+//解答
+(function(){
+	function each(fn,obj){
+    this.bind(obj);
+    for(let i = 0;i<this.length;i++){
+      this[i] = fn(i)
+    }
+    return this;
+	}
+  
+  Array.prototype.each = each;
+})()
+```
 
+#### 15、字符串中字母大写转小写、小写转大写
 
+```shell
+let str = 'smileyqpTestItSMILEYQP@沛沛$3434'
+str.replace(/a-zA-Z/ig,(content)=>{
+  return content.toUppperCase() === content?content.toLowerCase():content.toUpperCase()
+})
+```
 
+或者使用`content.charCodeAt()`，ASCII表中找大写字母的取值范围（65-90）
 
+#### 16、实现字符串查找
 
+实现一个字符串匹配算法，从字符串S中查找是否存在字符串T，若存在则返回第一次所在位置，不存在返回-1（不能基于indexOf以及includes等内置方法）
 
+##### 方法一：遍历查找
 
+```shell
+(function(){
+  function myIndexOf(T){
+    let tlen = T.length,
+    		slen = this.length,
+    		res = -1;
+    if(tlen>slen){return res;}
+    for(let i = 0;i <= slen - tlen;i++){
+      if(this.slice(i,t.length)){
+      	res = i;
+      	break;
+      }
+    }
+    return res;
+    
+  }
+  String.prototype.myIndexOf = myIndexOf;
+})()
+let S = 'yqp27982348张三smile&&&smile',
+		T = 'smile'
+console.log(S.myIndexOf(T))
+```
 
+##### 方法二：正则
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```shell
+(function(){
+  function myIndexOf(T){
+  	let reg = new RegExp(T),
+  			res = reg.exec(this)		//exec执行一个搜索匹配没有返回null；存在返回结果数组
+  	return res===null?-1:res.index
+  }
+  String.prototype.myIndexOf = myIndexOf;
+})()
+let S = 'yqp27982348张三smile&&&smile',
+		T = 'smile'
+console.log(S.myIndexOf(T))
+```
 
 
 
