@@ -1822,6 +1822,8 @@ Foo.a(); 		//1
 
 #### 20、数组交集
 
+##### 两层遍历
+
 ```shell
 let nums1 = [1,2,3,2]
 let nums2 = [2,2,2]
@@ -1842,7 +1844,7 @@ function fn(nums1,nums2){
 
 ```
 
-
+##### 一层遍历indexOf
 
 ```shell
 let nums1 = [1,2,3,2]
@@ -1861,15 +1863,179 @@ function fn(nums1,nums2){
 }
 ```
 
+#### 21、旋转数组
+
+给定一个数组，将数组中的元素向右移k个位置，其中k是非负数，例如：
+
+输入：[1,2,3,4,5,6,7]和k=3
+
+输出：[5,6,7,1,2,3,4]
+
+##### 1、splice 直接截取后面key位数，拼接到前面
+
+```shell
+(function(){
+  function rotate(key){
+  	if(key <=0 || this.length%key===0){return this}
+  	if(key > this.length){key = this.length%key}
+  	return this.splice(this.length-key,key).concat(this)
+  }
+  Array.prototype.rotate = rotate;
+})()
+let arr = [1,2,3,4,5,6,7],
+		k = 3;
+arr.rotate(3);		
+```
+
+##### 2、slice
+
+```shell
+(function(){
+  function rotate(key){
+  	if(key <=0 || this.length%key===0){return this}
+  	if(key > this.length){key = this.length%key}
+  	return this.slice(-key).concat(this.slice(0,this.length-key))
+  }
+  Array.prototype.rotate = rotate;
+})()
+let arr = [1,2,3,4,5,6,7],
+		k = 3;
+arr.rotate(3);		
+```
+
+##### 3、最后一项放到开头执行key次。pop和unshift
+
+```shell
+(function(){
+  function rotate(key){
+  		if(key <=0 || this.length%key===0){return this}
+      if(key > this.length){key = this.length%key}
+      for(let i = 0;i < key;i++){
+        this.unshift(this.pop());		//pop删除最后一项，unshift从头部插入第一项
+      }
+  }
+  Array.prototype.rotate = rotate;
+})()
+let arr = [1,2,3,4,5,6,7],
+		k = 3;
+arr.rotate(3);		
+```
+
+#### 22、函数柯里化思想
+
+##### 函数柯里化：就是预先处理的思想（利用闭包机制。闭包的量大作用：保存与保护）。利用闭包的保护作用，存储一些变量值，当要使用的时候再使用。
+
+实现：点击时候，this指向修改成obj，并传入事件对象以及两个参数100，200
+
+```shell
+//题目部分：
+let obj = {
+  name:'OBJ'
+}
+
+function fn(...arg){
+  console.log(this,arg)
+}
+
+document.body.onclick = fn;		//this=>BODY
+document.body.onclick = function(ev){
+//=>ev 事件对象：给元素的某个事件绑定方法，当事件触发会绑定这个方法，并且把当前事件的相关信息传递给这个函数事件对象
+}
+
+//解答部分：
+(function(){
+  function mybind(context=window,...outargs){
+		const _this = this;
+		return function(...innerArgs){
+      _this.call(context,...outargs,...innerargs)
+		}
+	}
+  Function.prototype.mybind = mybind;
+})()
+
+//调用
+let obj = {
+  name:'OBJ'
+}
+document.body.onclick = fn.myBind(obj,100,200)
+```
+
+##### 最简单的函数柯里化demo
+
+```shell
+function fn(a){
+	//第一次调用，形成闭包，将a存储起来
+  return function(b){
+    return a+b
+  }
+}
+
+fn(100)(200);		//第一次执行完成之后，作用域销毁，但是由于形成闭包，变量值a被存储了起来
+```
+
+##### 【clould review】经典案例
+
+```shell
+请实现一个add函数实现以下功能
+add(1)	//1
+add(1)(2)	//3
+add(1)(2)(3)	//6
+add(1)(2)(3)(4)	//10
+add(1)(2,3)	//6
+add(1,2)(3)	//6
+add(1,2,3)	//6
+
+//解答：
+function currying(fn,length){
+	length === fn.length||length;
+  return function(...args){
+    if(args.length>=length){
+      return fn(...args)
+    }else{
+      return curring(fn.bind(null,...args),length = length - fn.length)
+    }
+  }
+}
+
+let add = currying((...args)=>{
+  return eval(args.join('+'))
+},5)   //这个后面的5是总共要求几个字数的和，比如这里求五个的。这里是不管几次调用函数，只是参数的数量
+```
+
+#### 23、手写new
+
+```shell
+function Dog(name){
+  this.name = name;
+}
+Dog.prototype.bark = function(){
+  console.log('bark')
+}
+Dog.prototype.sayName = function(){
+  console.log('my name is'+this.name)
+}
 
 
+要实现一个_new方法实现以下：
+let dog = _new(Dog,'dooooog')
+dog.sayName()
+dog.bark()
+```
 
+- 创建空对象
+- 对象原型链指向传入对象的原型链
+- 代码执行
+- 返回新对象
 
-
-
-
-
-
+```shell
+function _new(Fn,...args){			//Fn当前要new的类，args给构造函数传递的参数
+  let obj = Object.create(Fn.prototype)	//创建原型链指向Fn.prototype的空对象
+  //let obj = {};
+  //obj.__proto__ = Fn.prototype;
+  Fn.call(obj,...args)
+  return obj
+}
+```
 
 
 

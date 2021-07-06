@@ -1932,7 +1932,7 @@ document.body.onclick = fn.myBind(obj,100,200)
   - 保护
   - 保存
 
-- 最简单科里化函数编程思想示例。科里化=》闭包。形成闭包，里面的参数供子集使用。
+  - 最简单科里化函数编程思想示例。科里化=》闭包。形成闭包，里面的参数供子集使用。
 
 ```shell
 function fn(x){
@@ -2017,6 +2017,7 @@ function _new(Fn,...arg){
   //Fn.call(obj,...arg)
   let obj = Object.create(Fn.prototype);		//创建原型链为Fn.prototype的对象实例
   obj.__proto__ = Fn.prototype;
+  Fn.call(obj,...args)
   return obj;
 }
 
