@@ -1774,7 +1774,92 @@ let S = 'yqp27982348张三smile&&&smile',
 console.log(S.myIndexOf(T))
 ```
 
+#### 【re】17、验证输入的是否是一个正确的网址
 
+协议
+
+域名
+
+路径
+
+问号传参
+
+哈希
+
+```shell
+let reg = /^((http|https|ftp):\/\/)$/ig
+```
+
+
+
+#### 18、原型链
+
+```shell
+function Foo(){
+  Foo.a = function(){
+    console.log(1)
+  }
+  this.a = function(){
+    console.log(2)
+  }
+}
+Foo.prototype.a = function(){
+  console.log(3)
+}
+Foo.a = function(){
+  cosnole.log(4)
+}
+
+Foo.a();	 			//4
+let obj = new Foo();			//改变了Foo对象上的a以及里面的this.a指向obj,挂载私有方法		
+obj.a();					//2
+Foo.a(); 		//1
+```
+
+#### 【re】19、图片懒加载
+
+
+
+#### 20、数组交集
+
+```shell
+let nums1 = [1,2,3,2]
+let nums2 = [2,2,2]
+
+function fn(nums1,nums2){
+	let res = [];
+  for(let i = 0;i<nums1.length;i++){
+    for(let j = 0;j<nums2.length;j++){
+      if(nums1[i]===nums2[j]){
+        res.push(nums[i])
+        nums2[j] = null;
+        break;
+      }
+    }
+  }
+  return res;
+}
+
+```
+
+
+
+```shell
+let nums1 = [1,2,3,2]
+let nums2 = [2,2,2]
+
+function fn(nums1,nums2){
+	let res = [];
+  nums1.forEach((item)=>{
+    let n = nums2.indexOf(item)
+		if(n>-1){
+      nums2.splice(n,1)
+      res.push(item)
+		}
+  })
+  return res;
+}
+```
 
 
 

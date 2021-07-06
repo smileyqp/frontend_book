@@ -1775,7 +1775,7 @@ let nums2 = [2,2,2]
 
 let arr = [];
 nums1.forEach((item,index)=>{
-	let n = nums.indexOf();
+	let n = nums.indexOf(item);
 	if(n>0){
     nums1.splice(index,1)
     nums2.splice(n,1)
