@@ -2413,7 +2413,35 @@ function deepClone(obj = {}){
 
 
 
-#### 32、class和继承
+#### 32、变量计算类型转换
+
+##### 字符串拼接
+
+```shell
+const a = 100+10;		//110
+const b = 100+'10';	//10010
+const c = true+'10';	//true10
+```
+
+##### ==
+
+```shell
+null == undefined 							//true
+NaN == NaN 											//false
+Symbol('1') == Symbol('1')			//false
+{} == {}												//比较内存地址
+```
+
+其他都转化成数字进行比较。字符串转化成数字比较的时候，只要含有非数字的字符都是NaN
+
+##### truely变量和falsely变量
+
+- truely变量：两次非运算得到true
+- falsely变量：两次非运算得到false
+
+![](https://img-blog.csdnimg.cn/20210513182550663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+#### 33、class和继承
 
 
 
