@@ -2175,6 +2175,23 @@ console.log(10)		//10
 
 #### 27、var a = ?`使得`a==1&&a==2&&a==3`
 
+##### 拓展==
+
+==比较如果左右两边数据类型不一样，那么久先转化成一样的再进行比较
+
+- `{}=={}`两个对象比内存地址
+- `null==undefined`为true
+- `NaN==NaN`为false。NaN与任何都不想等，包括自身
+- `[12]==12`为true。对象和字符串进行比较，先将对象toString转化成字符串再进行比较
+- 其他都转换成数字再比较
+  - 对象转化成数字都是先toString再转化成数字
+  - 字符串转化成数字只要有一个非字符串就是NaN
+  - 布尔转数字：true =>1   false=>0
+  - null转化成0,，但是null==0为false
+  - undefined转化成NaN
+
+##### var a = ?`使得`a==1&&a==2&&a==3`
+
 - a为object：toString
 
 ```shell
