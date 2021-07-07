@@ -2129,11 +2129,92 @@ for(var i = 0;i<=10;i++){
 - 匿名函数如果设置了函数名，在其外部是不能用这个函数名调用的
 - 在这个匿名函数内部可以调用，也就是当前函数本身。但是这个匿名函数名称在这个函数内部就类似于一个const声明的常量，不能进行修改赋值。（严格模式下会报错，非严格模式下不会报错）
 
+```shell
+let fn = function AAA(){
+  console.log(AAA)		//非严格模式下返回函数本身
+}
+```
 
+```shell
+var b = 10
+(function b(){
+  b = 20
+  console.log(b)		//此时b相当于一个常量不能被改变；
+})()
+console.log(b)
+```
 
+```shell
+va b = 10;
+(function(){		//去掉匿名函数的名称b之后，里面的b就变成全局的了
+  b = 20
+  console.log(b)	//20
+})()
+console.log(10)		//20
+```
 
+现在要让上面的匿名函数中的b的值log变成20，并且全局b仍然是10，怎样实现？将其变成函数自己内部变量，传入的参数(形参)或者内部声明
 
+```shell
+va b = 10;
+(function(){		
+  let b = 20			//用var也可以
+  console.log(b)	//20
+})()
+console.log(10)		//10
+```
 
+```shell
+va b = 10;
+(function(b){		
+  b = 20		
+  console.log(b)	//20
+})()
+console.log(10)		//10
+```
+
+#### 27、var a = ?`使得`a==1&&a==2&&a==3`
+
+- a为object：toString
+
+```shell
+var a = {
+	n:0,
+  toString(){
+    return ++this.n;
+  }
+}
+console.log(a==1&&a==2&&a==3)
+```
+
+- a为数组：toString = shift
+
+```shell
+var a = [1,2,3]
+a.toString = a.shift
+console.log(a==1&&a==2&&a==3)
+```
+
+- get和set方法劫持
+
+```shell
+let n = 0;
+Object.defineProperty(window,'a',{
+  get:function(){
+    return ++n;
+  }
+})
+console.log(a==1&&a==2&&a==3)
+```
+
+```shell
+Object.defineProperty(window,'a',{
+  get:function(){
+  	return this.val?++this.val:this.val=1;
+  }
+})
+console.log(a==1&&a==2&&a==3)
+```
 
 
 

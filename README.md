@@ -2239,9 +2239,10 @@ Object.defineProperty(window,'a',{
 //设置成全局变量实际并不好，可以优化
 Object.defineProperty(window,'a',{
   get:function(){
-  	this.val?this.val++:this.val=1;
+  	return this.val?++this.val:this.val=1;
   }
 })
+console.log(a==1&&a==2&&a==3)
 ```
 
 ES6新增方法
