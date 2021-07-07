@@ -2265,15 +2265,108 @@ Array.prototype.push = function(val){
 //push往数组末尾新增一个元素，返回的是数组的长度
 ```
 
+#### 29、对象转数组
 
+![](https://img-blog.csdnimg.cn/20210513153531948.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
+```shell
+let obj = {
+  1:2323,
+  4:3492,
+  8:2673
+}
+//要求得到[2323, null, null, 3492, null, null, null, 2673, null, null, null, null]
+```
 
+- 方法一：`new Array(23).fill(null)`
 
+```shell
+let obj = {
+  1:2323,
+  4:3492,
+  8:2673
+}
+let arr = new Array(12).fill(null)
+arr = arr.map((item,index)=>{
+  return obj[index+1] ? obj[index+1] : null;
+})
+```
 
+- 方法二：设置obj的长度，截取后面12个
 
+```shell
+let obj = {
+  1:2323,
+  4:3492,
+  8:2673
+}
+//Array.from(obj) 后的值[undefined, 2323, undefined, undefined, 3492, undefined, undefined, undefined, 2673, undefined, undefined, undefined,undefined]
+obj.length = 13;
+Array.from(obj).slice(1).map((item)=>{
+  return item ? item :null;
+})
+```
 
+- 方法三：Object.keys遍历object的key
 
+```shell
+let obj = {
+  1:2323,
+  4:3492,
+  8:2673
+}
+//Object.keys(obj)获取obj中的所有属性名，以数组的方式返回
+let arr = new Array(12).fill(null)
+Object.keys(obj).forEach((key)=>{
+  arr[parseInt(key)-1] = obj[key]
+})
+```
 
+#### 30、值类型和引用类型
+
+深拷贝
+
+- 值类型
+
+```shell
+let a = 100;
+let b = 1;
+a = 200;
+console.log(b) //100
+```
+
+- 引用类型
+
+```shell
+let a = {age:10};
+let b = a;
+b.age = 20;
+console.log(a.age)	//20
+```
+
+- 常见值类型
+  - Number
+  - String
+  - Boolean
+  - undefined
+  - Symbol
+
+- 常见引用类型
+  - Object
+  - Array
+  - Function特殊引用类型，不用域存储数据。所以没有拷贝、赋值函数一类说法
+  - null特殊的引用类型，指向的地址为空地址
+
+```shell
+const obj1 = {x:100,y:200}
+const obj2 =obj1;
+let x1 = obj1.x;		//100 	x1值类型
+obj2.x = 101;				//改了引用地址的x的值
+x1 = 102;
+console.log(obj1)	 {x:101,y:200}
+```
+
+#### 31、typeof运算符（变量类型）和深拷贝
 
 
 
