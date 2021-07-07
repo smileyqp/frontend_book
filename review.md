@@ -2366,9 +2366,50 @@ x1 = 102;
 console.log(obj1)	 {x:101,y:200}
 ```
 
-#### 【re】31、typeof运算符（变量类型）和深拷贝
+#### 31、typeof运算符（变量类型）和深拷贝
 
+##### typeof运算符
 
+- 判断所有值类型
+- 判断是否函数
+- 判断引用类型（不可细分，null也是特殊的Object）
+
+```shell
+let a;						 						//'undefined'
+const str = 'smileyqp'				//'string'
+const n = 100									//'number'
+const b = true								//'boolean'
+const s = Symbol('s')					//'symbol'
+
+typeof console.log						//'function'
+typeof function(){}						//'function'
+
+typeof null										//'object'
+typeof {a:1,b:0}							//'object'
+typeof [1,2,3,4]							//'object'
+```
+
+##### 深克隆
+
+```shell
+function deepClone(obj = {}){
+  if(typeof obj !== 'object'||obj === null){
+    return obj;
+  }
+  let result;
+  if(obj instanceof Array){			//根据传入参数的类型初始化返回的是对象还是数组
+    result = []
+  }else{
+    result = {}
+  }
+  for(let key in obj){
+    if(obj.hasOwnProperty(key)){
+      result[key] = deepClone(obj[key])
+    }
+  }
+  return result;
+}
+```
 
 
 
