@@ -2082,7 +2082,7 @@ for(var i = 0;i<10;i++){
 ```shell
 //将var改成let，let定义的局部块的变量，每次循环都会在当前块作用域中形成私有变量i，定时器执行的时候所使用的i是所属作用域的i
 for(let i = 0;i<10;i++){
-  setTimeut(()=>{
+  setTimeout(()=>{
     console.log(i)
   },10000)
 }
@@ -2093,7 +2093,7 @@ for(let i = 0;i<10;i++){
 //使用闭包保存i 
 for(var i = 0;i<10;i++){
   (function(i){
-    setTimeut(()=>{
+    setTimeout(()=>{
     	console.log(i)
   	},10000)
   })(i)
@@ -2103,7 +2103,7 @@ for(var i = 0;i<10;i++){
 ```shell
 //使用闭包也可以这样写
 for(var i = 0;i<10;i++){
-  setTimeut(((i)=>{
+  setTimeout(((i)=>{
    return ()=>{
       console.log(i)
    }
@@ -2129,7 +2129,7 @@ for(var i = 0;i<10;i++){
 - 并且这个名字相当于一个常量，这个名字存储的值不能修改（非严格模式下不会报错，但是不会有任何的效果，严格模式下直接报错。可以理解为const创建的常量 ）
 
 ```shell
-let fn = unction AAA(){
+let fn = function AAA(){
   console.log(AAA)	//当前函数
 }
 ```
@@ -2144,7 +2144,7 @@ console.log(10)		//10
 ```
 
 ```shell
-var b = 10;
+va b = 10;
 (function(){		//去掉匿名函数的名称b之后，里面的b就变成全局的了
   b = 20
   console.log(b)	//20
