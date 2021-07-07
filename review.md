@@ -2210,10 +2210,42 @@ console.log(a==1&&a==2&&a==3)
 ```shell
 Object.defineProperty(window,'a',{
   get:function(){
+  	//this =>window.a
   	return this.val?++this.val:this.val=1;
   }
 })
 console.log(a==1&&a==2&&a==3)
+```
+
+#### 28、对象调用push方法
+
+```shell
+let obj = {
+  2:3,
+  3:4,
+  length:2,
+  push:Array.prototype.push
+} 
+
+obj.push(1)			//obj[obj.length] = 1 即 obj[2] = 1 并且obj.length++ length 3
+obj.push(2)			//obj[obj.length] = 2 即 obj[3] = 2	并且obj.length++ length 4
+console.log(obj)
+
+//所以obj的值
+obj =  {
+  2:1,
+  3:2,
+  length:4,
+  push:Array.prototype.push
+}
+
+//数组push方法原理
+Array.prototype.push = function(val){
+   this[this.length] = val;
+   return this.length;	//现在这个长度是数组增加1之后了的长度
+}
+
+//push往数组末尾新增一个元素，返回的是数组的长度
 ```
 
 
