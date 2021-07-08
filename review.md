@@ -2788,16 +2788,16 @@ loadImg(url="http://....").then(img=>{
 }).cach(error => {
   console.log(error)
 })
+
+//return可以返回两种情况：Promise实例；普通对象
 ```
-
-
 
 ##### 异步的使用场景
 
 - 网络请求（图片加载也是异步的、点击事件等也是异步的）
 - 定时任务
 
-##### Promise主要是解决回调地狱的问题
+##### Promise主要是串行方式解决回调地狱的问题
 
 ```shell
 function getData(){
