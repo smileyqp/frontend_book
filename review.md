@@ -2443,17 +2443,73 @@ Symbol('1') == Symbol('1')			//false
 
 #### 33、class和继承
 
+```shell
+class Person{
+  constructor(name,age){
+    this.name = name
+    this.age = age;
+  }
+  eat(){
+    console.log(this.name+'eat food')
+  }
+}
+
+class Girl extends Person(){
+  constructor(name,age){
+    super(name,age)
+  }
+  dance(){
+    console.log(name+'dance')
+  }
+}
+
+let smileyqp = new Girl('smileyqp',20)
+
+smileyqp.eat()			//smileyqp eat food
+smileyqp.__proto__.eat()			//报错，相当于在Person上去调用eat而name没有定义
+```
+
+##### instanceof
+
+- instanceof可以去判断引用类型
+- Object是所有class的父类
+
+```shell
+smileyqp instsnceof Girl;
+smileyqp instanceof Person;
+smileyqp instanceof Object;
+
+[] instanceof Array;	//true
+{} instanceof Object;		//true
+[] instanceof Object;		//true
+```
+
+#### 35、原型和原型链
+
+- 每个class都有显式原型`prototype`
+- 每个实例都有隐式原型`__proto__`
+- 实例的`__proto__`都指向class的`prototype`
+
+```shell
+//隐式原型和显式原型（案例demo接上个题目的案例）
+console.log(smileyqp.__proto__)
+console.log(Girls.prototype)
+console.log(smileyqp.__proto__ === Girl.prototype)		//true
+```
+
+##### 获取实例的属性和方法
+
+- 自身的属性和方法上着
+- 如果找不到就在`__proto__`上查找
+
+##### 原型链
+
+![](https://img-blog.csdnimg.cn/20210514111816793.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+```shell
 
 
-
-
-
-
-
-
-
-
-
+```
 
 
 

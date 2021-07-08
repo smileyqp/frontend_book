@@ -2553,7 +2553,7 @@ let smileyqp = new Student('smileyqp',20)
 
 //补充
 smileyqp.eat()		//smileyqp eat food
-smileyqp.__proto__.eat()		//会爆粗，因为它相当于在smileyqp.__proto__即Student的原型上去调用的，没有定义name所以会报错
+smileyqp.__proto__.eat()		//会爆错，因为它相当于在smileyqp.__proto__即Student的原型上去调用的，没有定义name所以会报错
 
 ```
 
