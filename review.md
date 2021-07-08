@@ -2797,7 +2797,7 @@ loadImg(url="http://....").then(img=>{
 - 网络请求（图片加载也是异步的、点击事件等也是异步的）
 - 定时任务
 
-##### Promise主要是串行方式解决回调地狱的问题
+##### Promise主要是串行方式解决回调地狱嵌套的问题
 
 ```shell
 function getData(){
