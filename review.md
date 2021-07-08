@@ -1,4 +1,6 @@
-# Basic
+# Basic：
+
+### 第一遍复习（内容同README）
 
 ## 6.28
 
@@ -2608,17 +2610,210 @@ class myJquery extends jquery{
 
 ##### 闭包
 
+```shell
+//函数作为返回值，返回之后再执行
+function create(){
+  let a = 100;
+  return function(){
+    console.log(a)
+  }
+}
+let fn = create()
+let a = 200;
+fn()			//100
+```
+
+```shell
+//函数作为参数，通过参数传入之后再执行
+function print(fn){
+  let a = 200;
+  fn()
+}
+let a = 100;
+function fn(){
+  console.log(a)
+}
+print(fn);	//100
+```
+
+自由变量值是在函数定义的地方一层层向上查找，并非在执行时候进行查找
+
+#### 37、this
+
+##### this出现的场景
+
+- 当作普通函数被调用：返回window
+- apply、bind、call：传入什么就绑定什么
+- 作为对象方法被调用：对象本身
+- 在class方法中调用：当前实例本身
+- 箭头函数：找上级作用域的this
+
+this的取值是函数调用的时候决定的不是函数定义的时候决定的
+
+```shell
+function fn1(){
+  console.log(this)
+}
+fn1();	//window
+
+fn1.call({x:100})		 	//{x:100}
+	
+const fn2 = fn1.bind({x:200})
+fn2();			//{x:200}
+```
+
+箭头函数中没有this，this指向它上级函数用于的this
+
+```shell
+//demo1
+const zhansan = {
+  name:'zhangsan',
+  sayHi(){
+    console.log(this)		//this当前对象
+  },
+  wait(){
+    setTimeout(function(){
+      console.log(this)		//this window
+    })
+  }
+}
+
+//demo1
+const zhangsan = {
+  name:'zhangsan',
+  sayHi(){
+    console.log(this)		//当前对象
+  },
+  waitAgain(){
+    setTimeout(()=>{
+      console.log(this)		//当前对象
+    })
+  }
+}
+```
+
+##### 手写bind函数
+
+- 改变this指向
+- 返回方法：方法中调用fn并传入参数
+
+```shell
+(function(){
+  function mybind(){
+  	//argujments将参数拆解为数组。arguments不是数组只是类数组
+    const args = Array.prototype.slice.call(arguments)
+    
+    const t = arguments.shift();		//获取第一项this
+    
+    const self = this;		//fn1.bind()zh哦你给的fn1，即调用这个方法的方法
+    
+    return function(){
+      self.apply(t,args)
+    }
+  }
+  Fuction.mybind = mybind;
+})()
+```
+
+##### 闭包的应用
+
+- 保存
+- 保护
+
+缓存小插件:简单的cache工具，只能通过get和set堆数据进行读取和写入操作
+
+```shell
+function createCahe(){
+  const data = {};
+  return {
+    set:function(key,val){
+      data[key] = val;
+    },
+    get:function(key){
+      return data[key]
+    }
+  }
+}
+
+//隐藏不被外界访问,是指c只能通过set，get设置获取。只提供api访问，其他方式改不了
+const c = createCache();
+c.set('name','smileyqp')
+c.get('name')		//smileyqp
+```
+
+#### 38、同步和异步
+
+```shell
+//异步
+console.log(1)
+setTimeout(()=>{
+  console.log(2)
+},1000)
+console.log(3)
+
+//同步
+console.log(1)
+alert(2)
+console.log(3)
+```
+
+##### 同步和异步的区别
+
+- 长生同步异步的原因：基于js的单线程的语言（同时只能做一件事）
+- 同步会阻塞代码执行
+- 异步不会阻塞代码执行
+
+##### 手写用Promise加载一张图片
+
+```shell
+function loadImg(src){
+  return new Promise((resolve,reject)=>{
+    let img = document.createElement('img')
+    img.onload = function(){
+      console.log('loaded')
+      resolve(img)
+    }
+    img.onerror = function(){
+      console.log('error')
+      reject(new Error(`图片加载失败${src}`))
+    }
+    img.src = src
+  })
+}
+loadImg(url="http://....").then(img=>{
+  console.log(img.width)
+  return img
+}).then(img=>{
+  console.log(img.height)
+}).cach(error => {
+  console.log(error)
+})
+```
 
 
 
+##### 异步的使用场景
 
+- 网络请求（图片加载也是异步的、点击事件等也是异步的）
+- 定时任务
 
+##### Promise主要是解决回调地狱的问题
 
-
-
-
-
-
+```shell
+function getData(){
+  return new Promise((resolve,reject)=>{
+    $.ajax({
+      url,
+      success(data){
+        resolve(data)
+      },
+      error(err){
+        reject(err)
+      }
+    })
+  })
+}
+```
 
 
 

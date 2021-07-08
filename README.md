@@ -2746,19 +2746,10 @@ fn();		//100   函数执行是在全局作用域；函数的定义在create函�
 ```
 
 ```shell
-//函数作为参数，通过参数传入之后再执行
-function print(fn){
-  let a = 200;
-  fn()
-}
-let a = 100;
-function fn(){
-  console.log(a)
-}
-print(fn);		//100
+s	//100
 ```
 
-- ##### 闭包：自由变量的查找是在函数定义的地方，向上级作用域进行查找，不实在执行的地方进行查找 
+- ##### 闭包：自由变量的查找是在函数定义的地方，向上级作用域进行查找，不在执行的地方进行查找 
 
 #### 27、this
 
@@ -2803,7 +2794,7 @@ const zhangsan = {
   name:'zhangsan',
   sayHi(){
     console.log(this)		//当前对象
-  },
+  },zuo
   waitAgain(){
     setTimeout(()=>{
       console.log(this)		//当前对象
@@ -2886,21 +2877,22 @@ console.log(3)
 ```shell
 const src = '../xxximg.png'
 
-function loadImg(){
+function loadImg(src){
   return new Promise((resolve,reject)=>{
     let img = document.createElement('img')
 		img.onload = function(){
   		console.log('loaded')
   		resolve(img)
 		}
-		mg.onrror = function(){
+
+		img.onerror = function(){
       reject(new Error(`图片加载失败${src}`))
 		}
 		img.src = src
   })
 }
 
-loadImg().then(img=>{
+loadImg(url).then(img=>{
   console.log(img)
   return img
 }).catch(err){
