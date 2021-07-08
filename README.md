@@ -2660,13 +2660,7 @@ class myJQuery extends jQuery{
   constructor(selector){
     super(selector)
   }
-  //扩展自己的方法
-  addClass(className){
-    
-  }
-  style(data){
-    
-  }
+ 
 }
 ```
 
@@ -2722,7 +2716,7 @@ for(let i = 0;i<=10;i++){	//let i是定义块作用域
   ```shell
   //ES6新增
   if(true){
-    let x = 100;			//这里用乐天声明的变量或者const声明的常量，他们的作用域都是这个块之内
+    let x = 100;			//这里用let声明的变量或者const声明的常量，他们的作用域都是这个块之内
   }
   console.log(x);		//会报错
   ```

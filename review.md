@@ -2441,6 +2441,8 @@ Symbol('1') == Symbol('1')			//false
 
 ![](https://img-blog.csdnimg.cn/20210513182550663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
+## 7.8
+
 #### 33、class和继承
 
 ```shell
@@ -2507,17 +2509,104 @@ console.log(smileyqp.__proto__ === Girl.prototype)		//true
 ![](https://img-blog.csdnimg.cn/20210514111816793.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
 
 ```shell
-
-
+smileyqp.__proto__ === Girl.prototype;
+Girl.__proto__ === Person.prototype;
+Person.__Proto__ === Object.prototype;
 ```
 
+##### instanceof
 
+顺着原型链进行查找，有返回true没有返回false
 
+##### 原型和原型链相关问题回答
 
+- 如何判断一个变量是否是数组（instaceof）
+- 手写一个jQuery，考虑插件性和扩展性
 
+##### 【re】手写jQuery
 
+```shell
+class jquery{
+  constructor(selector){
+    const result = document.querySelectorAll(selector);
+    const length = result.length;
+    for(let i = 0;i < length;i++){
+      this[i] = result[i]
+    }
+    this.length = length;
+    this.selector = selector;
+  }
+  get(index){
+    return this[index]
+  }
+  each(fn){
+    for(let i =0;i<this.length;i++){
+      const elem  = this[i];
+      fn(elem)
+    }
+  }
+ 	on(type,fn){
+    return this.each(elem=>{
+      elem.addEventListener(type,fn,false)
+    })
+  }
+}
 
+const $p = new jQuery('p')
+$p.get(1)
+$p.each(elem=>console.log(elem.nodeName))
+$p.on('click',()=>{alert('click')})
+```
 
+```shell
+//插件机制
+jquery.prototype.dialog = function(info){
+  alert(info)
+}
+
+//造轮子
+class myJquery extends jquery{
+  constructor(selector){
+    super(selector)
+  }
+   //扩展自己的方法
+  addClass(className){
+    
+  }
+  style(data){
+    
+  }
+}
+```
+
+#### 36、作用域和闭包
+
+##### 作用域和自由变量
+
+- 作用域：变量的合法使用范围
+
+- 作用域分类：
+
+  - 全局作用域
+  - 函数作用域
+  - 块级作用域（ES6新增）
+
+  ```shell
+  if(true){
+    let x = 100;		//这里使用let声明的变量或者const声明的常量，作用域都是这个块之中
+  }
+  console.log(x)			//这里会报错
+  ```
+
+##### 自由变量
+
+- 自由变量：一个变量在当前的作用域没有声明但是被使用了
+- 向上级作用域一层层寻找，直到找到为止
+- 如果全局作用域都没找到的话就会报错
+
+![](https://img-blog.csdnimg.cn/20210514144022202.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+##### 闭包
 
 
 
