@@ -2878,3 +2878,782 @@ function getData(){
   - 单线程和异步本质、异步和同步的区别
   - 前端异步使用的场景（网络请求&定时任务）
   - Promise解决callback hell问题
+
+## 7.9
+
+### JS Web API
+
+- DOM
+- BOM
+- 事件绑定
+- ajax
+- 存储
+
+#### 1、DOM操作（Document oBject Model）
+
+##### 题目
+
+- DOM属于哪种数据结构
+- DOM操作常见的API
+- attr和property的区别
+- 一次性插入多个DOM节点考虑性能
+
+##### 知识点
+
+- DOM的本质是什么
+
+  - html语言解析出来的一棵树。基于树形结构。
+
+- DOM节点操作
+
+  - 获取节点
+    - getElementById
+    - getElementByClassName
+    - getElementByTagName
+    - document.querySelectorAll
+  - attribute：直接修改dom结构，直接对标签有影响
+
+  ```shell
+  const pList = ducument.querySelectorAll('p')
+  const p = pList[0]
+  
+  p.getAttribute('data-name')
+  p.setAttribute('data-name','smileyqp')
+  p.getAttribute('style')
+  p.setAttribute('style','font-size:30px')
+  ```
+
+  - property：修改js变量的属性，设置不会对标签有什么影响
+
+- DOM结构操作
+
+  - 新增/插入操作
+  - 获取子元素列表，获取父元素
+  - 删除子节点
+
+```shell
+const div1 = document.getElementById('div1')
+const div2 = document.getElementById('div2')
+
+//新建节点
+const newP = document.createElement('newP')
+newP.innerHTML = 'this is newP'
+
+//插入节点
+div1.appendChild(newP)
+
+//移动节点
+div2.appendChild(p1)	//将一个已经存在于dom中的元素append到另外一个中去，那么就是将节点移动过去的
+
+//获取父元素
+console.log(p1.parentNode)
+
+//获取子元素列表;类似乎组转化成数组Array.prototype.slice.call，然后过滤类型为1，即p的元素节点
+div1.childNodes();		
+const div1childNodesP = Array.prototype.slice.call(div1.childNodes()).filter((child)=>{
+  if(child.nodeType === 1){
+    return true;
+  }
+})
+
+//删除子节点
+div1.removeChild(div1childNodesP[0])
+```
+
+- DOM性能
+
+  - 缓存dom查询
+
+  ```shell
+  //不做缓存
+  for(let i = 0;i < document.getElementN=ByTagName('p').length;i++){
+    
+  }
+  //缓存
+  const plist = document.getElemnetBtTagName('p')
+  const plen = pliost.length;
+  for(let i = 0;i<plen;i++){
+    
+  }
+  ```
+
+  - 将频繁的操作改成一次操作(创建为难片段一次性插入)
+
+  ```shell
+  const listNode = document.getElementByTagName('list')
+  
+  //创建文档片段createFragment
+  const frag = document.createFragment();
+  
+  for(let i = 0;i <10 ;i++){
+    const li = document.createElement('li')
+    li.innerHTML = 'list item'+i;
+    frag.appendChild(li)
+  }
+  
+  listNode.appendChild(frag)
+  
+  ```
+
+  
+
+## 7.10
+
+#### 2、BOM
+
+- 如何识别浏览器类型
+- 分析拆解url的各个部分
+
+##### 知识点
+
+- navigator：浏览器信息
+- screen：屏幕信息
+- location：地址信息
+- history：前行后退信息
+
+##### navigator和screen
+
+```shell
+//navigator
+const ua = navigator.userAgent;		//获取当前浏览器的信息
+const isChrome = ua.indexOf('Chrome')
+console.log(isChrome)
+
+//screen
+onsole.log(screen.width)
+cobsole.log(screen.height)
+```
+
+##### location和history
+
+```shell
+//location
+console.log(location.href)
+console.log(location.protocol)
+console.log(location.pathname)
+console.log(location.search)		//获取url传的参数
+console.log(location.hash)		//获取哈希，也就是#后面的内容
+
+//history
+history.back();
+history.forward()
+```
+
+#### 3、事件
+
+##### 知识点
+
+- 事件绑定
+- 事件冒泡
+- 事件代理
+
+##### 题目
+
+- 编写一个通用的事件监听函数
+- 描述事件冒泡的流程
+  - 基于dom树形结构
+  - 事件会顺着触发元素往上冒泡
+  - 应用场景：事件代理
+- 无限下拉图片列表，如何监听每个图片的点击
+  - 事件代理
+  - 通过`e.target`来获取触发元素
+  - 用matches来判断是否触发元素
+
+##### 知识点
+
+- 事件绑定
+
+```shell
+const btn = document.getElementById('btn1')
+btn.addEventListener('click',event=>{
+  console.log('click')
+})
+```
+
+```shell
+//普通绑定：简易通用的事件绑定函数；详细通用事件绑定函数在下面将会提到
+function bindEvent(elem,type,fn){
+  elem.addEventListener(type,fn)
+}
+
+const a = document.getElementById('link1')
+bindEvent(a,'click',e=>{
+  e.preventDefault();		//阻止默认行为；比如组织链接的点击跳转
+  console.log(e.target);	//获取点击的元素
+  alert('this is aaa')
+})
+```
+
+- 事件冒泡
+  - 例如：在body上添加事件，如果点击它子元素，那么都会冒泡到body上去
+  - `stopPropagation`可以阻止冒泡
+
+![](https://img-blog.csdnimg.cn/20210517152222915.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- 事件代理（基于事件冒泡）
+  - 事件代理： 不好挨个去绑定事件，就绑定事件到它父标签上。
+  - 事件代理是基于事件冒泡来做的，有了事件冒泡的机制才能在这个机制上去实现代理。
+  - 事件代理的场景：一般是通过某种形式，比如图片列表的无限下拉加载。可能并不能知道容器里面到底有多少个图片标签，也没法一个个去绑定事件。这个时候我们就可以通过冒泡去获取事件，我们就可以通过一些方式去拿到这个点击的图片 
+
+![](https://img-blog.csdnimg.cn/20210517153922677.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+
+
+##### 事件绑定函数（考虑代理）
+
+![](https://img-blog.csdnimg.cn/20210517162455366.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- 综合以上两种（加上冒泡的情况）
+
+```shell
+//代理绑定
+function bindEvent(elem,type,selector,fn){		//selector要筛选的触发元素选择器
+  if(fn == null){		//说明传的是三个参数；也就是知识普通绑定，第三个参数就是fn
+    fn = selector;
+    selector = null;
+  }
+  elem.addEventListener(type,event=>{
+    //event.preventDefault();
+    const target = event.target;
+    if(selector){		//有selector也就是代理绑定（存在冒泡情况）
+      if(target.matches(selector)){		//判断当前元素是否符合我们传入的这个选择器
+        fn.call(target,event)
+      }
+    }else{		//没有selector，普通绑定情况
+      fn.call(target,event)		//因为需要fn的this指向这个元素，所以要call绑定一下当前触发的元素
+    }
+  })
+}
+
+
+//代理绑定
+const div3 = document.getElementById('div3')
+bindEvent(div3,'click','a',function(event){		//注意：这里不能用箭头函数，因为里面this指向
+  event.preventDefault();
+  alert(this.innerHTML)
+})
+```
+
+#### 4、ajax
+
+- XMLHttpRequest
+
+```shell
+//手写简易的ajax
+//get请求；post请求差不多
+const xhr = new XMLHttpRequest();
+xhr.open('GET','data/test.json',true);		//true的意思是异步请求
+xhr.onreadystatechange = function(){
+  if(xhr.readystate === 4){
+    if(xhr.status === 200){
+      alert(xhr.responseText)
+    }else if(xhr.status === 404){
+      console.log('404 not found ')
+    }
+  }
+}
+xhr.send(null)
+```
+
+- 状态码
+
+![](https://img-blog.csdnimg.cn/2021051717113417.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210518093144992.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+301永久重定向；302临时重定向；304资源未改变
+
+404资源找不到；403客户端没有权限
+
+##### 同源策略
+
+- ajax浏览器要求当前网页和server端必须同源
+- 同源：协议 域名 端口 必须一致
+- 加载 图片、css、js可以无视同源策略
+  - `<img src=""/>`可以做统计打点，可使用第三方统计服务
+  - `<link src=""/>`和`<script src=""></script>`可以使用CDN，CDN一般都是外域
+  - `<script src=""></script>`可以实现JSONP
+
+##### 跨域
+
+- `<script></script>`可以绕过跨域限制
+- 服务器可以任意动态拼接数据返回
+- 所以，`<script></script>`可以获得跨域数据，只要服务端愿意返回
+
+![](https://img-blog.csdnimg.cn/20210518100723124.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/2021051810101435.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+##### CORS 服务器设置http header
+
+- 服务器允许跨域
+
+![](https://img-blog.csdnimg.cn/20210518101438223.png)
+
+##### ajax的常用插件
+
+- jquery
+- fetch
+- Axis
+
+#### 5、存储
+
+##### 题目
+
+- 描述cookie、localstorage、sessionStorage的区别
+  - 容量
+  - API易用性
+  - 是否跟随http 请求发出去 
+
+##### 知识点
+
+- cookie
+- localstorage和sessionstorage
+
+##### cookie
+
+- 本身用于浏览器和server通信
+- 被"借用"来本地存储
+- 可用`document.cookie=... `来修改
+- 存储大小，最大4kb
+- http请求时候需要发送到服务端，增加请求数据量
+- 只能用`document.cookie=… `来修改，太过简陋
+
+ ##### localstorage和sessionstorage
+
+- html5专门为存储而设计，最大可以存储5M
+- API简洁易用，用setItem和getItem
+- 不会随着http请求被发出去
+
+#### 6、开发环境
+
+- git
+- 调试工具
+- 抓包
+- webpack babel
+- linux常用命令
+
+##### git
+
+- 最常用的代码版本管理工具
+- 大型项目多人协作，必须使用git
+
+##### chrome调试工具
+
+- elements
+- console
+- debugger
+- network
+- application
+
+
+
+##### 抓包
+
+- 移动端h5页，查看网络请求
+- win一般用fiddler
+- mac一般用charles
+- 抓包过程：
+  - 手机电脑连同一个局域网
+  - 手机代理到电脑上
+  - 手机浏览网页即可抓包
+- 查看网址请求
+- 网址代理 
+- https
+
+##### webpack和babel
+
+- ES6模块化，浏览器暂不支持
+- ES6语法，浏览器不完全支持
+- 压缩代码、整合代码，让网页加载更快
+
+##### linux
+
+- 公司上线的服务器一般是linux
+- 测试机也一致，linux
+- linux基础命令
+
+##### 运行环境介绍
+
+- 运行环境即浏览器（server 端有nodejs）
+- 下载网页代码，渲染出页面，期间执行若干js
+- 要保证在浏览器中：稳定且高效
+
+##### 运行环境涉及前端内容
+
+- 网页加载过程
+- 性能优化（体验优化）
+- 安全 
+
+#### 7、页面加载和渲染的过程
+
+##### 题目
+
+- 从输入url到渲染出页面的整个过程（见下：资源形式、加载过程、渲染过程）
+  - 下载资源：各个资源类型、下载过程
+  - 渲染页面：结合html、css、js图片等
+- `window.onload`和`DOMContentLoad`的区别
+  - window.onload页面全部加载完成包括图片
+  - DOMContentLoaded是dom渲染完成即可，此时图片视频可能还没有加载完 
+
+```shell
+document.addEventListener('load',()=>{
+  console.log('window loaded')
+})
+
+document.addEventListener('DOMContentLoaded',()=>{
+  console.log('dom loaded')
+})
+```
+
+##### 知识点
+
+- 加载资源的形式
+- 加载资源的过程
+- 渲染页面的过程
+
+##### 资源形式
+
+- html代码
+- 媒体文件，如图片视频等
+- js、css代码
+
+##### 加载过程
+
+- DNS解析：域名=>IP地址
+- 浏览器更具IP地址向服务器发起http请求
+- 服务器处理http请求，并返回给浏览器 
+
+##### 渲染过程
+
+- 根据html生成dom树
+- 根据css生成cssom（css对象模型）
+- 将dom树和cssom整合形成render tree（渲染树：像是dom树中挂了css属性）
+- 根据render tree渲染页面
+- 遇到`<script>`则暂停渲染，优先加载并执行js代码完成再继续（js进程和渲染进程共一个线程。script中可能有代码改了之前执行的结果，所以遇到script先暂停渲染）
+
+##### 为何建议把css放head中？
+
+- 防止重复渲染（本来按照没有css的默认样式渲染，完成之后，又发现有样式又重新结合这个cssom进行重新生成render tree重新渲染。并且网速慢的时候对用户可能会出现两种样式切换）
+
+##### 为何建议把script放到最后？
+
+- js没有放到最后就会导致页面渲染的过程比较长。因为js会暂停渲染。我们是期望先渲染完成再修改
+
+##### 图片渲染
+
+- 图片渲染并不会阻塞dom渲染，只不过可能先空着等图片加载完成之后显示
+
+#### 8、性能优化
+
+##### 性能优化原则
+
+- 多使用内存、缓存或者其他方法
+- 减少CPU计算量、减少网络加载耗时
+- （适用于所有编程性能优化、空间换时间）
+
+##### 从哪些方面入手
+
+- 加载更快
+  - 减少资源体积：压缩代码
+  - 减少访问次数：合并代码（js、css、雪碧图）、ssr服务端渲染（数据一起给前端）、缓存
+  - 使用更快的网络：CDN（根据地域做静态文件访问服务）
+- 渲染更快
+  - css放进head中，js放到body最下面
+  - 尽早执行js，用DOMContentLoad去触发
+  - 懒加载(图片懒加载、上滑加载更多)
+  - 对dom查询进行缓存
+  - 频繁dom操作合并到一起插入都没结构
+  - 节流throttle和防抖debounce （渲染更加流畅）
+
+##### 示例
+
+- 资源合并
+
+![](https://img-blog.csdnimg.cn/20210518173127797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+
+
+- 缓存
+  - 静态资源加hash后缀，根据文件内容计算哈希
+  - 文件内容不变、则哈希不变，那么url不变
+  - url和文件不变，则会自动触发http缓存机制返回304（减少了资源请求）
+
+![image-20210518173205903](/Users/yqp/Library/Application%20Support/typora-user-images/image-20210518173205903.png)
+
+- SSR（server side render）
+  - 服务端渲染：将网页和数据一起加载一起渲染
+  - 非SSR（前后端分离）：先加载网页、再加载数据、再渲染数据
+  - 早先的JSP、PHP、APS都属于ssr，现在的react  vue ssr
+- 懒加载
+
+![](https://img-blog.csdnimg.cn/20210518174016768.png)
+
+- 缓存dom查询
+
+![](https://img-blog.csdnimg.cn/20210518174058216.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- 多个dom操作合并一起插入dom结构
+
+![](https://img-blog.csdnimg.cn/20210518174153235.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- 尽早开始js执行
+  - 在dom渲染结束之后就可以开始js执行没必要等到图片、视频等多媒体资源都加载完成之后再去执行
+
+![](https://img-blog.csdnimg.cn/20210518174320303.png)
+
+
+
+#### 9、函数节流&防抖
+
+- 函数节流（上次与下次的函数出发的像个时间是一定的）
+
+一个函数执行完成一次之后，只有大于哦这个函数的执行中期，才会执行第二次。有些会频繁出发的函数，比如说：拖拽场景
+
+```shell
+function throttle(fn,delay){
+	var lastTime = 0;
+  return function(){
+    var curTime = Date.now()
+    if(curTime = lastTime > delay){
+      fn()
+      lastTime = curTime;
+    }
+  }
+}
+```
+
+- 函数防抖
+
+频繁触发的函数，规定时间之内，只能触发最后一次（每次出发回重置计时器）
+
+```shell
+function debounce(fn,delay){
+  var timer = null;
+  return function(){
+    if(timer){timer = null;}
+    timer = setTimeout(function(){
+      fn.call(this)
+    },delay)
+  }
+}
+```
+
+#### 10、安全
+
+##### 问题：常见的web前端攻击方式有哪些
+
+- XSS跨站请求攻击
+- XSRF跨站请求伪造
+
+##### XSS跨站请求攻击
+
+- 博客前端界面嵌入script脚本
+- 脚本内容：获取cookie发送到服务器（服务器配合跨域）
+- 发布博客，有人查看，可以轻松获取查看人的cookie信息
+
+##### XSS预防
+
+- 替换特殊字符。例如：`<`变成`&It`；`>`变成`&gt`，那么script就不会作为脚本执行
+- 可以使用`https://www.npmjs.com/package/xss`的xss工具
+
+##### XSRF跨站请求伪造（类似于钓鱼链接）
+
+- 比如：攻击者想要购买一件商品，知道了购买的请求url等
+- 然后用发邮件形式，发送一个图片隐藏的链接`<img src='xxx.com/pay?id=100'/>`。图片可以跨域。
+- 如果收到的人已经登陆过这个购物网站，收到的人点击打开链接，此时就会将用户信息带过去，就会发送用点击链接的那个人的用户信息去购买
+
+##### XSRF预防
+
+- 使用POST接口，因为使用POST接口跨域是需要serve端进行支持的
+- 增加验证，比如：密码验证码、指纹等
+
+## 7.11
+
+
+
+#### 1、作用域和值类型引用类型的传递
+
+##### 作用域
+
+```shell
+var num1 = 11;
+var num2 = 22;
+function fn(num,num1){
+	//num,num1块级作用域中变量，分别传入时候只为11，22
+  num = 100;
+  num1 = 100;
+  num2 = 100;		//没有用var声明，不是块作用域中变量，那么修改的就是全局的num2
+  console.log(num)		//100
+  console.log(num1)		//100
+  console.log(num2)		//100
+}
+	fn(num1,num2)
+  console.log(num1)		//11
+  console.log(num2)		//100
+  console.log(num)		//undefined报错
+```
+
+##### 值类型、引用类型的传递
+
+```shell
+function Person(name,age,salary){
+  this.name = name;
+  this.age = age;
+  this.salary = salary;
+}
+
+function f1(person){
+//执行f1(p)的时候person的地址和p的地址指向同一个内存地址，因此修改person.name会修改p.name
+  person.name = "ls"		
+  person = new Person('aa',18,10)		//此时重新将person指向另外一个引用地址，所以跟p无关，不修改p值
+}
+
+var p = new Person('zs',18,10000)
+console.log(p.name)		//zs
+f1(p)
+console.log(p.name) //ls
+```
+
+#### 2、封装函数进行字符串驼峰命名
+
+- 已知有字符串类似`get-element-by-id`格式，写一个function将其转化成驼峰命名表示法`getElementById`
+
+```shell
+function fn(str){
+  var arr = str.split('-')
+  for(let i = 0;i < arr.length;i++){
+    arr[i] = i === 0?arr[i]:arr[i].charAt(0).toUpperCase()+arr[i].substr(1,arr[i].length-1)
+  }
+  return arr.join('')
+}
+```
+
+#### 3、冒泡排序
+
+```shell
+function bubble(arr){
+  for(let i = 0;i < arr.length;i++){		//控制循环次数；比如四个球要比三次，五个球比四次
+    for(let j = 0;j < arr.length-1-i;j++){
+      arr[j]>arr[j+1]?[arr[j],arr[j+1]]=[arr[j+1],arr[j]]:null
+    }
+  }
+  return arr
+}
+```
+
+#### 4、反转数组
+
+- 示例：比如数组`[1,2,3,4,5,6,7,8]`反转数组之后的结果是`[8,7,6,5,4,3,2,1]`
+- 类似于首位交换
+
+```shell
+function fn(arr){
+  for(let i = 0;i < arr.length/2;i++){
+    [arr[i],arr[arr.length-1-i]] =  [arr[arr.length-1-i],arr[i]]
+  }
+  return arr
+}
+```
+
+#### 5、数组去重
+
+##### ES6 Set
+
+```shell
+function fn(arr){
+  return Array.from(new Set(arr))
+  //return [...new Set(arr)]
+}
+```
+
+##### 一项一项跟后面进行对比
+
+```shell
+function fn(arr){
+ for(let i = 0;i < arr.length-1;i++){
+   let val = arr[i],
+   		compareArr = arr.slice(i);
+   	if(compareArr.indexOf(val)>-1){
+      arr.splice(i,1)
+      i--;
+      arr.length--;
+   	}
+ } 
+ return arr
+}
+
+function fn(arr){
+  for(let i = 0;i< arr.length-1;i++){
+    let val = arr[i],
+   		compareArr = arr.slice(i);
+   	if(compareArr.indexOf(val)>-1){
+    	arr[i] = null;
+   	}
+  }
+  arr = arr.filter(item => item != null)
+  return arr
+}
+```
+
+##### 先排序 再去重
+
+```shell
+function fn(arr){
+  arr = arr.sort((a,b)=>{return a-b})
+  for(let i = 0;i < arr.length-1;i++){
+    if(arr[i] === arr[i+1]){
+      arr[i] = null
+    }
+  }
+  arr = arr.filter((item)=>{return item != null})
+  return arr;
+}
+```
+
+#### 6、js综合面试题
+
+- 变量提升，函数提升。变量提升：变量名提升；函数提升：函数整体提升
+- this指向问题
+- 变量常用规则，变量沿着作用域链进行查找
+- 运算符优先级关系：点运算优先级最高，但是遇到`()`没有办法进行运算，所以会记那个前面整体先进性运算
+- 实例对象属性规则，原型原型链
+
+```shell
+//涉及变量提升、函数提升；
+function Foo(){
+  getName = function(){alert(1)}		//修改了全局的
+  return this;
+}
+Foo.getName = function(){alert(2)}
+Foo.prototype.getName = function(){alert(3)}
+var getName = function(){alert(4)}
+function getName(){alert(5)}
+
+
+//输出如下结果
+Foo.getName()				//2	 
+getName()						//4	 
+Foo().getName()				//1	 
+getName()							//1
+new Foo.getName();		//2
+new Foo().getName();			//3
+new new Foo().getName();		//3
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

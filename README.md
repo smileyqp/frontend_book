@@ -944,7 +944,7 @@ conole.log(arr)
 let ary = [12, 23, 12, 15, 25, 23, 25, 14, 16];
 
 function bubble(ary){
-  for(let i = 0;i < ary.length - 1;i++){	//外面一层控制循环几轮
+  for(let i = 0;i < ary.length;i++){	//外面一层控制循环几轮
     for(let j = 0;j < ary.length-1-i;j++){	//里面一层控制循环到哪个数值
       if(ary[j] > ary[j+1]){
         [ary[j],ary[j+1]] = [ary[j+1],ary[j]]		//ES6解构赋值
@@ -3099,32 +3099,7 @@ html实际上也是一种特殊的xml
   - 删除子节点
 
 ```shell
-const div1 = document.getElementById('div1')
-const div2 = document.getElementById('div2')
 
-//新建节点
-const newP = document.createElement('newP')
-newP.innerHTML = 'this is newP'
-
-//插入节点
-div1.appendChild(newP)
-
-//移动节点
-div2.appendChild(p1)	//将一个已经存在于dom中的元素append到另外一个中去，那么就是将节点移动过去的
-
-//获取父元素
-console.log(p1.parentNode)
-
-//获取子元素列表;类似乎组转化成数组Array.prototype.slice.call，然后过滤类型为1，即p的元素节点
-div1.childNodes();		
-const div1childNodesP = Array.prototype.slice.call(div1.childNodes()).filter((child)=>{
-  if(child.nodeType === 1){
-    return true;
-  }
-})
-
-//删除子节点
-div1.removeChild(div1childNodesP[0])
 ```
 
 - DOM性能
@@ -3768,7 +3743,7 @@ div1.addEventListener(throttle(function(e){
 var num1 = 11;
 var num2 = 22;
 function fn(num,num1){
-	//num,num1会计作用域中变量，分别传入时候只为11，22
+	//num,num1块级作用域中变量，分别传入时候只为11，22
   num = 100;
   num1 = 100;
   num2 = 100;		//没有用var声明，不是块作用域中变量，那么修改的就是全局的num2
@@ -3869,7 +3844,7 @@ function fn(arr){
     let val = arr[i],
     		compareArr = arr.slice(i);		//取出i之后的所有项组成的数组
     if(compareArr.indexOf(val)>-1){		//如果后面存在这个值
-      arr.split(i,1)
+      arr.splice(i,1)
       arr.length--;
       i--;
     }
@@ -3887,6 +3862,7 @@ function fn(arr){
     }
   }
   arr = arr.filter((item)=>{return item != null})
+   return arr;
 }
 ```
 
