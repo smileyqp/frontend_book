@@ -3641,17 +3641,170 @@ new Foo().getName();			//3
 new new Foo().getName();		//3
 ```
 
+#### 【re】7、nodejs事件轮询
+
+- 借助`libuv`库实现
+- 事件轮询机制，六个阶段：
+  - timers阶段。定时器阶段：计时到点的计时器
+  - pending callbacks：做系统操作，tcp错误等
+  - idle、prepare准备工作
+  - 轮询阶段：轮询队列
+    - 轮询队列不为空：一次去除回调函数中的第一个函数，先进先出。知道轮询队列为空或者达到最大限制（轮询队列为空：设置过SetImmidiate函数直接进入下一个check阶段；没有设置过，那么就在当前poll等待，直到轮询队列添加进来新的函数，就会去第一个情况执行。如果定时器到点，那么也会去执行下一个阶段）
+  - check查阶段：执行setImmediate设置的回调函数
+  - close callback：关闭阶段。close事件的回调函数在这个阶段进行。
+- `process.nextTick`能在任意阶段优先执行
+
+```shell
+setTimeout(function(){
+  console.log(1)
+},0)
+
+setImmediate(function(){ 
+  console.log(2)
+})
+
+process.nextTick(function(){
+  console.log(3)
+})
+
+//nextTick timeout immediate
+```
+
+#### 8、从url输入
+
+- DNS解析。域名解析成IP。先读取浏览器DNS缓存，读取系统DNS缓存，读取路由器DNS缓存，网络运营商缓存，递归搜索
+- TCP三次握手：
+  - 浏览器告诉服务器要发送请求
+  - 服务器告诉浏览器准备接收
+  - 浏览器告诉服务器马上就发送请求
+- 发送请求：请求报文
+- 接受响应：响应报文
+- 渲染页面
+  - 遇见HTML标记，浏览器调用HTML解析器解析解析并且构建成dom树
+  - 遇见style/link，浏览器调用css解析起解析并且构建成cssom树
+  - 遇到script会调用js解析器，处理script代码（绑定事件，修改dom树/cssom树）
+  - 合并dom树和cssom树成渲染树
+  - 根据渲染树进行计算布局，计算每个节点的几何信息（布局）
+  - 将各个节点颜色绘制到屏幕上（渲染 ）
+  - 注意：这五个不一定按照顺序执行，如果dom树或者cssom树被修改了，可能会执行多次布局和渲染。
+- 断开链接：四次挥手。
+  - 浏览器发送给服务器：我请求报文完了，关闭
+  - 服务器告诉浏览器：我准备关闭
+  - 服务器告诉浏览器：响应报文发送完了，准备关闭
+  - 浏览器告诉服务器：客户端准备关闭
+
+#### 9、闭包
+
+- 函数嵌套
+- 内部函数使用外部函数的局部变量
+- 优点：延长外部函数局部变量的生命周期；缺点：内存泄漏
+- 合理使用闭包，及时销毁
+
+```shell
+function fun(n,o){
+  console.log(o)		 
+  return {
+    fun:function(m){
+      return fun(m, n);			 
+    }
+  }
+}
+
+var a = fun(0)			 
+a.fun(1)			 // 0
+a.fun(2)			 // 0
+a.fun(3)			 // 0
+
+var b = fun(0).fun(1).fun(2).fun(3)	 //undefined 0 1 2 
+
+//同理：
+var d = fun(0).fun(1).fun(2).fun(3).fun(67).fun(45)  //undefined 0 1 2 3 67
 
 
+var c = fun(0).fun(1) //undefined 0
+
+c.fun(2)		 //1
+c.fun(3)		 //1
+```
+
+#### 10、变量提升&上下文
+
+##### 变量提升
+
+- js引擎在代码执行之前会做预处理工作
+  - 收集变量：var声明的变量定义，但是不赋值
+  - 收集函数：function声明的函数就提前定义函数
+
+```shell
+console.log(username)		//undefined
+var username = 'smileyqp'
+
+fun();			//正常执行函数
+function fun(){
+	console.log('inner func')
+}
+```
+
+##### 执行上下文（excute context）
+
+- 理解：代码执行的环境
+- 时机：代码正式执行之前会进入到执行环境
+  - 创建变量对象（变量提升）
+    - 变量
+    - 函数及函数的参数
+    - 全局：window
+    - 局部变量对象
+  - 确认this指向
+    - 全局window
+    - 局部：调用其的对象
+  - 创建作用域链
+    - 父级作用域链+当前的变量对象
+  - 扩展：执行上下文可以认为是一个大的对象，这个对象中主要包含 
+    - 变量对象：变量、函数、函数的形参
+    - 作用域链Scopechain：父级作用链+当前作用域对象
+    - this：window||调用其的对象
+
+#### 11、宏任务和微任务
+
+> js是单线程的，所以我们可以称之为主线程，也就是我们的js代码都是在主线程上完成的。只不过我们区分任务是同步还是异步，如果是异步的话，那么它会有一个回调函数。 回调函数：定时器的回调、ajax请求的回调、对应事件的回调（比如点击事件）。不同的任务又会交给不同的模块去处理，比如：定时器模块、网络请求模块、事件处理模块。
+
+js事件轮询机制，js是单线程的
+
+- 宏任务：setTimeout 、setInterval、requestAnimationFrame
+  - 宏任务所处的队列就是宏任务队列 
+  - 第一个宏任务队列中只有一个任务、执主线程的js代码
+  - 宏任务队列可以哟欧多个
+- 微任务：New Promise().then(两个回调函数 )、process.nextTick
+  - 微任务所处的队列就是微任务队列
+  - 只有一个微任务队列
+  - 上一个宏任务执行完成之后如果有微任务就会执行微任务队列中所有任务
+  - 当宏任务重的任务执行完成之后会此案去查看微任务队列中是否有任务，如果有就先执行微任务队列中的任务，如果没有的话就继续执行下一个宏任务
+
+```shell
+//主线程宏任务执行打印1-5  微任务队列执行打印then中console   setTimeout宏任务执行
+
+console.log('start')
+
+setTimeout(()=>{
+  console.log('setTimeout')
+},0)
+
+new Promise((resolve,reject)=>{
+  for(let i = 0;i<=5;i++){
+    console.log(i)
+    resolve()
+  }
+}).then(()=>{
+  console.log('promise实例成功回调')
+})
+
+console.log('end')
 
 
+//start 1 2 3 4 5 end promise实例成功回调 setTimeout
+```
 
-
-
-
-
-
-
+#### 
 
 
 
