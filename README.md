@@ -4080,7 +4080,7 @@ console.log('end')
 // start 1 2 3 4 5 end promise实例成功回调  setTimeout
 ```
 
-#### 12、React和Vue
+#### vue
 
 ##### 相同点
 
@@ -4111,7 +4111,7 @@ console.log('end')
 ##### Redux 使用扩展 
 
 - react-redux简化编码
--  redux-thunk实现redux的一步编程。以及redux-saga
+-  redux-thunk实现redux的异步编程。以及redux-saga
 - redux-devtools实现chrome中redux的调试
 
 ## 5.21
@@ -4129,7 +4129,7 @@ console.log('end')
   - 标一般属性（父向子）、函数属性（子向父）
   - 隔代通信比比较麻烦：需要逐级传递；兄弟组件通信需要通过父组件传递 
 - Vue自定义事件：
-  - 绑定监听（子胥见在父组件中调用的时候绑定监听）`<My-component @eveName="callback"/>`
+  - 绑定监听（子组件在父组件中调用的时候绑定监听）`<My-component @eveName="callback"/>`
   - 触发(分发)事件`this.$emit('eveName',data )`
   - 只适合子组件向父组件通信 
 - 消息订阅与发布（例如：pubsub-js ）
@@ -4184,12 +4184,12 @@ console.log('end')
 
 ##### 重绘重排优化
 
-- 浏览器自己的优化：浏览器会维护一个队列，把所有会引起重绘或者重排的操作放入这个队列，等队列中的操作到了一定的哦时间间隔或者一定数量的时候，浏览器就会flush队列进行一个个处理，这样就会让多次回流和重绘便车个一次
+- 浏览器自己的优化：浏览器会维护一个队列，把所有会引起重绘或者重排的操作放入这个队列，等队列中的操作到了一定的时间间隔或者一定数量的时候，浏览器就会flush队列进行一个个处理，这样就会让多次回流和重绘变成一次
 - 我们也可以合并多次对dom的操作以及对样式的修改为一次，并且减少对style的样式请求
   - 直接改变元素的className
   - 先设置元素的`display:none`然后进行页面布局等操作，设置完成之后再将`display:block`这样的话就之后出现两次重绘和重排
   - 使用cloneNode（ture or false）和replace技术只引发一次重绘和重排
-  - 将需要毒刺重排的元素的`position`设置成absolte或者fixed,使其脱离文档流，那么它的变化不会影响到其他元素
+  - 将需要多次重排的元素的`position`设置成absolte或者fixed,使其脱离文档流，那么它的变化不会影响到其他元素
   - 如果要插入多个dom节点可以创建一个documentFragment创建完成之后一次性加入document
 
 ```shell
