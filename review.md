@@ -3903,16 +3903,216 @@ console.log('end')
 - 浏览器自己的优化策略：浏览器维护一个队列，会将所有引起重排或者重绘的操作放入这个队列，等队列中的操作到了一定的数量或者到了一定的时间，那么队列就会flush一次，这样就会把多次重排或者重绘转化成为一次
 
 - 我们也可以将多次dom操作等转化成为一次，并且减少样式请求
+  - 直接改变元素的className
+  - 先设置元素的`display:none`然后进行页面布局等操作，设置完成之后再将`display:block`这样的话就之后出现两次重绘和重排
+  - 使用cloneNode（ture or false）和replace技术只引发一次重绘和重排
+  - 将需要多次重排的元素的`position`设置成absolte或者fixed,使其脱离文档流，那么它的变化不会影响到其他元素
+  - 如果要插入多个dom节点可以创建一个documentFragment创建完成之后一次性加入document
+
+```shell
+var fragment = document.createDocumentFragment()
+for(let i = 0;i<=1000;i++){
+  var li = document.createElement('i')
+  li.innerHTML = i + '</br>'
+  fragment.append(li)
+}
+document.getElementById('container').appendChild(fragment)
+```
+
+#### 18、ES6的class
+
+```shell
+//class就是构造函数的一种新写法，可以视作语法糖
+class Person{
+  constructor(name,age){
+    this.name = name;
+    this.age = age;
+  }
+  say(){
+    console.log(`${this.name}${this.age}岁`)
+  }
+}
+
+let p = new Person('smileyqp',18);
+p.say()
+console.log(p.name)
+
+
+class Teacher extends Person{
+  constructor(){
+    super()
+  }
+  hello(){
+    console.log('say hi')
+  }
+}
+```
+
+#### 19、async、await使用与原理
+
+- 异步情况：定时器、ajax、事件处理、nodejs、读取文件也有异步
+
+```shell
+let p = new Promise((resolve,reject)=>{
+  resolve(1);
+})
+//这里的function就是promise中调用的resolve。那么上面掉哟哦那个resolve(1),data参数就是1 
+p.then(function(data){		
+  console.log('success',data)		//success 1
+})
+
+```
+
+- Promise减少嵌套关系，是一个链式编程的结果
+- axios就是把ajax用promise封装了一下
+- async、await最简单的使用就是省去then的步骤，改成类似同步的过程，等待成功才会执行下面。方便、可读性强、异步改成类似同步写法
+- **async和await其实是generator和yield的语法糖。async、await使得代码清晰。**
+- Generator里面的代码是分段执行。看到yield就分段暂停。
+
+```shell
+function *helloGenerator(){
+  yield 'hello';
+  yield 'world';
+  yield 'ending';
+}
+
+var hw = helloGenerator();
+console.log(hw);		//这个函数的结果并不是摁钉，因为代码是暂停的。是一个暂停标记，标记指向'hello'等结果
+console.log(hw.next())	//hello
+console.log(hw.next().next())		//world
+console.log(hw.next().next().next())		//ending
+console.log(hw.next().next().next().next())		//undefined
+```
+
+- 拓展`Promise.all`和`Promise.race`
+  - `Promise.all`必须数组里面的所有promise执行完毕，才成功。用在要很多结果都执行成功的情况。
+  - `Promise.race`只要数组里面的一个成功，整个race就成功执行
+
+```shell
+Promise.all([p1,p2,p3...],function)
+
+Promise.race([p1,p2,p3...],function)
+```
+
+#### 20、ts在项目中的使用
+
+- ts是js的一个超集，支持ES6标准
+- ts比js有更严格的类型要求。有类型的约束，减少大型项目中的bug
+- 示例：`msg!:string`msg是非空字符串；`msg?:string`msg有可能有可能没有
+
+#### 21、ES6装饰器的使用
+
+- 装饰器：是一种与类相关的语法，用来注释和修改类和类相关的方法和属性。许多面向对象的语言都有这个功能。一般和类class 相关，普通的方法不要去使用
+- 装饰器是一种函数，写法是`@函数名`，它可以放在类和类的方法定义前。装饰器就是执行函数，给类或者类下面的属性方法加一些控制条件
+- 装饰器
+  - 给类或者类属性加上一些其他代码
+  - 可以代码复用
+
+```shell
+@decorator
+class A(){
+  
+}
+
+//等同于
+class A(){
+	//decorator是一个函数，相当于调用它给A类可以加上一些其他代码,加上属性等
+  A = decorator(A)
+}
 
 
 
 
+//实例.在类或者类属性方法上写上@函数名，就相当于调用这个函数
+function testfunc(target){
+  target.isok = true;   			//相当于Myclass.isok = true 
+  console.log('i am test func',target)
+}
+
+@testfunc
+class Myclass{
+  
+}
 
 
 
+function readonly(target,name,descriptor){
+  console.log(target)		//当前的class，即Person
+  console.log(name)			//装饰的属性或方法名
+  //configuerable修改、enumerable枚举是否可for in循环、writeable、value对象属性默认值
+  console.log(descriptor)			
+  return descriptor;
+}
+
+class Person{
+  
+  @readonly
+  abc(){
+    console.log('add func ')
+  }
+}
+```
+
+![](https://img-blog.csdnimg.cn/20210523041948698.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+#### 22、事件循环
+
+异步：定时器、ajax、onclick、promise（new Promise立刻执行，then异步）
+
+- 宏任务：定时器（setTimeout、setInterval）、requestAnimationFrame、I/O
+- 微任务：process.nextTick、Promise、Object.observe、MutationObserver
+- 宏任务队列和微任务队列，执行主线程任务，宏任务放到宏任务队列，微任务放到微任务队列。只有在微任务队列中的微任务全部执行完成之后才会去执行下一个宏任务。注意：执行宏任务的时候，也会产生微任务，继续执行上面过程
+
+```shell
+console.log('1')
+
+setTimeout(function(){
+  console.log('2')
+  new Promise(function(resolve){
+    console.log('3')
+    resolve()
+  }).then(function(){
+    console.log('4')
+  })
+},0)
+
+new Promise(function(resolve){
+  console.log('5')
+  resolve()
+}).then(function(){
+  console.log('6')
+})
+
+setTimeout(function(){
+  console.log('7')
+  new Promise(function(resolve){
+    console.log('8')
+    resolve()
+  }).then(function(){
+    console.log('9')
+  })
+  console.log('10')
+},0)
+
+console.log('11')
 
 
+//1 5  11 6 2 3 4 7 8 10 9 
+```
 
+#### 23、浏览器缓存原理
+
+- 浏览器本身有缓存，浏览器可能会把上次代码缓存起来，再去访问不是去拿新代码，而是直接使用缓存
+- 浏览器的缓存分成两种，强制缓存和协商缓存
+  - 强缓存：不会向服务器发送请求，直接从缓存中读取资源，每次访问本地资源直接验证看是否过期。强缓存可以通过设置两种http header实现：expire过期时间和cache-control缓存控制。
+  - 协商缓存（Last-Modified/If-Modefied-Since和E-tag/If-None-Match）：发请求到服务器，服务器会告诉浏览器去拿缓存还是新的代码
+
+拓展：
+
+- 网站优化
+  - 雪碧图
+  - 懒加载
+  - 减少http请求（缓存:浏览器有缓存，现在h5的manifest也可以进行自定义缓存，优化网站）
 
 
 

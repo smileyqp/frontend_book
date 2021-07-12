@@ -4284,14 +4284,14 @@ Promise.race([p1,p2,p3...],function)
 
 - ts是js的一个超集，支持ES6标准
 - ts比js有更严格的类型要求。有类型的约束，减少大型项目中的bug
-- 示例：`msg!:string`msg是非空字符串；`msg?:string`msg有可能有欲呕可能没有
+- 示例：`msg!:string`msg是非空字符串；`msg?:string`msg有可能有可能没有
 
 #### 21、ES6装饰器的使用
 
 - 装饰器：是一种与类相关的语法，用来注释和修改类和类相关的方法和属性。许多面向对象的语言都有这个功能。一般和类class 相关，普通的方法不要去使用
 - 装饰器是一种函数，写法是`@函数名`，它可以放在类和类的方法定义前。装饰器就是执行函数，给类或者类下面的属性方法加一些控制条件
 - 装饰器
-  - 给类或者类属性驾驶一些其他代码
+  - 给类或者类属性加上一些其他代码
   - 可以代码复用
 
 ```shell
@@ -4362,7 +4362,7 @@ setTimeout(function(){
   }).then(function(){
     console.log('4')
   })
-})
+},0)
 
 new Promise(function(resolve){
   console.log('5')
