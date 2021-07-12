@@ -4405,7 +4405,7 @@ console.log('11')
 
 #### 24、h5离线存储manifest
 
-Html5提出的一个新特性：离线存储。通过离线存储，我们可以吧需要离线存储在本地的文件夹列举在manifest配置文件中，这样即使在离线的情况下，用户也可以正常的看见网页
+Html5提出的一个新特性：离线存储。通过离线存储，我们可以把需要离线存储在本地的文件夹列举在manifest配置文件中，这样即使在离线的情况下，用户也可以正常的看见网页
 
 - 在需要离线缓存的页面的html标签上加上`manifest='cache.manifest'`
 
@@ -4526,7 +4526,7 @@ Html5提出的一个新特性：离线存储。通过离线存储，我们可以
 
 - 一台服务器，提高并发？可以使用浏览器缓存，直接使用浏览器缓存减少请求，提高并发。
   - http缓存，能够帮助服务器提高并发，资源不需要重复请求，能够直接从浏览器中获取
-  - http缓存分类分为轻缓存和协商缓存。
+  - http缓存分类分为强缓存和协商缓存。
   - 强缓存通过cache和cache-control来进行控制。协商缓存通过last-modefied以及etag来进行控制
 
 - 为什么有expire需要cache-control ？
@@ -4630,7 +4630,7 @@ const noop = () => {}
 class MyPromise{
   constructor(exclutor){		//回调函数，promise传入的回调函数exclutor
     exclutor(this._resolve.bind(this),_this.reject.bind(this));		//回调函数立即执行
-  }
+  }	
   
   _state = State.pending;
   _value;
@@ -4756,7 +4756,7 @@ export default MyPromise;
 
   - React Hooks是一个新的API，可以用函数来写所有组件
   - 可以让函数也拥有自己的状态管理（包括state和生命周期）
-  - 可以通过创建自定义的hooks来抽离可服用量的业务组件
+  - 可以通过创建自定义的hooks来抽离可复用的业务组件
 
 - React组件类型
   - 函数组件
@@ -4974,7 +4974,7 @@ export default MyPromise;
 
 - 思路：
   - 导致卡顿的远影一般都是dom操作太多太频繁
-  - 如果想要渲染哦很多数据又不造成浏览器卡顿，那么肯定是要减少dom的操作。比如react创建虚拟dom，本质上是用js来模拟真实的dom，从而减少dom的操作
+  - 如果想要渲染很多数据又不造成浏览器卡顿，那么肯定是要减少dom的操作。比如react创建虚拟dom，本质上是用js来模拟真实的dom，从而减少dom的操作
   - 还有在插入多个dom节点时候，可以使用`document.createDocumentFragment`先创建虚拟节点，再一次性插入
   - 也可以采取分段式渲染的方式`requestAnimation`来进行逐帧渲染
 

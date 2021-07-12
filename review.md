@@ -4114,6 +4114,633 @@ console.log('11')
   - 懒加载
   - 减少http请求（缓存:浏览器有缓存，现在h5的manifest也可以进行自定义缓存，优化网站）
 
+#### 24、h5离线存储manifest
+
+Html5提出的一个新特性：离线存储。通过离线存储，我们可以吧需要离线存储在本地的文件夹列举在manifest配置文件中，这样即使在离线的情况下，用户也可以正常的看见网页
+
+- 在需要离线缓存的页面的html标签上加上`manifest='cache.manifest'`
+
+```shell
+<html lang='en' manifest='cache.manifest'>
+...
+</html>
+```
+
+- 在根目录创建新文件名称为`cache.manifest`的文件，并写上代码
+
+![](https://img-blog.csdnimg.cn/20210524024015163.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210524024122985.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+#### 25、移动端兼容问题
+
+![](https://img-blog.csdnimg.cn/20210524100605968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+![](https://img-blog.csdnimg.cn/20210524101343287.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210524101643460.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210524101720213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+#### 26、混合开发
+
+混合开发
+
+- 一部分原生一部分js
+- 内嵌浏览器壳
+- web手机端网页：手机操作比较困难，一般没有手机操作权限
+
+![](https://img-blog.csdnimg.cn/20210524102918108.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210524103318890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+##### 混合开发框架
+
+- weex：采用vue框架，可打包成app
+- react-native：采用react框架
+  - react语法加上自己特定的标签`<Text></Text>` `<View></View>`等
+- uniapp：采用vue框架
+
+> 补充：如何将vue项目打包成app？1、vue项目build 2、将build文件夹下面文件复制到新的hbuild创建的心项目中，覆盖原文件 3、直接打包
+
+#### 27、一次完整的http请求过程
+
+##### 题目
+
+当web浏览器输入`www.baidu.com`具体发生了什么？
+
+- DNS域名解析，得到对应的IP
+- 根据这个IP，找到对应的服务器，发起TCP三次握手
+- 建立TCP链接之后发起HTTP请求
+- 服务器响应HTTP请求，浏览器获取html代码
+- 浏览器解析html代码，并且请求html代码中的资源（css、js、图片、视频等。得到html后才能去湖区这些资源）
+- 浏览器对页面进行渲染并且呈现给用户
+- 服务器关闭TCP链接（四次挥手）
+
+##### 详细解析
+
+- 怎样进行域名解析，DNS怎样找到域名的？
+  - DNS域名解析是采用递归查询的方式，过程是：先去找DNS缓存=〉缓存找不到就去找根域名服务器=〉根域名又会去找下一级，这样递归查找之后，找到了就给我们的浏览器
+    - 浏览器自身DNS缓存
+    - 操作系统DNS缓存
+    - 路由器DNS缓存（host文件中查找）
+    - 递归去各个域名服务器查找
+- 为什么HTTP要基于TCP来实现？
+  - TCP是一个端到端的可靠的面相连接的协议，HTTP基于传输层TCP协议不用担心数据传输的各种问题（当发生错误的时候会重传）
+- 浏览器对页面是如何进行渲染的？
+  - 解析html获得dom树
+  - 解析css生成cssom树
+  - dom树和cssom合成渲染树
+  - 边解析边渲染（布局：计算位置和尺寸；渲染：渲染样式）
+  - JS单线程运行的，js困难修改dom的结构
+
+> 拓展：重排（回流）：修改布局；重绘：修改样式。重排一定会重绘，重绘不一定重排。
+
+#### 28、http缓存控制
+
+##### 强缓存
+
+- expire：绝对时间
+- cache-control：相对时间
+
+##### 协商缓存：
+
+- last-modified：上次修改的时间
+- e-tag：标注文件是否修改
+
+#### 
+
+- 缓存作用范围
+  - 第一次响应后到第二次请求
+- 缓存分类
+  - 缓存命中率：从缓存中获取数据的请求与所有请求的比率。理想状态是越高越好
+  - 过期内容：超过设置的过期时间，被标记为陈旧的内容，必须重新向服务器请求新的内容或者验证缓存的内容是否仍然准备
+  - 验证：验证缓存中的内容是否仍然有效，验证通过的话就刷新过期时间 
+  - 失效：把内容从缓存中清除，内容发生改变时就必须清除失效内容
+- http缓存实现技术
+
+![](https://img-blog.csdnimg.cn/20210524141627419.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+##### 浏览器缓存分类
+
+- 强缓存：不用发请求到服务器就能拿到缓存（减少服务器压力）
+  - expire和cache-control两个请求头设置。两个字端都有以`cache-control`为主，因为expire绝对时间，服务器和浏览器可能有差异
+  - expire：定义过期时间，绝对时间，由服务器发给浏览器的绝对时间
+  - cache-control：定义过期时间，相对时间，一个时间段
+
+![](https://img-blog.csdnimg.cn/20210524142112463.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210524142745672.png)![](https://img-blog.csdnimg.cn/20210524142824578.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+![](https://img-blog.csdnimg.cn/20210524142654807.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- 协商缓存：请求到服务器，询问服务器缓存是否过期，没有就直接从缓存加载资源。返回304状态码。
+  - Last-Modified/If-Modefied-Since
+  - E-tag/If-None-Match
+
+##### ![](https://img-blog.csdnimg.cn/20210524143326471.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+
+
+##### 拓展
+
+- 一台服务器，提高并发？可以使用浏览器缓存，直接使用浏览器缓存减少请求，提高并发。
+  - http缓存，能够帮助服务器提高并发，资源不需要重复请求，能够直接从浏览器中获取
+  - http缓存分类分为轻缓存和协商缓存。
+  - 强缓存通过cache和cache-control来进行控制。协商缓存通过last-modefied以及etag来进行控制
+- 为什么有expire需要cache-control ？
+  - 因为expire是绝对时间，有可能存在浏览器和服务器的时间不同步的问题
+  - cache-control 是相对时间，一定程度上弥补了expire导致的时间不同步问题
+- last-modify和etag
+  - last-modify存在精度问题，到秒
+  - e-tag没有精度问题，只要文件改变，e-tag值就会改变
+
+#### 【re】29、Promise
+
+##### 题目类型
+
+- Promise概念
+  - 解决ajax回调地狱问题，使得代码更加简洁易懂
+- 说Promise题目输出
+
+```shell
+const first = () =>(new Promise((resolve,reject)=>{
+    console.log(3)
+    let p = new Promise((resolve,reject)=>{
+      console.log(7)
+      setTimeout(()=>{
+        console.log(5)
+        resolve(6)		//一个promise值能执行一个resolve；这个在定时器中，比下面后执行，因此是执行下面的
+      },0)
+      resolve(1)
+    })
+    resolve(2)
+    p.then((arg)=>{
+      console.log(arg)
+    })
+  }))
+  
+  first().then((arg)=>{
+    console.log(arg)
+  })
+  console.log(4)
+  
+ //  3  7  4  1 2 5
+```
+
+- 如何实现链式调用
+
+```shell
+//每次then的时候返回一个promise
+b.then().then().then()的链式调用如何实现的？
+
+//方法一：返回this
+class Test{
+  then(){
+  	console.log('then')
+    return this;
+  }
+}
+var t = new Test();
+t.then().then().then()
+
+
+//方法二：返回改对象实例
+class Test1{
+  then(){
+  	console.log('then')
+    return new Test1();
+  }
+}
+var t1 = new Test1();
+t1.then().then().then()
+```
+
+- 手写实现简易Promise
+  - 分析promise特点
+    - Promise参数函数会立即执行
+    - promise在then的回调函数中可以拿到resolve参数
+    - promise可以有多个then并且可以依次执行
+    - promise可以嵌套多个then，then回调中可以返回promise
+    - promise可以嵌套多个then，then的回调中可以返回普通值
+    - resolved状态的promise，调用then方法会立即执行的
+    - 二次调用resolve不会产生影响
+  - 实现思路
+    - promise是一个对象，一般是通过`new Promise`来实例化的
+    - promise的then是可以链式调用的，所以需要有链式调用的实现
+    - 逐个根据列出的promise的特点来实现
+    - 主要实现promise的构造方法和then方法
+
+```shell
+let State = {
+  pending:'pending',
+  resolve:'resolved',
+  reject:'rejected'
+}
+
+class myPromise{
+   constructor(exclutor){			//传入回调函数exclutor
+			exclutor(this._resolve().bind(this),this._reject.bind(this))
+   }
+   
+   _state = State.pending;
+   _value;
+   _resArray = [];
+     
+   _resolve(val){
+     this._state = State.resolve;
+     this._value = val;
+     while(_resArray.length>0){
+       const item = _resArray.shift();
+        item(this._value);
+     }
+   }
+   
+   _reject(){
+     this.state = State.reject;
+   }
+   
+   then(){
+     	const newPromise = new MyPromise(()=>{})
+      this._resArray.push(onRes);		//存储then中回调方法
+      return newPromise;
+   }
+}
+
+export default myPromise;
+```
+
+#### 30、React
+
+##### redux
+
+- ##### Redux帮我们用一个变量存储所有的state，并且提供发布的功能来修改我们的数据，以及提供订阅的功能来触发回调
+
+- redux是一个独立的数据状态管理库，在angular、vue也都可以使用redux，只不过常与react一起使用
+
+- redux解决数据状态管理，跨层级问题。
+
+- redux就是一个经典的发布订阅器。事件绑定的过程其实也是一个发布订阅的过程。
+
+- redux使用方法
+
+  - 调用ctreateStore创建store对象
+  - 用Provide包裹根组件
+  - 使用connect获取链接
+
+##### react-redux
+
+- 提供两个api
+
+  - `Provider`传递store到每个组件中去。Provider实际上是一个组件。getChildContext创建store。Provider就是通过React的context API把数据往下传。
+
+  ![](https://img-blog.csdnimg.cn/20210526153235760.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+  - `connect`通过store传递进来的provider，将state绑定到当前组件。connect有两个参数mapstatetoProps订阅更新，mapdispatchtoprops 调用dispatch改变当前数据
+
+    - ##### connnect方法本质上是一个高阶组件，接收Provider传递过来的store并订阅store中的数据，如果store中的数据改变，就调用setState方法触发组件更新
+
+  ![](https://img-blog.csdnimg.cn/20210526153812547.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210526154758549.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+![](https://img-blog.csdnimg.cn/20210526154818274.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+> 拓展：`函数柯里化`：函数返回函数；`高阶组件`：组件返回组件
+
+![](https://img-blog.csdnimg.cn/20210526152902453.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+##### redux是如何将State注入到React组件中去
+
+- 明确react与redux的联系是react-redux这个库（Provider、connect）
+- redux的原理其实就是一个发布订阅器，帮我们用一个变量存储所有state，并且提供了发布来修改数据，提供了订阅功能来触发回调
+- react-redux的功能是订阅store中的数据更新，它包含两个重要的元素Provider和connect
+- Provider的作用是通过context api把store对象注入到react组件中去
+- connect方法就是一个高阶组件，在高阶组件中通过订阅store的更新，调用setState方法来触发组件更新
+
+- ##### redux在实际项目中的使用问题
+
+  - redux痛点是什么？
+
+    - 增加代码的复杂性。需要经过dispatch、调用reducer、触发回调、更新数据。redux在使用中最大的弊端就是样板代码（action、reducer）太多，修改数据链路较长
+
+  - 为什么还是要使用redux？
+
+    - redux可以解决跨组件间数据传递问题并且修改数据十分清晰。在复杂的大型项目中，状态数据较多，redux的映入可以较好对数据进行管理，使得数据流向组件状态变更更为清晰
+
+  - redux在使用时候，有哪些比较好的实践方式呢？（可以使用一些手段减少模板代码从而简化redux api）
+
+    - 使用redux-action，在初始化reducer和action构造器时候减少样板代码
+      - 减少创建action时候创建的一堆固定的写法
+      - 减少创建reducer时候写的一堆固定的switch（封装）
+    - 使用cli工具，帮我们生成模板代码。比如yeoman工具
+
+    > 总结：redux最大的弊端是样板代码太多，修改数据链路太长
+    >
+    > 解决方式：可以借助一些工具来减少创建样板代码的过程
+    >
+    > - 使用redux-action减少书写固定不变的代码使得我们代码更加清晰
+    > - 使用cli工具自动生成模板文件和代码
+
+  - redux的异步问题怎样处理（为什么redux处理不了异步问题？）
+
+    - dispatch默认只能接受一个object类型的action，因为reducer中要接收action.type来处理不同的数据
+    - 那怎样解决redux不能处理异步的问题呢？
+      - redux异步问题可以用中间件来解决
+        - redux-saga：让异步成为中架构中独立的一层
+        - redux-thunk
+
+> redux总结：
+>
+> - redux会增加代码的复杂性，使用前需要考虑当前项目的规模和要求
+> - 可以使用redux-action或者cli工具来帮我们减少模板代码的书写
+> - redux无法处理异步action是因为dispatch只能接收一个object类型的action，但是可以通过中间件的方式来解决异步问题
+
+
+
+- ##### React中的hooks
+
+  - React Hooks是一个新的API，可以用函数来写所有组件
+  - 可以让函数也拥有自己的状态管理（包括state和生命周期）
+  - 可以通过创建自定义的hooks来抽离可复用的业务组件
+
+- React组件类型
+
+  - 函数组件
+    - 一个函数就是一个组件
+    - 一个函数必须有return
+    - return的是一个react元素
+  - 类组件
+    - 一个Class声明就是一个类组件
+    - 所有的类组件都是继承于React.Component
+    - React.Component类有自带属性和方法，比如render、componentDidMount等等
+
+![](https://img-blog.csdnimg.cn/20210527093422780.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- React Hooks的作用以及有哪些特性
+  - react hooks是v16.8版本才引入的全新API，它算是一个颠覆性的变革
+  - 所有的React组件都可以是一个函数组件，再也不需要写类组件了
+  - 再也不需要记住react有哪些生命周期了
+
+![](https://img-blog.csdnimg.cn/20210527094522853.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210527094636771.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+创建使用自定义hooks
+
+![](https://img-blog.csdnimg.cn/20210527095744394.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210527095956508.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+#### 31、性能优化
+
+##### 初始阶段（加载优化）
+
+- ##### 首页加载优化
+
+  - 解答
+
+    - 对于首页加载过慢的问题，一般是由于首页加载资源过多并且资源过大导致，所以应对的策略一般是减少资源的数量以及减少资源的大小
+    - 对于图片可以进行懒加载，减少首屏图片加载量，以及对于小图标和小图片分别可以使用Iconfont和雪碧图来解决，最大程度的减少首屏图片渲染量，提高首屏加载速度
+    - 对于其他资源可以通过打包（nginx combo资源合并或者webpack打包）来合并资源，或者通过路由懒加载的方式来减少首页js加载的数量
+    - 同时可以在服务器配置nginx开启gzip打包来最大化压缩静态资源体积，达到优化首页加载的目的
+
+  - 问题分析（资源多、大）
+
+    - ##### 1、首页加载图片过多
+
+      - ##### 1、总结：
+
+        - 通过懒加载的方式处理非首屏图片
+        - 对于小图标可以使用Iconfont的方式来解决
+        - 对于小图片可以使用雪碧图的方式来解决
+
+      - Q&A
+
+        - Q：首页加载图片过多怎样处理
+          - 懒加载：监听滚动条事件，如果滚动条的高度距离浏览器顶部的高度等于或者接近于图片到浏览器顶部的高度，那么就将data-src的属性赋值到src上
+        - Q：首页设置的小图标很多，比如有很多的小icon怎么办
+          - 对于纯色小图标可以用Iconfont来解决（减少资源请求）
+            - 设置font-famliy的css属性
+          - 对于一些彩色的小图标可以使用雪碧图
+            - 把所有小图标拼接到一张大图片上（减少资源请求）
+            - 并使用background-position的css属性来修改图片坐标
+
+    - ##### 2、首页请求过多
+
+      - ##### 2、总结（首页请求量过多，可以通过一些手段来减少资源的请求量）
+
+        - 通过nginx服务器来做静态资源的合并或者通过webpack等打包工具进行物理的打包
+        - 在代码层面，对于u 一些需要引入大型的第三方库进行按需加载，比如可以按照babel来进行
+        - 还可以通过react lazy等动态导入方案进行前端路由层面的动态加载，从而减少首页的js和css加载的大小
+
+      - 可以通过减少资源请求量
+
+        - 通过nginx服务器（可用来做CDN，处理静态资源）用来做文件合并combo—将多个js、css合并成一个。逻辑上打包，通过拼接请求链接，将多个资源链接合并到一起
+        - 通过打包工具（webpack）来做资源文件的物理打包。没有第一种灵活。
+
+      - Q&A
+
+        - Q：只有合并资源的方式才能减少资源请求吗？
+
+          - 对于引用一些大型的第三方库，比如antd、elementui等，可以使用按需加载的方式进行解决。一般都是使用babel插件来实现
+
+          - 针对SPA单页应用，在路由层面，可以使用前端路由懒加载的方式，从而减小首页js和css的大小
+
+            - 使用React.lazy进行路由的加载(react16.6以上才可以使用，16.6以下版本可以使用react-loadable)
+
+            ![img](https://img-blog.csdnimg.cn/20210527114825660.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+            ![img](https://img-blog.csdnimg.cn/20210527115051890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+        - Q：为什么React lazy可以进行路由懒加载？
+
+          - 首先react lazy是使用了动态加载（dynamic import）的一个标准，webpack只要遇到了动态加载就会把import的内容单独打一个包
+          - 由于动态加载返回的是一个promise，所以可以利用promise的流程来做渲染流程的控制
+          - 如果当前promise是pending状态，那么就渲染loading组件，如果是resolve状态那么就渲染动态导入的组件
+
+        ![img](https://img-blog.csdnimg.cn/20210527154924142.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+        动态导入：代码执行到import这一行的时候才开始去下载组件。并且webpack会将其单独打包成一个文件 
+
+        ![img](https://img-blog.csdnimg.cn/20210527155047496.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+        lazy懒加载
+
+        ![img](https://img-blog.csdnimg.cn/20210527160626742.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+        - 结论：
+          - import('xxx')返回的是一个promise
+          - webpack只要遇到了import('xxx')就会把括号里引入的内容单独打一个包
+
+    - ##### 3、首页请求的静态资源（html、css、js）过大
+
+      - 分析
+        - 要分资源文件、js、css等分开处理
+        - css和js可以通过webpack进行混淆和压缩
+          - 混淆：将js代码进行字符串加密（最大程度减少代码，比如将变量名称程度单个字母等）
+          - 压缩：去除注释空行以及console.log等调试代码
+        - 图片的压缩
+          - 自动化工具来压缩图片
+          - 图片进行转码，转成base64格式
+          - 使用webP格式
+        - 通过开启gzip进行全部资源的压缩
+          - gzip是一种压缩文件资源的格式，可以对任何文件进行压缩（类比于文件压缩），通过nginx服务器配置开启
+
+    
+
+- ##### 优化图片的做法
+
+  - 解答：图片优化业主要是从两个方面来进行，太多和太大
+
+    - 通过懒加载减少加载图片请求，或者通过雪碧图来合并图片，以及将小图转化成base64格式减少图片请求
+    - 图片过大问题可以通过图片自动化压缩工具或者使用webp格式的图片
+
+  - 问题分析：
+
+    - 减少图片加载请求
+    - 减少图片大小
+
+  - Q&A
+
+    - Q：用什么自动化工具对图片进行压缩？
+
+      - 熊猫站（<https://tinypng.com/>）：无损压缩。熊猫站是通过相似颜色的量化技术来减少颜色的数量，并且可以将24位的png文件转化成8位的彩色图片，同时可以将不必要的元素进行剥离。并且它提供了npm包tinify，可以进行批量压缩
+
+    - Q：还有什么其他方式吗
+
+      - 将图片转码为base64，会增大图片体积，因此不建议把大图片转成base64格式，但是建议把小图片转成base64格式，因为它直接写在代码中，可以减少一个图片的请求
+      - 使用webp格式
+
+      ![img](https://img-blog.csdnimg.cn/20210527171756779.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- 实现webpack打包优化
+
+  - 解答：多&大
+
+    - 可以设置mode=production来默认实现webpack对代码的混淆和压缩，从而最大程度减少代码体积
+    - 使用webpack+dynamic import（动态加载）并结合路由的入口文件动态加载做拆包处理
+    - 并且可以设置一定的打包策略（分包压缩，node_modules、常改动、不常改动公共组件），配合网络缓存（cache-control等）进行加载性能优化
+
+  - 问题分析
+
+    - 少：使用webpack进行物理打包
+    - 小：使用webpack进行混淆和压缩，所有与webpack相关的配置都在optimization这个配置项进行管理
+
+  - Q&A
+
+    - Q：打包怎样小怎样少？
+
+      - A：使用webpack对代码进行混淆和压缩，并且可以使用react lazy进行拆包，结合路由进行按需加载
+
+    - Q：对文件进行拆包处理，那么文件肯定会增多，会不会跟减少资源请求数量矛盾呢？
+
+      - A：并不矛盾，因为我们按需加载之后，拆包的文件不可能同时加载，所以不会造成同一时间请求过多的问题
+
+      ![img](file:///Users/yqp/Library/Application%20Support/typora-user-images/image-20210528022556530.png?lastModify=1625795226)
+
+
+
+打包策略
+
+![img](https://img-blog.csdnimg.cn/20210528022405544.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![img](https://img-blog.csdnimg.cn/20210528022006976.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+- 实现CDN加速
+
+  - 解答：
+
+    - CDN服务器主要是用来做静态资源的服务器，可以用来加速静态资源的下载
+    - CDN之所以能够加速是因为在很多地方都部署了CDN服务器，如果用户需要下载静态资源，会自动选择最近的资源节点进行下载
+    - 同时由于CDN的服务器地址一般都跟主服务器不同，所以可以破除http1.0中对同一个域名同时发送的请求的限制问题
+
+  - 问题分析
+
+    - 什么叫做CDN（内容分发网站）
+
+      - 放静态资源服务器（JS、CSS、图片、字体..）。
+
+    - 为什么CDN可以实现加速？
+
+      - 因为里我们近。CDN服务器就是在里用户较近的地方放置一台服务器，把所有的静态资源放到这台服务器上，以后访问优先从这个网站上访问。CDN是一种解决方案，一般是用nginx实现。
+
+    - 为什么要进行CDN呢？
+
+      - HTTP1.1。因为对于同一个协议、同一个域名、同一个端口，浏览器允许最多同时打开六个TCP连接（最多同时发送六个请求）。通过CDN可以绕过浏览器对这个请求的限制
+
+      ![img](https://img-blog.csdnimg.cn/20210528155614408.png)
+
+      - http2：引入了多路复用的机制，可最大化发送请求数量。（没有了http1的六个TCP请求限制）
+
+##### 运行阶段（渲染优化）
+
+- 思路：
+  - 导致卡顿的远影一般都是dom操作太多太频繁
+  - 如果想要渲染很多数据又不造成浏览器卡顿，那么肯定是要减少dom的操作。比如react创建虚拟dom，本质上是用js来模拟真实的dom，从而减少dom的操作
+  - 还有在插入多个dom节点时候，可以使用`document.createDocumentFragment`先创建虚拟节点，再一次性插入
+  - 也可以采取分段式渲染的方式`requestAnimation`来进行逐帧渲染
+- 渲染十万条数据不造成卡顿？
+  - 结论：
+    - 可以使用`document.createDocumentFragment`创建虚拟节点来避免不必要的渲染
+    - 当所有的li都创建完成之后，再一次吧虚拟节点中的li全部渲染出来
+    - 可以采用分段渲染的方式，比如一次只渲染一屏的数据
+    - 最后使用 
+
+![img](https://img-blog.csdnimg.cn/20210528160433283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+
+
+普通方式：
+
+![img](https://img-blog.csdnimg.cn/20210528160747567.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+优化渲染（分段渲染 ）
+
+![img](https://img-blog.csdnimg.cn/20210528161129401.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70) ![img](https://img-blog.csdnimg.cn/20210528161156127.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![img](https://img-blog.csdnimg.cn/2021052816124314.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+> 补充：`requestAnimation`逐帧渲染。1000/60=16,也就是16ms渲染一次。requestAnimation要保证浏览器是60帧，所以默认是16ms一次渲染。
+
+> 拓展：服务器类别
+>
+> - 应用服务器：弹性计算，存放运行后端代码等
+> - 存储服务器：存储文件
+> - CDN服务器：处理静态资源，做资源文件的合并。做静态资源分发
+> - 数据库服务器
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
