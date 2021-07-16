@@ -4725,6 +4725,108 @@ export default myPromise;
 
 
 
+#### 35、算法基础
+
+![](https://img-blog.csdnimg.cn/20210601145630299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210601145716171.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+![](https://img-blog.csdnimg.cn/20210601151310919.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+
+
+
+##### 数组
+
+![](https://img-blog.csdnimg.cn/20210601163819826.png)
+
+数组相关声明式方法都是高阶函数，都没有改变原数组
+
+- 数组静态方法
+  - from
+  - of
+  - isArray
+
+```shell
+//from	从一个类数组，或者可迭代对象创建一个新的，浅拷贝的数组实例
+const set = new Set(['foo','smile','yqp'])
+console.log(Array.from(set))		//['foo','smile','yqp']
+
+//of	创建一个可变数量参数的数组实例，所有参数列表作为元素，创建一个新数组
+console.log(Array.of(3))		//[3]
+console.log(Array.of(3,5,7,8))		//[3,5,7,8]
+
+//isArray	判断是否是数组
+console.log(Array.isArray([1,2,3]))	//true
+console.log(Array.isArray({1,2,3,4}))		//false
+```
+
+- 数组更新的方法
+  - push
+  - pop
+  - unshift
+  - shift
+  - sort
+  - reverse
+  - splice
+
+```shell
+const arr = [1,2,4,7,9,3]
+
+//push	
+//1、数组最后添加6
+arr.push(6)		//[1,2,4,7,9,3,6]
+//2、数组最后一次添加8和9
+arr.push(8,8)		// [1,2,4,7,9,3,8,9]
+//2、数组最后添加包含8和9的数组
+arr.push([8,9])		// [1,2,4,7,9,3,[8,9]]
+
+//pop	删除数组最后一个元素
+arr.pop()		//9 pop方法返回的是删除的最后一个元素的值  原数组变成[1,2,4,7,9]
+
+//unshift  
+//1、在数组最前面添加2
+arr.unshift(2)		//[2,1,2,4,7,9,3]
+//2、在数组最前面添加4和3
+arr.unshift(4,3)		//[4,3,1,2,4,7,9,3]
+
+//shift 删除数组的第一个元素
+arr.shift()		//1 返回被删元素值	原数组变成[2,4,7,9,3]
+
+//sort 数组降序排列;sort的回调函数返回值为数值，分为dayu0，等于0，小于0；大于0item2放在左边
+arr.sort((item1,item2)=>{return item2 -item1})	//sort改变原数组；返回值也是改变之后排序的数组
+
+//splice	
+//1、删除第三个元素;两个参数，第一个index第二个是个数 
+arr.splice(2,1)
+//2、删除第将第三个元素替换为10
+arr.splice(2,1，10)
+//3、将11插入为数组的第三个元素
+arr.splice(2,0,11)
+```
+
+- 数组遍历相关的声明式方法
+  - forEach
+  - map
+  - reduce
+  - filter
+  - find
+  - findIndex
+  - some
+  - every
+  - slice返回一个新的数组，包含从 start 到 end。不会修改数组，而是返回一个子数组。`arrayObject.slice(start,end)`
+- 数组的其他方法
+  - length
+  - join
+  - contact被合并的可以是数组也可以是元素。`arr.concat([1,3],4)`，如果是数组就把数组中的元素取出来
+  - indexOf，找到元素下标
+  - lastIndexOf
+
+
+
+
+
+
+
 
 
 
