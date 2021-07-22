@@ -2128,7 +2128,7 @@ var fn = function(i){
     console.log(i)
 }
 for(var i = 0;i<10;i++){
-  setTimeut(fn.bind(null,i),10000)
+  setTimeout(fn.bind(null,i),10000)
 }
 ```
 
@@ -2620,7 +2620,7 @@ console.log(Student.prototype.__proto__ === Person.prototype)
 ##### 原型原型链相关题目解答
 
 - 如何判断一个变量是否是数组（类型判断instanceof，a instanceof Array）
-- 手写一个建议的jQuery，考虑插件和扩展性（原型和原型链）
+- 手写一个简易的jQuery，考虑插件和扩展性（原型和原型链）
 
 ```shell
 //jquery做dom查询的
@@ -2872,7 +2872,7 @@ setTimeout(()=>{
   console.log(2)
 },1000)
 console.log(3)
-
+c
 //同步
 console.log(1)
 alert(2)
@@ -2927,6 +2927,10 @@ loadImg(url).then(img=>{
 
   - 定时任务，比如：setTimeout
 
+  - 响应事件
+
+  - 图片加载
+
 ##### 知识点
 
 - 单线程和异步（异步是由单线程这个背景来的）
@@ -2941,7 +2945,7 @@ loadImg(url).then(img=>{
   - 需要异步，解决单线程的问题
   - 回调callback函数形式
 
-## 、
+## 总结
 
 ##### 知识模块
 
@@ -2980,7 +2984,7 @@ loadImg(url).then(img=>{
 
 ##### 闭包和作用域的题目
 
-- this的不同引用场景，如何取值
+- this的不同应用场景，如何取值
   - this是在函数执行的时候确定，函数定义的时候不能确定
 
 - 手写bind函数
@@ -3110,7 +3114,32 @@ html实际上也是一种特殊的xml
   - 删除子节点
 
 ```shell
+const div1 = document.getElementById('div1')
+const div2 = document.getElementById('div2')
 
+//新建节点
+const newP = document.createElement('newP')
+newP.innerHTML = 'this is newP'
+
+//插入节点
+div1.appendChild(newP)
+
+//移动节点
+div2.appendChild(p1)	//将一个已经存在于dom中的元素append到另外一个中去，那么就是将节点移动过去的
+
+//获取父元素
+console.log(p1.parentNode)
+
+//获取子元素列表;类似乎组转化成数组Array.prototype.slice.call，然后过滤类型为1，即p的元素节点
+div1.childNodes();		
+const div1childNodesP = Array.prototype.slice.call(div1.childNodes()).filter((child)=>{
+  if(child.nodeType === 1){
+    return true;
+  }
+})
+
+//删除子节点
+div1.removeChild(div1childNodesP[0])
 ```
 
 - DOM性能
