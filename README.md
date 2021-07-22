@@ -562,11 +562,15 @@ a.toString = a.shift;	//shift方法删除数组第一个值，并且返回第一
 
 ```shell
 var i = 0;
-Object.definedProperty(window,'a',{
+Object.defineProperty(window,'a',{
   set(){
-    return ++i;
+    
+  },
+  get(){
+    return ++i
   }
 })
+console.log(a==1&&a==2&&a==3)
 ```
 
 3、或者用true也行
@@ -944,7 +948,7 @@ conole.log(arr)
 let ary = [12, 23, 12, 15, 25, 23, 25, 14, 16];
 
 function bubble(ary){
-  for(let i = 0;i < ary.length;i++){	//外面一层控制循环几轮
+  for(let i = 0;i < ary.length-1;i++){	//外面一层控制循环几轮
     for(let j = 0;j < ary.length-1-i;j++){	//里面一层控制循环到哪个数值
       if(ary[j] > ary[j+1]){
         [ary[j],ary[j+1]] = [ary[j+1],ary[j]]		//ES6解构赋值
@@ -970,7 +974,7 @@ function insert(ary){
     for(let j = handle.length-1;j>=0;j--){
       let B = handle[j]
       if(A>B){
-        handle.slice(j,0,A);		//将A插在B后面
+        handle.splice(j+1,0,A);		//将A插在B后面
         break;		
       }
       if(j===0){
@@ -978,7 +982,9 @@ function insert(ary){
       }
     }
   }
+  return handle;
 }
+insert(ary)
 ```
 
 > unshift方法是在数组头部插入一个元素，并且是在原数组上进行操作不生成新数组
@@ -1139,10 +1145,13 @@ function flatten(arr){
 	Array.prototype.myFlat = myFlat;
 })()
 
+let arr = [
+    [1, 2, 2],
+    [3, 4, 5, 5],
+    [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10
+];
 arr = arr.myFlat();
 ```
-
-
 
 ##### 斐波那契数列
 
@@ -1222,7 +1231,7 @@ function createArr(n,len){
     return n+index
   })
   return arr;
-
+}
 ```
 
 
