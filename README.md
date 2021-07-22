@@ -1809,14 +1809,16 @@ nums1.forEach((item,index)=>{
 输入：[1,-100,78,90]  k = 2
 输出：[90,1,-100,78]
 
-function rotate(key){
-  //参数处理，key>0
-  if(key<0||key === 0||key === this.length)return this;
-  if(key>this.length){key = key%this.length}
-  //slice支持负数索引，直接就是数组的后几位
-   return this.slice(-key).concat(this.slice(0,this.length-key))
-}
-Array.prototype.rotate = rotate;
+(function(){
+  function rotate(key){
+    //参数处理，key>0
+    if(key<0||key === 0||key === this.length)return this;
+    if(key>this.length){key = key%this.length}
+    //slice支持负数索引，直接就是数组的后几位
+     return this.slice(-key).concat(this.slice(0,this.length-key))
+  }
+  Array.prototype.rotate = rotate;
+})()
 
 
 
@@ -1851,7 +1853,7 @@ let arr = [1,2,3,4,5,6,7],
 arr.rotate(3);		// [5, 6, 7, 1, 2, 3, 4]
 ```
 
-- 最后一项删除放到最开头，执行k次
+- 最后一项删除放到最开头，执行k
 
 ```shell
 输入：[1,-100,78,90]  k = 2
@@ -1892,7 +1894,7 @@ arr.rotate(3);		// [5, 6, 7, 1, 2, 3, 4]
 
 ## 5.12
 
-#### 14、函数科里化思想
+#### 14、函数柯里化思想
 
 - 函数科里化：预先处理的思想（利用闭包的机制）
 
