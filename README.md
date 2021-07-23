@@ -3282,7 +3282,7 @@ bindEvent(a,'click',e=>{
 ```shell
 //代理绑定
 function bindEvent(elem,type,selector,fn){		//selector要筛选的触发元素选择器
-  if(fn == null){		//说明传的是三个参数；也就是知识普通绑定，第三个参数就是fn
+  if(fn == null){		//说明传的是三个参数；也就是只是普通绑定，第三个参数就是fn
     fn = selector;
     selector = null;
   }
@@ -3330,8 +3330,9 @@ function ajax(url){
         }
       }
     }
+    xhr.send(null)
   });
-  xhr.send(null)
+  
   return p;
 }
 
@@ -3608,7 +3609,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   - 尽早执行js，用DOMContentLoad去触发
   - 懒加载(图片懒加载、上滑加载更多)
   - 对dom查询进行缓存
-  - 频繁dom操作合并到一起插入都没结构
+  - 频繁dom操作合并到一起插入dom结构
   - 节流throttle和防抖debounce （渲染更加流畅）
 
 ##### 示例
