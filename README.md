@@ -97,8 +97,6 @@
   }
   ```
 
-  
-
   - 使用JS控制
 
 - 响应式布局
@@ -178,12 +176,6 @@ a{
 - instanceof
 - constructor
 - Object.prototype.toString.call
-
-
-
-
-
-
 
 
 
