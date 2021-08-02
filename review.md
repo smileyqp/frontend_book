@@ -8,7 +8,7 @@
 
 ##### 1、html5
 
-- 语义化标签
+- 语义化标签：header、footer、section….
 - 音视频处理audio/video：新媒体解决方案代替传统flash解决方案
 - canvas/webGL：js绘制图形方式
 - history API：Browser路由底层实现就是这个API
@@ -4358,7 +4358,7 @@ class myPromise{
      this.state = State.reject;
    }
    
-   then(){
+   then(onRes){
      	const newPromise = new MyPromise(()=>{})
       this._resArray.push(onRes);		//存储then中回调方法
       return newPromise;
