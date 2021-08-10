@@ -694,7 +694,7 @@ console.log(a[b]);		//李四
 
 > Object.prototype.toString的应用，怎样检查数据类型的，valueOf
 
-基本类型直接存储，引用类型都存入堆中，最终使吧堆的地址给这个变量
+基本类型直接存储，引用类型都存入堆中，最终是把堆的地址给这个变量
 
 作为函数，在堆中存储代码（字符串），所以函数既是函数也是对象
 
@@ -881,11 +881,11 @@ Fn.prototype={
        alert(3);
     }
 };
-A();											 
-Fn.A();										 
-Fn().A();									 
-new Fn.A();								 
-new Fn().A();							 
+A();			//1								 
+Fn.A();		//1								 
+Fn().A();	//2								 
+new Fn.A();		//2							 
+new Fn().A();		//3					 
 new new Fn().A();					//报错；因为箭头函数不能被new，因为箭头函数没有原型链，没有constructor
 ```
 

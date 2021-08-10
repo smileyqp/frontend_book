@@ -1098,18 +1098,18 @@ function flatten(arr){
 > ```shell
 > var A = [3, 4, 5, 5]
 > var B = A.some((item)=>{
->   return item >=5;	//只要数组中有大于5的那么B就是true
+>     return item >=5;	//只要数组中有大于5的那么B就是true
 > })
 > ```
 >
 > ###### find
 >
-> Find返回的结果如果有就找出这项结果返回，如果没有就返回undefined。并且只查找哦这一项
+> Find返回的结果如果有就找出这项结果返回，如果没有就返回undefined。并且只查找这一项
 >
 > ```shell
 > var A = [3, 4, 5, 5]
 > var B = A.find((item)=>{
->   return item >=4;	//有返回这项值，没有返回undefined
+>     return item >=4;	//有返回这项值，没有返回undefined
 > })
 > ```
 >
@@ -1147,7 +1147,7 @@ arr = arr.myFlat();
 
 ##### 斐波那契数列
 
-![](https://img-blog.csdnimg.cn/20210507233617893.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MjczMDU5,size_16,color_FFFFFF,t_70)
+1
 
 - 方式一：递归
 
@@ -1290,8 +1290,8 @@ function $attr(property,value){
     
     if(property === 'class'){	//class样式类属性名要做特殊处理，因为class中可能有多个属性值
     	
-    	//判断当前字符串中是否包含着哦个单词
-    	new RegExp(/\b+value+\b/).test(itemValue)?arr.push(item):null		
+    	//判断当前字符串中是否包含着这个单词
+    	new RegExp(/\b+value+\b/).test(itemValue)?arr.push(item):null				// \b表示单词开头结尾
       return;
     }
      
@@ -1421,7 +1421,7 @@ arr = arr.each(function(item,index){
 	function each(fn,obj){
     this.bind(obj);
     for(let i = 0;i<this.length;i++){
-      this[i] = fn(i)
+       this[i] = isNaN(Number(this[i]))?false:fn(this[i])
     }
     return this;
 	}
@@ -2353,7 +2353,7 @@ Array.from(obj).slice(1).map(item=>{		//slice是动某个索引值开始
 })
 ```
 
-- 方法三:利用object.keys
+- 方法三:利用Object.keys
 
 ```shell
 let obj = {
@@ -2382,7 +2382,7 @@ Object.keys(obj).forEach(item=>{
 
 ```shell
 let a = 100;
-let b = 1;
+let b = 100co;
 a = 200;
 console.log(b) //100
 ```
@@ -2643,11 +2643,6 @@ class jquery{
 }
 
 
-const $p = new jQuery('p')
-$p.get(1)
-$p.each(elem=>console.log(elem.nodeName))
-$p.on('click',()=>{alert('click')})
-
 
 ```
 
@@ -2745,11 +2740,7 @@ function create(){
 let fn = create();
 let a = 200;
 fn();		//100   函数执行是在全局作用域；函数的定义在create函数里面，往上级作用域寻找
-
-```
-
-```shell
-s	//100
+f
 ```
 
 - ##### 闭包：自由变量的查找是在函数定义的地方，向上级作用域进行查找，不在执行的地方进行查找 
@@ -2864,7 +2855,7 @@ setTimeout(()=>{
   console.log(2)
 },1000)
 console.log(3)
-c
+
 //同步
 console.log(1)
 alert(2)
@@ -2898,9 +2889,9 @@ function loadImg(src){
 loadImg(url).then(img=>{
   console.log(img)
   return img
-}).catch(err){
-  console.log(err)
-}
+}).catch((error)=>{
+  console.log(error)
+})
 ```
 
 - 前端使用的异步的场景有哪些
@@ -3808,7 +3799,7 @@ function f1(person){
 var p = new Person('zs',18,10000)
 console.log(p.name)		//zs
 f1(p)
-console.log(p.name) //ls
+console.log(p.name) 	//ls
 ```
 
 #### 2、封装函数进行字符串驼峰命名
