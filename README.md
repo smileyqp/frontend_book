@@ -278,8 +278,8 @@ console.log(5+a++);	//6
 console.log(a)	//2
 
 let b = 1;
-console.log(5+(++a));	//7
-console.loog(a)		//2
+console.log(5+(++b));	//7
+console.log(b)		//2
 ```
 
 > 闭包的作用：保存、保护
